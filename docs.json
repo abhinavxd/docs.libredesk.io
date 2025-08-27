@@ -57,12 +57,67 @@
             ]
           },
           {
-            "group": "Endpoint examples",
+            "group": "Authentication",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete",
-              "api-reference/endpoint/webhook"
+              "api-reference/endpoint/authentication/login",
+              "api-reference/endpoint/authentication/logout",
+              "api-reference/endpoint/authentication/o-i-d-c-login",
+              "api-reference/endpoint/authentication/o-i-d-c-callback"
+            ]
+          },
+          {
+            "group": "Agents",
+            "pages": [
+              "api-reference/endpoint/agents/get-agents",
+              "api-reference/endpoint/agents/get-agent",
+              "api-reference/endpoint/agents/create-agent",
+              "api-reference/endpoint/agents/update-agent",
+              "api-reference/endpoint/agents/delete-agent",
+              "api-reference/endpoint/agents/get-current-agent",
+              "api-reference/endpoint/agents/update-current-agent",
+              "api-reference/endpoint/agents/generate-a-p-i-key",
+              "api-reference/endpoint/agents/revoke-a-p-i-key"
+            ]
+          },
+          {
+            "group": "Conversations",
+            "pages": [
+              "api-reference/endpoint/conversations/get-all-conversations",
+              "api-reference/endpoint/conversations/create-conversation",
+              "api-reference/endpoint/conversations/get-conversation",
+              "api-reference/endpoint/conversations/get-messages",
+              "api-reference/endpoint/conversations/send-message",
+              "api-reference/endpoint/conversations/update-conversation-assignee-last-seen"
+            ]
+          },
+          {
+            "group": "Contacts",
+            "pages": [
+              "api-reference/endpoint/contacts/get-contacts",
+              "api-reference/endpoint/contacts/get-contact",
+              "api-reference/endpoint/contacts/update-contact",
+              "api-reference/endpoint/contacts/block-contact"
+            ]
+          },
+          {
+            "group": "Automations",
+            "pages": [
+              "api-reference/endpoint/automations/get-automation-rules",
+              "api-reference/endpoint/automations/create-automation-rule",
+              "api-reference/endpoint/automations/get-automation-rule",
+              "api-reference/endpoint/automations/update-automation-rule",
+              "api-reference/endpoint/automations/delete-automation-rule",
+              "api-reference/endpoint/automations/toggle-automation-rule"
+            ]
+          },
+          {
+            "group": "Business Hours",
+            "pages": [
+              "api-reference/endpoint/business-hours/get-business-hours",
+              "api-reference/endpoint/business-hours/create-business-hours",
+              "api-reference/endpoint/business-hours/get-business-hour",
+              "api-reference/endpoint/business-hours/update-business-hours",
+              "api-reference/endpoint/business-hours/delete-business-hour"
             ]
           }
         ]
