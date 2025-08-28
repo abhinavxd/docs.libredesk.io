@@ -1,33 +1,205 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: 'API Reference'
+description: 'Complete LibreDesk API documentation with interactive examples'
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+# LibreDesk API Reference
 
-## Welcome
+LibreDesk is a comprehensive open-source helpdesk system designed for modern customer support teams. This API reference provides complete documentation for all 160+ endpoints across 32+ categories.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
+## API Overview
+
+The LibreDesk API is built with REST principles and returns JSON responses. All endpoints are organized into logical groups to help you find the functionality you need.
+
+<CardGroup cols={2}>
+  <Card
+    title="Authentication"
+    icon="key"
+    href="/api-reference/endpoint/authentication/login"
+  >
+    Login, logout, OAuth, and API key management
+  </Card>
+  <Card
+    title="Conversations"
+    icon="messages"
+    href="/api-reference/endpoint/conversations/get-all-conversations"
+  >
+    Ticket management, messaging, and status updates
+  </Card>
+  <Card
+    title="Agents"
+    icon="users"
+    href="/api-reference/endpoint/agents/get-agents"
+  >
+    Agent management, teams, and permissions
+  </Card>
+  <Card
+    title="Contacts"
+    icon="address-book"
+    href="/api-reference/endpoint/contacts/get-contacts"
+  >
+    Customer contact management and profiles
+  </Card>
+</CardGroup>
+
+## OpenAPI Specification
+
+The complete LibreDesk API is documented using OpenAPI 3.0 specification, enabling automatic SDK generation and interactive testing.
 
 <Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
+  title="OpenAPI Spec"
+  icon="code"
+  href="/api-reference/openapi.json"
 >
-  View the OpenAPI specification file
+  Download the complete OpenAPI specification
 </Card>
 
-## Authentication
+## Authentication Methods
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+LibreDesk supports multiple authentication methods to fit your integration needs:
+
+<AccordionGroup>
+  <Accordion title="API Key Authentication" icon="key">
+    Server-to-server authentication using API keys. Generate and manage API keys through the agent endpoints.
+    
+    ```json
+    {
+      "headers": {
+        "Authorization": "Bearer your-api-key"
+      }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="Basic Authentication" icon="lock">
+    Simple username and password authentication for direct API access.
+    
+    ```json
+    {
+      "headers": {
+        "Authorization": "Basic base64(username:password)"
+      }
+    }
+    ```
+  </Accordion>
+  
+  <Accordion title="OAuth/OIDC" icon="shield">
+    Enterprise-grade authentication with OpenID Connect support for single sign-on integration.
+    
+    ```json
+    {
+      "security": [
+        {
+          "oidc": ["openid", "profile", "email"]
+        }
+      ]
+    }
+    ```
+  </Accordion>
+</AccordionGroup>
+
+## Core API Categories
+
+<Tabs>
+  <Tab title="Core Operations">
+    Essential helpdesk functionality for day-to-day operations.
+    
+    - **Conversations**: Create, manage, and track support tickets
+    - **Messages**: Send messages, handle attachments, and manage threads  
+    - **Contacts**: Customer profiles and contact information
+    - **Agents**: Support team member management
+    - **Authentication**: Secure access and session management
+  </Tab>
+  
+  <Tab title="Automation & AI">
+    Advanced features for workflow automation and AI-powered support.
+    
+    - **Automations**: Business rules and workflow triggers
+    - **AI Completions**: AI-powered response generation
+    - **Macros**: Reusable response templates
+    - **Templates**: Message and response templates
+    - **Webhooks**: Event notifications and integrations
+  </Tab>
+  
+  <Tab title="Administration">
+    Configuration and management features for system administrators.
+    
+    - **Teams & Roles**: Organization structure and permissions
+    - **Business Hours**: Support hours and SLA configuration
+    - **Custom Attributes**: Custom fields and metadata
+    - **Settings**: System configuration and preferences
+    - **Reports**: Analytics and performance metrics
+  </Tab>
+</Tabs>
+
+## Base URL & Environment
+
+```
+http://localhost:8080
+```
+
+<Note>
+  The LibreDesk API is currently configured for local development. Update the base URL to match your production environment.
+</Note>
+
+## Response Format
+
+All API responses follow a consistent JSON structure with standard HTTP status codes:
 
 ```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+{
+  "data": {},
+  "message": "Success",
+  "status": 200
+}
 ```
+
+## Error Handling
+
+LibreDesk uses conventional HTTP response codes to indicate the success or failure of requests:
+
+- `200` - Success
+- `400` - Bad Request - Invalid parameters or malformed request
+- `401` - Unauthorized - Authentication required or invalid
+- `403` - Forbidden - Insufficient permissions
+- `404` - Not Found - Resource does not exist
+- `500` - Internal Server Error - Server-side error
+
+## Rate Limiting
+
+<Info>
+  Rate limiting information will be added as the API evolves. Check response headers for current limits.
+</Info>
+
+## Get Started
+
+<CardGroup cols={2}>
+  <Card
+    title="Authentication Guide"
+    icon="key"
+    href="/api-reference/endpoint/authentication/login"
+  >
+    Start by learning how to authenticate with the API
+  </Card>
+  <Card
+    title="Create Your First Ticket"
+    icon="ticket"
+    href="/api-reference/endpoint/conversations/create-conversation"
+  >
+    Learn how to create and manage support conversations
+  </Card>
+  <Card
+    title="Manage Contacts"
+    icon="address-book"
+    href="/api-reference/endpoint/contacts/get-contacts"
+  >
+    Add and manage customer contact information
+  </Card>
+  <Card
+    title="Set Up Automations"
+    icon="robot"
+    href="/api-reference/endpoint/automations/get-automation-rules"
+  >
+    Automate workflows with business rules
+  </Card>
+</CardGroup>

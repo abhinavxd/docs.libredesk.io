@@ -1527,6 +1527,28 @@
         ],
         "summary": "Get all Conversations",
         "operationId": "handleGetAllConversations",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Items per page"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -1537,7 +1559,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1555,6 +1584,28 @@
         ],
         "summary": "Get Assigned Conversations",
         "operationId": "handleGetAssignedConversations",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Items per page"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -1565,7 +1616,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1611,6 +1669,28 @@
         ],
         "summary": "Get Unassigned Conversations",
         "operationId": "handleGetUnassignedConversations",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 50
+            },
+            "description": "Items per page"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -1621,7 +1701,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1684,7 +1771,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Conversation UUID"
           },
           {
             "name": "uuid",
@@ -1692,7 +1780,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Message UUID"
           }
         ],
         "security": [
@@ -1705,7 +1794,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1776,7 +1872,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Conversation UUID"
           }
         ],
         "security": [
@@ -1789,7 +1886,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2126,7 +2230,28 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "Conversation UUID"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 1
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30
+            },
+            "description": "Items per page"
           }
         ],
         "security": [
@@ -2139,7 +2264,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -5335,6 +5467,415 @@
           }
         },
         "description": "User object returned on successful login"
+      },
+      "Contact": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "type": {
+            "type": "string"
+          },
+          "availability_status": {
+            "type": "string"
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone_number_calling_code": {
+            "type": "string",
+            "nullable": true
+          },
+          "custom_attributes": {
+            "type": "object"
+          },
+          "enabled": {
+            "type": "boolean"
+          },
+          "last_active_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_login_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        }
+      },
+      "ContactSummary": {
+        "type": "object",
+        "properties": {
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      },
+      "Message": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string",
+            "enum": ["incoming", "outgoing"]
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pending", "sent", "received", "failed"]
+          },
+          "conversation_id": {
+            "type": "integer"
+          },
+          "conversation_uuid": {
+            "type": "string"
+          },
+          "content": {
+            "type": "string"
+          },
+          "text_content": {
+            "type": "string"
+          },
+          "content_type": {
+            "type": "string",
+            "enum": ["html", "text"]
+          },
+          "private": {
+            "type": "boolean"
+          },
+          "sender_id": {
+            "type": "integer"
+          },
+          "sender_type": {
+            "type": "string",
+            "enum": ["agent", "contact"]
+          },
+          "meta": {
+            "type": "object",
+            "properties": {
+              "to": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "cc": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "bcc": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "from": {
+                "type": "array",
+                "items": {"type": "string"}
+              },
+              "subject": {
+                "type": "string"
+              }
+            }
+          },
+          "attachments": {
+            "type": "array",
+            "items": {"type": "object"}
+          }
+        }
+      },
+      "Conversation": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "contact_id": {
+            "type": "integer"
+          },
+          "inbox_id": {
+            "type": "integer"
+          },
+          "closed_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "reference_number": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "status": {
+            "type": "string"
+          },
+          "status_id": {
+            "type": "integer"
+          },
+          "first_reply_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_reply_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assigned_user_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "assigned_team_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "assignee_last_seen_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "waiting_since": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "subject": {
+            "type": "string"
+          },
+          "inbox_mail": {
+            "type": "string"
+          },
+          "inbox_name": {
+            "type": "string"
+          },
+          "inbox_channel": {
+            "type": "string"
+          },
+          "tags": {
+            "type": "array",
+            "items": {"type": "string"}
+          },
+          "meta": {
+            "type": "array",
+            "items": {"type": "object"}
+          },
+          "custom_attributes": {
+            "type": "object"
+          },
+          "last_message_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_message": {
+            "type": "string"
+          },
+          "last_message_sender": {
+            "type": "string"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/Contact"
+          },
+          "sla_policy_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "sla_policy_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "applied_sla_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "first_response_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolution_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "next_response_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "next_response_met_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "previous_conversations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {"type": "integer"},
+                "created_at": {"type": "string", "format": "date-time"},
+                "updated_at": {"type": "string", "format": "date-time"},
+                "uuid": {"type": "string"},
+                "contact": {"$ref": "#/components/schemas/ContactSummary"},
+                "last_message": {"type": "string"},
+                "last_message_at": {"type": "string", "format": "date-time"}
+              }
+            }
+          }
+        }
+      },
+      "ConversationListItem": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer"},
+          "created_at": {"type": "string", "format": "date-time"},
+          "updated_at": {"type": "string", "format": "date-time"},
+          "uuid": {"type": "string"},
+          "waiting_since": {"type": "string", "format": "date-time"},
+          "assignee_last_seen_at": {"type": "string", "format": "date-time"},
+          "contact": {"$ref": "#/components/schemas/ContactSummary"},
+          "inbox_channel": {"type": "string"},
+          "inbox_name": {"type": "string"},
+          "sla_policy_id": {"type": "integer", "nullable": true},
+          "first_reply_at": {"type": "string", "format": "date-time", "nullable": true},
+          "last_reply_at": {"type": "string", "format": "date-time", "nullable": true},
+          "resolved_at": {"type": "string", "format": "date-time", "nullable": true},
+          "subject": {"type": "string"},
+          "last_message": {"type": "string"},
+          "last_message_at": {"type": "string", "format": "date-time"},
+          "last_message_sender": {"type": "string"},
+          "next_sla_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
+          "priority_id": {"type": "integer", "nullable": true},
+          "unread_message_count": {"type": "integer"},
+          "status": {"type": "string"},
+          "priority": {"type": "string", "nullable": true},
+          "first_response_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
+          "resolution_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
+          "applied_sla_id": {"type": "integer", "nullable": true},
+          "next_response_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
+          "next_response_met_at": {"type": "string", "format": "date-time", "nullable": true}
+        }
+      },
+      "ConversationListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "object",
+            "properties": {
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/ConversationListItem"}
+              },
+              "total": {"type": "integer"},
+              "per_page": {"type": "integer"},
+              "total_pages": {"type": "integer"},
+              "page": {"type": "integer"}
+            }
+          }
+        }
+      },
+      "ConversationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Conversation"}
+        }
+      },
+      "MessageListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "object",
+            "properties": {
+              "results": {
+                "type": "array",
+                "items": {"$ref": "#/components/schemas/Message"}
+              },
+              "total": {"type": "integer"},
+              "per_page": {"type": "integer"},
+              "total_pages": {"type": "integer"},
+              "page": {"type": "integer"}
+            }
+          }
+        }
+      },
+      "MessageResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Message"}
+        }
       }
     }
   }

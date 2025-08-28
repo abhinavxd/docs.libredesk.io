@@ -1,97 +1,151 @@
 ---
-title: "Introduction"
-description: "Welcome to the new home for your documentation"
+title: "LibreDesk API Documentation"
+description: "Complete API reference for the LibreDesk helpdesk system"
 ---
 
-## Setting up
+# LibreDesk API
 
-Get your documentation site up and running in minutes.
+Welcome to the LibreDesk API documentation. LibreDesk is an open-source helpdesk system that provides comprehensive customer support management capabilities.
+
+## Getting Started
+
+The LibreDesk API is organized around REST principles and uses standard HTTP response codes. All API endpoints return JSON responses.
 
 <Card
-  title="Start here"
-  icon="rocket"
-  href="/quickstart"
-  horizontal
+  title="API Reference"
+  icon="terminal"
+  href="/api-reference/introduction"
 >
-  Follow our three step quickstart guide.
+  Browse all 160+ API endpoints across 32+ categories
 </Card>
 
-## Make it yours
+## Core Features
 
-Design a docs site that looks great and empowers your users.
+LibreDesk provides a complete helpdesk solution with these key capabilities:
 
-<Columns cols={2}>
+<CardGroup cols={2}>
   <Card
-    title="Edit locally"
-    icon="pen-to-square"
-    href="/development"
+    title="Ticket Management"
+    icon="ticket"
+    href="/api-reference/endpoint/conversations/get-all-conversations"
   >
-    Edit your docs locally and preview them in real time.
+    Create, manage, and track customer conversations and support tickets
   </Card>
   <Card
-    title="Customize your site"
-    icon="palette"
-    href="/essentials/settings"
+    title="Agent Management"
+    icon="users"
+    href="/api-reference/endpoint/agents/get-agents"
   >
-    Customize the design and colors of your site to match your brand.
-  </Card>
-    <Card
-    title="Set up navigation"
-    icon="map"
-    href="/essentials/navigation"
-  >
-    Organize your docs to help users find what they need and succeed with your product.
+    Manage support agents, teams, and user permissions
   </Card>
   <Card
-    title="API documentation"
-    icon="terminal"
+    title="Automation & Workflows"
+    icon="robot"
+    href="/api-reference/endpoint/automations/get-automation-rules"
+  >
+    Set up automated rules and AI-powered responses
+  </Card>
+  <Card
+    title="Customer Management"
+    icon="address-book"
+    href="/api-reference/endpoint/contacts/get-contacts"
+  >
+    Manage customer contacts and their support history
+  </Card>
+</CardGroup>
+
+## API Categories
+
+<AccordionGroup>
+  <Accordion title="Core Operations" icon="gear">
+    <CardGroup cols={2}>
+      <Card title="Authentication" href="/api-reference/endpoint/authentication/login">
+        Login, logout, and OAuth integration
+      </Card>
+      <Card title="Conversations" href="/api-reference/endpoint/conversations/get-all-conversations">
+        Ticket creation, messaging, and status management  
+      </Card>
+      <Card title="Contacts" href="/api-reference/endpoint/contacts/get-contacts">
+        Customer contact management and profiles
+      </Card>
+      <Card title="Agents" href="/api-reference/endpoint/agents/get-agents">
+        Agent management and permissions
+      </Card>
+    </CardGroup>
+  </Accordion>
+
+  <Accordion title="Advanced Features" icon="sparkles">
+    <CardGroup cols={2}>
+      <Card title="Automations" href="/api-reference/endpoint/automations/get-automation-rules">
+        Workflow automation and business rules
+      </Card>
+      <Card title="AI Completions" href="/api-reference/endpoint/ai-completions/a-i-completion">
+        AI-powered response generation
+      </Card>
+      <Card title="Templates & Macros" href="/api-reference/endpoint/templates/get-templates">
+        Reusable response templates and macros
+      </Card>
+      <Card title="Reports" href="/api-reference/endpoint/reports/overview-charts">
+        Analytics and performance reporting
+      </Card>
+    </CardGroup>
+  </Accordion>
+
+  <Accordion title="Configuration" icon="settings">
+    <CardGroup cols={2}>
+      <Card title="Teams & Roles" href="/api-reference/endpoint/teams/get-teams">
+        Team organization and role management
+      </Card>
+      <Card title="Business Hours" href="/api-reference/endpoint/business-hours/get-business-hours">
+        Support hours and SLA configuration
+      </Card>
+      <Card title="Custom Attributes" href="/api-reference/endpoint/custom-attributes/get-custom-attributes">
+        Custom fields and metadata
+      </Card>
+      <Card title="Webhooks" href="/api-reference/endpoint/webhooks/get-webhooks">
+        Event notifications and integrations
+      </Card>
+    </CardGroup>
+  </Accordion>
+</AccordionGroup>
+
+## Base URL
+
+```
+http://localhost:8080
+```
+
+## Authentication
+
+LibreDesk API supports multiple authentication methods:
+
+- **API Keys**: For server-to-server integration
+- **Basic Auth**: For simple username/password authentication  
+- **OAuth/OIDC**: For single sign-on integration
+
+<Card
+  title="Authentication Guide"
+  icon="key" 
+  href="/api-reference/endpoint/authentication/login"
+>
+  Learn how to authenticate with the LibreDesk API
+</Card>
+
+## Need Help?
+
+<CardGroup cols={2}>
+  <Card
+    title="Browse All Endpoints"
+    icon="list"
     href="/api-reference/introduction"
   >
-    Auto-generate API documentation from OpenAPI specifications.
-  </Card>
-</Columns>
-
-## Create beautiful pages
-
-Everything you need to create world-class documentation.
-
-<Columns cols={2}>
-  <Card
-    title="Write with MDX"
-    icon="pen-fancy"
-    href="/essentials/markdown"
-  >
-    Use MDX to style your docs pages.
+    Complete API reference with 160+ endpoints
   </Card>
   <Card
-    title="Code samples"
+    title="OpenAPI Specification"
     icon="code"
-    href="/essentials/code"
+    href="/api-reference/openapi.json"
   >
-    Add sample code to demonstrate how to use your product.
+    Download the complete OpenAPI spec
   </Card>
-  <Card
-    title="Images"
-    icon="image"
-    href="/essentials/images"
-  >
-    Display images and other media.
-  </Card>
-  <Card
-    title="Reusable snippets"
-    icon="recycle"
-    href="/essentials/reusable-snippets"
-  >
-    Write once and reuse across your docs.
-  </Card>
-</Columns>
-
-## Need inspiration?
-
-<Card
-  title="See complete examples"
-  icon="stars"
-  href="https://mintlify.com/customers"
->
-  Browse our showcase of exceptional documentation sites.
-</Card>
+</CardGroup>
