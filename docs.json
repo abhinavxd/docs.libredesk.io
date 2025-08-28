@@ -9,9 +9,6 @@
   },
   "favicon": "/favicon.svg",
   "navigation": {
-    "pages": [
-      "index"
-    ],
     "tabs": [
       {
         "tab": "API Reference",
@@ -240,7 +237,7 @@
         },
         {
           "anchor": "OpenAPI Spec",
-          "href": "/api-reference/openapi.json",
+          "href": "https://docs.libredesk.io/api-reference/openapi.json",
           "icon": "code"
         }
       ]
