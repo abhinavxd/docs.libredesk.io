@@ -12,142 +12,6 @@
     }
   ],
   "paths": {
-    "/": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/account/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/admin/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/api/docs": {
-      "get": {
-        "tags": [
-          "API Documentation"
-        ],
-        "summary": "Swagger U I",
-        "operationId": "handleSwaggerUI",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/api/openapi.json": {
-      "get": {
-        "tags": [
-          "API Documentation"
-        ],
-        "summary": "Get Open A P I Spec",
-        "operationId": "handleGetOpenAPISpec",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
     "/api/v1/activity-logs": {
       "get": {
         "tags": [
@@ -165,7 +29,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Activity logs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ActivityLogListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -193,7 +64,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Agents retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -219,7 +97,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Agent created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -247,7 +132,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Compact agents retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentCompactListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -275,7 +167,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Current agent details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -301,7 +200,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Updated agent details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -329,7 +235,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Agent availability updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -357,7 +270,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Avatar deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -385,7 +305,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Teams retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -413,7 +340,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Password reset initiated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -441,7 +375,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Password set successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -479,7 +420,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Agent deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -515,7 +463,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Agent retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -551,7 +506,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Agent updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgentResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -589,7 +551,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "API key revoked successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -625,7 +594,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "API key generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/APIKeyResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -653,7 +629,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "AI completion generated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AICompletionResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -681,7 +664,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "AI prompts retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AIPromptListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -709,7 +699,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "AI provider updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -799,7 +796,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Rules retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRuleListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -825,7 +829,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Rule created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRuleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -853,7 +864,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Execution mode updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -881,7 +899,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Weights updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -919,7 +944,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Rule deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -955,7 +987,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Rule retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRuleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -991,7 +1030,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Rule updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRuleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1029,7 +1075,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Rule toggled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AutomationRuleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1057,7 +1110,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Business hours retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessHourListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1083,7 +1143,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Business hours created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessHourResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1121,7 +1188,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Business hour deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1157,7 +1231,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Business hour retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessHourResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1193,7 +1274,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Business hours updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BusinessHourResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1221,7 +1309,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "List of contacts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1249,7 +1344,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contacts searched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactSearchResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1287,7 +1389,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1323,7 +1432,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1361,7 +1477,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact blocked successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1399,7 +1522,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact notes retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactNoteListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1435,7 +1565,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact note created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactNoteResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1481,7 +1618,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact note deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1509,7 +1653,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1559,7 +1710,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "All conversations retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1616,7 +1767,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Assigned conversations retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1651,7 +1802,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversations searched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationSearchResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1701,7 +1859,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Unassigned conversations retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1746,7 +1904,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Message sent successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1794,7 +1959,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Message sent successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1847,7 +2012,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Message retried successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1886,7 +2058,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Conversation retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -1931,7 +2103,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Team assignee updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -1969,7 +2148,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Team assignee removed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2007,7 +2193,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "User assignee updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2045,7 +2238,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "User assignee removed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2083,7 +2283,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Contact custom attributes updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2121,7 +2328,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation custom attributes updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2159,7 +2373,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation assignee last seen updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2205,7 +2426,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Macro applied successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2264,7 +2492,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response",
+            "description": "Messages retrieved successfully",
             "content": {
               "application/json": {
                 "schema": {
@@ -2309,7 +2537,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation participants retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2347,7 +2582,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation priority updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2385,7 +2627,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation status updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2423,7 +2672,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Conversation tags updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2451,7 +2707,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Custom attributes retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomAttributeListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2477,7 +2740,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Custom attribute created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomAttributeResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2515,7 +2785,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Custom attribute deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2551,7 +2828,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Custom attribute retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomAttributeResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2587,7 +2871,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Custom attribute updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CustomAttributeResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2615,7 +2906,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Inboxes retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2641,7 +2939,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Inbox created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2679,7 +2984,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Inbox deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2715,7 +3027,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Inbox retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2751,7 +3070,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Inbox updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2789,7 +3115,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Inbox toggled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InboxResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2819,7 +3152,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Language data retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2847,7 +3187,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Macros retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MacroListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2873,7 +3220,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Macro created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MacroResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2911,7 +3265,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Macro deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2947,7 +3308,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Macro retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MacroResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -2983,7 +3351,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Macro updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MacroResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3011,7 +3386,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Successful media upload response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MediaResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3039,7 +3421,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Messages searched successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageSearchResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3067,7 +3456,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "List of all OIDC providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OIDCListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3093,7 +3489,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Created OIDC provider response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OIDCResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3113,7 +3516,14 @@
         "operationId": "handleGetAllEnabledOIDC",
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "List of enabled OIDC providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OIDCListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3151,7 +3561,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "OIDC provider deletion success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3187,7 +3604,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Single OIDC provider response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OIDCResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3223,7 +3647,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Updated OIDC provider response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OIDCResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3253,7 +3684,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "OIDC callback processed successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3283,7 +3721,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "OIDC login initiated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3311,7 +3756,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Priorities retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PriorityListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3339,7 +3791,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Charts overview report retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3367,7 +3826,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Counts overview report retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3395,7 +3861,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "SLA overview report retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ReportResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3423,7 +3896,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Roles retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3449,7 +3929,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Role created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3487,7 +3974,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Role deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3523,7 +4017,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Role retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3559,7 +4060,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Role updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RoleResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3579,7 +4087,14 @@
         "operationId": "handleGetGeneralSettings",
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "General settings response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GeneralSettingsResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3605,7 +4120,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Settings update success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3633,7 +4155,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Email notification settings response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EmailNotificationResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3659,7 +4188,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Email settings update success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3687,7 +4223,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "SLAs retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SLAListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3713,7 +4256,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "SLA created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SLAResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3751,7 +4301,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "SLA deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3787,7 +4344,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "SLA retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SLAResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3823,7 +4387,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "SLA updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SLAResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3851,7 +4422,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Statuses retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3877,7 +4455,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Status created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3915,7 +4500,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Status deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3951,7 +4543,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Status updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -3979,7 +4578,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Tags retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4005,7 +4611,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Tag created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4043,7 +4656,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Tag deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4079,7 +4699,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Tag updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TagResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4107,7 +4734,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "List of teams",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4133,7 +4767,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Created team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4161,7 +4802,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Compact list of teams",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4199,7 +4847,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Team deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4235,7 +4890,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Team retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4271,7 +4933,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Team updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TeamResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4309,7 +4978,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "List of unassigned conversations for team",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4337,7 +5013,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Templates retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4363,7 +5046,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Template created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4401,7 +5091,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Template deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4437,7 +5134,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Template retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4473,7 +5177,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Template updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TemplateResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4501,7 +5212,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "User views retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4527,7 +5245,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "User view created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4565,7 +5290,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "User view deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4601,7 +5333,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "User view updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ViewResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4639,7 +5378,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "View conversations retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4667,7 +5413,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhooks retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookListResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4693,7 +5446,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhook created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4731,7 +5491,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhook deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4767,7 +5534,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhook retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4803,7 +5577,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhook updated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4841,7 +5622,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhook test initiated successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4879,7 +5667,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
+            "description": "Webhook toggled successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/WebhookResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Unauthorized"
@@ -4909,103 +5704,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/contacts/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+            "description": "Static file served successfully",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "binary"
+                }
+              }
             }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/csat/{uuid}": {
-      "get": {
-        "tags": [
-          "Public pages"
-        ],
-        "summary": "Show C S A T",
-        "operationId": "handleShowCSAT",
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      },
-      "post": {
-        "tags": [
-          "Public pages"
-        ],
-        "summary": "Update C S A T Response",
-        "operationId": "handleUpdateCSATResponse",
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
           },
           "401": {
             "description": "Unauthorized"
@@ -5025,353 +5732,14 @@
         "operationId": "handleHealthCheck",
         "responses": {
           "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/images/{all:*}": {
-      "get": {
-        "tags": [
-          "FIXME: Don't need three separate routes for the same thing"
-        ],
-        "summary": "serve Frontend Static Files",
-        "operationId": "serveFrontendStaticFiles",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
+            "description": "Health check passed",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SuccessResponse"
+                }
+              }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/inboxes/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/logout": {
-      "get": {
-        "tags": [
-          "Authentication"
-        ],
-        "summary": "Logout",
-        "operationId": "handleLogout",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/reports/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/reset-password": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/set-password": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/static/public/{all:*}": {
-      "get": {
-        "tags": [
-          "FIXME: Don't need three separate routes for the same thing"
-        ],
-        "summary": "serve Static Files",
-        "operationId": "serveStaticFiles",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/teams/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/uploads/{uuid}": {
-      "get": {
-        "tags": [
-          "Media"
-        ],
-        "summary": "Serve Media",
-        "operationId": "handleServeMedia",
-        "parameters": [
-          {
-            "name": "uuid",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/views/{all:*}": {
-      "get": {
-        "tags": [
-          "Frontend pages"
-        ],
-        "summary": "serve Index Page",
-        "operationId": "serveIndexPage",
-        "parameters": [
-          {
-            "name": "all:*",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/ws": {
-      "get": {
-        "tags": [
-          "WebSocket"
-        ],
-        "summary": "inline Handler",
-        "operationId": "inlineHandler",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "apiKey": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response"
           },
           "401": {
             "description": "Unauthorized"
@@ -5548,6 +5916,33 @@
           "avatar_url": {
             "type": "string",
             "nullable": true
+          }
+        }
+      },
+      "ContactResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Contact"
+          }
+        }
+      },
+      "ContactListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Contact"
+            }
           }
         }
       },
@@ -5875,6 +6270,779 @@
         "properties": {
           "status": {"type": "string", "example": "success"},
           "data": {"$ref": "#/components/schemas/Message"}
+        }
+      },
+      "Media": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 123},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "uuid": {"type": "string", "example": "550e8400-e29b-41d4-a716-446655440000"},
+          "store": {"type": "string", "example": "fs"},
+          "filename": {"type": "string", "example": "example.jpg"},
+          "content_type": {"type": "string", "example": "image/jpeg"},
+          "content_id": {"type": "string", "example": ""},
+          "model_id": {"type": "integer", "nullable": true, "example": 456},
+          "model_type": {"type": "string", "nullable": true, "example": "messages"},
+          "disposition": {"type": "string", "nullable": true, "example": "attachment"},
+          "size": {"type": "integer", "example": 102400},
+          "meta": {"type": "object", "example": {"width": 800, "height": 600}},
+          "url": {"type": "string", "example": "/uploads/550e8400-e29b-41d4-a716-446655440000"}
+        }
+      },
+      "MediaResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Media"}
+        }
+      },
+      "GeneralSettings": {
+        "type": "object",
+        "properties": {
+          "app.site_name": {"type": "string", "example": "LibreDesk"},
+          "app.lang": {"type": "string", "example": "en"},
+          "app.max_file_upload_size": {"type": "integer", "example": 10},
+          "app.favicon_url": {"type": "string", "example": "/images/favicon.ico"},
+          "app.logo_url": {"type": "string", "example": "/images/logo.png"},
+          "app.root_url": {"type": "string", "example": "http://localhost:8080"},
+          "app.allowed_file_upload_extensions": {"type": "array", "items": {"type": "string"}, "example": ["jpg", "png", "pdf"]},
+          "app.timezone": {"type": "string", "example": "UTC"},
+          "app.business_hours_id": {"type": "string", "example": "1"},
+          "app.update": {"type": "object", "example": null},
+          "app.version": {"type": "string", "example": "1.0.0"}
+        }
+      },
+      "GeneralSettingsResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/GeneralSettings"}
+        }
+      },
+      "EmailNotification": {
+        "type": "object",
+        "properties": {
+          "notification.email.username": {"type": "string", "example": "noreply@example.com"},
+          "notification.email.host": {"type": "string", "example": "smtp.example.com"},
+          "notification.email.port": {"type": "integer", "example": 587},
+          "notification.email.password": {"type": "string", "example": "**********"},
+          "notification.email.max_conns": {"type": "integer", "example": 10},
+          "notification.email.idle_timeout": {"type": "string", "example": "15s"},
+          "notification.email.wait_timeout": {"type": "string", "example": "5s"},
+          "notification.email.auth_protocol": {"type": "string", "example": "PLAIN"},
+          "notification.email.email_address": {"type": "string", "example": "noreply@example.com"},
+          "notification.email.max_msg_retries": {"type": "integer", "example": 3},
+          "notification.email.tls_type": {"type": "string", "example": "STARTTLS"},
+          "notification.email.tls_skip_verify": {"type": "boolean", "example": false},
+          "notification.email.hello_hostname": {"type": "string", "example": "example.com"},
+          "notification.email.enabled": {"type": "boolean", "example": true}
+        }
+      },
+      "EmailNotificationResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/EmailNotification"}
+        }
+      },
+      "OIDC": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Google SSO"},
+          "enabled": {"type": "boolean", "example": true},
+          "client_id": {"type": "string", "example": "example-client-id"},
+          "client_secret": {"type": "string", "example": "**********"},
+          "provider": {"type": "string", "example": "Google"},
+          "provider_url": {"type": "string", "example": "https://accounts.google.com"},
+          "redirect_uri": {"type": "string", "example": "http://localhost:8080/api/v1/oidc/1/finish"},
+          "logo_url": {"type": "string", "example": "/images/google-logo.png"}
+        }
+      },
+      "OIDCResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/OIDC"}
+        }
+      },
+      "OIDCListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/OIDC"}
+          }
+        }
+      },
+      "SuccessResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"type": "boolean", "example": true}
+        }
+      },
+      "ConversationSearchResult": {
+        "type": "object",
+        "properties": {
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "uuid": {"type": "string", "example": "550e8400-e29b-41d4-a716-446655440000"},
+          "reference_number": {"type": "string", "example": "REF-001"},
+          "subject": {"type": "string", "example": "Order inquiry"}
+        }
+      },
+      "MessageSearchResult": {
+        "type": "object",
+        "properties": {
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "text_content": {"type": "string", "example": "Hello, I need help with my order."},
+          "conversation_created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "conversation_uuid": {"type": "string", "example": "550e8400-e29b-41d4-a716-446655440000"},
+          "conversation_reference_number": {"type": "string", "example": "REF-001"}
+        }
+      },
+      "ContactSearchResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/ContactSearchResult"}
+          }
+        }
+      },
+      "ConversationSearchResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/ConversationSearchResult"}
+          }
+        }
+      },
+      "MessageSearchResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/MessageSearchResult"}
+          }
+        }
+      },
+      "ContactSearchResult": {
+        "type": "object",
+        "properties": {
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "first_name": {"type": "string", "example": "John"},
+          "last_name": {"type": "string", "example": "Doe"},
+          "email": {"type": "string", "format": "email", "example": "john.doe@example.com"}
+        }
+      },
+      "Status": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Open"}
+        }
+      },
+      "StatusResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Status"}
+        }
+      },
+      "StatusListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Status"}
+          }
+        }
+      },
+      "Priority": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "High"}
+        }
+      },
+      "PriorityResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Priority"}
+        }
+      },
+      "PriorityListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Priority"}
+          }
+        }
+      },
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "bug"}
+        }
+      },
+      "TagResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Tag"}
+        }
+      },
+      "TagListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Tag"}
+          }
+        }
+      },
+      "Agent": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "first_name": {"type": "string", "example": "John"},
+          "last_name": {"type": "string", "example": "Doe"},
+          "email": {"type": "string", "format": "email", "example": "john.doe@example.com", "nullable": true},
+          "type": {"type": "string", "example": "agent"},
+          "availability_status": {"type": "string", "example": "online"},
+          "phone_number_calling_code": {"type": "string", "nullable": true, "example": "+1"},
+          "phone_number": {"type": "string", "nullable": true, "example": "1234567890"},
+          "avatar_url": {"type": "string", "nullable": true, "example": "/avatars/agent1.jpg"},
+          "enabled": {"type": "boolean", "example": true},
+          "last_active_at": {"type": "string", "format": "date-time", "nullable": true, "example": "2025-08-28T10:00:00Z"},
+          "last_login_at": {"type": "string", "format": "date-time", "nullable": true, "example": "2025-08-28T10:00:00Z"},
+          "roles": {"type": "array", "items": {"type": "string"}, "example": ["admin"]},
+          "permissions": {"type": "array", "items": {"type": "string"}, "example": ["conversations:read"]},
+          "custom_attributes": {"type": "object"},
+          "teams": {"type": "array", "items": {"$ref": "#/components/schemas/TeamCompact"}},
+          "api_key": {"type": "string", "nullable": true},
+          "api_key_last_used_at": {"type": "string", "format": "date-time", "nullable": true}
+        }
+      },
+      "AgentCompact": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "type": {"type": "string", "example": "agent"},
+          "first_name": {"type": "string", "example": "John"},
+          "last_name": {"type": "string", "example": "Doe"},
+          "email": {"type": "string", "format": "email", "nullable": true, "example": "john.doe@example.com"},
+          "enabled": {"type": "boolean", "example": true},
+          "avatar_url": {"type": "string", "nullable": true, "example": "/avatars/agent1.jpg"},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "total": {"type": "integer", "example": 100}
+        }
+      },
+      "AgentResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Agent"}
+        }
+      },
+      "AgentListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Agent"}
+          }
+        }
+      },
+      "AgentCompactListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/AgentCompact"}
+          }
+        }
+      },
+      "TeamCompact": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "name": {"type": "string", "example": "Support Team"},
+          "emoji": {"type": "string", "nullable": true, "example": "🛠️"}
+        }
+      },
+      "Team": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "emoji": {"type": "string", "nullable": true, "example": "🛠️"},
+          "name": {"type": "string", "example": "Support Team"},
+          "conversation_assignment_type": {"type": "string", "example": "round_robin"},
+          "timezone": {"type": "string", "example": "UTC"},
+          "business_hours_id": {"type": "integer", "nullable": true, "example": 1},
+          "sla_policy_id": {"type": "integer", "nullable": true, "example": 1},
+          "max_auto_assigned_conversations": {"type": "integer", "example": 10}
+        }
+      },
+      "TeamResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Team"}
+        }
+      },
+      "TeamListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Team"}
+          }
+        }
+      },
+      "Macro": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Close and Thank"},
+          "actions": {"type": "object", "description": "JSON object containing macro actions"},
+          "visibility": {"type": "string", "example": "global"},
+          "visible_when": {"type": "array", "items": {"type": "string"}, "example": ["conversation_open"]},
+          "message_content": {"type": "string", "example": "Thank you for contacting us!"},
+          "user_id": {"type": "string", "nullable": true, "example": "1"},
+          "team_id": {"type": "string", "nullable": true, "example": "1"},
+          "usage_count": {"type": "integer", "example": 25}
+        }
+      },
+      "MacroResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Macro"}
+        }
+      },
+      "MacroListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Macro"}
+          }
+        }
+      },
+      "ContactNote": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "contact_id": {"type": "integer", "example": 1},
+          "note": {"type": "string", "example": "Customer prefers email communication"},
+          "user_id": {"type": "integer", "example": 1},
+          "first_name": {"type": "string", "example": "John"},
+          "last_name": {"type": "string", "example": "Doe"},
+          "avatar_url": {"type": "string", "nullable": true, "example": "/avatars/agent1.jpg"}
+        }
+      },
+      "ContactNoteResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/ContactNote"}
+        }
+      },
+      "ContactNoteListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/ContactNote"}
+          }
+        }
+      },
+      "AutomationRule": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Auto-assign urgent tickets"},
+          "description": {"type": "string", "example": "Automatically assign high priority tickets to senior agents"},
+          "type": {"type": "string", "example": "new_conversation"},
+          "events": {"type": "array", "items": {"type": "string"}, "example": ["conversation.message.incoming"]},
+          "enabled": {"type": "boolean", "example": true},
+          "weight": {"type": "integer", "example": 100},
+          "execution_mode": {"type": "string", "example": "all"},
+          "rules": {"type": "object", "description": "JSON object containing rule conditions"}
+        }
+      },
+      "AutomationRuleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/AutomationRule"}
+        }
+      },
+      "AutomationRuleListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/AutomationRule"}
+          }
+        }
+      },
+      "Inbox": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Support Email"},
+          "channel": {"type": "string", "example": "email"},
+          "enabled": {"type": "boolean", "example": true},
+          "csat_enabled": {"type": "boolean", "example": true},
+          "from": {"type": "string", "format": "email", "example": "support@company.com"},
+          "config": {"type": "object", "description": "Channel configuration JSON"}
+        }
+      },
+      "InboxResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Inbox"}
+        }
+      },
+      "InboxListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Inbox"}
+          }
+        }
+      },
+      "ActivityLog": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "activity_type": {"type": "string", "example": "agent_login"},
+          "activity_description": {"type": "string", "example": "Agent John Doe logged in"},
+          "actor_id": {"type": "integer", "example": 1},
+          "target_model_type": {"type": "string", "example": "user"},
+          "target_model_id": {"type": "integer", "example": 1},
+          "ip": {"type": "string", "example": "192.168.1.1"}
+        }
+      },
+      "ActivityLogResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/ActivityLog"}
+        }
+      },
+      "ActivityLogListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/ActivityLog"}
+          }
+        }
+      },
+      "APIKeyResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "object",
+            "properties": {
+              "api_key": {"type": "string", "example": "ak_1234567890abcdef"},
+              "api_secret": {"type": "string", "example": "as_abcdef1234567890"}
+            }
+          }
+        }
+      },
+      "BusinessHour": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Business Hours"},
+          "timezone": {"type": "string", "example": "UTC"},
+          "schedule": {"type": "object", "description": "Weekly schedule configuration"}
+        }
+      },
+      "BusinessHourResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/BusinessHour"}
+        }
+      },
+      "BusinessHourListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/BusinessHour"}
+          }
+        }
+      },
+      "View": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "My Open Tickets"},
+          "query": {"type": "object", "description": "View filter criteria"},
+          "user_id": {"type": "integer", "example": 1}
+        }
+      },
+      "ViewResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/View"}
+        }
+      },
+      "ViewListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/View"}
+          }
+        }
+      },
+      "Role": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Administrator"},
+          "permissions": {"type": "array", "items": {"type": "string"}, "example": ["conversations:read", "users:manage"]}
+        }
+      },
+      "RoleResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Role"}
+        }
+      },
+      "RoleListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Role"}
+          }
+        }
+      },
+      "Webhook": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Slack Notification"},
+          "url": {"type": "string", "format": "uri", "example": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"},
+          "enabled": {"type": "boolean", "example": true},
+          "events": {"type": "array", "items": {"type": "string"}, "example": ["conversation.created"]},
+          "headers": {"type": "object", "description": "Custom HTTP headers"}
+        }
+      },
+      "WebhookResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Webhook"}
+        }
+      },
+      "WebhookListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Webhook"}
+          }
+        }
+      },
+      "Template": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Welcome Email"},
+          "subject": {"type": "string", "example": "Welcome to our support"},
+          "content": {"type": "string", "example": "Thank you for contacting us..."},
+          "type": {"type": "string", "example": "email"}
+        }
+      },
+      "TemplateResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Template"}
+        }
+      },
+      "TemplateListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/Template"}
+          }
+        }
+      },
+      "SLA": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Standard SLA"},
+          "first_response_time": {"type": "integer", "example": 60, "description": "Minutes"},
+          "resolution_time": {"type": "integer", "example": 1440, "description": "Minutes"}
+        }
+      },
+      "SLAResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/SLA"}
+        }
+      },
+      "SLAListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/SLA"}
+          }
+        }
+      },
+      "CustomAttribute": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "integer", "example": 1},
+          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
+          "name": {"type": "string", "example": "Customer Type"},
+          "key": {"type": "string", "example": "customer_type"},
+          "type": {"type": "string", "example": "select"},
+          "options": {"type": "array", "items": {"type": "string"}, "example": ["Premium", "Standard"]}
+        }
+      },
+      "CustomAttributeResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/CustomAttribute"}
+        }
+      },
+      "CustomAttributeListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/CustomAttribute"}
+          }
+        }
+      },
+      "AICompletion": {
+        "type": "object",
+        "properties": {
+          "content": {"type": "string", "example": "Thank you for contacting us. I'll help you resolve this issue..."},
+          "usage": {"type": "object", "properties": {"tokens": {"type": "integer", "example": 150}}}
+        }
+      },
+      "AICompletionResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/AICompletion"}
+        }
+      },
+      "AIPrompt": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "example": "reply_friendly"},
+          "name": {"type": "string", "example": "Friendly Reply"},
+          "prompt": {"type": "string", "example": "Write a friendly response to this customer inquiry"}
+        }
+      },
+      "AIPromptListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {
+            "type": "array",
+            "items": {"$ref": "#/components/schemas/AIPrompt"}
+          }
+        }
+      },
+      "Report": {
+        "type": "object",
+        "properties": {
+          "period": {"type": "string", "example": "last_7_days"},
+          "data": {"type": "object", "description": "Report data structure varies by report type"}
+        }
+      },
+      "ReportResponse": {
+        "type": "object",
+        "properties": {
+          "status": {"type": "string", "example": "success"},
+          "data": {"$ref": "#/components/schemas/Report"}
         }
       }
     }
