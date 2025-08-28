@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "LibreDesk API",
-    "description": "REST API documentation for LibreDesk helpdesk system",
+    "title": "Libredesk API",
+    "description": "REST API documentation for Libredesk helpdesk system",
     "version": "1.0.0"
   },
   "servers": [

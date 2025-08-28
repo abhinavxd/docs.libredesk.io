@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "LibreDesk API Documentation",
+  "name": "Libredesk API Documentation",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
@@ -244,8 +244,8 @@
     }
   },
   "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
+    "light": "https://s3.ap-south-1.amazonaws.com/libredesk.io/libredesk_black.png",
+    "dark": "https://s3.ap-south-1.amazonaws.com/libredesk.io/libredesk_white.svg"
   },
   "navbar": {
     "links": [
