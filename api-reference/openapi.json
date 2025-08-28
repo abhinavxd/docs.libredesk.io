@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Libredesk API",
-    "description": "REST API documentation for Libredesk helpdesk system",
+    "description": "REST API for Libredesk - Open source, self-hosted customer support desk",
     "version": "1.0.0"
   },
   "servers": [

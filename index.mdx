@@ -1,11 +1,15 @@
 ---
 title: "Libredesk API Documentation"
-description: "Complete API reference for the Libredesk helpdesk system"
+description: "Complete API reference for the open source, self-hosted customer support desk"
 ---
 
 # Libredesk API
 
-Welcome to the Libredesk API documentation. Libredesk is an open-source helpdesk system that provides comprehensive customer support management capabilities.
+Welcome to the Libredesk API documentation. Libredesk is an **open source, self-hosted customer support desk** delivered as a single binary application.
+
+<Note>
+  Libredesk is currently in **alpha** stage. Features and APIs may change as we continue development.
+</Note>
 
 ## Getting Started
 
@@ -25,25 +29,25 @@ Libredesk provides a complete helpdesk solution with these key capabilities:
 
 <CardGroup cols={2}>
   <Card
-    title="Ticket Management"
-    icon="ticket"
+    title="Conversation Management"
+    icon="messages"
     href="/api-reference/endpoint/conversations/get-all-conversations"
   >
-    Create, manage, and track customer conversations and support tickets
+    Create, manage, and track customer conversations and support interactions
   </Card>
   <Card
     title="Agent Management"
     icon="users"
     href="/api-reference/endpoint/agents/get-agents"
   >
-    Manage support agents, teams, and user permissions
+    Manage support agents, teams, and granular role-based permissions
   </Card>
   <Card
-    title="Automation & Workflows"
+    title="Smart Automation"
     icon="robot"
     href="/api-reference/endpoint/automations/get-automation-rules"
   >
-    Set up automated rules and AI-powered responses
+    Smart automation rules with AI-assisted response writing and auto-assignment
   </Card>
   <Card
     title="Customer Management"
@@ -63,7 +67,7 @@ Libredesk provides a complete helpdesk solution with these key capabilities:
         Login, logout, and OAuth integration
       </Card>
       <Card title="Conversations" href="/api-reference/endpoint/conversations/get-all-conversations">
-        Ticket creation, messaging, and status management  
+        Conversation creation, messaging, and status management  
       </Card>
       <Card title="Contacts" href="/api-reference/endpoint/contacts/get-contacts">
         Customer contact management and profiles

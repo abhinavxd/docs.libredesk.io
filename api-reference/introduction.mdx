@@ -5,7 +5,11 @@ description: 'Complete Libredesk API documentation with interactive examples'
 
 # Libredesk API Reference
 
-Libredesk is a comprehensive open-source helpdesk system designed for modern customer support teams. This API reference provides complete documentation for all 160+ endpoints across 32+ categories.
+Libredesk is an **open source, self-hosted customer support desk** delivered as a single binary application. This API reference provides complete documentation for all 160+ endpoints across 32+ categories.
+
+<Note>
+  **Alpha Stage**: Libredesk is currently in alpha development. Features and APIs may change as we continue development.
+</Note>
 
 ## API Overview
 
@@ -24,7 +28,7 @@ The Libredesk API is built with REST principles and returns JSON responses. All 
     icon="messages"
     href="/api-reference/endpoint/conversations/get-all-conversations"
   >
-    Ticket management, messaging, and status updates
+    Conversation management, messaging, and status updates
   </Card>
   <Card
     title="Agents"
@@ -104,7 +108,7 @@ Libredesk supports multiple authentication methods to fit your integration needs
   <Tab title="Core Operations">
     Essential helpdesk functionality for day-to-day operations.
     
-    - **Conversations**: Create, manage, and track support tickets
+    - **Conversations**: Create, manage, and track support conversations
     - **Messages**: Send messages, handle attachments, and manage threads  
     - **Contacts**: Customer profiles and contact information
     - **Agents**: Support team member management
@@ -131,6 +135,15 @@ Libredesk supports multiple authentication methods to fit your integration needs
     - **Reports**: Analytics and performance metrics
   </Tab>
 </Tabs>
+
+## Technology Stack
+
+Libredesk is built with modern technologies for performance and scalability:
+
+- **Backend**: Go (Golang) - Fast, efficient REST API
+- **Frontend**: Vue.js 3 with Shadcn UI components
+- **Database**: PostgreSQL - Reliable data storage
+- **Deployment**: Single binary application or Docker container
 
 ## Base URL & Environment
 
@@ -182,8 +195,8 @@ Libredesk uses conventional HTTP response codes to indicate the success or failu
     Start by learning how to authenticate with the API
   </Card>
   <Card
-    title="Create Your First Ticket"
-    icon="ticket"
+    title="Create Your First Conversation"
+    icon="messages"
     href="/api-reference/endpoint/conversations/create-conversation"
   >
     Learn how to create and manage support conversations

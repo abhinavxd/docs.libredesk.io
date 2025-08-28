@@ -208,10 +208,7 @@
               "api-reference/endpoint/settings/update-email-notification-settings",
               "api-reference/endpoint/media/media-upload",
               "api-reference/endpoint/media/serve-media",
-              "api-reference/endpoint/i18n/get-i18n-lang",
-              "api-reference/endpoint/api-documentation/get-open-a-p-i-spec",
-              "api-reference/endpoint/api-documentation/swagger-u-i",
-              "api-reference/endpoint/websocket/inline-handler"
+              "api-reference/endpoint/i18n/get-i18n-lang"
             ]
           },
           {
@@ -232,7 +229,7 @@
       "anchors": [
         {
           "anchor": "GitHub",
-          "href": "https://github.com/libredesk/libredesk",
+          "href": "https://github.com/abhinavxd/libredesk",
           "icon": "github"
         },
         {
@@ -252,7 +249,7 @@
     "links": [
       {
         "label": "GitHub",
-        "href": "https://github.com/libredesk/libredesk"
+        "href": "https://github.com/abhinavxd/libredesk"
       }
     ]
   },
