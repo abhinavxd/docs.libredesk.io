@@ -8,6 +8,7 @@
     "dark": "#1D4ED8"
   },
   "favicon": "/favicon.svg",
+  "navigation": {
     "pages": [
       "index"
     ],
