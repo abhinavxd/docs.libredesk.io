@@ -287,5 +287,8 @@
     "socials": {
       "github": "https://github.com/libredesk/libredesk"
     }
+  },
+  "custom": {
+    "css": "/custom.css"
   }
 }

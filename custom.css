@@ -1,0 +1,21 @@
+/* Custom CSS for Libredesk Documentation */
+
+/* Make navbar logo smaller */
+nav img[alt*="logo"],
+nav img[src*="/logo/"],
+[class*="navbar"] img,
+[class*="nav-logo"] img,
+header img[src*="/logo/"] {
+  max-height: 24px !important;
+  height: 24px !important;
+  width: auto !important;
+}
+
+/* Ensure logo container doesn't force larger size */
+nav a[href="/"],
+[class*="navbar"] a[href="/"],
+[class*="logo-container"] {
+  display: flex;
+  align-items: center;
+  height: auto !important;
+}
