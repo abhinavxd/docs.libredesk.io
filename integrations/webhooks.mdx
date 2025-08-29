@@ -1,0 +1,363 @@
+---
+title: Webhooks
+description: Receive real-time HTTP notifications for Libredesk events
+---
+
+# Webhooks
+
+Webhooks allow you to receive real-time HTTP notifications when specific events occur in your Libredesk instance. This enables you to integrate Libredesk with external systems and automate workflows based on conversation and message events.
+
+## Overview
+
+When a configured event occurs in Libredesk, an HTTP POST request is sent to the webhook URL you specify. The request contains a JSON payload with event details and relevant data.
+
+## Configuration
+
+<Steps>
+  <Step title="Navigate to webhooks">
+    Go to **Admin → Integrations → Webhooks** in your Libredesk dashboard
+  </Step>
+  
+  <Step title="Create webhook">
+    Click **Create Webhook** and configure:
+    - **Name**: A descriptive name for your webhook
+    - **URL**: The endpoint URL where webhook payloads will be sent
+    - **Events**: Select which events you want to subscribe to
+    - **Secret**: Optional secret key for signature verification
+    - **Status**: Enable or disable the webhook
+  </Step>
+  
+  <Step title="Test webhook">
+    Use the test button to send a sample payload to verify your endpoint is working
+  </Step>
+</Steps>
+
+## Security
+
+### Signature Verification
+
+If you provide a secret key, webhook payloads will be signed using HMAC-SHA256. The signature is included in the `X-Signature-256` header in the format `sha256=<signature>`.
+
+<CodeGroup>
+
+```python Python
+import hmac
+import hashlib
+
+def verify_signature(payload, signature, secret):
+    expected_signature = hmac.new(
+        secret.encode('utf-8'),
+        payload,
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(f"sha256={expected_signature}", signature)
+```
+
+```javascript Node.js
+const crypto = require('crypto');
+
+function verifySignature(payload, signature, secret) {
+    const expectedSignature = crypto
+        .createHmac('sha256', secret)
+        .update(payload)
+        .digest('hex');
+    return signature === `sha256=${expectedSignature}`;
+}
+```
+
+```go Go
+import (
+    "crypto/hmac"
+    "crypto/sha256"
+    "encoding/hex"
+    "fmt"
+)
+
+func verifySignature(payload []byte, signature, secret string) bool {
+    h := hmac.New(sha256.New, []byte(secret))
+    h.Write(payload)
+    expectedSignature := fmt.Sprintf("sha256=%s", hex.EncodeToString(h.Sum(nil)))
+    return hmac.Equal([]byte(signature), []byte(expectedSignature))
+}
+```
+
+</CodeGroup>
+
+### Headers
+
+Each webhook request includes the following headers:
+
+| Header | Description |
+|--------|-------------|
+| `Content-Type` | Always `application/json` |
+| `User-Agent` | `Libredesk-Webhook/<version>` |
+| `X-Signature-256` | HMAC signature (if secret is configured) |
+
+## Available Events
+
+### Conversation Events
+
+<AccordionGroup>
+
+<Accordion title="conversation.created">
+Triggered when a new conversation is created.
+
+```json
+{
+  "event": "conversation.created",
+  "timestamp": "2025-06-15T10:30:00Z",
+  "payload": {
+    "id": 123,
+    "created_at": "2025-06-15T10:30:00Z",
+    "updated_at": "2025-06-15T10:30:00Z",
+    "uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "contact_id": 456,
+    "inbox_id": 1,
+    "reference_number": "100",
+    "priority": "Medium",
+    "priority_id": 2,
+    "status": "Open",
+    "status_id": 1,
+    "subject": "Help with account setup",
+    "inbox_name": "Support",
+    "inbox_channel": "email",
+    "contact": {
+      "id": 456,
+      "first_name": "John",
+      "last_name": "Doe",
+      "email": "john.doe@example.com",
+      "type": "contact"
+    },
+    "custom_attributes": {},
+    "tags": []
+  }
+}
+```
+</Accordion>
+
+<Accordion title="conversation.status_changed">
+Triggered when a conversation's status is updated.
+
+```json
+{
+  "event": "conversation.status_changed",
+  "timestamp": "2025-06-15T10:35:00Z",
+  "payload": {
+    "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "previous_status": "Open",
+    "new_status": "Resolved",
+    "snooze_until": "",
+    "actor_id": 789
+  }
+}
+```
+</Accordion>
+
+<Accordion title="conversation.assigned">
+Triggered when a conversation is assigned to a user.
+
+```json
+{
+  "event": "conversation.assigned",
+  "timestamp": "2025-06-15T10:32:00Z",
+  "payload": {
+    "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "assigned_to": 789,
+    "actor_id": 789
+  }
+}
+```
+</Accordion>
+
+<Accordion title="conversation.unassigned">
+Triggered when a conversation is unassigned from a user.
+
+```json
+{
+  "event": "conversation.unassigned",
+  "timestamp": "2025-06-15T10:40:00Z",
+  "payload": {
+    "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "actor_id": 789
+  }
+}
+```
+</Accordion>
+
+<Accordion title="conversation.tags_changed">
+Triggered when tags are added or removed from a conversation.
+
+```json
+{
+  "event": "conversation.tags_changed",
+  "timestamp": "2025-06-15T10:45:00Z",
+  "payload": {
+    "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "previous_tags": ["bug", "priority"],
+    "new_tags": ["bug", "priority", "resolved"],
+    "actor_id": 789
+  }
+}
+```
+</Accordion>
+
+</AccordionGroup>
+
+### Message Events
+
+<AccordionGroup>
+
+<Accordion title="message.created">
+Triggered when a new message is created in a conversation.
+
+```json
+{
+  "event": "message.created",
+  "timestamp": "2025-06-15T10:33:00Z",
+  "payload": {
+    "id": 987,
+    "created_at": "2025-06-15T10:33:00Z",
+    "updated_at": "2025-06-15T10:33:00Z",
+    "uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "type": "outgoing",
+    "status": "sent",
+    "conversation_id": 123,
+    "content": "<p>Hello! How can I help you today?</p>",
+    "text_content": "Hello! How can I help you today?",
+    "content_type": "html",
+    "private": false,
+    "sender_id": 789,
+    "sender_type": "agent",
+    "attachments": []
+  }
+}
+```
+</Accordion>
+
+<Accordion title="message.updated">
+Triggered when an existing message is updated.
+
+```json
+{
+  "event": "message.updated",
+  "timestamp": "2025-06-15T10:34:00Z",
+  "payload": {
+    "id": 987,
+    "created_at": "2025-06-15T10:33:00Z",
+    "updated_at": "2025-06-15T10:34:00Z",
+    "uuid": "123e4567-e89b-12d3-a456-426614174000",
+    "type": "outgoing",
+    "status": "sent",
+    "conversation_id": 123,
+    "content": "<p>Hello! How can I help you today? (Updated)</p>",
+    "text_content": "Hello! How can I help you today? (Updated)",
+    "content_type": "html",
+    "private": false,
+    "sender_id": 789,
+    "sender_type": "agent",
+    "attachments": []
+  }
+}
+```
+</Accordion>
+
+</AccordionGroup>
+
+## Delivery and Retries
+
+<Info>
+**Webhook Delivery Behavior:**
+- Webhooks requests timeout can be configured in the `config.toml` file
+- Failed deliveries are not automatically retried
+- Webhook delivery runs in a background worker pool for better performance
+- If the webhook queue is full (configurable in config.toml), new events may be dropped
+</Info>
+
+## Testing Webhooks
+
+You can test your webhook configuration using these tools:
+
+<CardGroup cols={2}>
+  <Card title="Webhook.site" icon="globe" href="https://webhook.site">
+    Generate a temporary URL to inspect webhook payloads
+  </Card>
+  <Card title="ngrok" icon="tunnel" href="https://ngrok.com">
+    Expose your local development server to receive webhooks
+  </Card>
+  <Card title="RequestBin" icon="inbox" href="https://requestbin.com">
+    Collect and inspect HTTP requests
+  </Card>
+  <Card title="Postman" icon="rocket" href="https://www.postman.com">
+    Create mock servers to test webhook payloads
+  </Card>
+</CardGroup>
+
+## Best Practices
+
+<Check>
+**Do:**
+- Always verify webhook signatures in production
+- Respond quickly (< 5 seconds) to webhook requests
+- Process webhooks asynchronously in your application
+- Implement idempotency to handle duplicate events
+- Log all webhook events for debugging
+</Check>
+
+<Warning>
+**Don't:**
+- Perform long-running operations in your webhook handler
+- Expose sensitive data in webhook URLs
+- Rely solely on webhooks for critical data (implement polling as backup)
+- Ignore webhook failures without logging
+</Warning>
+
+## Example Integration
+
+Here's a simple Express.js server that receives and processes Libredesk webhooks:
+
+```javascript
+const express = require('express');
+const crypto = require('crypto');
+const app = express();
+
+// Middleware to capture raw body for signature verification
+app.use(express.raw({ type: 'application/json' }));
+
+app.post('/webhook', (req, res) => {
+    const signature = req.headers['x-signature-256'];
+    const secret = process.env.WEBHOOK_SECRET;
+    
+    // Verify signature
+    if (secret && !verifySignature(req.body, signature, secret)) {
+        return res.status(401).send('Invalid signature');
+    }
+    
+    const event = JSON.parse(req.body);
+    
+    // Process event asynchronously
+    setImmediate(() => {
+        processWebhookEvent(event);
+    });
+    
+    // Respond immediately
+    res.status(200).send('OK');
+});
+
+function processWebhookEvent(event) {
+    console.log(`Received event: ${event.event}`);
+    
+    switch(event.event) {
+        case 'conversation.created':
+            // Handle new conversation
+            break;
+        case 'message.created':
+            // Handle new message
+            break;
+        // Add more cases as needed
+    }
+}
+
+app.listen(3000, () => {
+    console.log('Webhook server listening on port 3000');
+});
+```

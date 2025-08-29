@@ -1,0 +1,189 @@
+---
+title: SSO Setup
+description: Configure Single Sign-On with OpenID Connect providers
+---
+
+# Setting up SSO
+
+Libredesk supports external OpenID Connect providers (e.g., Google, Keycloak, Auth0, Okta) for signing in users.
+
+<Note>
+User accounts must be created in Libredesk manually before they can sign in via SSO. Automatic signup is not supported.
+</Note>
+
+## Generic Configuration Steps
+
+Follow these general steps to configure any OpenID Connect provider:
+
+<Steps>
+  <Step title="Configure your identity provider">
+    In your provider's admin console, create a new OpenID Connect application/client and retrieve:
+    - **Client ID**
+    - **Client Secret**
+    - **Issuer/Provider URL**
+  </Step>
+  
+  <Step title="Configure Libredesk">
+    In Libredesk, navigate to **Security → SSO** and click **New SSO**:
+    - **Provider URL**: The URL of your OpenID provider
+    - **Client ID**: From your provider
+    - **Client Secret**: From your provider
+    - **Name**: A descriptive name for the connection
+  </Step>
+  
+  <Step title="Add redirect URL to provider">
+    After saving in Libredesk:
+    1. Copy the generated **Callback URL** from Libredesk
+    2. Add it as a valid redirect URI in your provider's client settings
+  </Step>
+</Steps>
+
+## Provider-Specific Guides
+
+<Tabs>
+  <Tab title="Keycloak">
+    ## Keycloak Configuration
+    
+    <Steps>
+      <Step title="Create client in Keycloak">
+        Log in to your Keycloak Admin Console and navigate to **Clients → Create**:
+        
+        - **Client ID**: `libredesk-app` (or your preferred name)
+        - **Client Protocol**: `openid-connect`
+        - **Root URL**: Your app domain (e.g., `https://ticket.example.com`)
+        - **Web Origins**: Your app domain
+        - Under **Authentication flow**, uncheck everything except **Standard flow**
+        - Click **Save**
+      </Step>
+      
+      <Step title="Configure client credentials">
+        Go to the **Credentials** tab:
+        - Ensure **Client Authenticator** is set to `Client Id and Secret`
+        - Note down the generated **Client Secret**
+      </Step>
+      
+      <Step title="Configure Libredesk SSO">
+        In Libredesk, go to **Admin → Security → SSO** and click **New SSO**:
+        
+        ```
+        Provider URL: https://keycloak.example.com/realms/yourrealm
+        Name: Keycloak
+        Client ID: libredesk-app
+        Client Secret: [your-client-secret]
+        ```
+        
+        Click **Save**
+      </Step>
+      
+      <Step title="Add redirect URI to Keycloak">
+        1. In Libredesk, click the three dots menu on your SSO entry and choose **Edit**
+        2. Copy the generated **Callback URL**
+        3. In Keycloak, edit the client and add the Callback URL to **Valid Redirect URIs**
+           
+           Example: `https://ticket.example.com/api/v1/oidc/1/finish`
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Google">
+    ## Google OAuth Configuration
+    
+    <Steps>
+      <Step title="Create OAuth 2.0 credentials">
+        Go to [Google Cloud Console](https://console.cloud.google.com/):
+        1. Navigate to **APIs & Services → Credentials**
+        2. Click **Create Credentials → OAuth 2.0 Client ID**
+        3. Application type: **Web application**
+        4. Name: `Libredesk` (or your preferred name)
+      </Step>
+      
+      <Step title="Configure Libredesk">
+        In Libredesk, create a new SSO configuration:
+        
+        ```
+        Provider URL: https://accounts.google.com
+        Name: Google
+        Client ID: [your-google-client-id]
+        Client Secret: [your-google-client-secret]
+        ```
+      </Step>
+      
+      <Step title="Add redirect URI">
+        1. Copy the Callback URL from Libredesk
+        2. In Google Cloud Console, add it to **Authorized redirect URIs**
+        3. Save the changes
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Azure AD">
+    ## Azure Active Directory Configuration
+    
+    <Steps>
+      <Step title="Register application">
+        In Azure Portal:
+        1. Navigate to **Azure Active Directory → App registrations**
+        2. Click **New registration**
+        3. Name: `Libredesk`
+        4. Supported account types: Choose based on your needs
+        5. Click **Register**
+      </Step>
+      
+      <Step title="Configure authentication">
+        1. Go to **Authentication → Add a platform → Web**
+        2. Add the redirect URI later (after configuring Libredesk)
+        3. Under **Certificates & secrets**, create a new client secret
+      </Step>
+      
+      <Step title="Configure Libredesk">
+        ```
+        Provider URL: https://login.microsoftonline.com/{tenant-id}/v2.0
+        Name: Azure AD
+        Client ID: [application-id]
+        Client Secret: [client-secret-value]
+        ```
+      </Step>
+      
+      <Step title="Complete Azure configuration">
+        Add the Libredesk callback URL to Azure AD's redirect URIs
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## User Mapping
+
+<Info>
+Libredesk maps SSO users based on their email address. Ensure that:
+- Users exist in Libredesk with the same email as their SSO account
+- The SSO provider returns the email claim in the ID token
+</Info>
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="User cannot sign in">
+    - Verify the user exists in Libredesk with the exact email address
+    - Check that the SSO provider is enabled in Libredesk
+    - Ensure the callback URL is correctly configured in both systems
+  </Accordion>
+  
+  <Accordion title="Invalid redirect URI error">
+    The callback URL in your identity provider must exactly match the one generated by Libredesk, including the protocol (https/http) and any trailing slashes.
+  </Accordion>
+  
+  <Accordion title="Token validation failed">
+    - Verify the Client ID and Client Secret are correct
+    - Check that the Provider URL is accurate
+    - Ensure your Libredesk server time is synchronized (for token expiry validation)
+  </Accordion>
+</AccordionGroup>
+
+## Security Considerations
+
+<Warning>
+- Always use HTTPS in production for SSO configurations
+- Keep Client Secrets secure and rotate them periodically
+- Regularly audit SSO access logs
+- Consider implementing IP restrictions at the identity provider level
+</Warning>

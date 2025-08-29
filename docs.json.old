@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Libredesk Documentation",
+  "name": "Libredesk API Documentation",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
@@ -11,93 +11,12 @@
   "navigation": {
     "tabs": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Welcome",
-            "pages": [
-              "introduction"
-            ]
-          },
-          {
-            "group": "Getting Started",
-            "pages": [
-              "getting-started/installation",
-              "getting-started/initial-setup",
-              "getting-started/quick-start"
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "pages": [
-              "concepts/conversations",
-              "concepts/agents-teams",
-              "concepts/contacts",
-              "concepts/inboxes",
-              "concepts/automation"
-            ]
-          },
-          {
-            "group": "Configuration",
-            "pages": [
-              "configuration/general",
-              "configuration/email",
-              "configuration/email-templates",
-              "configuration/business-hours",
-              "configuration/sla",
-              "configuration/custom-attributes"
-            ]
-          },
-          {
-            "group": "Features",
-            "pages": [
-              "features/macros",
-              "features/automation-rules",
-              "features/webhooks",
-              "features/reporting",
-              "features/ai-assist"
-            ]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "authentication/overview",
-              "authentication/sso-setup",
-              "authentication/oidc",
-              "authentication/api-keys"
-            ]
-          },
-          {
-            "group": "Administration",
-            "pages": [
-              "admin/user-management",
-              "admin/roles-permissions",
-              "admin/backup-restore",
-              "admin/upgrade-guide",
-              "admin/monitoring"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/webhooks",
-              "integrations/email",
-              "integrations/custom-integrations"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API Reference",
         "groups": [
           {
             "group": "Getting Started",
             "pages": [
-              "api-reference/introduction",
-              "api-reference/authentication",
-              "api-reference/rate-limits",
-              "api-reference/pagination",
-              "api-reference/errors"
+              "api-reference/introduction"
             ]
           },
           {
@@ -133,10 +52,7 @@
               "api-reference/endpoint/contacts/get-contacts",
               "api-reference/endpoint/contacts/get-contact",
               "api-reference/endpoint/contacts/update-contact",
-              "api-reference/endpoint/contacts/block-contact",
-              "api-reference/endpoint/contact-notes/get-contact-notes",
-              "api-reference/endpoint/contact-notes/create-contact-note",
-              "api-reference/endpoint/contact-notes/delete-contact-note"
+              "api-reference/endpoint/contacts/block-contact"
             ]
           },
           {
@@ -209,11 +125,7 @@
               "api-reference/endpoint/custom-attributes/create-custom-attribute",
               "api-reference/endpoint/custom-attributes/get-custom-attribute",
               "api-reference/endpoint/custom-attributes/update-custom-attribute",
-              "api-reference/endpoint/custom-attributes/delete-custom-attribute",
-              "api-reference/endpoint/tags/get-tags",
-              "api-reference/endpoint/tags/create-tag",
-              "api-reference/endpoint/tags/update-tag",
-              "api-reference/endpoint/tags/delete-tag"
+              "api-reference/endpoint/custom-attributes/delete-custom-attribute"
             ]
           },
           {
@@ -225,13 +137,25 @@
               "api-reference/endpoint/webhooks/update-webhook",
               "api-reference/endpoint/webhooks/delete-webhook",
               "api-reference/endpoint/webhooks/toggle-webhook",
-              "api-reference/endpoint/webhooks/test-webhook",
+              "api-reference/endpoint/webhooks/test-webhook"
+            ]
+          },
+          {
+            "group": "Additional Features",
+            "pages": [
               "api-reference/endpoint/inboxes/get-inboxes",
               "api-reference/endpoint/inboxes/create-inbox",
               "api-reference/endpoint/inboxes/get-inbox",
               "api-reference/endpoint/inboxes/update-inbox",
               "api-reference/endpoint/inboxes/delete-inbox",
-              "api-reference/endpoint/inboxes/toggle-inbox"
+              "api-reference/endpoint/inboxes/toggle-inbox",
+              "api-reference/endpoint/contact-notes/get-contact-notes",
+              "api-reference/endpoint/contact-notes/create-contact-note",
+              "api-reference/endpoint/contact-notes/delete-contact-note",
+              "api-reference/endpoint/tags/get-tags",
+              "api-reference/endpoint/tags/create-tag",
+              "api-reference/endpoint/tags/update-tag",
+              "api-reference/endpoint/tags/delete-tag"
             ]
           },
           {
@@ -255,17 +179,6 @@
             ]
           },
           {
-            "group": "SSO & Authentication",
-            "pages": [
-              "api-reference/endpoint/openid-connect-single-sign-on/get-all-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/get-all-enabled-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/get-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/create-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/update-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/delete-o-i-d-c"
-            ]
-          },
-          {
             "group": "System & Utilities",
             "pages": [
               "api-reference/endpoint/health-check/health-check",
@@ -286,44 +199,16 @@
               "api-reference/endpoint/settings/update-email-notification-settings",
               "api-reference/endpoint/media/media-upload"
             ]
-          }
-        ]
-      },
-      {
-        "tab": "Developers",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "developers/setup",
-              "developers/architecture",
-              "developers/code-structure"
-            ]
           },
           {
-            "group": "Contributing",
+            "group": "Single Sign-On",
             "pages": [
-              "developers/contributing",
-              "developers/code-style",
-              "developers/testing",
-              "developers/pull-requests"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "developers/frontend",
-              "developers/backend",
-              "developers/database",
-              "developers/translations"
-            ]
-          },
-          {
-            "group": "Deployment",
-            "pages": [
-              "developers/docker",
-              "developers/kubernetes",
-              "developers/ci-cd"
+              "api-reference/endpoint/openid-connect-single-sign-on/get-all-o-i-d-c",
+              "api-reference/endpoint/openid-connect-single-sign-on/get-all-enabled-o-i-d-c",
+              "api-reference/endpoint/openid-connect-single-sign-on/get-o-i-d-c",
+              "api-reference/endpoint/openid-connect-single-sign-on/create-o-i-d-c",
+              "api-reference/endpoint/openid-connect-single-sign-on/update-o-i-d-c",
+              "api-reference/endpoint/openid-connect-single-sign-on/delete-o-i-d-c"
             ]
           }
         ]
@@ -337,14 +222,9 @@
           "icon": "github"
         },
         {
-          "anchor": "API Reference",
-          "href": "/api-reference/introduction",
+          "anchor": "OpenAPI Spec",
+          "href": "https://docs.libredesk.io/api-reference/openapi.json",
           "icon": "code"
-        },
-        {
-          "anchor": "Support",
-          "href": "https://github.com/abhinavxd/libredesk/issues",
-          "icon": "life-ring"
         }
       ]
     }
@@ -359,10 +239,6 @@
       {
         "label": "GitHub",
         "href": "https://github.com/abhinavxd/libredesk"
-      },
-      {
-        "label": "Website",
-        "href": "https://libredesk.io"
       }
     ]
   },
@@ -380,26 +256,7 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/libredesk/libredesk",
-      "website": "https://libredesk.io"
+      "github": "https://github.com/libredesk/libredesk"
     }
-  },
-  "feedback": {
-    "thumbsRating": true,
-    "suggestEdit": true,
-    "raiseIssue": true
-  },
-  "search": {
-    "prompt": "Search documentation..."
-  },
-  "topbarLinks": [
-    {
-      "name": "Support",
-      "url": "https://github.com/abhinavxd/libredesk/issues"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "/getting-started/installation"
   }
 }

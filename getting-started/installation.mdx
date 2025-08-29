@@ -1,0 +1,176 @@
+---
+title: Installation
+description: Deploy Libredesk using Docker, binary, or from source
+---
+
+# Installation
+
+Libredesk is a single binary application that requires PostgreSQL and Redis to run. Choose your preferred installation method below.
+
+## Prerequisites
+
+<Info>
+Before installing Libredesk, ensure you have:
+- PostgreSQL ≥13
+- Redis
+- Port 9000 available (or configure a different port)
+</Info>
+
+## Installation Methods
+
+<Tabs>
+  <Tab title="Docker (Recommended)">
+    ## Docker Installation
+    
+    The latest image is available on DockerHub at `libredesk/libredesk:latest`
+    
+    ### Quick Start with Docker Compose
+    
+    <Steps>
+      <Step title="Download configuration files">
+        ```bash
+        # Download the compose file and the sample config file
+        curl -LO https://github.com/abhinavxd/libredesk/raw/main/docker-compose.yml
+        curl -LO https://github.com/abhinavxd/libredesk/raw/main/config.sample.toml
+        ```
+      </Step>
+      
+      <Step title="Configure Libredesk">
+        ```bash
+        # Copy the config.sample.toml to config.toml and edit as needed
+        cp config.sample.toml config.toml
+        ```
+        
+        Edit `config.toml` with your database credentials and preferences.
+      </Step>
+      
+      <Step title="Start the services">
+        ```bash
+        # Run the services in the background
+        docker compose up -d
+        ```
+      </Step>
+      
+      <Step title="Set the admin password">
+        ```bash
+        # Set System user password
+        docker exec -it libredesk_app ./libredesk --set-system-user-password
+        ```
+      </Step>
+    </Steps>
+    
+    Visit `http://localhost:9000` and login with:
+    - **Email**: `System`
+    - **Password**: The password you just set
+  </Tab>
+  
+  <Tab title="Binary">
+    ## Binary Installation
+    
+    <Steps>
+      <Step title="Download the latest release">
+        Download the [latest release](https://github.com/abhinavxd/libredesk/releases) for your platform and extract the libredesk binary.
+      </Step>
+      
+      <Step title="Install database tables">
+        ```bash
+        ./libredesk --install
+        ```
+        This will create the necessary tables in PostgreSQL and prompt you to set the System user password.
+        
+        <Tip>
+        To set the password non-interactively:
+        ```bash
+        LIBREDESK_SYSTEM_USER_PASSWORD=your_password ./libredesk --install
+        ```
+        </Tip>
+      </Step>
+      
+      <Step title="Run Libredesk">
+        ```bash
+        ./libredesk
+        ```
+      </Step>
+    </Steps>
+    
+    Visit `http://localhost:9000` and login with the System credentials.
+  </Tab>
+  
+  <Tab title="From Source">
+    ## Compile from Source
+    
+    Build the latest unreleased version from the `main` branch.
+    
+    ### Requirements
+    - Go (latest version)
+    - Node.js (≥18)
+    - pnpm
+    
+    <Steps>
+      <Step title="Clone the repository">
+        ```bash
+        git clone git@github.com:abhinavxd/libredesk.git
+        cd libredesk
+        ```
+      </Step>
+      
+      <Step title="Build the application">
+        ```bash
+        make
+        ```
+        This will generate the `libredesk` binary in the current directory.
+      </Step>
+      
+      <Step title="Follow binary installation">
+        Follow the [binary installation](#binary) steps above to set up the database and run Libredesk.
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>
+
+## Nginx Configuration
+
+Libredesk uses WebSockets for real-time updates. If you're using Nginx as a reverse proxy, add this configuration:
+
+```nginx
+server {
+    listen 80;
+    server_name your-domain.com;
+    
+    client_max_body_size 100M;
+    
+    location / {
+        proxy_pass http://localhost:9000;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection 'upgrade';
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_cache_bypass $http_upgrade;
+    }
+}
+```
+
+<Warning>
+Ensure WebSocket support is enabled in your reverse proxy configuration for real-time features to work properly.
+</Warning>
+
+## Next Steps
+
+<CardGroup cols={2}>
+  <Card
+    title="Initial Configuration"
+    icon="gear"
+    href="/getting-started/initial-setup"
+  >
+    Configure your Libredesk instance
+  </Card>
+  <Card
+    title="Email Setup"
+    icon="envelope"
+    href="/configuration/email"
+  >
+    Set up email integration
+  </Card>
+</CardGroup>
