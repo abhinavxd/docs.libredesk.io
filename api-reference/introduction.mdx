@@ -1,218 +1,40 @@
 ---
-title: 'API Reference'
-description: 'Complete Libredesk API documentation with interactive examples'
+title: API Introduction
+description: Getting started with the Libredesk API
 ---
 
-# Libredesk API Reference
+# API Introduction
 
-Libredesk is an **open source, self-hosted customer support desk** delivered as a single binary application. This API reference provides complete documentation for all 160+ endpoints across 32+ categories.
+The Libredesk API allows you to interact with your instance programmatically.
 
-<Note>
-  **Alpha Stage**: Libredesk is currently in alpha development. Features and APIs may change as we continue development.
-</Note>
+## Authentication
 
-## API Overview
+The API supports two authentication methods:
 
-The Libredesk API is built with REST principles and returns JSON responses. All endpoints are organized into logical groups to help you find the functionality you need.
-
-<CardGroup cols={2}>
-  <Card
-    title="Authentication"
-    icon="key"
-    href="/api-reference/endpoint/authentication/login"
-  >
-    Login, logout, OAuth, and API key management
-  </Card>
-  <Card
-    title="Conversations"
-    icon="messages"
-    href="/api-reference/endpoint/conversations/get-all-conversations"
-  >
-    Conversation management, messaging, and status updates
-  </Card>
-  <Card
-    title="Agents"
-    icon="users"
-    href="/api-reference/endpoint/agents/get-agents"
-  >
-    Agent management, teams, and permissions
-  </Card>
-  <Card
-    title="Contacts"
-    icon="address-book"
-    href="/api-reference/endpoint/contacts/get-contacts"
-  >
-    Customer contact management and profiles
-  </Card>
-</CardGroup>
-
-## OpenAPI Specification
-
-The complete Libredesk API is documented using OpenAPI 3.0 specification, enabling automatic SDK generation and interactive testing.
-
-<Card
-  title="OpenAPI Spec"
-  icon="code"
-  href="/api-reference/openapi.json"
->
-  Download the complete OpenAPI specification
-</Card>
-
-## Authentication Methods
-
-Libredesk supports multiple authentication methods to fit your integration needs:
-
-<AccordionGroup>
-  <Accordion title="API Key Authentication" icon="key">
-    Server-to-server authentication using API keys. Generate and manage API keys through the agent endpoints.
-    
-    ```json
-    {
-      "headers": {
-        "Authorization": "Bearer your-api-key"
-      }
-    }
-    ```
-  </Accordion>
-  
-  <Accordion title="Basic Authentication" icon="lock">
-    Simple username and password authentication for direct API access.
-    
-    ```json
-    {
-      "headers": {
-        "Authorization": "Basic base64(username:password)"
-      }
-    }
-    ```
-  </Accordion>
-  
-  <Accordion title="OAuth/OIDC" icon="shield">
-    Enterprise-grade authentication with OpenID Connect support for single sign-on integration.
-    
-    ```json
-    {
-      "security": [
-        {
-          "oidc": ["openid", "profile", "email"]
-        }
-      ]
-    }
-    ```
-  </Accordion>
-</AccordionGroup>
-
-## Core API Categories
-
-<Tabs>
-  <Tab title="Core Operations">
-    Essential helpdesk functionality for day-to-day operations.
-    
-    - **Conversations**: Create, manage, and track support conversations
-    - **Messages**: Send messages, handle attachments, and manage threads  
-    - **Contacts**: Customer profiles and contact information
-    - **Agents**: Support team member management
-    - **Authentication**: Secure access and session management
-  </Tab>
-  
-  <Tab title="Automation & AI">
-    Advanced features for workflow automation and AI-powered support.
-    
-    - **Automations**: Business rules and workflow triggers
-    - **AI Completions**: AI-powered response generation
-    - **Macros**: Reusable response templates
-    - **Templates**: Message and response templates
-    - **Webhooks**: Event notifications and integrations
-  </Tab>
-  
-  <Tab title="Administration">
-    Configuration and management features for system administrators.
-    
-    - **Teams & Roles**: Organization structure and permissions
-    - **Business Hours**: Support hours and SLA configuration
-    - **Custom Attributes**: Custom fields and metadata
-    - **Settings**: System configuration and preferences
-    - **Reports**: Analytics and performance metrics
-  </Tab>
-</Tabs>
-
-## Technology Stack
-
-Libredesk is built with modern technologies for performance and scalability:
-
-- **Backend**: Go (Golang) - Fast, efficient REST API
-- **Frontend**: Vue.js 3 with Shadcn UI components
-- **Database**: PostgreSQL - Reliable data storage
-- **Deployment**: Single binary application or Docker container
-
-## Base URL & Environment
-
-```
-http://localhost:8080
+### Basic Authentication
+```bash
+curl -X GET "https://your-instance.com/api/v1/endpoint" \
+  -H "Authorization: Basic <base64_encoded_api_key:api_secret>"
 ```
 
-<Note>
-  The Libredesk API is currently configured for local development. Update the base URL to match your production environment.
-</Note>
+### Token Authentication
+```bash
+curl -X GET "https://your-instance.com/api/v1/endpoint" \
+  -H "Authorization: token api_key:api_secret"
+```
+
+## Getting API Keys
+
+1. Go to **Admin → Teammate → Agent → Edit**
+2. Generate a new API key
+3. Save both the API Key and API Secret
+
+## Base URL
+
+```
+https://your-instance.com/api/v1
+```
 
 ## Response Format
 
-All API responses follow a consistent JSON structure with standard HTTP status codes:
-
-```json
-{
-  "data": {},
-  "message": "Success",
-  "status": 200
-}
-```
-
-## Error Handling
-
-Libredesk uses conventional HTTP response codes to indicate the success or failure of requests:
-
-- `200` - Success
-- `400` - Bad Request - Invalid parameters or malformed request
-- `401` - Unauthorized - Authentication required or invalid
-- `403` - Forbidden - Insufficient permissions
-- `404` - Not Found - Resource does not exist
-- `500` - Internal Server Error - Server-side error
-
-## Rate Limiting
-
-<Info>
-  Rate limiting information will be added as the API evolves. Check response headers for current limits.
-</Info>
-
-## Get Started
-
-<CardGroup cols={2}>
-  <Card
-    title="Authentication Guide"
-    icon="key"
-    href="/api-reference/endpoint/authentication/login"
-  >
-    Start by learning how to authenticate with the API
-  </Card>
-  <Card
-    title="Create Your First Conversation"
-    icon="messages"
-    href="/api-reference/endpoint/conversations/create-conversation"
-  >
-    Learn how to create and manage support conversations
-  </Card>
-  <Card
-    title="Manage Contacts"
-    icon="address-book"
-    href="/api-reference/endpoint/contacts/get-contacts"
-  >
-    Add and manage customer contact information
-  </Card>
-  <Card
-    title="Set Up Automations"
-    icon="robot"
-    href="/api-reference/endpoint/automations/get-automation-rules"
-  >
-    Automate workflows with business rules
-  </Card>
-</CardGroup>
+All API responses are returned in JSON format.
