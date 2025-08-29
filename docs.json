@@ -197,9 +197,7 @@
               "api-reference/endpoint/settings/update-general-settings",
               "api-reference/endpoint/settings/get-email-notification-settings",
               "api-reference/endpoint/settings/update-email-notification-settings",
-              "api-reference/endpoint/media/media-upload",
-              "api-reference/endpoint/media/serve-media",
-              "api-reference/endpoint/i18n/get-i18n-lang"
+              "api-reference/endpoint/media/media-upload"
             ]
           },
           {
