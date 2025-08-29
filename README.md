@@ -1,44 +1,51 @@
-# Mintlify Starter Kit
+# Libredesk Documentation
 
-Use the starter kit to get your docs deployed and ready to customize.
+Official documentation for [Libredesk](https://libredesk.io) - Open source, self-hosted customer support desk.
 
-Click the green **Use this template** button at the top of this repo to copy the Mintlify starter kit. The starter kit contains examples with
+🔗 **Live Documentation**: [docs.libredesk.io](https://docs.libredesk.io)
 
-- Guide pages
-- Navigation
-- Customizations
-- API reference pages
-- Use of popular components
+## About
 
-**[Follow the full quickstart guide](https://starter.mintlify.com/quickstart)**
+This repository contains the source code for the Libredesk documentation website, built with [Mintlify](https://mintlify.com). It includes:
+
+- **User Documentation**: Installation guides, configuration, and usage instructions
+- **API Reference**: Complete OpenAPI specification with interactive examples
+- **Developer Guides**: Setup instructions and contribution guidelines
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview your documentation changes locally. To install, use the following command:
+Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview documentation changes locally:
 
-```
+```bash
 npm i -g mint
 ```
 
-Run the following command at the root of your documentation, where your `docs.json` is located:
+Run the development server:
 
-```
+```bash
 mint dev
 ```
 
 View your local preview at `http://localhost:3000`.
 
-## Publishing changes
+## Repository Structure
 
-Install our GitHub app from your [dashboard](https://dashboard.mintlify.com/settings/organization/github-app) to propagate changes from your repo to your deployment. Changes are deployed to production automatically after pushing to the default branch.
+- `introduction.mdx` - Main introduction page
+- `getting-started/` - Installation and setup guides
+- `configuration/` - Configuration documentation
+- `contributing/` - Developer and contributor guides
+- `api-reference/` - OpenAPI specification and API docs
+- `docs.json` - Mintlify navigation configuration
 
-## Need help?
+## Contributing
 
-### Troubleshooting
+See the [Developer Setup guide](https://docs.libredesk.io/contributing/developer-setup) for information on contributing to Libredesk itself.
 
-- If your dev environment isn't running: Run `mint update` to ensure you have the most recent version of the CLI.
-- If a page loads as a 404: Make sure you are running in a folder with a valid `docs.json`.
+For documentation improvements, please submit pull requests to this repository.
 
-### Resources
-- [Mintlify documentation](https://mintlify.com/docs)
-- [Mintlify community](https://mintlify.com/community)
+## Links
+
+- **Main Project**: [github.com/abhinavxd/libredesk](https://github.com/abhinavxd/libredesk)
+- **Website**: [libredesk.io](https://libredesk.io)
+- **Demo**: [demo.libredesk.io](https://demo.libredesk.io)
+- **Documentation**: [docs.libredesk.io](https://docs.libredesk.io)
