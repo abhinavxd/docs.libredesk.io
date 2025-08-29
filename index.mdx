@@ -1,155 +1,86 @@
 ---
-title: "Libredesk API Documentation"
-description: "Complete API reference for the open source, self-hosted customer support desk"
+title: Introduction
+description: Open source, self-hosted customer support desk
 ---
 
-# Libredesk API
+Open source, self-hosted customer support desk. Single binary app.
 
-Welcome to the Libredesk API documentation. Libredesk is an **open source, self-hosted customer support desk** delivered as a single binary application.
+<img
+  src="/images/hero.png"
+  alt="Libredesk"
+  className="rounded-lg border"
+/>
 
-<Note>
-  Libredesk is currently in **alpha** stage. Features and APIs may change as we continue development.
-</Note>
+Visit [libredesk.io](https://libredesk.io) for more info. Check out the [**Live demo**](https://demo.libredesk.io/).
 
-## Getting Started
+<Warning>
+This project is currently in **alpha**. Features and APIs may change and are not yet fully tested.
+</Warning>
 
-The Libredesk API is organized around REST principles and uses standard HTTP response codes. All API endpoints return JSON responses.
+## Features
 
-<Card
-  title="API Reference"
-  icon="terminal"
-  href="/api-reference/introduction"
->
-  Browse all 160+ API endpoints across 32+ categories
-</Card>
+- **Multi Shared Inbox**  
+  Libredesk supports multiple shared inboxes, letting you manage conversations across teams effortlessly.
 
-## Core Features
+- **Granular Permissions**  
+  Create custom roles with granular permissions for teams and individual agents.
 
-Libredesk provides a complete helpdesk solution with these key capabilities:
+- **Smart Automation**  
+  Eliminate repetitive tasks with powerful automation rules. Auto-tag, assign, and route conversations based on custom conditions.
 
-<CardGroup cols={2}>
-  <Card
-    title="Conversation Management"
-    icon="messages"
-    href="/api-reference/endpoint/conversations/get-all-conversations"
-  >
-    Create, manage, and track customer conversations and support interactions
-  </Card>
-  <Card
-    title="Agent Management"
-    icon="users"
-    href="/api-reference/endpoint/agents/get-agents"
-  >
-    Manage support agents, teams, and granular role-based permissions
-  </Card>
-  <Card
-    title="Smart Automation"
-    icon="robot"
-    href="/api-reference/endpoint/automations/get-automation-rules"
-  >
-    Smart automation rules with AI-assisted response writing and auto-assignment
-  </Card>
-  <Card
-    title="Customer Management"
-    icon="address-book"
-    href="/api-reference/endpoint/contacts/get-contacts"
-  >
-    Manage customer contacts and their support history
-  </Card>
-</CardGroup>
+- **CSAT Surveys**  
+  Measure customer satisfaction with automated surveys.
 
-## API Categories
+- **Macros**  
+  Save frequently sent messages as templates. With one click, send saved responses, set tags, and more.
 
-<AccordionGroup>
-  <Accordion title="Core Operations" icon="gear">
-    <CardGroup cols={2}>
-      <Card title="Authentication" href="/api-reference/endpoint/authentication/login">
-        Login, logout, and OAuth integration
-      </Card>
-      <Card title="Conversations" href="/api-reference/endpoint/conversations/get-all-conversations">
-        Conversation creation, messaging, and status management  
-      </Card>
-      <Card title="Contacts" href="/api-reference/endpoint/contacts/get-contacts">
-        Customer contact management and profiles
-      </Card>
-      <Card title="Agents" href="/api-reference/endpoint/agents/get-agents">
-        Agent management and permissions
-      </Card>
-    </CardGroup>
-  </Accordion>
+- **Smart Organization**  
+  Keep conversations organized with tags, custom statuses for conversations, and snoozing. Find any conversation instantly from the search bar.
 
-  <Accordion title="Advanced Features" icon="sparkles">
-    <CardGroup cols={2}>
-      <Card title="Automations" href="/api-reference/endpoint/automations/get-automation-rules">
-        Workflow automation and business rules
-      </Card>
-      <Card title="AI Completions" href="/api-reference/endpoint/ai-completions/a-i-completion">
-        AI-powered response generation
-      </Card>
-      <Card title="Templates & Macros" href="/api-reference/endpoint/templates/get-templates">
-        Reusable response templates and macros
-      </Card>
-      <Card title="Reports" href="/api-reference/endpoint/reports/overview-charts">
-        Analytics and performance reporting
-      </Card>
-    </CardGroup>
-  </Accordion>
+- **Auto Assignment**  
+  Distribute workload with auto assignment rules. Auto-assign conversations based on agent capacity or custom criteria.
 
-  <Accordion title="Configuration" icon="settings">
-    <CardGroup cols={2}>
-      <Card title="Teams & Roles" href="/api-reference/endpoint/teams/get-teams">
-        Team organization and role management
-      </Card>
-      <Card title="Business Hours" href="/api-reference/endpoint/business-hours/get-business-hours">
-        Support hours and SLA configuration
-      </Card>
-      <Card title="Custom Attributes" href="/api-reference/endpoint/custom-attributes/get-custom-attributes">
-        Custom fields and metadata
-      </Card>
-      <Card title="Webhooks" href="/api-reference/endpoint/webhooks/get-webhooks">
-        Event notifications and integrations
-      </Card>
-    </CardGroup>
-  </Accordion>
-</AccordionGroup>
+- **SLA Management**  
+  Set and track response time targets. Get notified when conversations are at risk of breaching SLA commitments.
 
-## Base URL
+- **Custom Attributes**  
+  Create custom attributes for contacts or conversations such as the subscription plan or the date of their first purchase.
 
-```
-http://localhost:8080
-```
+- **AI-Assist**  
+  Instantly rewrite responses with AI to make them more friendly, professional, or polished.
 
-## Authentication
+- **Activity Logs**  
+  Track all actions performed by agents and admins—updates and key events across the system—for auditing and accountability.
 
-Libredesk API supports multiple authentication methods:
-
-- **API Keys**: For server-to-server integration
-- **Basic Auth**: For simple username/password authentication  
-- **OAuth/OIDC**: For single sign-on integration
-
-<Card
-  title="Authentication Guide"
-  icon="key" 
-  href="/api-reference/endpoint/authentication/login"
->
-  Learn how to authenticate with the Libredesk API
-</Card>
-
-## Need Help?
+## Quick Links
 
 <CardGroup cols={2}>
   <Card
-    title="Browse All Endpoints"
-    icon="list"
-    href="/api-reference/introduction"
+    title="Installation"
+    icon="download"
+    href="/getting-started/installation"
   >
-    Complete API reference with 160+ endpoints
+    Get Libredesk up and running
   </Card>
   <Card
-    title="OpenAPI Specification"
-    icon="code"
-    href="/api-reference/openapi.json"
+    title="Live Demo"
+    icon="play"
+    href="https://demo.libredesk.io"
   >
-    Download the complete OpenAPI spec
+    Try Libredesk in action
+  </Card>
+  <Card
+    title="GitHub"
+    icon="github"
+    href="https://github.com/abhinavxd/libredesk"
+  >
+    View source code
+  </Card>
+  <Card
+    title="Website"
+    icon="globe"
+    href="https://libredesk.io"
+  >
+    Visit our website
   </Card>
 </CardGroup>
