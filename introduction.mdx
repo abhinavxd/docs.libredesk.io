@@ -1,91 +1,88 @@
 ---
 title: Introduction
-description: Open-source, self-hosted customer support desk
+description: Open source, self-hosted customer support desk
 ---
 
-# Welcome to Libredesk
+# Libredesk
 
-Libredesk is an open-source, self-hosted customer support desk — a single binary application designed for simplicity and efficiency.
+Open source, self-hosted customer support desk. Single binary app.
 
 <img
   src="/images/hero.png"
-  alt="Libredesk Dashboard"
+  alt="Libredesk"
   className="rounded-lg border"
 />
 
-## What is Libredesk?
+Visit [libredesk.io](https://libredesk.io) for more info. Check out the [**Live demo**](https://demo.libredesk.io/).
 
-Libredesk is a modern helpdesk solution that gives you complete control over your customer support infrastructure. Built as a single binary with a Vue.js frontend, it's designed to be easy to deploy, maintain, and customize.
+<Warning>
+This project is currently in **alpha**. Features and APIs may change and are not yet fully tested.
+</Warning>
 
-## Key Features
+## Features
 
-<CardGroup cols={2}>
-  <Card title="Self-Hosted" icon="server">
-    Deploy on your own infrastructure with complete data ownership
-  </Card>
-  <Card title="Single Binary" icon="box">
-    Simple deployment with one executable file
-  </Card>
-  <Card title="Real-time Updates" icon="bolt">
-    WebSocket-powered live updates for conversations
-  </Card>
-  <Card title="Multi-channel Support" icon="messages">
-    Handle support across email, web, and API
-  </Card>
-</CardGroup>
+- **Multi Shared Inbox**  
+  Libredesk supports multiple shared inboxes, letting you manage conversations across teams effortlessly.
 
-## Why Libredesk?
+- **Granular Permissions**  
+  Create custom roles with granular permissions for teams and individual agents.
 
-- **Privacy First**: Your data stays on your servers
-- **Cost Effective**: No per-agent pricing or usage limits
-- **Developer Friendly**: Open-source with a clean API
-- **Production Ready**: Battle-tested with enterprise features
+- **Smart Automation**  
+  Eliminate repetitive tasks with powerful automation rules. Auto-tag, assign, and route conversations based on custom conditions.
+
+- **CSAT Surveys**  
+  Measure customer satisfaction with automated surveys.
+
+- **Macros**  
+  Save frequently sent messages as templates. With one click, send saved responses, set tags, and more.
+
+- **Smart Organization**  
+  Keep conversations organized with tags, custom statuses for conversations, and snoozing. Find any conversation instantly from the search bar.
+
+- **Auto Assignment**  
+  Distribute workload with auto assignment rules. Auto-assign conversations based on agent capacity or custom criteria.
+
+- **SLA Management**  
+  Set and track response time targets. Get notified when conversations are at risk of breaching SLA commitments.
+
+- **Custom Attributes**  
+  Create custom attributes for contacts or conversations such as the subscription plan or the date of their first purchase.
+
+- **AI-Assist**  
+  Instantly rewrite responses with AI to make them more friendly, professional, or polished.
+
+- **Activity Logs**  
+  Track all actions performed by agents and admins—updates and key events across the system—for auditing and accountability.
 
 ## Quick Links
 
 <CardGroup cols={2}>
   <Card
-    title="Installation Guide"
+    title="Installation"
     icon="download"
     href="/getting-started/installation"
   >
-    Get Libredesk up and running in minutes
+    Get Libredesk up and running
   </Card>
   <Card
-    title="API Documentation"
-    icon="code"
-    href="/api-reference/introduction"
+    title="Live Demo"
+    icon="play"
+    href="https://demo.libredesk.io"
   >
-    Integrate Libredesk with your applications
+    Try Libredesk in action
   </Card>
   <Card
-    title="Configuration"
-    icon="gear"
-    href="/configuration/general"
+    title="GitHub"
+    icon="github"
+    href="https://github.com/abhinavxd/libredesk"
   >
-    Customize Libredesk for your needs
+    View source code
   </Card>
   <Card
-    title="Developer Guide"
-    icon="terminal"
-    href="/developers/setup"
+    title="Website"
+    icon="globe"
+    href="https://libredesk.io"
   >
-    Contribute to Libredesk development
+    Visit our website
   </Card>
 </CardGroup>
-
-## Community & Support
-
-- **Source Code**: [GitHub Repository](https://github.com/abhinavxd/libredesk)
-- **Issues**: [Bug Reports & Feature Requests](https://github.com/abhinavxd/libredesk/issues)
-- **License**: AGPLv3
-
-## Tech Stack
-
-Libredesk is built with modern, reliable technologies:
-
-- **Backend**: Go (Golang)
-- **Frontend**: Vue 3 with Shadcn UI
-- **Database**: PostgreSQL (≥13)
-- **Cache**: Redis
-- **Real-time**: WebSockets
