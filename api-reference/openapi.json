@@ -112,6 +112,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Agent creation details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -215,6 +226,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Agent update details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -249,6 +271,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Availability status update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AvailabilityRequest"
+              }
+            }
           }
         }
       }
@@ -355,6 +388,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Password reset request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ResetPasswordRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -389,6 +433,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "New password details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SetPasswordRequest"
+              }
+            }
           }
         }
       }
@@ -521,6 +576,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Agent update details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AgentRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -644,6 +710,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "AI completion request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AICompletionRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -714,6 +791,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "AI provider configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AIProviderRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -782,6 +870,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Automation rule details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationRule"
+              }
+            }
+          }
         }
       }
     },
@@ -817,6 +916,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Execution mode update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ExecutionModeRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -851,6 +961,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Rule weights mapping",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RuleWeightsRequest"
+              }
+            }
           }
         }
       }
@@ -983,6 +1104,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Automation rule update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AutomationRule"
+              }
+            }
+          }
         }
       }
     },
@@ -1027,6 +1159,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Toggle rule status",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleRequest"
+              }
+            }
           }
         }
       }
@@ -1095,6 +1238,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Business hours configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessHours"
+              }
+            }
           }
         }
       }
@@ -1226,6 +1380,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Business hours update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BusinessHours"
+              }
+            }
           }
         }
       }
@@ -1385,6 +1550,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Contact update details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Contact"
+              }
+            }
+          }
         }
       }
     },
@@ -1429,6 +1605,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Block status update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/BlockContactRequest"
+              }
+            }
           }
         }
       }
@@ -1518,6 +1705,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Note details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContactNoteRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -1605,6 +1803,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Conversation creation details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateConversationRequest"
+              }
+            }
           }
         }
       }
@@ -1857,6 +2066,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Message details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MessageRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -2056,6 +2276,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Team assignment details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TeamAssignRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -2145,6 +2376,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "User assignment details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserAssignRequest"
+              }
+            }
           }
         }
       }
@@ -2236,6 +2478,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Custom attributes",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAttributesRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -2280,6 +2533,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Custom attributes",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAttributesRequest"
+              }
+            }
           }
         }
       }
@@ -2378,6 +2642,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Macro application request",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ApplyMacroRequest"
+              }
+            }
           }
         }
       }
@@ -2535,6 +2810,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Priority update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PriorityUpdateRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -2580,6 +2866,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Status update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/StatusUpdateRequest"
+              }
+            }
+          }
         }
       }
     },
@@ -2624,6 +2921,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Tags to add",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TagsUpdateRequest"
+              }
+            }
           }
         }
       }
@@ -2692,6 +3000,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Custom attribute details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAttribute"
+              }
+            }
           }
         }
       }
@@ -2824,6 +3143,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Custom attribute update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CustomAttribute"
+              }
+            }
+          }
         }
       }
     },
@@ -2891,6 +3221,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Inbox configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Inbox"
+              }
+            }
           }
         }
       }
@@ -3023,6 +3364,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Inbox update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Inbox"
+              }
+            }
+          }
         }
       }
     },
@@ -3067,6 +3419,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Toggle inbox status",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleRequest"
+              }
+            }
           }
         }
       }
@@ -3172,6 +3535,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Macro configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Macro"
+              }
+            }
           }
         }
       }
@@ -3304,6 +3678,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Macro update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Macro"
+              }
+            }
+          }
         }
       }
     },
@@ -3338,6 +3723,24 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Media upload",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "File to upload"
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -3582,6 +3985,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Role configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Role"
+              }
+            }
+          }
         }
       }
     },
@@ -3713,6 +4127,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Role update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Role"
+              }
+            }
+          }
         }
       }
     },
@@ -3772,6 +4197,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "General settings",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GeneralSettings"
+              }
+            }
           }
         }
       }
@@ -3841,6 +4277,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Email notification settings",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/EmailNotificationSettings"
+              }
+            }
+          }
         }
       }
     },
@@ -3908,6 +4355,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "SLA configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SLA"
+              }
+            }
           }
         }
       }
@@ -4040,6 +4498,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "SLA update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SLA"
+              }
+            }
+          }
         }
       }
     },
@@ -4107,6 +4576,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Status configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
           }
         }
       }
@@ -4196,6 +4676,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Status update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Status"
+              }
+            }
+          }
         }
       }
     },
@@ -4263,6 +4754,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Tag details",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tag"
+              }
+            }
           }
         }
       }
@@ -4352,6 +4854,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Tag update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Tag"
+              }
+            }
+          }
         }
       }
     },
@@ -4419,6 +4932,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Team configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Team"
+              }
+            }
           }
         }
       }
@@ -4586,6 +5110,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Team update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Team"
+              }
+            }
+          }
         }
       }
     },
@@ -4698,6 +5233,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Template configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Template"
+              }
+            }
           }
         }
       }
@@ -4830,6 +5376,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Template update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Template"
+              }
+            }
+          }
         }
       }
     },
@@ -4897,6 +5454,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "View configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/View"
+              }
+            }
           }
         }
       }
@@ -4985,6 +5553,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "View update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/View"
+              }
+            }
           }
         }
       }
@@ -5098,6 +5677,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Webhook configuration",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Webhook"
+              }
+            }
           }
         }
       }
@@ -5230,6 +5820,17 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Webhook update",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Webhook"
+              }
+            }
+          }
         }
       }
     },
@@ -5275,6 +5876,22 @@
           "500": {
             "description": "Internal server error"
           }
+        },
+        "requestBody": {
+          "description": "Test webhook payload",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "test_data": {
+                    "type": "object",
+                    "description": "Test payload data"
+                  }
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -5319,6 +5936,17 @@
           },
           "500": {
             "description": "Internal server error"
+          }
+        },
+        "requestBody": {
+          "description": "Toggle webhook status",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ToggleRequest"
+              }
+            }
           }
         }
       }
@@ -5603,11 +6231,19 @@
           },
           "type": {
             "type": "string",
-            "enum": ["incoming", "outgoing"]
+            "enum": [
+              "incoming",
+              "outgoing"
+            ]
           },
           "status": {
             "type": "string",
-            "enum": ["pending", "sent", "received", "failed"]
+            "enum": [
+              "pending",
+              "sent",
+              "received",
+              "failed"
+            ]
           },
           "conversation_id": {
             "type": "integer"
@@ -5623,7 +6259,10 @@
           },
           "content_type": {
             "type": "string",
-            "enum": ["html", "text"]
+            "enum": [
+              "html",
+              "text"
+            ]
           },
           "private": {
             "type": "boolean"
@@ -5633,26 +6272,37 @@
           },
           "sender_type": {
             "type": "string",
-            "enum": ["agent", "contact"]
+            "enum": [
+              "agent",
+              "contact"
+            ]
           },
           "meta": {
             "type": "object",
             "properties": {
               "to": {
                 "type": "array",
-                "items": {"type": "string"}
+                "items": {
+                  "type": "string"
+                }
               },
               "cc": {
                 "type": "array",
-                "items": {"type": "string"}
+                "items": {
+                  "type": "string"
+                }
               },
               "bcc": {
                 "type": "array",
-                "items": {"type": "string"}
+                "items": {
+                  "type": "string"
+                }
               },
               "from": {
                 "type": "array",
-                "items": {"type": "string"}
+                "items": {
+                  "type": "string"
+                }
               },
               "subject": {
                 "type": "string"
@@ -5661,7 +6311,9 @@
           },
           "attachments": {
             "type": "array",
-            "items": {"type": "object"}
+            "items": {
+              "type": "object"
+            }
           }
         }
       },
@@ -5755,11 +6407,15 @@
           },
           "tags": {
             "type": "array",
-            "items": {"type": "string"}
+            "items": {
+              "type": "string"
+            }
           },
           "meta": {
             "type": "array",
-            "items": {"type": "object"}
+            "items": {
+              "type": "object"
+            }
           },
           "custom_attributes": {
             "type": "object"
@@ -5814,13 +6470,30 @@
             "items": {
               "type": "object",
               "properties": {
-                "id": {"type": "integer"},
-                "created_at": {"type": "string", "format": "date-time"},
-                "updated_at": {"type": "string", "format": "date-time"},
-                "uuid": {"type": "string"},
-                "contact": {"$ref": "#/components/schemas/ContactSummary"},
-                "last_message": {"type": "string"},
-                "last_message_at": {"type": "string", "format": "date-time"}
+                "id": {
+                  "type": "integer"
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "format": "date-time"
+                },
+                "uuid": {
+                  "type": "string"
+                },
+                "contact": {
+                  "$ref": "#/components/schemas/ContactSummary"
+                },
+                "last_message": {
+                  "type": "string"
+                },
+                "last_message_at": {
+                  "type": "string",
+                  "format": "date-time"
+                }
               }
             }
           }
@@ -5829,50 +6502,142 @@
       "ConversationListItem": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer"},
-          "created_at": {"type": "string", "format": "date-time"},
-          "updated_at": {"type": "string", "format": "date-time"},
-          "uuid": {"type": "string"},
-          "waiting_since": {"type": "string", "format": "date-time"},
-          "assignee_last_seen_at": {"type": "string", "format": "date-time"},
-          "contact": {"$ref": "#/components/schemas/ContactSummary"},
-          "inbox_channel": {"type": "string"},
-          "inbox_name": {"type": "string"},
-          "sla_policy_id": {"type": "integer", "nullable": true},
-          "first_reply_at": {"type": "string", "format": "date-time", "nullable": true},
-          "last_reply_at": {"type": "string", "format": "date-time", "nullable": true},
-          "resolved_at": {"type": "string", "format": "date-time", "nullable": true},
-          "subject": {"type": "string"},
-          "last_message": {"type": "string"},
-          "last_message_at": {"type": "string", "format": "date-time"},
-          "last_message_sender": {"type": "string"},
-          "next_sla_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
-          "priority_id": {"type": "integer", "nullable": true},
-          "unread_message_count": {"type": "integer"},
-          "status": {"type": "string"},
-          "priority": {"type": "string", "nullable": true},
-          "first_response_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
-          "resolution_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
-          "applied_sla_id": {"type": "integer", "nullable": true},
-          "next_response_deadline_at": {"type": "string", "format": "date-time", "nullable": true},
-          "next_response_met_at": {"type": "string", "format": "date-time", "nullable": true}
+          "id": {
+            "type": "integer"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "waiting_since": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "assignee_last_seen_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "contact": {
+            "$ref": "#/components/schemas/ContactSummary"
+          },
+          "inbox_channel": {
+            "type": "string"
+          },
+          "inbox_name": {
+            "type": "string"
+          },
+          "sla_policy_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "first_reply_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "last_reply_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "subject": {
+            "type": "string"
+          },
+          "last_message": {
+            "type": "string"
+          },
+          "last_message_at": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "last_message_sender": {
+            "type": "string"
+          },
+          "next_sla_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "priority_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "unread_message_count": {
+            "type": "integer"
+          },
+          "status": {
+            "type": "string"
+          },
+          "priority": {
+            "type": "string",
+            "nullable": true
+          },
+          "first_response_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "resolution_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "applied_sla_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "next_response_deadline_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "next_response_met_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
         }
       },
       "ConversationListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "object",
             "properties": {
               "results": {
                 "type": "array",
-                "items": {"$ref": "#/components/schemas/ConversationListItem"}
+                "items": {
+                  "$ref": "#/components/schemas/ConversationListItem"
+                }
               },
-              "total": {"type": "integer"},
-              "per_page": {"type": "integer"},
-              "total_pages": {"type": "integer"},
-              "page": {"type": "integer"}
+              "total": {
+                "type": "integer"
+              },
+              "per_page": {
+                "type": "integer"
+              },
+              "total_pages": {
+                "type": "integer"
+              },
+              "page": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -5880,25 +6645,43 @@
       "ConversationResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Conversation"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Conversation"
+          }
         }
       },
       "MessageListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "object",
             "properties": {
               "results": {
                 "type": "array",
-                "items": {"$ref": "#/components/schemas/Message"}
+                "items": {
+                  "$ref": "#/components/schemas/Message"
+                }
               },
-              "total": {"type": "integer"},
-              "per_page": {"type": "integer"},
-              "total_pages": {"type": "integer"},
-              "page": {"type": "integer"}
+              "total": {
+                "type": "integer"
+              },
+              "per_page": {
+                "type": "integer"
+              },
+              "total_pages": {
+                "type": "integer"
+              },
+              "page": {
+                "type": "integer"
+              }
             }
           }
         }
@@ -5906,534 +6689,1278 @@
       "MessageResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Message"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Message"
+          }
         }
       },
       "Media": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 123},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "uuid": {"type": "string", "example": "550e8400-e29b-41d4-a716-446655440000"},
-          "store": {"type": "string", "example": "fs"},
-          "filename": {"type": "string", "example": "example.jpg"},
-          "content_type": {"type": "string", "example": "image/jpeg"},
-          "content_id": {"type": "string", "example": ""},
-          "model_id": {"type": "integer", "nullable": true, "example": 456},
-          "model_type": {"type": "string", "nullable": true, "example": "messages"},
-          "disposition": {"type": "string", "nullable": true, "example": "attachment"},
-          "size": {"type": "integer", "example": 102400},
-          "meta": {"type": "object", "example": {"width": 800, "height": 600}},
-          "url": {"type": "string", "example": "/uploads/550e8400-e29b-41d4-a716-446655440000"}
+          "id": {
+            "type": "integer",
+            "example": 123
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "store": {
+            "type": "string",
+            "example": "fs"
+          },
+          "filename": {
+            "type": "string",
+            "example": "example.jpg"
+          },
+          "content_type": {
+            "type": "string",
+            "example": "image/jpeg"
+          },
+          "content_id": {
+            "type": "string",
+            "example": ""
+          },
+          "model_id": {
+            "type": "integer",
+            "nullable": true,
+            "example": 456
+          },
+          "model_type": {
+            "type": "string",
+            "nullable": true,
+            "example": "messages"
+          },
+          "disposition": {
+            "type": "string",
+            "nullable": true,
+            "example": "attachment"
+          },
+          "size": {
+            "type": "integer",
+            "example": 102400
+          },
+          "meta": {
+            "type": "object",
+            "example": {
+              "width": 800,
+              "height": 600
+            }
+          },
+          "url": {
+            "type": "string",
+            "example": "/uploads/550e8400-e29b-41d4-a716-446655440000"
+          }
         }
       },
       "MediaResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Media"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Media"
+          }
         }
       },
       "GeneralSettings": {
         "type": "object",
         "properties": {
-          "app.site_name": {"type": "string", "example": "LibreDesk"},
-          "app.lang": {"type": "string", "example": "en"},
-          "app.max_file_upload_size": {"type": "integer", "example": 10},
-          "app.favicon_url": {"type": "string", "example": "/images/favicon.ico"},
-          "app.logo_url": {"type": "string", "example": "/images/logo.png"},
-          "app.root_url": {"type": "string", "example": "http://localhost:8080"},
-          "app.allowed_file_upload_extensions": {"type": "array", "items": {"type": "string"}, "example": ["jpg", "png", "pdf"]},
-          "app.timezone": {"type": "string", "example": "UTC"},
-          "app.business_hours_id": {"type": "string", "example": "1"},
-          "app.update": {"type": "object", "example": null},
-          "app.version": {"type": "string", "example": "1.0.0"}
+          "app.site_name": {
+            "type": "string",
+            "example": "LibreDesk"
+          },
+          "app.lang": {
+            "type": "string",
+            "example": "en"
+          },
+          "app.max_file_upload_size": {
+            "type": "integer",
+            "example": 10
+          },
+          "app.favicon_url": {
+            "type": "string",
+            "example": "/images/favicon.ico"
+          },
+          "app.logo_url": {
+            "type": "string",
+            "example": "/images/logo.png"
+          },
+          "app.root_url": {
+            "type": "string",
+            "example": "http://localhost:8080"
+          },
+          "app.allowed_file_upload_extensions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "jpg",
+              "png",
+              "pdf"
+            ]
+          },
+          "app.timezone": {
+            "type": "string",
+            "example": "UTC"
+          },
+          "app.business_hours_id": {
+            "type": "string",
+            "example": "1"
+          },
+          "app.update": {
+            "type": "object",
+            "example": null
+          },
+          "app.version": {
+            "type": "string",
+            "example": "1.0.0"
+          }
         }
       },
       "GeneralSettingsResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/GeneralSettings"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/GeneralSettings"
+          }
         }
       },
       "EmailNotification": {
         "type": "object",
         "properties": {
-          "notification.email.username": {"type": "string", "example": "noreply@example.com"},
-          "notification.email.host": {"type": "string", "example": "smtp.example.com"},
-          "notification.email.port": {"type": "integer", "example": 587},
-          "notification.email.password": {"type": "string", "example": "**********"},
-          "notification.email.max_conns": {"type": "integer", "example": 10},
-          "notification.email.idle_timeout": {"type": "string", "example": "15s"},
-          "notification.email.wait_timeout": {"type": "string", "example": "5s"},
-          "notification.email.auth_protocol": {"type": "string", "example": "PLAIN"},
-          "notification.email.email_address": {"type": "string", "example": "noreply@example.com"},
-          "notification.email.max_msg_retries": {"type": "integer", "example": 3},
-          "notification.email.tls_type": {"type": "string", "example": "STARTTLS"},
-          "notification.email.tls_skip_verify": {"type": "boolean", "example": false},
-          "notification.email.hello_hostname": {"type": "string", "example": "example.com"},
-          "notification.email.enabled": {"type": "boolean", "example": true}
+          "notification.email.username": {
+            "type": "string",
+            "example": "noreply@example.com"
+          },
+          "notification.email.host": {
+            "type": "string",
+            "example": "smtp.example.com"
+          },
+          "notification.email.port": {
+            "type": "integer",
+            "example": 587
+          },
+          "notification.email.password": {
+            "type": "string",
+            "example": "**********"
+          },
+          "notification.email.max_conns": {
+            "type": "integer",
+            "example": 10
+          },
+          "notification.email.idle_timeout": {
+            "type": "string",
+            "example": "15s"
+          },
+          "notification.email.wait_timeout": {
+            "type": "string",
+            "example": "5s"
+          },
+          "notification.email.auth_protocol": {
+            "type": "string",
+            "example": "PLAIN"
+          },
+          "notification.email.email_address": {
+            "type": "string",
+            "example": "noreply@example.com"
+          },
+          "notification.email.max_msg_retries": {
+            "type": "integer",
+            "example": 3
+          },
+          "notification.email.tls_type": {
+            "type": "string",
+            "example": "STARTTLS"
+          },
+          "notification.email.tls_skip_verify": {
+            "type": "boolean",
+            "example": false
+          },
+          "notification.email.hello_hostname": {
+            "type": "string",
+            "example": "example.com"
+          },
+          "notification.email.enabled": {
+            "type": "boolean",
+            "example": true
+          }
         }
       },
       "EmailNotificationResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/EmailNotification"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/EmailNotification"
+          }
         }
       },
       "OIDC": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Google SSO"},
-          "enabled": {"type": "boolean", "example": true},
-          "client_id": {"type": "string", "example": "example-client-id"},
-          "client_secret": {"type": "string", "example": "**********"},
-          "provider": {"type": "string", "example": "Google"},
-          "provider_url": {"type": "string", "example": "https://accounts.google.com"},
-          "redirect_uri": {"type": "string", "example": "http://localhost:8080/api/v1/oidc/1/finish"},
-          "logo_url": {"type": "string", "example": "/images/google-logo.png"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Google SSO"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "client_id": {
+            "type": "string",
+            "example": "example-client-id"
+          },
+          "client_secret": {
+            "type": "string",
+            "example": "**********"
+          },
+          "provider": {
+            "type": "string",
+            "example": "Google"
+          },
+          "provider_url": {
+            "type": "string",
+            "example": "https://accounts.google.com"
+          },
+          "redirect_uri": {
+            "type": "string",
+            "example": "http://localhost:8080/api/v1/oidc/1/finish"
+          },
+          "logo_url": {
+            "type": "string",
+            "example": "/images/google-logo.png"
+          }
         }
       },
       "OIDCResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/OIDC"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/OIDC"
+          }
         }
       },
       "OIDCListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/OIDC"}
+            "items": {
+              "$ref": "#/components/schemas/OIDC"
+            }
           }
         }
       },
       "SuccessResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"type": "boolean", "example": true}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "boolean",
+            "example": true
+          }
         }
       },
       "ConversationSearchResult": {
         "type": "object",
         "properties": {
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "uuid": {"type": "string", "example": "550e8400-e29b-41d4-a716-446655440000"},
-          "reference_number": {"type": "string", "example": "REF-001"},
-          "subject": {"type": "string", "example": "Order inquiry"}
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "uuid": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "reference_number": {
+            "type": "string",
+            "example": "REF-001"
+          },
+          "subject": {
+            "type": "string",
+            "example": "Order inquiry"
+          }
         }
       },
       "MessageSearchResult": {
         "type": "object",
         "properties": {
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "text_content": {"type": "string", "example": "Hello, I need help with my order."},
-          "conversation_created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "conversation_uuid": {"type": "string", "example": "550e8400-e29b-41d4-a716-446655440000"},
-          "conversation_reference_number": {"type": "string", "example": "REF-001"}
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "text_content": {
+            "type": "string",
+            "example": "Hello, I need help with my order."
+          },
+          "conversation_created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "conversation_uuid": {
+            "type": "string",
+            "example": "550e8400-e29b-41d4-a716-446655440000"
+          },
+          "conversation_reference_number": {
+            "type": "string",
+            "example": "REF-001"
+          }
         }
       },
       "ContactSearchResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/ContactSearchResult"}
+            "items": {
+              "$ref": "#/components/schemas/ContactSearchResult"
+            }
           }
         }
       },
       "ConversationSearchResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/ConversationSearchResult"}
+            "items": {
+              "$ref": "#/components/schemas/ConversationSearchResult"
+            }
           }
         }
       },
       "MessageSearchResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/MessageSearchResult"}
+            "items": {
+              "$ref": "#/components/schemas/MessageSearchResult"
+            }
           }
         }
       },
       "ContactSearchResult": {
         "type": "object",
         "properties": {
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "first_name": {"type": "string", "example": "John"},
-          "last_name": {"type": "string", "example": "Doe"},
-          "email": {"type": "string", "format": "email", "example": "john.doe@example.com"}
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john.doe@example.com"
+          }
         }
       },
       "Status": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Open"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Open"
+          }
         }
       },
       "StatusResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Status"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Status"
+          }
         }
       },
       "StatusListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Status"}
+            "items": {
+              "$ref": "#/components/schemas/Status"
+            }
           }
         }
       },
       "Priority": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "High"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "High"
+          }
         }
       },
       "PriorityResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Priority"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Priority"
+          }
         }
       },
       "PriorityListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Priority"}
+            "items": {
+              "$ref": "#/components/schemas/Priority"
+            }
           }
         }
       },
       "Tag": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "bug"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "bug"
+          }
         }
       },
       "TagResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Tag"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Tag"
+          }
         }
       },
       "TagListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Tag"}
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            }
           }
         }
       },
       "Agent": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "first_name": {"type": "string", "example": "John"},
-          "last_name": {"type": "string", "example": "Doe"},
-          "email": {"type": "string", "format": "email", "example": "john.doe@example.com", "nullable": true},
-          "type": {"type": "string", "example": "agent"},
-          "availability_status": {"type": "string", "example": "online"},
-          "phone_number_calling_code": {"type": "string", "nullable": true, "example": "+1"},
-          "phone_number": {"type": "string", "nullable": true, "example": "1234567890"},
-          "avatar_url": {"type": "string", "nullable": true, "example": "/avatars/agent1.jpg"},
-          "enabled": {"type": "boolean", "example": true},
-          "last_active_at": {"type": "string", "format": "date-time", "nullable": true, "example": "2025-08-28T10:00:00Z"},
-          "last_login_at": {"type": "string", "format": "date-time", "nullable": true, "example": "2025-08-28T10:00:00Z"},
-          "roles": {"type": "array", "items": {"type": "string"}, "example": ["admin"]},
-          "permissions": {"type": "array", "items": {"type": "string"}, "example": ["conversations:read"]},
-          "custom_attributes": {"type": "object"},
-          "teams": {"type": "array", "items": {"$ref": "#/components/schemas/TeamCompact"}},
-          "api_key": {"type": "string", "nullable": true},
-          "api_key_last_used_at": {"type": "string", "format": "date-time", "nullable": true}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "john.doe@example.com",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "example": "agent"
+          },
+          "availability_status": {
+            "type": "string",
+            "example": "online"
+          },
+          "phone_number_calling_code": {
+            "type": "string",
+            "nullable": true,
+            "example": "+1"
+          },
+          "phone_number": {
+            "type": "string",
+            "nullable": true,
+            "example": "1234567890"
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true,
+            "example": "/avatars/agent1.jpg"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "last_active_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "last_login_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "admin"
+            ]
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "conversations:read"
+            ]
+          },
+          "custom_attributes": {
+            "type": "object"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TeamCompact"
+            }
+          },
+          "api_key": {
+            "type": "string",
+            "nullable": true
+          },
+          "api_key_last_used_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
         }
       },
       "AgentCompact": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "type": {"type": "string", "example": "agent"},
-          "first_name": {"type": "string", "example": "John"},
-          "last_name": {"type": "string", "example": "Doe"},
-          "email": {"type": "string", "format": "email", "nullable": true, "example": "john.doe@example.com"},
-          "enabled": {"type": "boolean", "example": true},
-          "avatar_url": {"type": "string", "nullable": true, "example": "/avatars/agent1.jpg"},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "total": {"type": "integer", "example": 100}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "type": {
+            "type": "string",
+            "example": "agent"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "nullable": true,
+            "example": "john.doe@example.com"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true,
+            "example": "/avatars/agent1.jpg"
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "total": {
+            "type": "integer",
+            "example": 100
+          }
         }
       },
       "AgentResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Agent"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Agent"
+          }
         }
       },
       "AgentListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Agent"}
+            "items": {
+              "$ref": "#/components/schemas/Agent"
+            }
           }
         }
       },
       "AgentCompactListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/AgentCompact"}
+            "items": {
+              "$ref": "#/components/schemas/AgentCompact"
+            }
           }
         }
       },
       "TeamCompact": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "name": {"type": "string", "example": "Support Team"},
-          "emoji": {"type": "string", "nullable": true, "example": "🛠️"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Support Team"
+          },
+          "emoji": {
+            "type": "string",
+            "nullable": true,
+            "example": "\ud83d\udee0\ufe0f"
+          }
         }
       },
       "Team": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "emoji": {"type": "string", "nullable": true, "example": "🛠️"},
-          "name": {"type": "string", "example": "Support Team"},
-          "conversation_assignment_type": {"type": "string", "example": "round_robin"},
-          "timezone": {"type": "string", "example": "UTC"},
-          "business_hours_id": {"type": "integer", "nullable": true, "example": 1},
-          "sla_policy_id": {"type": "integer", "nullable": true, "example": 1},
-          "max_auto_assigned_conversations": {"type": "integer", "example": 10}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "emoji": {
+            "type": "string",
+            "nullable": true,
+            "example": "\ud83d\udee0\ufe0f"
+          },
+          "name": {
+            "type": "string",
+            "example": "Support Team"
+          },
+          "conversation_assignment_type": {
+            "type": "string",
+            "example": "round_robin"
+          },
+          "timezone": {
+            "type": "string",
+            "example": "UTC"
+          },
+          "business_hours_id": {
+            "type": "integer",
+            "nullable": true,
+            "example": 1
+          },
+          "sla_policy_id": {
+            "type": "integer",
+            "nullable": true,
+            "example": 1
+          },
+          "max_auto_assigned_conversations": {
+            "type": "integer",
+            "example": 10
+          }
         }
       },
       "TeamResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Team"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Team"
+          }
         }
       },
       "TeamListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Team"}
+            "items": {
+              "$ref": "#/components/schemas/Team"
+            }
           }
         }
       },
       "Macro": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Close and Thank"},
-          "actions": {"type": "object", "description": "JSON object containing macro actions"},
-          "visibility": {"type": "string", "example": "global"},
-          "visible_when": {"type": "array", "items": {"type": "string"}, "example": ["conversation_open"]},
-          "message_content": {"type": "string", "example": "Thank you for contacting us!"},
-          "user_id": {"type": "string", "nullable": true, "example": "1"},
-          "team_id": {"type": "string", "nullable": true, "example": "1"},
-          "usage_count": {"type": "integer", "example": 25}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Close and Thank"
+          },
+          "actions": {
+            "type": "object",
+            "description": "JSON object containing macro actions"
+          },
+          "visibility": {
+            "type": "string",
+            "example": "global"
+          },
+          "visible_when": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "conversation_open"
+            ]
+          },
+          "message_content": {
+            "type": "string",
+            "example": "Thank you for contacting us!"
+          },
+          "user_id": {
+            "type": "string",
+            "nullable": true,
+            "example": "1"
+          },
+          "team_id": {
+            "type": "string",
+            "nullable": true,
+            "example": "1"
+          },
+          "usage_count": {
+            "type": "integer",
+            "example": 25
+          }
         }
       },
       "MacroResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Macro"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Macro"
+          }
         }
       },
       "MacroListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Macro"}
+            "items": {
+              "$ref": "#/components/schemas/Macro"
+            }
           }
         }
       },
       "ContactNote": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "contact_id": {"type": "integer", "example": 1},
-          "note": {"type": "string", "example": "Customer prefers email communication"},
-          "user_id": {"type": "integer", "example": 1},
-          "first_name": {"type": "string", "example": "John"},
-          "last_name": {"type": "string", "example": "Doe"},
-          "avatar_url": {"type": "string", "nullable": true, "example": "/avatars/agent1.jpg"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "contact_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "note": {
+            "type": "string",
+            "example": "Customer prefers email communication"
+          },
+          "user_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "first_name": {
+            "type": "string",
+            "example": "John"
+          },
+          "last_name": {
+            "type": "string",
+            "example": "Doe"
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true,
+            "example": "/avatars/agent1.jpg"
+          }
         }
       },
       "ContactNoteResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/ContactNote"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ContactNote"
+          }
         }
       },
       "ContactNoteListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/ContactNote"}
+            "items": {
+              "$ref": "#/components/schemas/ContactNote"
+            }
           }
         }
       },
       "AutomationRule": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Auto-assign urgent tickets"},
-          "description": {"type": "string", "example": "Automatically assign high priority tickets to senior agents"},
-          "type": {"type": "string", "example": "new_conversation"},
-          "events": {"type": "array", "items": {"type": "string"}, "example": ["conversation.message.incoming"]},
-          "enabled": {"type": "boolean", "example": true},
-          "weight": {"type": "integer", "example": 100},
-          "execution_mode": {"type": "string", "example": "all"},
-          "rules": {"type": "object", "description": "JSON object containing rule conditions"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Auto-assign urgent tickets"
+          },
+          "description": {
+            "type": "string",
+            "example": "Automatically assign high priority tickets to senior agents"
+          },
+          "type": {
+            "type": "string",
+            "example": "new_conversation"
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "conversation.message.incoming"
+            ]
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "weight": {
+            "type": "integer",
+            "example": 100
+          },
+          "execution_mode": {
+            "type": "string",
+            "example": "all"
+          },
+          "rules": {
+            "type": "object",
+            "description": "JSON object containing rule conditions"
+          }
         }
       },
       "AutomationRuleResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/AutomationRule"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AutomationRule"
+          }
         }
       },
       "AutomationRuleListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/AutomationRule"}
+            "items": {
+              "$ref": "#/components/schemas/AutomationRule"
+            }
           }
         }
       },
       "Inbox": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Support Email"},
-          "channel": {"type": "string", "example": "email"},
-          "enabled": {"type": "boolean", "example": true},
-          "csat_enabled": {"type": "boolean", "example": true},
-          "from": {"type": "string", "format": "email", "example": "support@company.com"},
-          "config": {"type": "object", "description": "Channel configuration JSON"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Support Email"
+          },
+          "channel": {
+            "type": "string",
+            "example": "email"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "csat_enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "from": {
+            "type": "string",
+            "format": "email",
+            "example": "support@company.com"
+          },
+          "config": {
+            "type": "object",
+            "description": "Channel configuration JSON"
+          }
         }
       },
       "InboxResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Inbox"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Inbox"
+          }
         }
       },
       "InboxListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Inbox"}
+            "items": {
+              "$ref": "#/components/schemas/Inbox"
+            }
           }
         }
       },
       "ActivityLog": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "activity_type": {"type": "string", "example": "agent_login"},
-          "activity_description": {"type": "string", "example": "Agent John Doe logged in"},
-          "actor_id": {"type": "integer", "example": 1},
-          "target_model_type": {"type": "string", "example": "user"},
-          "target_model_id": {"type": "integer", "example": 1},
-          "ip": {"type": "string", "example": "192.168.1.1"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "activity_type": {
+            "type": "string",
+            "example": "agent_login"
+          },
+          "activity_description": {
+            "type": "string",
+            "example": "Agent John Doe logged in"
+          },
+          "actor_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "target_model_type": {
+            "type": "string",
+            "example": "user"
+          },
+          "target_model_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "ip": {
+            "type": "string",
+            "example": "192.168.1.1"
+          }
         }
       },
       "ActivityLogResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/ActivityLog"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ActivityLog"
+          }
         }
       },
       "ActivityLogListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/ActivityLog"}
+            "items": {
+              "$ref": "#/components/schemas/ActivityLog"
+            }
           }
         }
       },
       "APIKeyResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "object",
             "properties": {
-              "api_key": {"type": "string", "example": "ak_1234567890abcdef"},
-              "api_secret": {"type": "string", "example": "as_abcdef1234567890"}
+              "api_key": {
+                "type": "string",
+                "example": "ak_1234567890abcdef"
+              },
+              "api_secret": {
+                "type": "string",
+                "example": "as_abcdef1234567890"
+              }
             }
           }
         }
@@ -6441,246 +7968,916 @@
       "BusinessHour": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Business Hours"},
-          "timezone": {"type": "string", "example": "UTC"},
-          "schedule": {"type": "object", "description": "Weekly schedule configuration"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Business Hours"
+          },
+          "timezone": {
+            "type": "string",
+            "example": "UTC"
+          },
+          "schedule": {
+            "type": "object",
+            "description": "Weekly schedule configuration"
+          }
         }
       },
       "BusinessHourResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/BusinessHour"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/BusinessHour"
+          }
         }
       },
       "BusinessHourListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/BusinessHour"}
+            "items": {
+              "$ref": "#/components/schemas/BusinessHour"
+            }
           }
         }
       },
       "View": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "My Open Tickets"},
-          "query": {"type": "object", "description": "View filter criteria"},
-          "user_id": {"type": "integer", "example": 1}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "My Open Tickets"
+          },
+          "query": {
+            "type": "object",
+            "description": "View filter criteria"
+          },
+          "user_id": {
+            "type": "integer",
+            "example": 1
+          }
         }
       },
       "ViewResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/View"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/View"
+          }
         }
       },
       "ViewListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/View"}
+            "items": {
+              "$ref": "#/components/schemas/View"
+            }
           }
         }
       },
       "Role": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Administrator"},
-          "permissions": {"type": "array", "items": {"type": "string"}, "example": ["conversations:read", "users:manage"]}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Administrator"
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "conversations:read",
+              "users:manage"
+            ]
+          }
         }
       },
       "RoleResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Role"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Role"
+          }
         }
       },
       "RoleListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Role"}
+            "items": {
+              "$ref": "#/components/schemas/Role"
+            }
           }
         }
       },
       "Webhook": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Slack Notification"},
-          "url": {"type": "string", "format": "uri", "example": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"},
-          "enabled": {"type": "boolean", "example": true},
-          "events": {"type": "array", "items": {"type": "string"}, "example": ["conversation.created"]},
-          "headers": {"type": "object", "description": "Custom HTTP headers"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Slack Notification"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "example": "https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "events": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "conversation.created"
+            ]
+          },
+          "headers": {
+            "type": "object",
+            "description": "Custom HTTP headers"
+          }
         }
       },
       "WebhookResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Webhook"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Webhook"
+          }
         }
       },
       "WebhookListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Webhook"}
+            "items": {
+              "$ref": "#/components/schemas/Webhook"
+            }
           }
         }
       },
       "Template": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Welcome Email"},
-          "subject": {"type": "string", "example": "Welcome to our support"},
-          "content": {"type": "string", "example": "Thank you for contacting us..."},
-          "type": {"type": "string", "example": "email"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Welcome Email"
+          },
+          "subject": {
+            "type": "string",
+            "example": "Welcome to our support"
+          },
+          "content": {
+            "type": "string",
+            "example": "Thank you for contacting us..."
+          },
+          "type": {
+            "type": "string",
+            "example": "email"
+          }
         }
       },
       "TemplateResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Template"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Template"
+          }
         }
       },
       "TemplateListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/Template"}
+            "items": {
+              "$ref": "#/components/schemas/Template"
+            }
           }
         }
       },
       "SLA": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Standard SLA"},
-          "first_response_time": {"type": "integer", "example": 60, "description": "Minutes"},
-          "resolution_time": {"type": "integer", "example": 1440, "description": "Minutes"}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Standard SLA"
+          },
+          "first_response_time": {
+            "type": "integer",
+            "example": 60,
+            "description": "Minutes"
+          },
+          "resolution_time": {
+            "type": "integer",
+            "example": 1440,
+            "description": "Minutes"
+          }
         }
       },
       "SLAResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/SLA"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/SLA"
+          }
         }
       },
       "SLAListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/SLA"}
+            "items": {
+              "$ref": "#/components/schemas/SLA"
+            }
           }
         }
       },
       "CustomAttribute": {
         "type": "object",
         "properties": {
-          "id": {"type": "integer", "example": 1},
-          "created_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "updated_at": {"type": "string", "format": "date-time", "example": "2025-08-28T10:00:00Z"},
-          "name": {"type": "string", "example": "Customer Type"},
-          "key": {"type": "string", "example": "customer_type"},
-          "type": {"type": "string", "example": "select"},
-          "options": {"type": "array", "items": {"type": "string"}, "example": ["Premium", "Standard"]}
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-08-28T10:00:00Z"
+          },
+          "name": {
+            "type": "string",
+            "example": "Customer Type"
+          },
+          "key": {
+            "type": "string",
+            "example": "customer_type"
+          },
+          "type": {
+            "type": "string",
+            "example": "select"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "Premium",
+              "Standard"
+            ]
+          }
         }
       },
       "CustomAttributeResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/CustomAttribute"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/CustomAttribute"
+          }
         }
       },
       "CustomAttributeListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/CustomAttribute"}
+            "items": {
+              "$ref": "#/components/schemas/CustomAttribute"
+            }
           }
         }
       },
       "AICompletion": {
         "type": "object",
         "properties": {
-          "content": {"type": "string", "example": "Thank you for contacting us. I'll help you resolve this issue..."},
-          "usage": {"type": "object", "properties": {"tokens": {"type": "integer", "example": 150}}}
+          "content": {
+            "type": "string",
+            "example": "Thank you for contacting us. I'll help you resolve this issue..."
+          },
+          "usage": {
+            "type": "object",
+            "properties": {
+              "tokens": {
+                "type": "integer",
+                "example": 150
+              }
+            }
+          }
         }
       },
       "AICompletionResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/AICompletion"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/AICompletion"
+          }
         }
       },
       "AIPrompt": {
         "type": "object",
         "properties": {
-          "id": {"type": "string", "example": "reply_friendly"},
-          "name": {"type": "string", "example": "Friendly Reply"},
-          "prompt": {"type": "string", "example": "Write a friendly response to this customer inquiry"}
+          "id": {
+            "type": "string",
+            "example": "reply_friendly"
+          },
+          "name": {
+            "type": "string",
+            "example": "Friendly Reply"
+          },
+          "prompt": {
+            "type": "string",
+            "example": "Write a friendly response to this customer inquiry"
+          }
         }
       },
       "AIPromptListResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
           "data": {
             "type": "array",
-            "items": {"$ref": "#/components/schemas/AIPrompt"}
+            "items": {
+              "$ref": "#/components/schemas/AIPrompt"
+            }
           }
         }
       },
       "Report": {
         "type": "object",
         "properties": {
-          "period": {"type": "string", "example": "last_7_days"},
-          "data": {"type": "object", "description": "Report data structure varies by report type"}
+          "period": {
+            "type": "string",
+            "example": "last_7_days"
+          },
+          "data": {
+            "type": "object",
+            "description": "Report data structure varies by report type"
+          }
         }
       },
       "ReportResponse": {
         "type": "object",
         "properties": {
-          "status": {"type": "string", "example": "success"},
-          "data": {"$ref": "#/components/schemas/Report"}
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/Report"
+          }
+        }
+      },
+      "AgentRequest": {
+        "type": "object",
+        "required": [
+          "email",
+          "first_name",
+          "last_name"
+        ],
+        "properties": {
+          "first_name": {
+            "type": "string",
+            "description": "Agent's first name"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Agent's last name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Agent's email address"
+          },
+          "send_welcome_email": {
+            "type": "boolean",
+            "description": "Whether to send welcome email"
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Team IDs to assign agent to"
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether agent is enabled"
+          },
+          "role": {
+            "type": "string",
+            "description": "Agent's role ID"
+          }
+        }
+      },
+      "AvailabilityRequest": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "available",
+              "busy",
+              "away",
+              "offline"
+            ],
+            "description": "Availability status"
+          }
+        }
+      },
+      "ResetPasswordRequest": {
+        "type": "object",
+        "required": [
+          "email"
+        ],
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Email address for password reset"
+          }
+        }
+      },
+      "SetPasswordRequest": {
+        "type": "object",
+        "required": [
+          "token",
+          "password"
+        ],
+        "properties": {
+          "token": {
+            "type": "string",
+            "description": "Password reset token"
+          },
+          "password": {
+            "type": "string",
+            "description": "New password"
+          }
+        }
+      },
+      "AICompletionRequest": {
+        "type": "object",
+        "required": [
+          "prompt_key",
+          "content"
+        ],
+        "properties": {
+          "prompt_key": {
+            "type": "string",
+            "description": "AI prompt identifier"
+          },
+          "content": {
+            "type": "string",
+            "description": "Content for AI completion"
+          }
+        }
+      },
+      "AIProviderRequest": {
+        "type": "object",
+        "required": [
+          "provider",
+          "api_key"
+        ],
+        "properties": {
+          "provider": {
+            "type": "string",
+            "description": "AI provider name"
+          },
+          "api_key": {
+            "type": "string",
+            "description": "API key for provider"
+          }
+        }
+      },
+      "ExecutionModeRequest": {
+        "type": "object",
+        "required": [
+          "mode"
+        ],
+        "properties": {
+          "mode": {
+            "type": "string",
+            "enum": [
+              "auto",
+              "manual"
+            ],
+            "description": "Execution mode for automation rules"
+          }
+        }
+      },
+      "RuleWeightsRequest": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "integer",
+          "description": "Rule ID to weight mapping"
+        }
+      },
+      "ToggleRequest": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether to enable or disable"
+          }
+        }
+      },
+      "BlockContactRequest": {
+        "type": "object",
+        "required": [
+          "enabled"
+        ],
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether to block or unblock contact"
+          }
+        }
+      },
+      "ContactNoteRequest": {
+        "type": "object",
+        "required": [
+          "note"
+        ],
+        "properties": {
+          "note": {
+            "type": "string",
+            "description": "Note content"
+          }
+        }
+      },
+      "CreateConversationRequest": {
+        "type": "object",
+        "required": [
+          "inbox_id",
+          "contact_email"
+        ],
+        "properties": {
+          "inbox_id": {
+            "type": "integer",
+            "description": "Inbox ID for the conversation"
+          },
+          "agent_id": {
+            "type": "integer",
+            "description": "Assigned agent ID"
+          },
+          "team_id": {
+            "type": "integer",
+            "description": "Assigned team ID"
+          },
+          "contact_email": {
+            "type": "string",
+            "format": "email",
+            "description": "Contact's email address"
+          },
+          "first_name": {
+            "type": "string",
+            "description": "Contact's first name"
+          },
+          "last_name": {
+            "type": "string",
+            "description": "Contact's last name"
+          },
+          "subject": {
+            "type": "string",
+            "description": "Conversation subject"
+          },
+          "message": {
+            "type": "string",
+            "description": "Initial message"
+          }
+        }
+      },
+      "MessageRequest": {
+        "type": "object",
+        "required": [
+          "message"
+        ],
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Message content"
+          },
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Attachment IDs"
+          },
+          "private": {
+            "type": "boolean",
+            "description": "Whether message is private (internal note)"
+          },
+          "to": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Email recipients"
+          },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "CC recipients"
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "BCC recipients"
+          }
+        }
+      },
+      "TeamAssignRequest": {
+        "type": "object",
+        "required": [
+          "assignee_id"
+        ],
+        "properties": {
+          "assignee_id": {
+            "type": "integer",
+            "description": "Team ID to assign"
+          }
+        }
+      },
+      "UserAssignRequest": {
+        "type": "object",
+        "required": [
+          "assignee_id"
+        ],
+        "properties": {
+          "assignee_id": {
+            "type": "integer",
+            "description": "User ID to assign"
+          }
+        }
+      },
+      "CustomAttributesRequest": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "description": "Custom attribute values"
+        }
+      },
+      "PriorityUpdateRequest": {
+        "type": "object",
+        "required": [
+          "priority"
+        ],
+        "properties": {
+          "priority": {
+            "type": "string",
+            "description": "Priority level"
+          }
+        }
+      },
+      "StatusUpdateRequest": {
+        "type": "object",
+        "required": [
+          "status"
+        ],
+        "properties": {
+          "status": {
+            "type": "string",
+            "description": "Status value"
+          },
+          "snoozed_until": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Snooze until timestamp"
+          }
+        }
+      },
+      "TagsUpdateRequest": {
+        "type": "object",
+        "required": [
+          "tags"
+        ],
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Tag names"
+          }
+        }
+      },
+      "SnoozeRequest": {
+        "type": "object",
+        "required": [
+          "snoozed_until"
+        ],
+        "properties": {
+          "snoozed_until": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Snooze until timestamp"
+          }
+        }
+      },
+      "ApplyMacroRequest": {
+        "type": "object",
+        "properties": {
+          "variables": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "Macro variables"
+          }
+        }
+      },
+      "EmailNotificationSettings": {
+        "type": "object",
+        "properties": {
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether email notifications are enabled"
+          },
+          "new_conversation": {
+            "type": "boolean",
+            "description": "Notify on new conversations"
+          },
+          "new_message": {
+            "type": "boolean",
+            "description": "Notify on new messages"
+          },
+          "assignment": {
+            "type": "boolean",
+            "description": "Notify on assignment"
+          }
         }
       }
     }
