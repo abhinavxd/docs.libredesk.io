@@ -20,15 +20,6 @@
             ]
           },
           {
-            "group": "Core Operations",
-            "pages": [
-              "api-reference/endpoint/authentication/login",
-              "api-reference/endpoint/authentication/logout",
-              "api-reference/endpoint/authentication/o-i-d-c-login",
-              "api-reference/endpoint/authentication/o-i-d-c-callback"
-            ]
-          },
-          {
             "group": "Conversations",
             "pages": [
               "api-reference/endpoint/conversations/get-all-conversations",
