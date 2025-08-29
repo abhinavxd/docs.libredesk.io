@@ -1,0 +1,61 @@
+---
+title: Upgrade Guide
+description: How to upgrade Libredesk to the latest version
+---
+
+# Upgrade
+
+<Warning>
+Always take a backup of the Postgres database before upgrading Libredesk.
+</Warning>
+
+## Upgrade Methods
+
+<Tabs>
+  <Tab title="Binary">
+    <Steps>
+      <Step title="Stop Libredesk">
+        Stop the running libredesk binary process.
+      </Step>
+      
+      <Step title="Download latest release">
+        Download the [latest release](https://github.com/abhinavxd/libredesk/releases) and extract the libredesk binary to overwrite the previous version.
+      </Step>
+      
+      <Step title="Upgrade database">
+        ```bash
+        ./libredesk --upgrade
+        ```
+        Upgrades are idempotent and running them multiple times have no side effects.
+      </Step>
+      
+      <Step title="Start Libredesk">
+        ```bash
+        ./libredesk
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Docker">
+    <Steps>
+      <Step title="Stop the application">
+        ```bash
+        docker compose down app
+        ```
+      </Step>
+      
+      <Step title="Pull latest image">
+        ```bash
+        docker compose pull
+        ```
+      </Step>
+      
+      <Step title="Start the application">
+        ```bash
+        docker compose up app -d
+        ```
+      </Step>
+    </Steps>
+  </Tab>
+</Tabs>

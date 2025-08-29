@@ -14,7 +14,7 @@
         "tab": "Documentation",
         "groups": [
           {
-            "group": "Welcome",
+            "group": "Introduction",
             "pages": [
               "introduction"
             ]
@@ -23,66 +23,23 @@
             "group": "Getting Started",
             "pages": [
               "getting-started/installation",
-              "getting-started/initial-setup",
-              "getting-started/quick-start"
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "pages": [
-              "concepts/conversations",
-              "concepts/agents-teams",
-              "concepts/contacts",
-              "concepts/inboxes",
-              "concepts/automation"
+              "getting-started/upgrade",
+              "getting-started/api-getting-started"
             ]
           },
           {
             "group": "Configuration",
             "pages": [
-              "configuration/general",
-              "configuration/email",
               "configuration/email-templates",
-              "configuration/business-hours",
-              "configuration/sla",
-              "configuration/custom-attributes"
+              "configuration/sso",
+              "configuration/webhooks"
             ]
           },
           {
-            "group": "Features",
+            "group": "Contributing",
             "pages": [
-              "features/macros",
-              "features/automation-rules",
-              "features/webhooks",
-              "features/reporting",
-              "features/ai-assist"
-            ]
-          },
-          {
-            "group": "Authentication",
-            "pages": [
-              "authentication/overview",
-              "authentication/sso-setup",
-              "authentication/oidc",
-              "authentication/api-keys"
-            ]
-          },
-          {
-            "group": "Administration",
-            "pages": [
-              "admin/user-management",
-              "admin/roles-permissions",
-              "admin/backup-restore",
-              "admin/upgrade-guide",
-              "admin/monitoring"
-            ]
-          },
-          {
-            "group": "Integrations",
-            "pages": [
-              "integrations/webhooks",
-              "integrations/email",
-              "integrations/custom-integrations"
+              "contributing/developer-setup",
+              "contributing/translations"
             ]
           }
         ]
@@ -93,11 +50,7 @@
           {
             "group": "Getting Started",
             "pages": [
-              "api-reference/introduction",
-              "api-reference/authentication",
-              "api-reference/rate-limits",
-              "api-reference/pagination",
-              "api-reference/errors"
+              "api-reference/introduction"
             ]
           },
           {
@@ -288,45 +241,6 @@
             ]
           }
         ]
-      },
-      {
-        "tab": "Developers",
-        "groups": [
-          {
-            "group": "Getting Started",
-            "pages": [
-              "developers/setup",
-              "developers/architecture",
-              "developers/code-structure"
-            ]
-          },
-          {
-            "group": "Contributing",
-            "pages": [
-              "developers/contributing",
-              "developers/code-style",
-              "developers/testing",
-              "developers/pull-requests"
-            ]
-          },
-          {
-            "group": "Customization",
-            "pages": [
-              "developers/frontend",
-              "developers/backend",
-              "developers/database",
-              "developers/translations"
-            ]
-          },
-          {
-            "group": "Deployment",
-            "pages": [
-              "developers/docker",
-              "developers/kubernetes",
-              "developers/ci-cd"
-            ]
-          }
-        ]
       }
     ],
     "global": {
@@ -337,14 +251,9 @@
           "icon": "github"
         },
         {
-          "anchor": "API Reference",
-          "href": "https://docs.libredesk.io/api-reference/introduction",
+          "anchor": "OpenAPI Spec",
+          "href": "https://docs.libredesk.io/api-reference/openapi.json",
           "icon": "code"
-        },
-        {
-          "anchor": "Support",
-          "href": "https://github.com/abhinavxd/libredesk/issues",
-          "icon": "life-ring"
         }
       ]
     }
@@ -359,10 +268,6 @@
       {
         "label": "GitHub",
         "href": "https://github.com/abhinavxd/libredesk"
-      },
-      {
-        "label": "Website",
-        "href": "https://libredesk.io"
       }
     ]
   },
@@ -380,26 +285,7 @@
   },
   "footer": {
     "socials": {
-      "github": "https://github.com/libredesk/libredesk",
-      "website": "https://libredesk.io"
+      "github": "https://github.com/libredesk/libredesk"
     }
-  },
-  "feedback": {
-    "thumbsRating": true,
-    "suggestEdit": true,
-    "raiseIssue": true
-  },
-  "search": {
-    "prompt": "Search documentation..."
-  },
-  "topbarLinks": [
-    {
-      "name": "Support",
-      "url": "https://github.com/abhinavxd/libredesk/issues"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Get Started",
-    "url": "/getting-started/installation"
   }
 }

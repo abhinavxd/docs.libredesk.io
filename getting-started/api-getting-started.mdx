@@ -1,0 +1,70 @@
+---
+title: API Getting Started
+description: Access the Libredesk API to interact with your instance programmatically
+---
+
+# API Getting Started
+
+You can access the Libredesk API to interact with your instance programmatically.
+
+## Generating API Keys
+
+<Steps>
+  <Step title="Edit agent">
+    Go to **Admin → Teammate → Agent → Edit**
+  </Step>
+  
+  <Step title="Generate new API key">
+    An API Key and API Secret will be generated for the agent
+  </Step>
+  
+  <Step title="Save the credentials">
+    Keep both the API Key and API Secret secure
+  </Step>
+  
+  <Step title="Key management">
+    You can revoke / regenerate API keys at any time from the same page
+  </Step>
+</Steps>
+
+## Using the API
+
+Libredesk supports two authentication schemes:
+
+### Basic Authentication
+
+```bash
+curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
+  -H "Authorization: Basic <base64_encoded_key:secret>"
+```
+
+### Token Authentication
+
+```bash
+curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
+  -H "Authorization: token your_api_key:your_api_secret"
+```
+
+## API Documentation
+
+### Interactive API Documentation
+
+You can explore the complete API documentation with interactive Swagger UI at:
+- **Development**: `http://localhost:8080/api/docs`
+- **OpenAPI Spec**: `http://localhost:8080/api/openapi.json`
+
+The documentation includes all 146+ API endpoints with:
+- Request/response formats
+- Authentication requirements  
+- Path parameters
+- Interactive testing capabilities
+
+### Generating/Updating Documentation
+
+To regenerate the API documentation after adding new endpoints:
+
+```bash
+go run scripts/generate_openapi.go
+```
+
+This will update the `api/openapi.json` and `api/openapi.yaml` files.

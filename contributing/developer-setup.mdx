@@ -1,0 +1,96 @@
+---
+title: Developer Setup
+description: Set up your development environment for Libredesk
+---
+
+# Developer Setup
+
+Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend uses Shadcn for UI components.
+
+## Prerequisites
+
+- Go
+- Node.js and pnpm (if working on frontend)
+- Redis
+- PostgreSQL (≥13)
+
+## First Time Setup
+
+<Steps>
+  <Step title="Clone the repository">
+    ```bash
+    git clone https://github.com/abhinavxd/libredesk.git
+    cd libredesk
+    ```
+  </Step>
+  
+  <Step title="Configure Libredesk">
+    Copy `config.toml.sample` as `config.toml` and add your configuration:
+    ```bash
+    cp config.toml.sample config.toml
+    ```
+  </Step>
+  
+  <Step title="Build and install">
+    Build the libredesk binary and run the DB setup:
+    ```bash
+    make
+    ./libredesk --install
+    ```
+    This will set up the database and prompt you to set the System user password.
+  </Step>
+</Steps>
+
+## Running the Dev Environment
+
+<Tabs>
+  <Tab title="Full Stack Development">
+    Run both backend and frontend in development mode:
+    
+    <Steps>
+      <Step title="Start backend server">
+        ```bash
+        make run-backend
+        ```
+        This starts the libredesk backend dev server on `:9000`
+      </Step>
+      
+      <Step title="Start frontend server">
+        ```bash
+        make run-frontend
+        ```
+        This starts the Vue frontend in dev mode using pnpm on `:8000`
+        
+        Requests are proxied to the backend running on `:9000` (check `vite.config.js` for proxy config)
+      </Step>
+    </Steps>
+  </Tab>
+  
+  <Tab title="Backend Only">
+    ```bash
+    make run-backend
+    ```
+    Access the backend API at `http://localhost:9000`
+  </Tab>
+  
+  <Tab title="Frontend Only">
+    ```bash
+    make run-frontend
+    ```
+    Access the frontend at `http://localhost:8000`
+  </Tab>
+</Tabs>
+
+## Production Build
+
+To build a production-ready binary:
+
+```bash
+make
+```
+
+This will:
+- Build the Go binary
+- Build the Javascript frontend
+- Embed the static assets
+- Produce a single self-contained binary: `libredesk`
