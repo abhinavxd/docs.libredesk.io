@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "LibreDesk API",
-    "description": "REST API documentation for LibreDesk helpdesk system",
+    "description": "REST API documentation for LibreDesk helpdesk system.\n\n## Authentication\n\nThe LibreDesk API supports two authentication methods:\n\n### 1. Basic Authentication\nUse your API key and secret with Basic authentication:\n```\nAuthorization: Basic <base64_encoded_api_key:api_secret>\n```\n\n### 2. Token Authentication  \nUse your API key and secret with token authentication:\n```\nAuthorization: token api_key:api_secret\n```\n\nTo obtain API credentials, generate them from your agent profile in the LibreDesk dashboard.",
     "version": "1.0.0"
   },
   "servers": [
@@ -24,7 +24,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -59,7 +59,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -92,7 +92,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -138,7 +138,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -173,7 +173,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -206,7 +206,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -252,7 +252,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -298,7 +298,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -333,7 +333,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -368,7 +368,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -414,7 +414,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -470,7 +470,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -513,7 +513,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -556,7 +556,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -612,7 +612,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -655,7 +655,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -690,7 +690,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -736,7 +736,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -771,7 +771,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -817,7 +817,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -850,7 +850,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -896,7 +896,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -942,7 +942,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -998,7 +998,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1041,7 +1041,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1084,7 +1084,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1140,7 +1140,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1186,7 +1186,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1219,7 +1219,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1275,7 +1275,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1318,7 +1318,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1361,7 +1361,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1407,7 +1407,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1442,7 +1442,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1487,7 +1487,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1530,7 +1530,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1586,7 +1586,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1642,7 +1642,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1685,7 +1685,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1749,7 +1749,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1784,7 +1784,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1852,7 +1852,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1909,7 +1909,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -1944,7 +1944,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2001,7 +2001,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2046,7 +2046,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2112,7 +2112,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2165,7 +2165,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2211,7 +2211,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2256,7 +2256,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2312,7 +2312,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2357,7 +2357,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2413,7 +2413,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2458,7 +2458,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2514,7 +2514,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2570,7 +2570,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2623,7 +2623,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2700,7 +2700,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2745,7 +2745,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2790,7 +2790,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2846,7 +2846,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2902,7 +2902,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2948,7 +2948,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -2981,7 +2981,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3037,7 +3037,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3080,7 +3080,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3123,7 +3123,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3169,7 +3169,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3202,7 +3202,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3258,7 +3258,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3301,7 +3301,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3344,7 +3344,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3400,7 +3400,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3446,7 +3446,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3479,7 +3479,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3535,7 +3535,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3578,7 +3578,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3621,7 +3621,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3667,7 +3667,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3720,7 +3720,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3755,7 +3755,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3790,7 +3790,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3825,7 +3825,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3860,7 +3860,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3895,7 +3895,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3928,7 +3928,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -3984,7 +3984,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4027,7 +4027,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4070,7 +4070,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4141,7 +4141,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4187,7 +4187,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4220,7 +4220,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4266,7 +4266,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4299,7 +4299,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4355,7 +4355,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4398,7 +4398,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4441,7 +4441,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4487,7 +4487,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4520,7 +4520,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4576,7 +4576,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4619,7 +4619,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4665,7 +4665,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4698,7 +4698,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4754,7 +4754,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4797,7 +4797,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4843,7 +4843,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4876,7 +4876,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4922,7 +4922,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -4967,7 +4967,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5010,7 +5010,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5053,7 +5053,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5109,7 +5109,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5144,7 +5144,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5177,7 +5177,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5233,7 +5233,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5276,7 +5276,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5319,7 +5319,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5365,7 +5365,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5398,7 +5398,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5454,7 +5454,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5497,7 +5497,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5553,7 +5553,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5588,7 +5588,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5621,7 +5621,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5677,7 +5677,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5720,7 +5720,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5763,7 +5763,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5819,7 +5819,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5880,7 +5880,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -5991,7 +5991,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -6038,7 +6038,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "requestBody": {
@@ -6151,7 +6151,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -6229,7 +6229,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "requestBody": {
@@ -6318,7 +6318,7 @@
             "basicAuth": []
           },
           {
-            "apiKey": []
+            "tokenAuth": []
           }
         ],
         "responses": {
@@ -6508,14 +6508,16 @@
   },
   "components": {
     "securitySchemes": {
-      "apiKey": {
-        "type": "apiKey",
-        "name": "Authorization",
-        "in": "header"
-      },
       "basicAuth": {
         "type": "http",
-        "scheme": "basic"
+        "scheme": "basic",
+        "description": "Basic authentication using base64 encoded API key and secret. Format: `Authorization: Basic <base64(api_key:api_secret)>`"
+      },
+      "tokenAuth": {
+        "type": "apiKey",
+        "name": "Authorization",
+        "in": "header",
+        "description": "Token authentication using API key and secret. Format: `Authorization: token api_key:api_secret`"
       }
     },
     "schemas": {
@@ -9413,5 +9415,13 @@
         }
       }
     }
-  }
+  },
+  "security": [
+    {
+      "basicAuth": []
+    },
+    {
+      "tokenAuth": []
+    }
+  ]
 }
