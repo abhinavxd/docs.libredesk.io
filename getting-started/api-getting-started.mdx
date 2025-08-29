@@ -47,24 +47,16 @@ curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
 
 ## API Documentation
 
-### Interactive API Documentation
+The complete API documentation with all endpoints is available in the [API Reference](/api-reference/introduction) section of this documentation.
 
-You can explore the complete API documentation with interactive Swagger UI at:
-- **Development**: `http://localhost:8080/api/docs`
-- **OpenAPI Spec**: `http://localhost:8080/api/openapi.json`
+The API reference includes:
+- All available endpoints organized by category
+- Request/response formats with examples
+- Authentication requirements
+- Path and query parameters
+- Request body schemas
+- Response schemas
 
-The documentation includes all 146+ API endpoints with:
-- Request/response formats
-- Authentication requirements  
-- Path parameters
-- Interactive testing capabilities
-
-### Generating/Updating Documentation
-
-To regenerate the API documentation after adding new endpoints:
-
-```bash
-go run scripts/generate_openapi.go
-```
-
-This will update the `api/openapi.json` and `api/openapi.yaml` files.
+<Card title="View API Reference" icon="code" href="/api-reference/introduction">
+  Explore the complete interactive API documentation
+</Card>
