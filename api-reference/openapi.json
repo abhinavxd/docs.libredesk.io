@@ -9159,21 +9159,36 @@
       "CreateConversationRequest": {
         "type": "object",
         "required": [
+          "subject",
+          "content",
           "inbox_id",
-          "contact_email"
+          "contact_email",
+          "first_name",
+          "last_name",
+          "initiator"
         ],
         "properties": {
+          "subject": {
+            "type": "string",
+            "description": "Conversation subject"
+          },
+          "content": {
+            "type": "string",
+            "description": "Initial message content (HTML format)"
+          },
           "inbox_id": {
             "type": "integer",
             "description": "Inbox ID for the conversation"
           },
-          "agent_id": {
-            "type": "integer",
-            "description": "Assigned agent ID"
-          },
           "team_id": {
             "type": "integer",
-            "description": "Assigned team ID"
+            "nullable": true,
+            "description": "Team ID to be assigned when conversation is created"
+          },
+          "agent_id": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Agent ID to be assigned when conversation is created"
           },
           "contact_email": {
             "type": "string",
@@ -9188,13 +9203,17 @@
             "type": "string",
             "description": "Contact's last name"
           },
-          "subject": {
-            "type": "string",
-            "description": "Conversation subject"
+          "attachments": {
+            "type": "array",
+            "items": {
+              "type": "integer"
+            },
+            "description": "Array of attachment IDs"
           },
-          "message": {
+          "initiator": {
             "type": "string",
-            "description": "Initial message"
+            "enum": ["agent", "contact"],
+            "description": "Who initiated the conversation. 'contact' means first message is incoming from contact, 'agent' means first message is outgoing from agent"
           }
         }
       },
