@@ -219,25 +219,55 @@
             ]
           },
           {
-            "group": "System & Utilities",
+            "group": "Health",
             "pages": [
-              "api-reference/endpoint/health-check/health-check",
+              "api-reference/endpoint/health-check/health-check"
+            ]
+          },
+          {
+            "group": "Search",
+            "pages": [
               "api-reference/endpoint/search/search-conversations",
               "api-reference/endpoint/search/search-contacts",
-              "api-reference/endpoint/search/search-messages",
+              "api-reference/endpoint/search/search-messages"
+            ]
+          },
+          {
+            "group": "Report",
+            "pages": [
               "api-reference/endpoint/reports/overview-charts",
               "api-reference/endpoint/reports/overview-counts",
-              "api-reference/endpoint/reports/overview-s-l-a",
-              "api-reference/endpoint/actvity-logs/get-activity-logs",
+              "api-reference/endpoint/reports/overview-s-l-a"
+            ]
+          },
+          {
+            "group": "Views",
+            "pages": [
               "api-reference/endpoint/views/get-user-views",
               "api-reference/endpoint/views/create-user-view",
               "api-reference/endpoint/views/update-user-view",
-              "api-reference/endpoint/views/delete-user-view",
+              "api-reference/endpoint/views/delete-user-view"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
               "api-reference/endpoint/settings/get-general-settings",
               "api-reference/endpoint/settings/update-general-settings",
               "api-reference/endpoint/settings/get-email-notification-settings",
-              "api-reference/endpoint/settings/update-email-notification-settings",
+              "api-reference/endpoint/settings/update-email-notification-settings"
+            ]
+          },
+          {
+            "group": "Media",
+            "pages": [
               "api-reference/endpoint/media/media-upload"
+            ]
+          },
+          {
+            "group": "Activity Logs",
+            "pages": [
+              "api-reference/endpoint/actvity-logs/get-activity-logs"
             ]
           }
         ]
