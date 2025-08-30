@@ -151,18 +151,28 @@
             ]
           },
           {
-            "group": "Configuration",
+            "group": "Business Hours",
             "pages": [
               "api-reference/endpoint/business-hours/get-business-hours",
               "api-reference/endpoint/business-hours/create-business-hours",
               "api-reference/endpoint/business-hours/get-business-hour",
               "api-reference/endpoint/business-hours/update-business-hours",
-              "api-reference/endpoint/business-hours/delete-business-hour",
+              "api-reference/endpoint/business-hours/delete-business-hour"
+            ]
+          },
+          {
+            "group": "Custom Attributes",
+            "pages": [
               "api-reference/endpoint/custom-attributes/get-custom-attributes",
               "api-reference/endpoint/custom-attributes/create-custom-attribute",
               "api-reference/endpoint/custom-attributes/get-custom-attribute",
               "api-reference/endpoint/custom-attributes/update-custom-attribute",
-              "api-reference/endpoint/custom-attributes/delete-custom-attribute",
+              "api-reference/endpoint/custom-attributes/delete-custom-attribute"
+            ]
+          },
+          {
+            "group": "Tags",
+            "pages": [
               "api-reference/endpoint/tags/get-tags",
               "api-reference/endpoint/tags/create-tag",
               "api-reference/endpoint/tags/update-tag",
