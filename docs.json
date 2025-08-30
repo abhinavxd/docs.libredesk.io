@@ -180,7 +180,7 @@
             ]
           },
           {
-            "group": "Integrations",
+            "group": "Webhooks",
             "pages": [
               "api-reference/endpoint/webhooks/get-webhooks",
               "api-reference/endpoint/webhooks/create-webhook",
@@ -188,7 +188,12 @@
               "api-reference/endpoint/webhooks/update-webhook",
               "api-reference/endpoint/webhooks/delete-webhook",
               "api-reference/endpoint/webhooks/toggle-webhook",
-              "api-reference/endpoint/webhooks/test-webhook",
+              "api-reference/endpoint/webhooks/test-webhook"
+            ]
+          },
+          {
+            "group": "Inboxes",
+            "pages": [
               "api-reference/endpoint/inboxes/get-inboxes",
               "api-reference/endpoint/inboxes/create-inbox",
               "api-reference/endpoint/inboxes/get-inbox",
@@ -198,18 +203,28 @@
             ]
           },
           {
-            "group": "Administration",
+            "group": "Roles",
             "pages": [
               "api-reference/endpoint/roles/get-roles",
               "api-reference/endpoint/roles/create-role",
               "api-reference/endpoint/roles/get-role",
               "api-reference/endpoint/roles/update-role",
-              "api-reference/endpoint/roles/delete-role",
+              "api-reference/endpoint/roles/delete-role"
+            ]
+          },
+          {
+            "group": "SLA",
+            "pages": [
               "api-reference/endpoint/slas/get-s-l-as",
               "api-reference/endpoint/slas/create-s-l-a",
               "api-reference/endpoint/slas/get-s-l-a",
               "api-reference/endpoint/slas/update-s-l-a",
-              "api-reference/endpoint/slas/delete-s-l-a",
+              "api-reference/endpoint/slas/delete-s-l-a"
+            ]
+          },
+          {
+            "group": "Conversation Status",
+            "pages": [
               "api-reference/endpoint/status-and-priority/get-statuses",
               "api-reference/endpoint/status-and-priority/create-status",
               "api-reference/endpoint/status-and-priority/update-status",
@@ -218,7 +233,7 @@
             ]
           },
           {
-            "group": "SSO & Authentication",
+            "group": "SSO",
             "pages": [
               "api-reference/endpoint/openid-connect-single-sign-on/get-all-o-i-d-c",
               "api-reference/endpoint/openid-connect-single-sign-on/get-o-i-d-c",
