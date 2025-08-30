@@ -8553,29 +8553,59 @@
         "properties": {
           "id": {
             "type": "integer",
-            "example": 1
+            "example": 6,
+            "description": "Unique view ID"
           },
           "created_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2025-08-28T10:00:00Z"
+            "example": "2025-08-25T19:41:07.983539Z"
           },
           "updated_at": {
             "type": "string",
             "format": "date-time",
-            "example": "2025-08-28T10:00:00Z"
+            "example": "2025-08-25T19:41:07.983539Z"
           },
           "name": {
             "type": "string",
-            "example": "My Open Tickets"
+            "example": "adsad",
+            "description": "Name of the view"
           },
-          "query": {
-            "type": "object",
-            "description": "View filter criteria"
+          "filters": {
+            "type": "array",
+            "description": "Array of filter conditions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "field": {
+                  "type": "string",
+                  "example": "status_id",
+                  "description": "Field to filter on"
+                },
+                "model": {
+                  "type": "string",
+                  "example": "conversations",
+                  "description": "Model the field belongs to"
+                },
+                "value": {
+                  "type": "string",
+                  "example": "1",
+                  "description": "Value to filter by"
+                },
+                "operator": {
+                  "type": "string",
+                  "example": "equals",
+                  "enum": ["equals", "not_equals", "contains", "not_contains", "greater_than", "less_than"],
+                  "description": "Comparison operator"
+                }
+              },
+              "required": ["field", "model", "value", "operator"]
+            }
           },
           "user_id": {
             "type": "integer",
-            "example": 1
+            "example": 1,
+            "description": "ID of the user who owns this view"
           }
         }
       },
