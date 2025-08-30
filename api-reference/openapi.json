@@ -6806,7 +6806,9 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "example": 51,
+            "description": "Unique conversation ID"
           },
           "created_at": {
             "type": "string",
@@ -6817,7 +6819,10 @@
             "format": "date-time"
           },
           "uuid": {
-            "type": "string"
+            "type": "string",
+            "format": "uuid",
+            "example": "7d692b95-73dc-4f53-9343-6ed47a3db903",
+            "description": "Unique UUID for the conversation"
           },
           "contact_id": {
             "type": "integer"
@@ -6836,7 +6841,9 @@
             "nullable": true
           },
           "reference_number": {
-            "type": "string"
+            "type": "string",
+            "example": "150",
+            "description": "Human-readable reference number for the conversation"
           },
           "priority": {
             "type": "string",
@@ -6847,7 +6854,9 @@
             "nullable": true
           },
           "status": {
-            "type": "string"
+            "type": "string",
+            "example": "Open",
+            "description": "Current status of the conversation (Open, Closed, Resolved)"
           },
           "status_id": {
             "type": "integer"
@@ -6876,19 +6885,29 @@
           },
           "waiting_since": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "subject": {
-            "type": "string"
+            "type": "string",
+            "example": "[GitHub] A third-party GitHub Application has been added",
+            "description": "Subject line of the conversation"
           },
           "inbox_mail": {
-            "type": "string"
+            "type": "string",
+            "format": "email",
+            "example": "support@example.com",
+            "description": "Email address of the inbox"
           },
           "inbox_name": {
-            "type": "string"
+            "type": "string",
+            "example": "Support Inbox",
+            "description": "Name of the inbox"
           },
           "inbox_channel": {
-            "type": "string"
+            "type": "string",
+            "example": "email",
+            "description": "Channel type of the inbox (email, web, api)"
           },
           "tags": {
             "type": "array",
@@ -6910,10 +6929,15 @@
             "format": "date-time"
           },
           "last_message": {
-            "type": "string"
+            "type": "string",
+            "example": "Hey! A third-party GitHub Application was recently authorized...",
+            "description": "Content of the last message in the conversation"
           },
           "last_message_sender": {
-            "type": "string"
+            "type": "string",
+            "enum": ["contact", "agent"],
+            "example": "contact",
+            "description": "Who sent the last message"
           },
           "contact": {
             "$ref": "#/components/schemas/Contact"
@@ -6970,7 +6994,19 @@
                   "type": "string"
                 },
                 "contact": {
-                  "$ref": "#/components/schemas/ContactSummary"
+                  "type": "object",
+                  "properties": {
+                    "first_name": {
+                      "type": "string"
+                    },
+                    "last_name": {
+                      "type": "string"
+                    },
+                    "avatar_url": {
+                      "type": "string",
+                      "nullable": true
+                    }
+                  }
                 },
                 "last_message": {
                   "type": "string"
@@ -7003,7 +7039,8 @@
           },
           "waiting_since": {
             "type": "string",
-            "format": "date-time"
+            "format": "date-time",
+            "nullable": true
           },
           "assignee_last_seen_at": {
             "type": "string",
