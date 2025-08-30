@@ -15,7 +15,7 @@
     "/api/v1/activity-logs": {
       "get": {
         "tags": [
-          "Actvity logs"
+          "Activity logs"
         ],
         "summary": "Get Activity Logs",
         "operationId": "handleGetActivityLogs",
@@ -3775,7 +3775,7 @@
     "/api/v1/reports/overview/charts": {
       "get": {
         "tags": [
-          "Reports"
+          "Report"
         ],
         "summary": "Overview Charts",
         "operationId": "handleOverviewCharts",
@@ -3810,7 +3810,7 @@
     "/api/v1/reports/overview/counts": {
       "get": {
         "tags": [
-          "Reports"
+          "Report"
         ],
         "summary": "Overview Counts",
         "operationId": "handleOverviewCounts",
@@ -3845,7 +3845,7 @@
     "/api/v1/reports/overview/sla": {
       "get": {
         "tags": [
-          "Reports"
+          "Report"
         ],
         "summary": "Overview S L A",
         "operationId": "handleOverviewSLA",
@@ -5949,7 +5949,7 @@
     "/health": {
       "get": {
         "tags": [
-          "Health check"
+          "Health"
         ],
         "summary": "Health Check",
         "operationId": "handleHealthCheck",
@@ -7306,46 +7306,51 @@
         "properties": {
           "app.site_name": {
             "type": "string",
-            "example": "LibreDesk"
+            "example": "Libredesk",
+            "description": "Name of the site"
           },
           "app.lang": {
             "type": "string",
-            "example": "en"
+            "example": "en",
+            "description": "Default language code"
           },
-          "app.max_file_upload_size": {
-            "type": "integer",
-            "example": 10
-          },
-          "app.favicon_url": {
+          "app.timezone": {
             "type": "string",
-            "example": "/images/favicon.ico"
+            "example": "Asia/Kolkata",
+            "description": "Timezone for the application"
+          },
+          "app.business_hours_id": {
+            "type": "string",
+            "example": "",
+            "description": "Business hours configuration ID"
           },
           "app.logo_url": {
             "type": "string",
-            "example": "/images/logo.png"
+            "example": "http://localhost:9000/logo.png",
+            "description": "URL for the application logo"
           },
           "app.root_url": {
             "type": "string",
-            "example": "http://localhost:8080"
+            "example": "http://localhost:9000",
+            "description": "Root URL of the application"
+          },
+          "app.favicon_url": {
+            "type": "string",
+            "example": "http://localhost:9000/favicon.ico",
+            "description": "URL for the favicon"
+          },
+          "app.max_file_upload_size": {
+            "type": "integer",
+            "example": 20,
+            "description": "Maximum file upload size in MB"
           },
           "app.allowed_file_upload_extensions": {
             "type": "array",
             "items": {
               "type": "string"
             },
-            "example": [
-              "jpg",
-              "png",
-              "pdf"
-            ]
-          },
-          "app.timezone": {
-            "type": "string",
-            "example": "UTC"
-          },
-          "app.business_hours_id": {
-            "type": "string",
-            "example": "1"
+            "example": ["*"],
+            "description": "Allowed file extensions for uploads (* for all)"
           },
           "app.update": {
             "type": "object",
@@ -9401,21 +9406,77 @@
       "EmailNotificationSettings": {
         "type": "object",
         "properties": {
-          "enabled": {
+          "notification.email.enabled": {
             "type": "boolean",
+            "example": false,
             "description": "Whether email notifications are enabled"
           },
-          "new_conversation": {
-            "type": "boolean",
-            "description": "Notify on new conversations"
+          "notification.email.username": {
+            "type": "string",
+            "example": "admin@yourcompany.com",
+            "description": "SMTP username for authentication"
           },
-          "new_message": {
-            "type": "boolean",
-            "description": "Notify on new messages"
+          "notification.email.host": {
+            "type": "string",
+            "example": "smtp.gmail.com",
+            "description": "SMTP server host"
           },
-          "assignment": {
+          "notification.email.port": {
+            "type": "integer",
+            "example": 587,
+            "description": "SMTP server port"
+          },
+          "notification.email.password": {
+            "type": "string",
+            "example": "",
+            "description": "SMTP password for authentication"
+          },
+          "notification.email.max_conns": {
+            "type": "integer",
+            "example": 5,
+            "description": "Maximum number of concurrent SMTP connections"
+          },
+          "notification.email.idle_timeout": {
+            "type": "string",
+            "example": "25s",
+            "description": "Idle timeout for SMTP connections"
+          },
+          "notification.email.wait_timeout": {
+            "type": "string",
+            "example": "60s",
+            "description": "Wait timeout for SMTP operations"
+          },
+          "notification.email.auth_protocol": {
+            "type": "string",
+            "example": "plain",
+            "enum": ["plain", "login", "cram-md5"],
+            "description": "SMTP authentication protocol"
+          },
+          "notification.email.email_address": {
+            "type": "string",
+            "example": "admin@yourcompany.com",
+            "description": "From email address for notifications"
+          },
+          "notification.email.max_msg_retries": {
+            "type": "integer",
+            "example": 3,
+            "description": "Maximum message retry attempts"
+          },
+          "notification.email.hello_hostname": {
+            "type": "string",
+            "example": "",
+            "description": "Hostname used in SMTP HELO/EHLO command"
+          },
+          "notification.email.tls_type": {
+            "type": "string",
+            "example": "starttls",
+            "enum": ["none", "starttls", "tls"],
+            "description": "TLS connection type"
+          },
+          "notification.email.tls_skip_verify": {
             "type": "boolean",
-            "description": "Notify on assignment"
+            "example": false,
+            "description": "Skip TLS certificate verification"
           }
         }
       },
