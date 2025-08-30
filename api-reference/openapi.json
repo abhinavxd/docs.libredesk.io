@@ -9012,7 +9012,9 @@
             "example": "success"
           },
           "data": {
-            "$ref": "#/components/schemas/AICompletion"
+            "type": "string",
+            "example": "Thank you for contacting us. I'll help you resolve this issue...",
+            "description": "The AI-generated completion response"
           }
         }
       },
@@ -9020,16 +9022,29 @@
         "type": "object",
         "properties": {
           "id": {
-            "type": "string",
-            "example": "reply_friendly"
+            "type": "integer",
+            "example": 1,
+            "description": "Unique prompt ID"
           },
-          "name": {
+          "created_at": {
             "type": "string",
-            "example": "Friendly Reply"
+            "format": "date-time",
+            "example": "2025-08-30T10:00:00Z"
           },
-          "prompt": {
+          "updated_at": {
             "type": "string",
-            "example": "Write a friendly response to this customer inquiry"
+            "format": "date-time",
+            "example": "2025-08-30T10:00:00Z"
+          },
+          "key": {
+            "type": "string",
+            "example": "reply_friendly",
+            "description": "Unique key identifier for the prompt"
+          },
+          "title": {
+            "type": "string",
+            "example": "Friendly Reply",
+            "description": "Display title of the prompt"
           }
         }
       },
