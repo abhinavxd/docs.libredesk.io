@@ -1437,6 +1437,18 @@
         ],
         "summary": "Search Contacts",
         "operationId": "handleSearchContacts",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3
+            },
+            "description": "Search query (minimum 3 characters)"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -1935,6 +1947,18 @@
         ],
         "summary": "Search Conversations",
         "operationId": "handleSearchConversations",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3
+            },
+            "description": "Search query (minimum 3 characters)"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -3709,6 +3733,18 @@
         ],
         "summary": "Search Messages",
         "operationId": "handleSearchMessages",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3
+            },
+            "description": "Search query (minimum 3 characters)"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
