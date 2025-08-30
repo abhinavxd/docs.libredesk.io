@@ -3779,6 +3779,18 @@
         ],
         "summary": "Overview Charts",
         "operationId": "handleOverviewCharts",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30
+            },
+            "description": "Number of days to include in the report"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -3793,7 +3805,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportResponse"
+                  "$ref": "#/components/schemas/ChartsReportResponse"
                 }
               }
             }
@@ -3828,7 +3840,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportResponse"
+                  "$ref": "#/components/schemas/CountsReportResponse"
                 }
               }
             }
@@ -3849,6 +3861,18 @@
         ],
         "summary": "Overview S L A",
         "operationId": "handleOverviewSLA",
+        "parameters": [
+          {
+            "name": "days",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "default": 30
+            },
+            "description": "Number of days to include in the report"
+          }
+        ],
         "security": [
           {
             "basicAuth": []
@@ -3863,7 +3887,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ReportResponse"
+                  "$ref": "#/components/schemas/SLAReportResponse"
                 }
               }
             }
@@ -9042,6 +9066,168 @@
           },
           "data": {
             "$ref": "#/components/schemas/Report"
+          }
+        }
+      },
+      "ChartsReportResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "new_conversations": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date",
+                      "example": "2025-08-19"
+                    },
+                    "count": {
+                      "type": "integer",
+                      "example": 16
+                    }
+                  }
+                },
+                "description": "Daily count of new conversations"
+              },
+              "resolved_conversations": {
+                "type": "array",
+                "nullable": true,
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "date": {
+                      "type": "string",
+                      "format": "date"
+                    },
+                    "count": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "description": "Daily count of resolved conversations"
+              }
+            }
+          }
+        }
+      },
+      "CountsReportResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "open": {
+                "type": "integer",
+                "example": 52,
+                "description": "Number of open conversations"
+              },
+              "awaiting_response": {
+                "type": "integer",
+                "example": 46,
+                "description": "Number of conversations awaiting response"
+              },
+              "unassigned": {
+                "type": "integer",
+                "example": 52,
+                "description": "Number of unassigned conversations"
+              },
+              "pending": {
+                "type": "integer",
+                "example": 52,
+                "description": "Number of pending conversations"
+              },
+              "agents_online": {
+                "type": "integer",
+                "example": 1,
+                "description": "Number of agents currently online"
+              },
+              "agents_away": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of agents currently away"
+              },
+              "agents_reassigning": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of agents in reassigning status"
+              },
+              "agents_offline": {
+                "type": "integer",
+                "example": 4,
+                "description": "Number of agents currently offline"
+              }
+            }
+          }
+        }
+      },
+      "SLAReportResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "first_response_met_count": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of conversations that met first response SLA"
+              },
+              "first_response_breached_count": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of conversations that breached first response SLA"
+              },
+              "avg_first_response_time_sec": {
+                "type": "integer",
+                "example": 0,
+                "description": "Average first response time in seconds"
+              },
+              "next_response_met_count": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of conversations that met next response SLA"
+              },
+              "next_response_breached_count": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of conversations that breached next response SLA"
+              },
+              "avg_next_response_time_sec": {
+                "type": "integer",
+                "example": 0,
+                "description": "Average next response time in seconds"
+              },
+              "resolution_met_count": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of conversations that met resolution SLA"
+              },
+              "resolution_breached_count": {
+                "type": "integer",
+                "example": 0,
+                "description": "Number of conversations that breached resolution SLA"
+              },
+              "avg_resolution_time_sec": {
+                "type": "integer",
+                "example": 0,
+                "description": "Average resolution time in seconds"
+              }
+            }
           }
         }
       },
