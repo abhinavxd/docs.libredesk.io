@@ -6150,38 +6150,6 @@
         }
       }
     },
-    "/api/v1/oidc/enabled": {
-      "get": {
-        "tags": [
-          "OpenID Connect SSO"
-        ],
-        "summary": "Get enabled OIDC providers",
-        "operationId": "handleGetAllEnabledOIDC",
-        "description": "Returns all enabled OIDC providers available for login (with client secrets stripped)",
-        "responses": {
-          "200": {
-            "description": "List of enabled OIDC providers",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OIDCListResponse"
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/api/v1/oidc/{id}": {
       "get": {
         "tags": [

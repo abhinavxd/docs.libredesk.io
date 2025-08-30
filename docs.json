@@ -211,7 +211,6 @@
             "group": "SSO & Authentication",
             "pages": [
               "api-reference/endpoint/openid-connect-single-sign-on/get-all-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/get-all-enabled-o-i-d-c",
               "api-reference/endpoint/openid-connect-single-sign-on/get-o-i-d-c",
               "api-reference/endpoint/openid-connect-single-sign-on/create-o-i-d-c",
               "api-reference/endpoint/openid-connect-single-sign-on/update-o-i-d-c",
