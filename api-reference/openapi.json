@@ -1829,20 +1829,18 @@
           {
             "name": "page",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "default": 1
+              "type": "integer"
             },
             "description": "Page number"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "default": 50
+              "type": "integer"
             },
             "description": "Items per page"
           }
@@ -1886,20 +1884,18 @@
           {
             "name": "page",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "default": 1
+              "type": "integer"
             },
             "description": "Page number"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "default": 50
+              "type": "integer"
             },
             "description": "Items per page"
           }
@@ -1978,20 +1974,18 @@
           {
             "name": "page",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "default": 1
+              "type": "integer"
             },
             "description": "Page number"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": false,
+            "required": true,
             "schema": {
-              "type": "integer",
-              "default": 50
+              "type": "integer"
             },
             "description": "Items per page"
           }
