@@ -1622,10 +1622,15 @@
                     "enum": ["online", "offline", "busy"],
                     "description": "Contact's availability status"
                   },
-                  "avatar": {
+                  "files": {
                     "type": "string",
                     "format": "binary",
-                    "description": "Avatar image file"
+                    "description": "New avatar image file to upload (field name must be 'files')"
+                  },
+                  "avatar_url": {
+                    "type": "string",
+                    "description": "Existing avatar URL. Set to empty string or 'null' to remove avatar",
+                    "nullable": true
                   },
                   "enabled": {
                     "type": "boolean",
