@@ -3,15 +3,7 @@ title: Installation
 description: Deploy Libredesk using Docker, binary, or from source
 ---
 
-Libredesk is a single binary application that requires PostgreSQL and Redis to run. Choose your preferred installation method below.
-
-## Prerequisites
-
-<Info>
-Before installing Libredesk, ensure you have:
-- PostgreSQL ≥13
-- Redis
-</Info>
+Libredesk is a single binary application that can be deployed using Docker (which includes all dependencies) or installed directly (which requires PostgreSQL and Redis). Choose your preferred installation method below.
 
 ## Installation Methods
 
@@ -64,6 +56,12 @@ Before installing Libredesk, ensure you have:
   <Tab title="Binary">
     ## Binary Installation
     
+    <Info>
+    **Prerequisites:**
+    - PostgreSQL ≥13
+    - Redis
+    </Info>
+    
     <Steps>
       <Step title="Download the latest release">
         Download the [latest release](https://github.com/abhinavxd/libredesk/releases) for your platform and extract the libredesk binary.
@@ -98,10 +96,14 @@ Before installing Libredesk, ensure you have:
     
     Build the latest unreleased version from the `main` branch.
     
-    ### Requirements
+    <Info>
+    **Prerequisites:**
+    - PostgreSQL ≥13
+    - Redis
     - Go (latest version)
     - Node.js (≥18)
     - pnpm
+    </Info>
     
     <Steps>
       <Step title="Clone the repository">
