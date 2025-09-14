@@ -114,55 +114,11 @@
             ]
           },
           {
-            "group": "Automation & AI",
+            "group": "AI",
             "pages": [
-              "api-reference/endpoint/automations/get-automation-rules",
-              "api-reference/endpoint/automations/create-automation-rule",
-              "api-reference/endpoint/automations/get-automation-rule",
-              "api-reference/endpoint/automations/update-automation-rule",
-              "api-reference/endpoint/automations/update-automation-rule-execution-mode",
-              "api-reference/endpoint/automations/update-automation-rule-weights",
-              "api-reference/endpoint/automations/delete-automation-rule",
-              "api-reference/endpoint/automations/toggle-automation-rule",
               "api-reference/endpoint/ai-completions/a-i-completion",
               "api-reference/endpoint/ai-completions/get-a-i-prompts",
               "api-reference/endpoint/ai-completions/update-a-i-provider"
-            ]
-          },
-          {
-            "group": "Templates & Macros",
-            "pages": [
-              "api-reference/endpoint/templates/get-templates",
-              "api-reference/endpoint/templates/create-template",
-              "api-reference/endpoint/templates/get-template",
-              "api-reference/endpoint/templates/update-template",
-              "api-reference/endpoint/templates/delete-template",
-              "api-reference/endpoint/macros/get-macros",
-              "api-reference/endpoint/macros/create-macro",
-              "api-reference/endpoint/macros/get-macro",
-              "api-reference/endpoint/macros/update-macro",
-              "api-reference/endpoint/macros/delete-macro",
-              "api-reference/endpoint/macros/apply-macro"
-            ]
-          },
-          {
-            "group": "Business Hours",
-            "pages": [
-              "api-reference/endpoint/business-hours/get-business-hours",
-              "api-reference/endpoint/business-hours/create-business-hours",
-              "api-reference/endpoint/business-hours/get-business-hour",
-              "api-reference/endpoint/business-hours/update-business-hours",
-              "api-reference/endpoint/business-hours/delete-business-hour"
-            ]
-          },
-          {
-            "group": "Custom Attributes",
-            "pages": [
-              "api-reference/endpoint/custom-attributes/get-custom-attributes",
-              "api-reference/endpoint/custom-attributes/create-custom-attribute",
-              "api-reference/endpoint/custom-attributes/get-custom-attribute",
-              "api-reference/endpoint/custom-attributes/update-custom-attribute",
-              "api-reference/endpoint/custom-attributes/delete-custom-attribute"
             ]
           },
           {
@@ -175,49 +131,6 @@
             ]
           },
           {
-            "group": "Webhooks",
-            "pages": [
-              "api-reference/endpoint/webhooks/get-webhooks",
-              "api-reference/endpoint/webhooks/create-webhook",
-              "api-reference/endpoint/webhooks/get-webhook",
-              "api-reference/endpoint/webhooks/update-webhook",
-              "api-reference/endpoint/webhooks/delete-webhook",
-              "api-reference/endpoint/webhooks/toggle-webhook",
-              "api-reference/endpoint/webhooks/test-webhook"
-            ]
-          },
-          {
-            "group": "Inboxes",
-            "pages": [
-              "api-reference/endpoint/inboxes/get-inboxes",
-              "api-reference/endpoint/inboxes/create-inbox",
-              "api-reference/endpoint/inboxes/get-inbox",
-              "api-reference/endpoint/inboxes/update-inbox",
-              "api-reference/endpoint/inboxes/delete-inbox",
-              "api-reference/endpoint/inboxes/toggle-inbox"
-            ]
-          },
-          {
-            "group": "Roles",
-            "pages": [
-              "api-reference/endpoint/roles/get-roles",
-              "api-reference/endpoint/roles/create-role",
-              "api-reference/endpoint/roles/get-role",
-              "api-reference/endpoint/roles/update-role",
-              "api-reference/endpoint/roles/delete-role"
-            ]
-          },
-          {
-            "group": "SLA",
-            "pages": [
-              "api-reference/endpoint/slas/get-s-l-as",
-              "api-reference/endpoint/slas/create-s-l-a",
-              "api-reference/endpoint/slas/get-s-l-a",
-              "api-reference/endpoint/slas/update-s-l-a",
-              "api-reference/endpoint/slas/delete-s-l-a"
-            ]
-          },
-          {
             "group": "Conversation Status",
             "pages": [
               "api-reference/endpoint/status-and-priority/get-statuses",
@@ -225,16 +138,6 @@
               "api-reference/endpoint/status-and-priority/update-status",
               "api-reference/endpoint/status-and-priority/delete-status",
               "api-reference/endpoint/status-and-priority/get-priorities"
-            ]
-          },
-          {
-            "group": "SSO",
-            "pages": [
-              "api-reference/endpoint/openid-connect-single-sign-on/get-all-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/get-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/create-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/update-o-i-d-c",
-              "api-reference/endpoint/openid-connect-single-sign-on/delete-o-i-d-c"
             ]
           },
           {
@@ -252,41 +155,9 @@
             ]
           },
           {
-            "group": "Report",
-            "pages": [
-              "api-reference/endpoint/reports/overview-charts",
-              "api-reference/endpoint/reports/overview-counts",
-              "api-reference/endpoint/reports/overview-s-l-a"
-            ]
-          },
-          {
-            "group": "Views",
-            "pages": [
-              "api-reference/endpoint/views/get-user-views",
-              "api-reference/endpoint/views/create-user-view",
-              "api-reference/endpoint/views/update-user-view",
-              "api-reference/endpoint/views/delete-user-view"
-            ]
-          },
-          {
-            "group": "Settings",
-            "pages": [
-              "api-reference/endpoint/settings/get-general-settings",
-              "api-reference/endpoint/settings/update-general-settings",
-              "api-reference/endpoint/settings/get-email-notification-settings",
-              "api-reference/endpoint/settings/update-email-notification-settings"
-            ]
-          },
-          {
             "group": "Media",
             "pages": [
               "api-reference/endpoint/media/media-upload"
-            ]
-          },
-          {
-            "group": "Activity Logs",
-            "pages": [
-              "api-reference/endpoint/actvity-logs/get-activity-logs"
             ]
           }
         ]
