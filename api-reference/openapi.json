@@ -1246,7 +1246,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BusinessHours"
+                "$ref": "#/components/schemas/BusinessHour"
               }
             }
           }
@@ -1388,7 +1388,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BusinessHours"
+                "$ref": "#/components/schemas/BusinessHour"
               }
             }
           }
@@ -5233,6 +5233,15 @@
         "description": "Get conversation assigned to team but not assigned to any agent",
         "parameters": [
           {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The unique identifier for the team"
+          },
+          {
             "name": "page",
             "in": "query",
             "required": true,
@@ -5689,6 +5698,15 @@
         "operationId": "handleGetViewConversations",
         "description": "Get all conversations filtered by this view",
         "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The unique identifier for the view"
+          },
           {
             "name": "page",
             "in": "query",
@@ -7256,29 +7274,26 @@
         }
       },
       "ConversationParticipantsResponse": {
-        "type": "object",
-        "properties": {
-          "type": "array",
-          "items": {
-            "type": "object",
-            "properties": {
-              "id": {
-                "type": "integer",
-                "example": 21
-              },
-              "first_name": {
-                "type": "string",
-                "example": "John"
-              },
-              "last_name": {
-                "type": "string",
-                "example": "Doe"
-              },
-              "avatar_url": {
-                "type": "string",
-                "nullable": true,
-                "example": null
-              }
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "example": 21
+            },
+            "first_name": {
+              "type": "string",
+              "example": "John"
+            },
+            "last_name": {
+              "type": "string",
+              "example": "Doe"
+            },
+            "avatar_url": {
+              "type": "string",
+              "nullable": true,
+              "example": null
             }
           }
         }
