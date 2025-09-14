@@ -102,7 +102,6 @@
               "api-reference/endpoint/agents/update-agent",
               "api-reference/endpoint/agents/delete-agent",
               "api-reference/endpoint/agents/get-current-agent",
-              "api-reference/endpoint/agents/delete-current-agent-avatar",
               "api-reference/endpoint/agents/update-agent-availability",
               "api-reference/endpoint/agents/generate-a-p-i-key",
               "api-reference/endpoint/agents/revoke-a-p-i-key",

@@ -131,7 +131,7 @@
         "tags": [
           "Agents"
         ],
-        "summary": "Update Agent Availability",
+        "summary": "Update Current Agent Availability",
         "operationId": "handleUpdateAgentAvailability",
         "security": [
           {
@@ -168,41 +168,6 @@
                 "$ref": "#/components/schemas/AvailabilityRequest"
               }
             }
-          }
-        }
-      }
-    },
-    "/api/v1/agents/me/avatar": {
-      "delete": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Delete Current Agent Avatar",
-        "operationId": "handleDeleteCurrentAgentAvatar",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Avatar deleted successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
           }
         }
       }
