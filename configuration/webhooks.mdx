@@ -305,8 +305,16 @@ const app = express();
 // Middleware to capture raw body for signature verification
 app.use(express.raw({ type: 'application/json' }));
 
+function verifySignature(payload, signature, secret) {
+    const expectedSignature = crypto
+        .createHmac('sha256', secret)
+        .update(payload)
+        .digest('hex');
+    return signature === `sha256=${expectedSignature}`;
+}
+
 app.post('/webhook', (req, res) => {
-    const signature = req.headers['X-Libredesk-Signature'];
+    const signature = req.headers['x-libredesk-signature'];
     const secret = process.env.WEBHOOK_SECRET;
     
     // Verify signature
