@@ -93,7 +93,7 @@ Libredesk is a single binary application that requires postgres and redis to run
         </Tip>
       </Step>
       
-      <Step title="Set the admin password">
+      <Step title="Set the System user password">
         ```bash
         # Set System user password
         ./libredesk --set-system-user-password
@@ -107,7 +107,9 @@ Libredesk is a single binary application that requires postgres and redis to run
       </Step>
     </Steps>
     
-    Visit `http://localhost:9000` and login with the System credentials.
+    Visit `http://localhost:9000` and login with:
+    - **Email**: `System`
+    - **Password**: The password you just set
   </Tab>
   
   <Tab title="From Source">
@@ -165,7 +167,7 @@ Libredesk is a single binary application that requires postgres and redis to run
         </Tip>
       </Step>
       
-      <Step title="Set the admin password">
+      <Step title="Set the System user password">
         ```bash
         # Set System user password
         ./libredesk --set-system-user-password
@@ -178,6 +180,10 @@ Libredesk is a single binary application that requires postgres and redis to run
         ```
       </Step>
     </Steps>
+    
+    Visit `http://localhost:9000` and login with:
+    - **Email**: `System`
+    - **Password**: The password you just set
   </Tab>
 </Tabs>
 
