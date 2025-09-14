@@ -34,7 +34,7 @@ When a configured event occurs in Libredesk, an HTTP POST request is sent to the
 
 ### Signature Verification
 
-If you provide a secret key, webhook payloads will be signed using HMAC-SHA256. The signature is included in the `X-Signature-256` header in the format `sha256=<signature>`.
+If you provide a secret key, webhook payloads will be signed using HMAC-SHA256. The signature is included in the `X-Libredesk-Signature` header in the format `sha256=<signature>`.
 
 <CodeGroup>
 
@@ -89,7 +89,7 @@ Each webhook request includes the following headers:
 |--------|-------------|
 | `Content-Type` | Always `application/json` |
 | `User-Agent` | `Libredesk-Webhook/<version>` |
-| `X-Signature-256` | HMAC signature (if secret is configured) |
+| `X-Libredesk-Signature` | HMAC signature (if secret is configured) |
 
 ## Available Events
 
@@ -279,14 +279,8 @@ You can test your webhook configuration using these tools:
   <Card title="Webhook.site" icon="globe" href="https://webhook.site">
     Generate a temporary URL to inspect webhook payloads
   </Card>
-  <Card title="ngrok" icon="tunnel" href="https://ngrok.com">
-    Expose your local development server to receive webhooks
-  </Card>
   <Card title="RequestBin" icon="inbox" href="https://requestbin.com">
     Collect and inspect HTTP requests
-  </Card>
-  <Card title="Postman" icon="rocket" href="https://www.postman.com">
-    Create mock servers to test webhook payloads
   </Card>
 </CardGroup>
 
@@ -297,17 +291,7 @@ You can test your webhook configuration using these tools:
 - Always verify webhook signatures in production
 - Respond quickly (< 5 seconds) to webhook requests
 - Process webhooks asynchronously in your application
-- Implement idempotency to handle duplicate events
-- Log all webhook events for debugging
 </Check>
-
-<Warning>
-**Don't:**
-- Perform long-running operations in your webhook handler
-- Expose sensitive data in webhook URLs
-- Rely solely on webhooks for critical data (implement polling as backup)
-- Ignore webhook failures without logging
-</Warning>
 
 ## Example Integration
 
@@ -322,7 +306,7 @@ const app = express();
 app.use(express.raw({ type: 'application/json' }));
 
 app.post('/webhook', (req, res) => {
-    const signature = req.headers['x-signature-256'];
+    const signature = req.headers['X-Libredesk-Signature'];
     const secret = process.env.WEBHOOK_SECRET;
     
     // Verify signature
