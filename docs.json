@@ -81,6 +81,16 @@
             ]
           },
           {
+            "group": "Conversation Status & Priority",
+            "pages": [
+              "api-reference/endpoint/status-and-priority/get-statuses",
+              "api-reference/endpoint/status-and-priority/create-status",
+              "api-reference/endpoint/status-and-priority/update-status",
+              "api-reference/endpoint/status-and-priority/delete-status",
+              "api-reference/endpoint/status-and-priority/get-priorities"
+            ]
+          },
+          {
             "group": "Contacts",
             "pages": [
               "api-reference/endpoint/contacts/get-contacts",
@@ -118,16 +128,6 @@
               "api-reference/endpoint/ai-completions/a-i-completion",
               "api-reference/endpoint/ai-completions/get-a-i-prompts",
               "api-reference/endpoint/ai-completions/update-a-i-provider"
-            ]
-          },
-          {
-            "group": "Conversation Status",
-            "pages": [
-              "api-reference/endpoint/status-and-priority/get-statuses",
-              "api-reference/endpoint/status-and-priority/create-status",
-              "api-reference/endpoint/status-and-priority/update-status",
-              "api-reference/endpoint/status-and-priority/delete-status",
-              "api-reference/endpoint/status-and-priority/get-priorities"
             ]
           },
           {

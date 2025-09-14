@@ -2099,7 +2099,7 @@
         "tags": [
           "Status and priority"
         ],
-        "summary": "Get Priorities",
+        "summary": "Get Conversation Priorities",
         "operationId": "handleGetPriorities",
         "security": [
           {
@@ -2134,7 +2134,7 @@
         "tags": [
           "Status and priority"
         ],
-        "summary": "Get Statuses",
+        "summary": "Get Conversation Statuses",
         "operationId": "handleGetStatuses",
         "security": [
           {
@@ -2167,7 +2167,7 @@
         "tags": [
           "Status and priority"
         ],
-        "summary": "Create Status",
+        "summary": "Create Conversation Status",
         "operationId": "handleCreateStatus",
         "security": [
           {
@@ -2201,7 +2201,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Status"
+                "$ref": "#/components/schemas/StatusRequest"
               }
             }
           }
@@ -2213,7 +2213,7 @@
         "tags": [
           "Status and priority"
         ],
-        "summary": "Delete Status",
+        "summary": "Delete Conversation Status",
         "operationId": "handleDeleteStatus",
         "parameters": [
           {
@@ -2256,7 +2256,7 @@
         "tags": [
           "Status and priority"
         ],
-        "summary": "Update Status",
+        "summary": "Update Conversation Status",
         "operationId": "handleUpdateStatus",
         "parameters": [
           {
@@ -2300,7 +2300,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Status"
+                "$ref": "#/components/schemas/StatusRequest"
               }
             }
           }
@@ -3738,6 +3738,18 @@
             "example": "john.doe@example.com"
           }
         }
+      },
+      "StatusRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Open"
+          }
+        },
+        "required": [
+          "name"
+        ]
       },
       "Status": {
         "type": "object",
