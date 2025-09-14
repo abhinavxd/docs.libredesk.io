@@ -106,7 +106,6 @@
             "group": "Agents & Teams",
             "pages": [
               "api-reference/endpoint/agents/get-agents",
-              "api-reference/endpoint/agents/get-agents-compact",
               "api-reference/endpoint/agents/get-agent",
               "api-reference/endpoint/agents/create-agent",
               "api-reference/endpoint/agents/update-agent",
