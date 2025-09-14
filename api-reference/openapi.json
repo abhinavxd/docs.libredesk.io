@@ -1410,6 +1410,29 @@
             "tokenAuth": []
           }
         ],
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "description": "Page number (required)"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Number of items per page (required, range 1–100)"
+          }
+        ],
         "responses": {
           "200": {
             "description": "List of contacts",
@@ -1552,31 +1575,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/ContactResponse"
-                },
-                "example": {
-                  "status": "success",
-                  "data": {
-                    "id": 93,
-                    "created_at": "2025-09-01T17:49:01.658615Z",
-                    "updated_at": "2025-09-01T18:02:23.547853Z",
-                    "first_name": "John",
-                    "last_name": "Doe",
-                    "email": "john.doe@example.com",
-                    "type": "contact",
-                    "availability_status": "offline",
-                    "phone_number_calling_code": "+1",
-                    "phone_number": "555-0100",
-                    "avatar_url": "/uploads/avatar-example.jpg",
-                    "enabled": true,
-                    "last_active_at": null,
-                    "last_login_at": null,
-                    "roles": null,
-                    "permissions": null,
-                    "custom_attributes": null,
-                    "teams": [],
-                    "api_key": null,
-                    "api_key_last_used_at": null
-                  }
                 }
               }
             }
@@ -1613,39 +1611,25 @@
                     "type": "string",
                     "description": "Contact's phone number"
                   },
-                  "phone_number_calling_code": {
+                  "phone_number_country_code": {
                     "type": "string",
-                    "description": "International calling code (e.g., +1, +44)"
-                  },
-                  "availability_status": {
-                    "type": "string",
-                    "enum": ["online", "offline", "busy"],
-                    "description": "Contact's availability status"
+                    "description": "ISO country code"
                   },
                   "files": {
                     "type": "string",
                     "format": "binary",
-                    "description": "New avatar image file to upload (field name must be 'files')"
+                    "description": "New avatar image file to upload"
                   },
                   "avatar_url": {
                     "type": "string",
-                    "description": "Existing avatar URL. Set to empty string or 'null' to remove avatar",
+                    "description": "URL of the contact's avatar image. Pass a valid image URL to update, pass null to remove the avatar, or pass the existing value to keep it unchanged.",
                     "nullable": true
                   },
                   "enabled": {
                     "type": "boolean",
                     "description": "Whether the contact is enabled"
-                  },
-                  "custom_attributes": {
-                    "type": "object",
-                    "description": "Custom attributes as JSON object"
                   }
                 }
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/Contact"
               }
             }
           }
@@ -1657,7 +1641,7 @@
         "tags": [
           "Contacts"
         ],
-        "summary": "Block Contact",
+        "summary": "Block or Unblock Contact",
         "operationId": "handleBlockContact",
         "parameters": [
           {
@@ -1679,11 +1663,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Contact blocked successfully",
+            "description": "Contact block status updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/ContactResponse"
                 }
               }
             }
@@ -1696,12 +1680,22 @@
           }
         },
         "requestBody": {
-          "description": "Block status update",
+          "description": "Update the contact's block status.",
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/BlockContactRequest"
+                "type": "object",
+                "properties": {
+                  "enabled": {
+                    "type": "boolean",
+                    "description": "Set to `false` to block, `true` to unblock",
+                    "example": false
+                  }
+                },
+                "required": [
+                  "enabled"
+                ]
               }
             }
           }
@@ -1821,7 +1815,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "The unique identifier for the contact."
           },
           {
             "name": "note_id",
@@ -1829,7 +1824,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "The unique identifier for the note associated with the contact."
           }
         ],
         "security": [
@@ -1928,9 +1924,11 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
-            "description": "Items per page"
+            "description": "Number of items per page (1–100)"
           }
         ],
         "security": [
@@ -1968,6 +1966,7 @@
         ],
         "summary": "Get Assigned Conversations",
         "operationId": "handleGetAssignedConversations",
+        "description": "Get all assigned conversations to current user",
         "parameters": [
           {
             "name": "page",
@@ -1983,9 +1982,11 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
-            "description": "Items per page"
+            "description": "Number of items per page (1–100)"
           }
         ],
         "security": [
@@ -2070,6 +2071,7 @@
         ],
         "summary": "Get Unassigned Conversations",
         "operationId": "handleGetUnassignedConversations",
+        "description": "Get all conversations not assigned to any user and team",
         "parameters": [
           {
             "name": "page",
@@ -2085,9 +2087,11 @@
             "in": "query",
             "required": true,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
             },
-            "description": "Items per page"
+            "description": "Number of items per page (1–100)"
           }
         ],
         "security": [
@@ -2235,6 +2239,7 @@
           "Conversations"
         ],
         "summary": "Retry Message",
+        "description": "Retries sending a failed message in the specified conversation.",
         "operationId": "handleRetryMessage",
         "parameters": [
           {
@@ -2359,7 +2364,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2460,7 +2465,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2561,7 +2566,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContactResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2617,7 +2622,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2773,8 +2778,7 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer",
-              "default": 1
+              "type": "integer"
             },
             "description": "Page number"
           },
@@ -2784,9 +2788,10 @@
             "required": false,
             "schema": {
               "type": "integer",
-              "default": 30
+              "minimum": 1,
+              "maximum": 100
             },
-            "description": "Items per page"
+            "description": "Number of items per page (1–100)"
           }
         ],
         "security": [
@@ -2831,7 +2836,8 @@
             "required": true,
             "schema": {
               "type": "string"
-            }
+            },
+            "description": "UUID of conversation"
           }
         ],
         "security": [
@@ -2848,7 +2854,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ContactListResponse"
+                  "$ref": "#/components/schemas/ConversationParticipantsResponse"
                 }
               }
             }
@@ -2893,7 +2899,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2949,7 +2955,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -2979,7 +2985,7 @@
         "tags": [
           "Conversations"
         ],
-        "summary": "Update Conversationtags",
+        "summary": "Update conversation tags",
         "operationId": "handleUpdateConversationtags",
         "parameters": [
           {
@@ -3005,7 +3011,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConversationResponse"
+                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -3971,7 +3977,7 @@
         "tags": [
           "Report"
         ],
-        "summary": "Overview S L A",
+        "summary": "Overview SLA",
         "operationId": "handleOverviewSLA",
         "parameters": [
           {
@@ -5224,14 +5230,27 @@
         ],
         "summary": "Get Team Unassigned Conversations",
         "operationId": "handleGetTeamUnassignedConversations",
+        "description": "Get conversation assigned to team but not assigned to any agent",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "page",
+            "in": "query",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Number of items per page (1–100)"
           }
         ],
         "security": [
@@ -5668,14 +5687,27 @@
         ],
         "summary": "Get View Conversations",
         "operationId": "handleGetViewConversations",
+        "description": "Get all conversations filtered by this view",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
+            "name": "page",
+            "in": "query",
             "required": true,
             "schema": {
-              "type": "string"
-            }
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Number of items per page (1–100)"
           }
         ],
         "security": [
@@ -6691,6 +6723,51 @@
         },
         "description": "User object returned on successful login"
       },
+      "ContactList": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 163
+          },
+          "type": {
+            "type": "string",
+            "example": "contact"
+          },
+          "first_name": {
+            "type": "string",
+            "example": "PayPal"
+          },
+          "last_name": {
+            "type": "string",
+            "example": ""
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "example": "donotreply@paypal.com"
+          },
+          "enabled": {
+            "type": "boolean",
+            "example": true
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true,
+            "example": null
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-09-14T18:53:01.172243Z"
+          },
+          "updated_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2025-09-14T18:53:01.172243Z"
+          }
+        }
+      },
       "Contact": {
         "type": "object",
         "properties": {
@@ -6729,12 +6806,13 @@
             "type": "string",
             "nullable": true
           },
-          "phone_number_calling_code": {
+          "phone_number_country_code": {
             "type": "string",
             "nullable": true
           },
           "custom_attributes": {
-            "type": "object"
+            "type": "object",
+            "nullable": true
           },
           "enabled": {
             "type": "boolean"
@@ -6745,6 +6823,35 @@
             "nullable": true
           },
           "last_login_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "permissions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "nullable": true
+          },
+          "teams": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "api_key": {
+            "type": "string",
+            "nullable": true
+          },
+          "api_key_last_used_at": {
             "type": "string",
             "format": "date-time",
             "nullable": true
@@ -6794,9 +6901,30 @@
             "example": "success"
           },
           "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Contact"
+            "type": "object",
+            "properties": {
+              "results": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ContactList"
+                }
+              },
+              "total": {
+                "type": "integer",
+                "example": 39
+              },
+              "per_page": {
+                "type": "integer",
+                "example": 100
+              },
+              "total_pages": {
+                "type": "integer",
+                "example": 1
+              },
+              "page": {
+                "type": "integer",
+                "example": 1
+              }
             }
           }
         }
@@ -7039,7 +7167,10 @@
           },
           "last_message_sender": {
             "type": "string",
-            "enum": ["contact", "agent"],
+            "enum": [
+              "contact",
+              "agent"
+            ],
             "example": "contact",
             "description": "Who sent the last message"
           },
@@ -7119,6 +7250,34 @@
                   "type": "string",
                   "format": "date-time"
                 }
+              }
+            }
+          }
+        }
+      },
+      "ConversationParticipantsResponse": {
+        "type": "object",
+        "properties": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer",
+                "example": 21
+              },
+              "first_name": {
+                "type": "string",
+                "example": "John"
+              },
+              "last_name": {
+                "type": "string",
+                "example": "Doe"
+              },
+              "avatar_url": {
+                "type": "string",
+                "nullable": true,
+                "example": null
               }
             }
           }
@@ -7453,7 +7612,9 @@
             "items": {
               "type": "string"
             },
-            "example": ["*"],
+            "example": [
+              "*"
+            ],
             "description": "Allowed file extensions for uploads (* for all)"
           },
           "app.update": {
@@ -7936,7 +8097,7 @@
             "type": "string",
             "example": "online"
           },
-          "phone_number_calling_code": {
+          "phone_number_country_code": {
             "type": "string",
             "nullable": true,
             "example": "+1"
@@ -8699,11 +8860,23 @@
                 "operator": {
                   "type": "string",
                   "example": "equals",
-                  "enum": ["equals", "not_equals", "contains", "not_contains", "greater_than", "less_than"],
+                  "enum": [
+                    "equals",
+                    "not_equals",
+                    "contains",
+                    "not_contains",
+                    "greater_than",
+                    "less_than"
+                  ],
                   "description": "Comparison operator"
                 }
               },
-              "required": ["field", "model", "value", "operator"]
+              "required": [
+                "field",
+                "model",
+                "value",
+                "operator"
+              ]
             }
           },
           "user_id": {
@@ -9527,7 +9700,7 @@
           },
           "content": {
             "type": "string",
-            "description": "Initial message content (HTML format)"
+            "description": "Initial message content (Accepts HTML as well)"
           },
           "inbox_id": {
             "type": "integer",
@@ -9565,7 +9738,10 @@
           },
           "initiator": {
             "type": "string",
-            "enum": ["agent", "contact"],
+            "enum": [
+              "agent",
+              "contact"
+            ],
             "description": "Who initiated the conversation. 'contact' means first message is incoming from contact, 'agent' means first message is outgoing from agent"
           }
         }
@@ -9611,6 +9787,14 @@
               "type": "string"
             },
             "description": "BCC recipients"
+          },
+          "sender_type": {
+            "type": "string",
+            "enum": [
+              "agent",
+              "contact"
+            ],
+            "description": "Specifies whether the message is sent by an agent or a contact."
           }
         }
       },
@@ -9640,9 +9824,9 @@
       },
       "CustomAttributesRequest": {
         "type": "object",
+        "description": "Dictionary of custom attributes where the key is the attribute name and the value. The custom attribute must be first defined in Admin -> Custom Attributes.",
         "additionalProperties": {
-          "type": "string",
-          "description": "Custom attribute values"
+          "description": "Custom attribute value"
         }
       },
       "PriorityUpdateRequest": {
@@ -9653,6 +9837,11 @@
         "properties": {
           "priority": {
             "type": "string",
+            "enum": [
+              "Low",
+              "Medium",
+              "High"
+            ],
             "description": "Priority level"
           }
         }
@@ -9665,12 +9854,11 @@
         "properties": {
           "status": {
             "type": "string",
-            "description": "Status value"
+            "description": "Status value e.g. Open, Resolved"
           },
           "snoozed_until": {
             "type": "string",
-            "format": "date-time",
-            "description": "Snooze until timestamp"
+            "description": "Snooze duration (e.g. 1h, 3h, 100h). Required if status is Snoozed."
           }
         }
       },
@@ -9760,7 +9948,11 @@
           "notification.email.auth_protocol": {
             "type": "string",
             "example": "plain",
-            "enum": ["plain", "login", "cram-md5"],
+            "enum": [
+              "plain",
+              "login",
+              "cram-md5"
+            ],
             "description": "SMTP authentication protocol"
           },
           "notification.email.email_address": {
@@ -9781,7 +9973,11 @@
           "notification.email.tls_type": {
             "type": "string",
             "example": "starttls",
-            "enum": ["none", "starttls", "tls"],
+            "enum": [
+              "none",
+              "starttls",
+              "tls"
+            ],
             "description": "TLS connection type"
           },
           "notification.email.tls_skip_verify": {
@@ -9822,10 +10018,6 @@
             "type": "string",
             "enum": [
               "google",
-              "azure",
-              "okta",
-              "keycloak",
-              "auth0",
               "custom"
             ],
             "description": "Provider type"
