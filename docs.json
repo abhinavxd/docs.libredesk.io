@@ -121,15 +121,6 @@
             ]
           },
           {
-            "group": "Tags",
-            "pages": [
-              "api-reference/endpoint/tags/get-tags",
-              "api-reference/endpoint/tags/create-tag",
-              "api-reference/endpoint/tags/update-tag",
-              "api-reference/endpoint/tags/delete-tag"
-            ]
-          },
-          {
             "group": "Conversation Status",
             "pages": [
               "api-reference/endpoint/status-and-priority/get-statuses",
