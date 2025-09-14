@@ -3,7 +3,7 @@ title: Installation
 description: Deploy Libredesk using Docker, binary, or from source
 ---
 
-Libredesk is a single binary application that can be deployed using Docker (which includes all dependencies) or installed directly (which requires PostgreSQL and Redis). Choose your preferred installation method below.
+Libredesk is a single binary application that requires postgres and redis to run. You can install it using the binary or docker.
 
 ## Installation Methods
 
@@ -11,7 +11,7 @@ Libredesk is a single binary application that can be deployed using Docker (whic
   <Tab title="Docker (Recommended)">
     ## Docker Installation
     
-    The latest image is available on DockerHub at `libredesk/libredesk:latest`
+    The latest image is available on DockerHub at [libredesk/libredesk:latest](https://hub.docker.com/r/libredesk/libredesk)
     
     ### Quick Start with Docker Compose
     
@@ -67,18 +67,37 @@ Libredesk is a single binary application that can be deployed using Docker (whic
         Download the [latest release](https://github.com/abhinavxd/libredesk/releases) for your platform and extract the libredesk binary.
       </Step>
       
+      <Step title="Configure Libredesk">
+        ```bash
+        # Download the sample config file
+        curl -LO https://github.com/abhinavxd/libredesk/raw/main/config.sample.toml
+        
+        # Copy the config.sample.toml to config.toml and edit as needed
+        cp config.sample.toml config.toml
+        ```
+        
+        Edit `config.toml` with your database credentials and preferences.
+      </Step>
+      
       <Step title="Install database tables">
         ```bash
         ./libredesk --install
         ```
-        This will create the necessary tables in PostgreSQL and prompt you to set the System user password.
+        This will create the necessary tables in PostgreSQL.
         
         <Tip>
-        To set the password non-interactively:
+        To set the System user password during installation, use the environment variable: 
         ```bash
         LIBREDESK_SYSTEM_USER_PASSWORD=your_password ./libredesk --install
         ```
         </Tip>
+      </Step>
+      
+      <Step title="Set the admin password">
+        ```bash
+        # Set System user password
+        ./libredesk --set-system-user-password
+        ```
       </Step>
       
       <Step title="Run Libredesk">
@@ -120,8 +139,43 @@ Libredesk is a single binary application that can be deployed using Docker (whic
         This will generate the `libredesk` binary in the current directory.
       </Step>
       
-      <Step title="Follow binary installation">
-        Follow the [binary installation](#binary) steps above to set up the database and run Libredesk.
+      <Step title="Configure Libredesk">
+        ```bash
+        # Download the sample config file
+        curl -LO https://github.com/abhinavxd/libredesk/raw/main/config.sample.toml
+        
+        # Copy the config.sample.toml to config.toml and edit as needed
+        cp config.sample.toml config.toml
+        ```
+        
+        Edit `config.toml` with your database credentials and preferences.
+      </Step>
+      
+      <Step title="Install database tables">
+        ```bash
+        ./libredesk --install
+        ```
+        This will create the necessary tables in PostgreSQL.
+        
+        <Tip>
+        To set the System user password during installation, use the environment variable: 
+        ```bash
+        LIBREDESK_SYSTEM_USER_PASSWORD=your_password ./libredesk --install
+        ```
+        </Tip>
+      </Step>
+      
+      <Step title="Set the admin password">
+        ```bash
+        # Set System user password
+        ./libredesk --set-system-user-password
+        ```
+      </Step>
+      
+      <Step title="Run Libredesk">
+        ```bash
+        ./libredesk
+        ```
       </Step>
     </Steps>
   </Tab>
@@ -129,7 +183,7 @@ Libredesk is a single binary application that can be deployed using Docker (whic
 
 ## Nginx Configuration
 
-Libredesk uses WebSockets for real-time updates. If you're using Nginx as a reverse proxy, add this configuration:
+Libredesk uses WebSockets for real-time updates. If you're using Nginx as a reverse proxy, you can add a configuration like this:
 
 ```nginx
 server {
@@ -150,11 +204,3 @@ server {
     }
 }
 ```
-
-<Warning>
-Ensure WebSocket support is enabled in your reverse proxy configuration for real-time features to work properly.
-</Warning>
-
-## Next Steps
-
-After installation, you can configure your Libredesk instance and explore the available features.
