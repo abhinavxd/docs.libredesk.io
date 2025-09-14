@@ -126,41 +126,6 @@
         }
       }
     },
-    "/api/v1/agents/compact": {
-      "get": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Get Agents Compact",
-        "operationId": "handleGetAgentsCompact",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Compact agents retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentCompactListResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
     "/api/v1/agents/me": {
       "get": {
         "tags": [
@@ -194,50 +159,6 @@
             "description": "Internal server error"
           }
         }
-      },
-      "put": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Update Current Agent",
-        "operationId": "handleUpdateCurrentAgent",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Updated agent details",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AgentResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "requestBody": {
-          "description": "Agent update details",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AgentRequest"
-              }
-            }
-          }
-        }
       }
     },
     "/api/v1/agents/me/availability": {
@@ -257,11 +178,11 @@
         ],
         "responses": {
           "200": {
-            "description": "Agent availability updated successfully",
+            "description": "Agent availability status updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/AgentResponse"
                 }
               }
             }
@@ -317,133 +238,6 @@
           },
           "500": {
             "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/api/v1/agents/me/teams": {
-      "get": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Get Current Agent Teams",
-        "operationId": "handleGetCurrentAgentTeams",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Teams retrieved successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TeamListResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        }
-      }
-    },
-    "/api/v1/agents/reset-password": {
-      "post": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Reset Password",
-        "operationId": "handleResetPassword",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Password reset initiated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "requestBody": {
-          "description": "Password reset request",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ResetPasswordRequest"
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api/v1/agents/set-password": {
-      "post": {
-        "tags": [
-          "Agents"
-        ],
-        "summary": "Set Password",
-        "operationId": "handleSetPassword",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Password set successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
-          }
-        },
-        "requestBody": {
-          "description": "New password details",
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SetPasswordRequest"
-              }
-            }
           }
         }
       }
@@ -5039,44 +4833,9 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Team"
+                "$ref": "#/components/schemas/TeamRequest"
               }
             }
-          }
-        }
-      }
-    },
-    "/api/v1/teams/compact": {
-      "get": {
-        "tags": [
-          "Teams"
-        ],
-        "summary": "Get Teams Compact",
-        "operationId": "handleGetTeamsCompact",
-        "security": [
-          {
-            "basicAuth": []
-          },
-          {
-            "tokenAuth": []
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Compact list of teams",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/TeamListResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          },
-          "500": {
-            "description": "Internal server error"
           }
         }
       }
@@ -5216,7 +4975,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/Team"
+                "$ref": "#/components/schemas/TeamRequest"
               }
             }
           }
@@ -8115,7 +7874,7 @@
           "phone_number_country_code": {
             "type": "string",
             "nullable": true,
-            "example": "+1"
+            "example": "US"
           },
           "phone_number": {
             "type": "string",
@@ -8184,50 +7943,57 @@
       "AgentCompact": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "example": 1
-          },
-          "type": {
+          "status": {
             "type": "string",
-            "example": "agent"
+            "example": "success"
           },
-          "first_name": {
-            "type": "string",
-            "example": "John"
-          },
-          "last_name": {
-            "type": "string",
-            "example": "Doe"
-          },
-          "email": {
-            "type": "string",
-            "format": "email",
-            "nullable": true,
-            "example": "john.doe@example.com"
-          },
-          "enabled": {
-            "type": "boolean",
-            "example": true
-          },
-          "avatar_url": {
-            "type": "string",
-            "nullable": true,
-            "example": "/avatars/agent1.jpg"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2025-08-28T10:00:00Z"
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2025-08-28T10:00:00Z"
-          },
-          "total": {
-            "type": "integer",
-            "example": 100
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer",
+                  "example": 76
+                },
+                "type": {
+                  "type": "string",
+                  "example": "agent"
+                },
+                "first_name": {
+                  "type": "string",
+                  "example": "John"
+                },
+                "last_name": {
+                  "type": "string",
+                  "example": "Doe"
+                },
+                "email": {
+                  "type": "string",
+                  "format": "email",
+                  "example": "example@example.com"
+                },
+                "enabled": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "avatar_url": {
+                  "type": "string",
+                  "nullable": true,
+                  "example": null
+                },
+                "created_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-08-30T15:44:51.110888Z"
+                },
+                "updated_at": {
+                  "type": "string",
+                  "format": "date-time",
+                  "example": "2025-09-14T18:23:36.149041Z"
+                }
+              }
+            }
           }
         }
       },
@@ -8244,21 +8010,6 @@
         }
       },
       "AgentListResponse": {
-        "type": "object",
-        "properties": {
-          "status": {
-            "type": "string",
-            "example": "success"
-          },
-          "data": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Agent"
-            }
-          }
-        }
-      },
-      "AgentCompactListResponse": {
         "type": "object",
         "properties": {
           "status": {
@@ -8288,6 +8039,39 @@
             "type": "string",
             "nullable": true,
             "example": "\ud83d\udee0\ufe0f"
+          }
+        }
+      },
+      "TeamRequest": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Support"
+          },
+          "emoji": {
+            "type": "string",
+            "example": "😗"
+          },
+          "conversation_assignment_type": {
+            "type": "string",
+            "example": "Manual"
+          },
+          "max_auto_assigned_conversations": {
+            "type": "integer",
+            "example": 2
+          },
+          "timezone": {
+            "type": "string",
+            "example": "America/Toronto"
+          },
+          "business_hours_id": {
+            "type": "integer",
+            "example": 1
+          },
+          "sla_policy_id": {
+            "type": "integer",
+            "example": 1
           }
         }
       },
@@ -9519,7 +9303,7 @@
         "required": [
           "email",
           "first_name",
-          "last_name"
+          "roles"
         ],
         "properties": {
           "first_name": {
@@ -9535,9 +9319,16 @@
             "format": "email",
             "description": "Agent's email address"
           },
+          "roles": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "Roles assigned to the agent"
+          },
           "send_welcome_email": {
             "type": "boolean",
-            "description": "Whether to send welcome email"
+            "description": "Only used during agent creation to send welcome email"
           },
           "teams": {
             "type": "array",
@@ -9550,9 +9341,20 @@
             "type": "boolean",
             "description": "Whether agent is enabled"
           },
-          "role": {
+          "availability_status": {
             "type": "string",
-            "description": "Agent's role ID"
+            "enum": [
+              "online",
+              "away",
+              "away_manual",
+              "offline",
+              "away_and_reassigning"
+            ],
+            "description": "Agent's availability status"
+          },
+          "new_password": {
+            "type": "string",
+            "description": "Agent's new password, Optional"
           }
         }
       },
@@ -9571,36 +9373,6 @@
               "offline"
             ],
             "description": "Availability status"
-          }
-        }
-      },
-      "ResetPasswordRequest": {
-        "type": "object",
-        "required": [
-          "email"
-        ],
-        "properties": {
-          "email": {
-            "type": "string",
-            "format": "email",
-            "description": "Email address for password reset"
-          }
-        }
-      },
-      "SetPasswordRequest": {
-        "type": "object",
-        "required": [
-          "token",
-          "password"
-        ],
-        "properties": {
-          "token": {
-            "type": "string",
-            "description": "Password reset token"
-          },
-          "password": {
-            "type": "string",
-            "description": "New password"
           }
         }
       },

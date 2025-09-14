@@ -102,16 +102,11 @@
               "api-reference/endpoint/agents/update-agent",
               "api-reference/endpoint/agents/delete-agent",
               "api-reference/endpoint/agents/get-current-agent",
-              "api-reference/endpoint/agents/update-current-agent",
-              "api-reference/endpoint/agents/get-current-agent-teams",
+              "api-reference/endpoint/agents/delete-current-agent-avatar",
               "api-reference/endpoint/agents/update-agent-availability",
-              "api-reference/endpoint/agents/reset-password",
-              "api-reference/endpoint/agents/set-password",
               "api-reference/endpoint/agents/generate-a-p-i-key",
               "api-reference/endpoint/agents/revoke-a-p-i-key",
-              "api-reference/endpoint/agents/delete-current-agent-avatar",
               "api-reference/endpoint/teams/get-teams",
-              "api-reference/endpoint/teams/get-teams-compact",
               "api-reference/endpoint/teams/create-team",
               "api-reference/endpoint/teams/get-team",
               "api-reference/endpoint/teams/update-team",
@@ -327,15 +322,15 @@
   },
   "contextual": {
     "options": [
-     "copy",
-     "view",
-     "chatgpt",
-     "claude",
-     "perplexity",
-     "mcp",
-     "cursor",
-     "vscode"
-   ]
+      "copy",
+      "view",
+      "chatgpt",
+      "claude",
+      "perplexity",
+      "mcp",
+      "cursor",
+      "vscode"
+    ]
   },
   "footer": {
     "socials": {
