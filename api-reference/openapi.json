@@ -3603,6 +3603,21 @@
           }
         }
       },
+      "TagsUpdateRequest": {
+        "type": "object",
+        "properties": {
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "example": [
+              "urgent",
+              "vip"
+            ]
+          }
+        }
+      },
       "MediaResponse": {
         "type": "object",
         "properties": {
