@@ -2528,6 +2528,73 @@
         }
       }
     },
+    "/api/v1/views/{id}/conversations": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Get View Conversations",
+        "operationId": "handleGetViewConversations",
+        "description": "Get conversations for a specific view",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique ID of the view"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer"
+            },
+            "description": "Page number"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100
+            },
+            "description": "Number of items per page (1–100)"
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of conversations for view",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          },
+          "500": {
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
     "/api/v1/teams/{id}/conversations/unassigned": {
       "get": {
         "tags": [
