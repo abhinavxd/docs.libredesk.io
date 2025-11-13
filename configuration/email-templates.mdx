@@ -47,35 +47,43 @@ If you want to customize the look of outgoing emails, you can do so in the **Adm
 | `{{ .Author.FullName }}` | Full name of the message author |
 | `{{ .Author.Email }}` | Email address of the message author |
 
-## Example outgoing email template
+## Example outgoing email template 
 
-```
-Dear {{ .Recipient.FirstName }},
+<Note>
+Templates support HTML formatting. Use HTML tags like `<p>` and `<br />` to control spacing and line breaks. Plain text without HTML tags will render without line breaks.
+</Note>
+
+```html
+<p>Dear {{ .Recipient.FirstName }},</p>
 
 {{ template "content" . }}
 
-Best regards,
-{{ .Author.FullName }}
+<p>Best regards,<br />
+{{ .Author.FullName }}</p>
 ---
-Reference: {{ .Conversation.ReferenceNumber }}
+<p>Reference: {{ .Conversation.ReferenceNumber }}</p>
 ```
 
-### Important: How templates work with your responses
+### Understanding Template Structure
 
-When this template is set as default, it automatically wraps around your ticket responses. The `{{ template "content" . }}` placeholder is where your response text will be inserted.
+When an outgoing email template is configured, it automatically wraps around message content. The `{{ template "content" . }}` placeholder indicates where the message body will be inserted.
 
-#### What this means for you:
-- **DO NOT** include greetings (like "Hello" or "Dear Customer") in your response
-- **DO NOT** include sign-offs (like "Best regards" or your name) in your response  
-- **ONLY** write the main body of your message
+#### Template Behavior
 
-#### Example of CORRECT usage:
-When you write in the response field:
+The template structure determines what should be included in message responses:
+
+- **Greetings**: If the template includes a greeting (e.g., "Dear {{ .Recipient.FirstName }}"), do not add another greeting in the message body
+- **Sign-offs**: If the template includes a sign-off (e.g., "Best regards, {{ .Author.FullName }}"), do not add another sign-off in the message body
+- **Message Content**: Write only the main content that should appear in the `{{ template "content" . }}` section
+
+#### Example: Correct Usage
+
+**Message written in text editor:**
 ```
 Thank you for contacting us. I've reviewed your account and can confirm that your refund has been processed.
 ```
 
-The customer receives:
+**Email received by customer:**
 ```
 Dear John,
 
@@ -87,8 +95,9 @@ Sarah Smith
 Reference: TKT-2024-001
 ```
 
-#### Example of INCORRECT usage (creates duplication):
-When you write in the response field:
+#### Example: Incorrect Usage (Duplication)
+
+**Message written in text editor:**
 ```
 Hello John,
 
@@ -98,7 +107,7 @@ Best regards,
 Sarah
 ```
 
-The customer receives (with unwanted duplication):
+**Email received by customer (with unwanted duplication):**
 ```
 Dear John,
 
@@ -115,9 +124,10 @@ Sarah Smith
 Reference: TKT-2024-001
 ```
 
-### Working with different templates
+### Adapting to Different Template Configurations
 
-If your organization uses a different template structure, adjust your response accordingly. For example:
-- A template with no greeting would require you to include your own
-- A template with only `{{ template "content" . }}` and nothing else would require you to write complete emails
-- Always check your active template configuration to understand what's automatically included
+The content structure should match your template configuration:
+
+- **Templates without greetings**: Include your own greeting in the message body
+- **Templates with only content placeholder**: Write complete emails including greetings and sign-offs
+- **Custom templates**: Review the active template configuration to understand what elements are automatically included
