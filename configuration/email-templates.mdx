@@ -72,8 +72,8 @@ When an outgoing email template is configured, it automatically wraps around mes
 
 The template structure determines what should be included in message responses:
 
-- **Greetings**: If the template includes a greeting (e.g., "Dear {{ .Recipient.FirstName }}"), do not add another greeting in the message body
-- **Sign-offs**: If the template includes a sign-off (e.g., "Best regards, {{ .Author.FullName }}"), do not add another sign-off in the message body
+- **Greetings**: If the template includes a greeting (e.g., "Dear `{{ .Recipient.FirstName }}`"), do not add another greeting in the message body
+- **Sign-offs**: If the template includes a sign-off (e.g., "Best regards, `{{ .Author.FullName }}`"), do not add another sign-off in the message body
 - **Message Content**: Write only the main content that should appear in the `{{ template "content" . }}` section
 
 #### Example: Correct Usage
