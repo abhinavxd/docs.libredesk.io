@@ -2035,7 +2035,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "file": {
+                  "files": {
                     "type": "string",
                     "format": "binary",
                     "description": "File to upload"
