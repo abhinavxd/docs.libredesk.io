@@ -5,6 +5,7 @@ description: Deploy Libredesk using Docker, binary, or from source
 
 Libredesk is a single binary application that requires postgres and redis to run. You can install it using the binary or docker.
 
+
 ## Installation Methods
 
 <Tabs>
@@ -186,6 +187,23 @@ Libredesk is a single binary application that requires postgres and redis to run
     - **Password**: The password you just set
   </Tab>
 </Tabs>
+
+
+## Configuration via Environment Variables
+
+Instead of using a `config.toml` file, you can configure Libredesk entirely through environment variables.
+
+- All environment variables use the `LIBREDESK_` prefix
+- Use double underscore (`__`) for nested configuration keys
+- To use environment variables exclusively (without a config file), pass `--config=""`
+
+**Example:**
+
+| TOML Config | Environment Variable |
+|-------------|---------------------|
+| `upload.fs.upload_path = "uploads"` | `LIBREDESK_UPLOAD__FS__UPLOAD_PATH=uploads` |
+| `db.host = "localhost"` | `LIBREDESK_DB__HOST=localhost` |
+
 
 ## Nginx Configuration
 
