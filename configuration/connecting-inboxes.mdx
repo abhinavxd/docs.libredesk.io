@@ -1,0 +1,145 @@
+---
+title: Connecting Inboxes
+description: Connect email inboxes using Google, Microsoft OAuth, or manual IMAP/SMTP configuration
+---
+
+Libredesk supports three methods for connecting email inboxes: Google OAuth, Microsoft OAuth, and manual IMAP/SMTP configuration with password authentication.
+
+## Google setup
+
+Connect your Gmail or Google Workspace inbox using OAuth 2.0.
+
+### Prerequisites
+
+- A Google Cloud Console project
+- OAuth 2.0 credentials (Client ID & Client Secret)
+
+### Required OAuth scopes
+
+When configuring your Google OAuth app, the following scopes are required:
+
+| Scope | Purpose |
+|-------|---------|
+| `https://mail.google.com/` | Full Gmail access for reading and sending emails |
+| `https://www.googleapis.com/auth/userinfo.email` | Access to user's email address |
+
+### Configuration steps
+
+<Steps>
+  <Step title="Create a Google Cloud project">
+    Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a new project or select an existing one.
+  </Step>
+
+  <Step title="Enable Gmail API">
+    In your project, navigate to APIs & Services → Library and enable the Gmail API.
+  </Step>
+
+  <Step title="Create OAuth credentials">
+    Go to APIs & Services → Credentials and click Create Credentials → OAuth client ID:
+    - Application type: Web application
+    - Add your Libredesk callback URL to Authorized redirect URIs
+    - Note down the Client ID and Client Secret
+  </Step>
+
+  <Step title="Configure OAuth consent screen">
+    Set up the OAuth consent screen with the required scopes listed above.
+  </Step>
+
+  <Step title="Add inbox in Libredesk">
+    In Libredesk, navigate to Admin → Inboxes → Add Inbox → Google:
+    - Enter the Client ID
+    - Enter the Client Secret
+    - Click Authorize
+  </Step>
+
+  <Step title="Complete authorization">
+    You'll be redirected to Google's consent screen. Sign in with the Google account you want to connect and grant the requested permissions.
+  </Step>
+</Steps>
+
+## Microsoft setup
+
+Connect your Outlook or Microsoft 365 inbox using OAuth 2.0.
+
+### Prerequisites
+
+- An Azure Active Directory (Azure AD) app registration
+- OAuth 2.0 credentials (Client ID & Client Secret)
+
+### Required API permissions
+
+Add the following **Microsoft Graph** delegated permissions in Azure Portal:
+
+<img
+  src="/images/microsoft-api-permissions.png"
+  alt="Microsoft API Permissions"
+  className="rounded-lg border"
+/>
+
+| Permission | Type | Description |
+|------------|------|-------------|
+| email | Delegated | View users' email address |
+| IMAP.AccessAsUser.All | Delegated | Read and write access to mailboxes via IMAP |
+| offline_access | Delegated | Maintain access to data you have given it access to |
+| openid | Delegated | Sign users in |
+| SMTP.Send | Delegated | Send emails from mailboxes using SMTP AUTH |
+| User.Read | Delegated | Sign in and read user profile |
+
+### Configuration steps
+
+<Steps>
+  <Step title="Register an app in Azure Portal">
+    Go to the [Azure Portal](https://portal.azure.com/) → Azure Active Directory → App registrations → New registration:
+    - Enter a name for your application
+    - Select the appropriate account type (single tenant or multi-tenant)
+    - Add your Libredesk callback URL as the Redirect URI
+  </Step>
+
+  <Step title="Configure API permissions">
+    In your app registration, go to API permissions → Add a permission → Microsoft Graph:
+    - Add all the delegated permissions shown in the table above
+    - Click Grant admin consent for Default Directory
+  </Step>
+
+  <Step title="Create client secret">
+    Go to Certificates & secrets → New client secret:
+    - Add a description and expiration period
+    - Copy the secret value immediately (it won't be shown again)
+  </Step>
+
+  <Step title="Note your credentials">
+    From the Overview page, copy:
+    - Application (client) ID
+    - Directory (tenant) ID (if using single-tenant)
+  </Step>
+
+  <Step title="Add inbox in Libredesk">
+    In Libredesk, navigate to Admin → Inboxes → Add Inbox → Microsoft:
+    - Enter the Client ID
+    - Enter the Client Secret
+    - Enter the Tenant ID (optional, for single-tenant apps)
+    - Click Authorize
+  </Step>
+
+  <Step title="Complete authorization">
+    You'll be redirected to Microsoft's consent screen. Sign in with the Microsoft account you want to connect and grant the requested permissions.
+  </Step>
+</Steps>
+
+## Manual IMAP/SMTP setup
+
+For self-hosted mail servers or providers that don't support OAuth, use manual IMAP/SMTP configuration.
+
+### When to use
+
+- Self-hosted mail servers
+- Email providers without OAuth support
+- App passwords for Google (if OAuth is not preferred)
+
+### Configuration steps
+
+<Steps>
+  <Step title="Add inbox in Libredesk">
+    Navigate to Admin → Inboxes → New inbox → Other provider, configure IMAP and SMTP settings, then click Save.
+  </Step>
+</Steps>
