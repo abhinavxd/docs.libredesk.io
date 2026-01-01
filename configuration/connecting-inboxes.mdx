@@ -26,6 +26,10 @@ When configuring your Google OAuth app, the following scopes are required:
 ### Configuration steps
 
 <Steps>
+  <Step title="Get callback URL from Libredesk">
+    In Libredesk, go to Admin → Inboxes → New inbox → Google. A dialog will open with the **Callback URL** - copy this URL.
+  </Step>
+
   <Step title="Create a Google Cloud project">
     Go to the [Google Cloud Console](https://console.cloud.google.com/) and create a new project or select an existing one.
   </Step>
@@ -34,26 +38,19 @@ When configuring your Google OAuth app, the following scopes are required:
     In your project, navigate to APIs & Services → Library and enable the Gmail API.
   </Step>
 
-  <Step title="Create OAuth credentials">
-    Go to APIs & Services → Credentials and click Create Credentials → OAuth client ID:
-    - Application type: Web application
-    - Add your Libredesk callback URL to Authorized redirect URIs
-    - Note down the Client ID and Client Secret
-  </Step>
-
   <Step title="Configure OAuth consent screen">
     Set up the OAuth consent screen with the required scopes listed above.
   </Step>
 
-  <Step title="Add inbox in Libredesk">
-    In Libredesk, navigate to Admin → Inboxes → Add Inbox → Google:
-    - Enter the Client ID
-    - Enter the Client Secret
-    - Click Authorize
+  <Step title="Create OAuth credentials">
+    Go to APIs & Services → Credentials and click Create Credentials → OAuth client ID:
+    - Application type: Web application
+    - Add the callback URL from step 1 to Authorized redirect URIs
+    - Note down the Client ID and Client Secret
   </Step>
 
-  <Step title="Complete authorization">
-    You'll be redirected to Google's consent screen. Sign in with the Google account you want to connect and grant the requested permissions.
+  <Step title="Complete setup in Libredesk">
+    Back in the Libredesk dialog, enter the Client ID and Client Secret, then click Authorize. You'll be redirected to Google's consent screen to grant permissions.
   </Step>
 </Steps>
 
@@ -88,11 +85,15 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
 ### Configuration steps
 
 <Steps>
+  <Step title="Get callback URL from Libredesk">
+    In Libredesk, go to Admin → Inboxes → New inbox → Microsoft. A dialog will open with the **Callback URL** - copy this URL.
+  </Step>
+
   <Step title="Register an app in Azure Portal">
     Go to the [Azure Portal](https://portal.azure.com/) → Azure Active Directory → App registrations → New registration:
     - Enter a name for your application
     - Select the appropriate account type (single tenant or multi-tenant)
-    - Add your Libredesk callback URL as the Redirect URI
+    - Add the callback URL from step 1 as the Redirect URI
   </Step>
 
   <Step title="Configure API permissions">
@@ -113,16 +114,8 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
     - Directory (tenant) ID (if using single-tenant)
   </Step>
 
-  <Step title="Add inbox in Libredesk">
-    In Libredesk, navigate to Admin → Inboxes → Add Inbox → Microsoft:
-    - Enter the Client ID
-    - Enter the Client Secret
-    - Enter the Tenant ID (optional, for single-tenant apps)
-    - Click Authorize
-  </Step>
-
-  <Step title="Complete authorization">
-    You'll be redirected to Microsoft's consent screen. Sign in with the Microsoft account you want to connect and grant the requested permissions.
+  <Step title="Complete setup in Libredesk">
+    Back in the Libredesk dialog, enter the Client ID, Client Secret, and Tenant ID (optional), then click Authorize. You'll be redirected to Microsoft's consent screen to grant permissions.
   </Step>
 </Steps>
 
