@@ -548,23 +548,25 @@
           {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
-              "minimum": 1
+              "minimum": 1,
+              "default": 1
             },
-            "description": "Page number (required)"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (required, range 1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
           }
         ],
         "responses": {
@@ -1047,22 +1049,24 @@
           {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 1
             },
-            "description": "Page number"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
           }
         ],
         "security": [
@@ -1105,22 +1109,24 @@
           {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 1
             },
-            "description": "Page number"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
           }
         ],
         "security": [
@@ -1210,22 +1216,24 @@
           {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 1
             },
-            "description": "Page number"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
           }
         ],
         "security": [
@@ -1736,9 +1744,10 @@
             "in": "query",
             "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 1
             },
-            "description": "Page number"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
@@ -1747,9 +1756,34 @@
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
+          },
+          {
+            "name": "private",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "boolean"
+            },
+            "description": "Filter by private messages (internal notes). If not provided, returns all messages."
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["incoming", "outgoing", "activity"]
+              }
+            },
+            "style": "form",
+            "explode": true,
+            "description": "Filter by message type. Can be specified multiple times (e.g., ?type=incoming&type=outgoing). If not provided, returns all messages."
           }
         ],
         "security": [
@@ -2549,22 +2583,24 @@
           {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 1
             },
-            "description": "Page number"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
           }
         ],
         "security": [
@@ -2616,22 +2652,24 @@
           {
             "name": "page",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
-              "type": "integer"
+              "type": "integer",
+              "default": 1
             },
-            "description": "Page number"
+            "description": "Page number (defaults to 1)"
           },
           {
             "name": "page_size",
             "in": "query",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer",
               "minimum": 1,
-              "maximum": 100
+              "maximum": 100,
+              "default": 30
             },
-            "description": "Number of items per page (1–100)"
+            "description": "Number of items per page (defaults to 30, max 100)"
           }
         ],
         "security": [
