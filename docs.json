@@ -33,7 +33,8 @@
               "configuration/connecting-inboxes",
               "configuration/email-templates",
               "configuration/sso",
-              "configuration/webhooks"
+              "configuration/webhooks",
+              "configuration/context-links"
             ]
           },
           {

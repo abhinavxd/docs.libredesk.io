@@ -1,0 +1,274 @@
+---
+title: Context Links
+description: Open external tools from the conversation sidebar with contact details passed automatically
+---
+
+Context Links let agents open external tools — CRMs, billing systems, internal dashboards — directly from the conversation sidebar. Contact and conversation details are passed automatically via URL variables or an encrypted token, eliminating manual lookups.
+
+## Overview
+
+When an agent views a conversation, context link buttons appear in the sidebar. Clicking a button generates a URL with the current contact's details substituted in, and opens it in a new tab. This gives agents instant access to relevant external systems without copy-pasting identifiers.
+
+There are two modes for passing data:
+
+- **Plain variable mode** — Individual variables like `{{email}}` or `{{external_user_id}}` are substituted directly into the URL. Best for trusted internal tools where encryption is unnecessary.
+- **Encrypted token mode** — A `{{token}}` placeholder is replaced with an AES-256-GCM encrypted blob containing all contact and agent fields. Best for external systems where you need controlled, time-limited access.
+
+## Configuration
+
+<Steps>
+  <Step title="Navigate to context links">
+    Go to **Admin → Integrations → Context Links** in your Libredesk dashboard
+  </Step>
+
+  <Step title="Create a context link">
+    Click **Create Context Link** and configure:
+    - **Name**: A descriptive label shown to agents (e.g., "Open in CRM")
+    - **URL Template**: The URL with variable placeholders (see below)
+    - **Secret**: A 32-character shared secret, required only if you use `{{token}}`
+    - **Token Expiry**: How long the encrypted token remains valid
+    - **Status**: Enable or disable the context link
+  </Step>
+
+  <Step title="Test the link">
+    Open a conversation and click the context link button in the sidebar to verify it opens the correct URL
+  </Step>
+</Steps>
+
+## URL Template Variables
+
+Use these placeholders in your URL template. They are replaced with the current contact's and conversation's details when an agent clicks the link.
+
+| Variable | Description |
+|----------|-------------|
+| `{{email}}` | Contact's email address |
+| `{{phone}}` | Contact's phone number |
+| `{{external_user_id}}` | Contact's external user ID (from your system) |
+| `{{contact_id}}` | Contact's internal Libredesk ID |
+| `{{first_name}}` | Contact's first name |
+| `{{last_name}}` | Contact's last name |
+| `{{conversation_uuid}}` | UUID of the current conversation |
+| `{{token}}` | Encrypted token containing all fields (requires secret) |
+
+### URL Template Examples
+
+| Use case | URL Template | Secret needed? |
+|----------|-------------|----------------|
+| Encrypted client lookup | `https://tools.example.com/lookup?token={{token}}` | Yes |
+| Simple CRM link | `https://crm.internal/contact?email={{email}}` | No |
+| Billing by external ID | `https://billing.internal/user/{{external_user_id}}` | No |
+| Dashboard with multiple fields | `https://dash.internal/user?name={{first_name}}&cid={{contact_id}}` | No |
+
+## Encrypted Token Mode
+
+When you use `{{token}}` in your URL template, Libredesk generates an AES-256-GCM encrypted token containing contact, conversation, and agent details. This is the recommended approach when passing data to external or semi-trusted systems, since the token is encrypted and time-limited.
+
+### Requirements
+
+- A **32-character shared secret** must be configured on the context link
+- The same secret must be available to the receiving system for decryption
+- A **token expiry** duration controls how long the token remains valid
+
+### Token Format
+
+The encrypted token is a base64-encoded string containing:
+
+```
+base64(nonce_12_bytes + ciphertext + GCM_tag)
+```
+
+To decrypt:
+1. Base64-decode the token
+2. Extract the first 12 bytes as the AES-256-GCM nonce
+3. Decrypt the remainder using AES-256-GCM with the 32-character shared secret
+4. Parse the resulting JSON
+5. Check the `exp` field to verify the token has not expired
+
+### Token Payload
+
+The decrypted JSON contains:
+
+```json
+{
+  "email": "john@example.com",
+  "phone": "+919876543210",
+  "external_user_id": "CUS12345",
+  "contact_id": 42,
+  "first_name": "John",
+  "last_name": "Doe",
+  "conversation_uuid": "a1b2c3d4-e5f6-7890",
+  "agent_id": 7,
+  "agent_email": "agent@company.com",
+  "iat": 1711800000,
+  "exp": 1711801200
+}
+```
+
+| Field | Description |
+|-------|-------------|
+| `email` | Contact's email address |
+| `phone` | Contact's phone number |
+| `external_user_id` | Contact's external user ID |
+| `contact_id` | Contact's internal Libredesk ID |
+| `first_name` | Contact's first name |
+| `last_name` | Contact's last name |
+| `conversation_uuid` | UUID of the current conversation |
+| `agent_id` | ID of the agent who clicked the link |
+| `agent_email` | Email of the agent who clicked the link |
+| `iat` | Issued-at timestamp (Unix seconds) |
+| `exp` | Expiry timestamp (Unix seconds) |
+
+### Decryption Examples
+
+<CodeGroup>
+
+```python Python
+import base64
+import json
+from cryptography.hazmat.primitives.ciphers.aead import AESGCM
+
+def decrypt_context_token(token, secret):
+    raw = base64.b64decode(token)
+    nonce = raw[:12]
+    ciphertext = raw[12:]
+
+    aesgcm = AESGCM(secret.encode('utf-8'))
+    plaintext = aesgcm.decrypt(nonce, ciphertext, None)
+    return json.loads(plaintext)
+
+# Usage
+secret = "your-32-character-shared-secret!"  # exactly 32 characters
+payload = decrypt_context_token(token_from_url, secret)
+
+if payload["exp"] < time.time():
+    raise ValueError("Token has expired")
+
+print(payload["email"], payload["conversation_uuid"])
+```
+
+```javascript Node.js
+const crypto = require('crypto');
+
+function decryptContextToken(token, secret) {
+    const raw = Buffer.from(token, 'base64');
+    const nonce = raw.subarray(0, 12);
+    const ciphertext = raw.subarray(12);
+
+    const decipher = crypto.createDecipheriv(
+        'aes-256-gcm',
+        Buffer.from(secret, 'utf-8'),
+        nonce
+    );
+
+    // GCM tag is the last 16 bytes
+    const tag = ciphertext.subarray(ciphertext.length - 16);
+    const encrypted = ciphertext.subarray(0, ciphertext.length - 16);
+
+    decipher.setAuthTag(tag);
+    const plaintext = Buffer.concat([
+        decipher.update(encrypted),
+        decipher.final()
+    ]);
+
+    return JSON.parse(plaintext.toString('utf-8'));
+}
+
+// Usage
+const secret = 'your-32-character-shared-secret!'; // exactly 32 characters
+const payload = decryptContextToken(tokenFromUrl, secret);
+
+if (payload.exp < Math.floor(Date.now() / 1000)) {
+    throw new Error('Token has expired');
+}
+
+console.log(payload.email, payload.conversation_uuid);
+```
+
+```go Go
+import (
+    "crypto/aes"
+    "crypto/cipher"
+    "encoding/base64"
+    "encoding/json"
+    "fmt"
+    "time"
+)
+
+func decryptContextToken(token, secret string) (map[string]interface{}, error) {
+    raw, err := base64.StdEncoding.DecodeString(token)
+    if err != nil {
+        return nil, err
+    }
+
+    block, err := aes.NewCipher([]byte(secret))
+    if err != nil {
+        return nil, err
+    }
+
+    gcm, err := cipher.NewGCM(block)
+    if err != nil {
+        return nil, err
+    }
+
+    nonce := raw[:gcm.NonceSize()]
+    ciphertext := raw[gcm.NonceSize():]
+
+    plaintext, err := gcm.Open(nil, nonce, ciphertext, nil)
+    if err != nil {
+        return nil, err
+    }
+
+    var payload map[string]interface{}
+    if err := json.Unmarshal(plaintext, &payload); err != nil {
+        return nil, err
+    }
+
+    if exp, ok := payload["exp"].(float64); ok {
+        if time.Now().Unix() > int64(exp) {
+            return nil, fmt.Errorf("token has expired")
+        }
+    }
+
+    return payload, nil
+}
+```
+
+</CodeGroup>
+
+## API Endpoints
+
+### Admin Endpoints
+
+These endpoints require the `context_links:manage` permission.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/v1/context-links` | List all context links |
+| `GET` | `/api/v1/context-links/{id}` | Get a specific context link |
+| `POST` | `/api/v1/context-links` | Create a new context link |
+| `PUT` | `/api/v1/context-links/{id}` | Update a context link |
+| `DELETE` | `/api/v1/context-links/{id}` | Delete a context link |
+| `PUT` | `/api/v1/context-links/{id}/toggle` | Toggle a context link's active status |
+
+### Agent Endpoints
+
+These endpoints require authentication.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| `GET` | `/api/v1/context-links/active` | List all active context links |
+| `GET` | `/api/v1/context-links/{id}/url?conversation_uuid=XXX` | Generate a URL with variables substituted |
+
+## Best Practices
+
+<Check>
+**Do:**
+- Use encrypted token mode when passing data to external or semi-trusted systems
+- Set short token expiry times to limit the window of exposure
+- Use plain variable mode only for trusted internal tools behind your network
+- Give context links clear, descriptive names so agents know what they open
+</Check>
+
+<Info>
+**Security note:** Plain variable mode substitutes contact details directly into the URL with no encryption. Only use this mode for internal tools where URL exposure is not a concern. For anything external-facing, use encrypted token mode.
+</Info>
