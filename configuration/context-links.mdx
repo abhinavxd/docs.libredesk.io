@@ -5,18 +5,6 @@ description: Open external tools from the conversation sidebar with contact deta
 
 Context Links are buttons in the conversation sidebar that open external URLs with contact and conversation details filled in. Agents click them to jump to CRMs, billing systems, or internal dashboards without copy-pasting identifiers.
 
-## Setup
-
-Go to **Admin > Integrations > Context Links** and click **Create Context Link**.
-
-| Field | Description |
-|-------|-------------|
-| **Name** | Label shown to agents (e.g., "Open in CRM") |
-| **URL Template** | URL with placeholders (see below) |
-| **Secret** | 32-character key, required only if you use `{{token}}` |
-| **Token Expiry** | How long the encrypted token stays valid |
-| **Status** | Enable or disable the link |
-
 ## URL Template Variables
 
 These placeholders are replaced with the current contact's details when an agent clicks the link.
@@ -25,12 +13,38 @@ These placeholders are replaced with the current contact's details when an agent
 |----------|-------------|
 | `{{email}}` | Contact's email |
 | `{{phone}}` | Contact's phone number |
+| `{{phone_country_code}}` | Contact's phone country code |
 | `{{external_user_id}}` | Contact's external user ID |
 | `{{contact_id}}` | Contact's internal Libredesk ID |
 | `{{first_name}}` | Contact's first name |
 | `{{last_name}}` | Contact's last name |
 | `{{conversation_uuid}}` | UUID of the current conversation |
 | `{{token}}` | Encrypted token containing all fields (requires secret) |
+
+All values except `{{contact_id}}` and `{{conversation_uuid}}` are URL-encoded automatically.
+
+### Examples
+
+**Simple lookup by email:**
+```
+https://crm.example.com/contacts?email={{email}}
+```
+
+**Multiple parameters:**
+```
+https://billing.example.com/customer?ext_id={{external_user_id}}&email={{email}}
+```
+
+**Internal dashboard with conversation context:**
+```
+https://dashboard.internal/lookup?contact={{contact_id}}&conv={{conversation_uuid}}
+```
+
+**Secure integration with encrypted token:**
+```
+https://api.example.com/auth/libredesk?token={{token}}
+```
+The receiving system decrypts the token to get all contact and agent fields in one payload, without exposing them in the URL.
 
 ## Encrypted Token
 
