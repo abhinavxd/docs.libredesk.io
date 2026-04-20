@@ -205,26 +205,38 @@ Instead of using a `config.toml` file, you can configure Libredesk entirely thro
 | `db.host = "localhost"` | `LIBREDESK_DB__HOST=localhost` |
 
 
-## Nginx Configuration
+## Nginx Configuration (Recommended)
 
-Libredesk uses WebSockets for real-time updates. If you're using Nginx as a reverse proxy, you can add a configuration like this:
+We recommend running Libredesk behind Nginx as a reverse proxy. Save the block below to `/etc/nginx/sites-available/libredesk`, then enable it:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/libredesk /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
+```
+
+<Warning>
+The proxy must set `X-Client-IP` to `$remote_addr` - Libredesk uses this header to identify the client for rate limiting and audit logs. Without it, the proxy's IP is treated as the client.
+</Warning>
 
 ```nginx
 server {
     listen 80;
     server_name your-domain.com;
-    
-    client_max_body_size 100M;
-    
+    client_max_body_size 30M;
+
     location / {
         proxy_pass http://localhost:9000;
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection 'upgrade';
         proxy_set_header Host $host;
+        
         proxy_set_header X-Client-IP $remote_addr;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        # If behind Cloudflare (or another CDN), forward the CDN's real-client header
+        # instead, AND firewall nginx to only accept connections from the CDN's IP range,
+        # otherwise clients can bypass the CDN and spoof this header directly.
+        # proxy_set_header X-Client-IP $http_cf_connecting_ip;   # Cloudflare
+
         proxy_cache_bypass $http_upgrade;
     }
 }
