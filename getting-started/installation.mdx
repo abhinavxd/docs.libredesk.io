@@ -207,16 +207,23 @@ Instead of using a `config.toml` file, you can configure Libredesk entirely thro
 
 ## Nginx Configuration (Recommended)
 
-We recommend running Libredesk behind Nginx as a reverse proxy. Save the block below to `/etc/nginx/sites-available/libredesk`, then enable it:
+We recommend running Libredesk behind Nginx as a reverse proxy.
+
+Install nginx if you don't have it:
 
 ```bash
-sudo ln -s /etc/nginx/sites-available/libredesk /etc/nginx/sites-enabled/
-sudo nginx -t && sudo systemctl reload nginx
+# Debian / Ubuntu
+sudo apt update && sudo apt install nginx
+
+# RHEL / Fedora / CentOS
+sudo dnf install nginx && sudo systemctl enable --now nginx
 ```
 
 <Warning>
 The proxy must set `X-Client-IP` to `$remote_addr` - Libredesk uses this header to identify the client for rate limiting and audit logs. Without it, the proxy's IP is treated as the client.
 </Warning>
+
+Save the following as `/etc/nginx/sites-available/libredesk`:
 
 ```nginx
 server {
@@ -240,4 +247,11 @@ server {
         proxy_cache_bypass $http_upgrade;
     }
 }
+```
+
+Then enable it and reload nginx:
+
+```bash
+sudo ln -s /etc/nginx/sites-available/libredesk /etc/nginx/sites-enabled/
+sudo nginx -t && sudo systemctl reload nginx
 ```
