@@ -1,0 +1,202 @@
+---
+title: Live Chat
+description: Embed the Libredesk chat widget on your website and verify user identity with JWTs
+---
+
+The Libredesk live chat widget embeds on any website as a single `<script>` tag. Visitors can start conversations anonymously, or you can verify their identity with a server-signed JWT so the widget loads with their profile attached.
+
+## Create a live chat inbox
+
+<Steps>
+  <Step title="Add the inbox">
+    Go to **Admin → Inboxes → New inbox → Live chat**. Fill in the name, brand name, and website URL.
+  </Step>
+
+  <Step title="Configure appearance and messages">
+    Set the launcher colour, position, logo, greeting message, and home screen under the **Appearance** and **Messages** tabs. All changes are live as soon as you save.
+  </Step>
+
+  <Step title="Copy the install snippet">
+    Open the **Installation** tab and copy the `<script>` snippet shown there. Paste it before the closing `</body>` tag on every page where the widget should appear.
+  </Step>
+</Steps>
+
+## Install the widget
+
+The anonymous snippet looks like this:
+
+```html
+<script>
+  window.LibredeskSettings = {
+    baseURL: 'https://support.example.com',
+    inboxID: 'YOUR_INBOX_UUID'
+  };
+</script>
+<script async src="https://support.example.com/widget.js"></script>
+```
+
+`baseURL` is the URL of your Libredesk instance. `inboxID` is the UUID shown on the inbox's **Installation** tab.
+
+Anyone visiting the page can now open the widget and start a conversation. Every session is treated as a new anonymous visitor unless you add identity verification.
+
+## Identity verification
+
+If users are already signed into your product, pass a signed JWT so the widget loads with their existing Libredesk contact. Without verification, the widget cannot tell a returning user apart from a new visitor on a new device.
+
+### How it works
+
+1. Your server signs a JWT with the inbox **Secret key** (set under the **Security** tab).
+2. Your page passes that JWT to the widget via `userJWT`.
+3. Libredesk verifies the signature, then upserts the contact by `external_user_id`.
+
+The signing algorithm is **HS256** (HMAC-SHA256). The secret never leaves your server.
+
+### JWT payload
+
+```json
+{
+  "external_user_id": "your_app_user_123",
+  "email": "user@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "exp": 1735689600,
+  "contact_custom_attributes": {
+    "plan": "premium",
+    "company": "Acme Inc"
+  }
+}
+```
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `external_user_id` | Yes | Stable unique ID from your system. Used to match returning users. |
+| `email` | Yes | User's email address. |
+| `first_name` | Yes | User's first name. |
+| `last_name` | No | User's last name. |
+| `exp` | Yes | Unix timestamp (seconds) when the token expires. |
+| `contact_custom_attributes` | No | Object of custom attributes written to the contact record on login. |
+
+### Sign the token on your server
+
+<CodeGroup>
+
+```python Python
+import jwt, time
+
+payload = {
+    "external_user_id": "your_app_user_123",
+    "email": "user@example.com",
+    "first_name": "John",
+    "exp": int(time.time()) + 3600,
+}
+token = jwt.encode(payload, SECRET, algorithm="HS256")
+```
+
+```javascript Node.js
+const jwt = require('jsonwebtoken');
+
+const token = jwt.sign({
+  external_user_id: 'your_app_user_123',
+  email: 'user@example.com',
+  first_name: 'John',
+  exp: Math.floor(Date.now() / 1000) + 3600,
+}, SECRET, { algorithm: 'HS256' });
+```
+
+```go Go
+import (
+    "time"
+    "github.com/golang-jwt/jwt/v5"
+)
+
+claims := jwt.MapClaims{
+    "external_user_id": "your_app_user_123",
+    "email":            "user@example.com",
+    "first_name":       "John",
+    "exp":              time.Now().Add(time.Hour).Unix(),
+}
+token, _ := jwt.NewWithClaims(jwt.SigningMethodHS256, claims).
+    SignedString([]byte(SECRET))
+```
+
+</CodeGroup>
+
+<Warning>
+Never embed the inbox secret in client-side code. Sign the JWT on your server and inject it into the page at render time, or fetch it from an authenticated endpoint.
+</Warning>
+
+### Pass the token to the widget
+
+```html
+<script>
+  window.LibredeskSettings = {
+    baseURL: 'https://support.example.com',
+    inboxID: 'YOUR_INBOX_UUID',
+    userJWT: 'YOUR_SIGNED_JWT_TOKEN_HERE'
+  };
+</script>
+<script async src="https://support.example.com/widget.js"></script>
+```
+
+## JavaScript API
+
+Once the widget loads, `window.Libredesk` exposes these methods:
+
+| Method | Description |
+|--------|-------------|
+| `Libredesk.show()` | Open the widget. |
+| `Libredesk.hide()` | Close the widget. |
+| `Libredesk.toggle()` | Toggle between open and closed. |
+| `Libredesk.setUser(jwt)` | Log a user in after page load with a signed JWT. |
+| `Libredesk.logout()` | Clear the current session and reset to anonymous. |
+| `Libredesk.onShow(fn)` | Register a callback fired when the widget opens. |
+| `Libredesk.onHide(fn)` | Register a callback fired when the widget closes. |
+| `Libredesk.onUnreadCountChange(fn)` | Register a callback fired with the unread message count. |
+
+Example:
+
+```javascript
+window.Libredesk.onUnreadCountChange(function (count) {
+  document.title = count > 0 ? `(${count}) Inbox` : 'Inbox';
+});
+```
+
+## Conversation continuity
+
+If an agent is offline, visitors usually leave. Link the live chat inbox to an email inbox under **General → Conversation continuity** and Libredesk will email the visitor's message to the agent instead of dropping it.
+
+| Setting | Description |
+|---------|-------------|
+| `offline_threshold` | How long agents must be offline before email fallback kicks in (e.g. `10m`). |
+| `max_messages_per_email` | Batch size. Messages beyond this split into a new email. |
+| `min_email_interval` | Minimum gap between fallback emails for the same conversation. |
+
+Replies from the email thread appear back in the same live chat conversation.
+
+## Security
+
+### Trusted domains
+
+Under the **Security** tab, list the domains allowed to embed the widget. Requests from other origins are rejected. Supports wildcards:
+
+```
+example.com
+*.example.com
+staging.example.com
+```
+
+Leave this empty to allow all origins. Set it in production.
+
+### Blocked IPs
+
+Block specific IPs or CIDR ranges from opening the widget:
+
+```
+192.168.1.0/24
+10.0.0.1
+2001:db8::/32
+```
+
+### Session duration
+
+Controls how long a widget session stays authenticated before the JWT must be re-verified. Default is `10h`. Format accepts `s`, `m`, `h` (e.g. `30m`, `24h`).

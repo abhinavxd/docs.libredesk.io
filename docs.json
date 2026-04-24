@@ -31,6 +31,7 @@
             "group": "Configuration",
             "pages": [
               "configuration/connecting-inboxes",
+              "configuration/livechat",
               "configuration/email-templates",
               "configuration/sso",
               "configuration/webhooks",
