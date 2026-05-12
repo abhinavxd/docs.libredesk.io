@@ -7,14 +7,16 @@ Libredesk supports three methods for connecting email inboxes: Google OAuth, Mic
 
 ## Google setup
 
-Connect your Gmail or Google Workspace inbox using OAuth 2.0.
+Connect your Gmail or Google Workspace inbox using OAuth 2.0 or an app password.
 
-### Prerequisites
+### OAuth
+
+#### Prerequisites
 
 - A Google Cloud Console project
 - OAuth 2.0 credentials (Client ID & Client Secret)
 
-### Required OAuth scopes
+#### Required OAuth scopes
 
 When configuring your Google OAuth app, the following scopes are required:
 
@@ -23,11 +25,11 @@ When configuring your Google OAuth app, the following scopes are required:
 | `https://mail.google.com/` | Full Gmail access for reading and sending emails |
 | `https://www.googleapis.com/auth/userinfo.email` | Access to user's email address |
 
-### Configuration steps
+#### Configuration steps
 
 <Steps>
   <Step title="Get callback URL from Libredesk">
-    In Libredesk, go to Admin → Inboxes → New inbox → Google. A dialog will open with the **Callback URL** - copy this URL.
+    In Libredesk, go to Admin → Inboxes → New inbox → Google. A dialog will open with the **Callback URL**, copy this URL.
   </Step>
 
   <Step title="Create a Google Cloud project">
@@ -51,6 +53,39 @@ When configuring your Google OAuth app, the following scopes are required:
 
   <Step title="Complete setup in Libredesk">
     Back in the Libredesk dialog, enter the Client ID and Client Secret, then click Authorize. You'll be redirected to Google's consent screen to grant permissions.
+  </Step>
+</Steps>
+
+### App password
+
+If you'd rather skip the Google Cloud Console, you can connect Gmail using a 16-character app password instead. Your Google account must have [2-Step Verification](https://myaccount.google.com/signinoptions/twosv) enabled for this option to be available.
+
+<Steps>
+  <Step title="Generate an app password">
+    Visit [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords), name the app (e.g. `Libredesk`), and copy the generated 16-character password.
+  </Step>
+
+  <Step title="Add inbox in Libredesk">
+    Go to Admin → Inboxes → New inbox → **Other provider** and use these settings:
+
+    **IMAP**
+    | Field | Value |
+    |-------|-------|
+    | Host | `imap.gmail.com` |
+    | Port | `993` |
+    | TLS | SSL/TLS |
+    | Username | Your full Gmail address |
+    | Password | The app password from step 1 |
+
+    **SMTP**
+    | Field | Value |
+    |-------|-------|
+    | Host | `smtp.gmail.com` |
+    | Port | `587` |
+    | TLS | STARTTLS |
+    | Authentication Protocol | PLAIN |
+    | Username | Your full Gmail address |
+    | Password | The app password from step 1 |
   </Step>
 </Steps>
 
@@ -127,7 +162,8 @@ For self-hosted mail servers or providers that don't support OAuth, use manual I
 
 - Self-hosted mail servers
 - Email providers without OAuth support
-- App passwords for Google (if OAuth is not preferred)
+
+For Gmail specifically, see the [App password](#app-password) option under Google setup.
 
 ### Configuration steps
 
