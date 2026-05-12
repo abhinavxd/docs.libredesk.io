@@ -14,15 +14,16 @@ This repository contains the source code for the Libredesk documentation website
 
 ## Development
 
-Install the [Mintlify CLI](https://www.npmjs.com/package/mint) to preview documentation changes locally:
+Run the [Mintlify](https://www.npmjs.com/package/mint) dev server to preview documentation changes locally:
+
+```bash
+npx mint dev
+```
+
+Or install the CLI globally first:
 
 ```bash
 npm i -g mint
-```
-
-Run the development server:
-
-```bash
 mint dev
 ```
 
