@@ -23,6 +23,12 @@
             "group": "Getting Started",
             "pages": [
               "getting-started/installation",
+              {
+                "group": "Hosting Providers",
+                "pages": [
+                  "hosting-providers/railway"
+                ]
+              },
               "getting-started/upgrade",
               "getting-started/api-getting-started"
             ]

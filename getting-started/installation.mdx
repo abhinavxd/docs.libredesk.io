@@ -242,6 +242,7 @@ server {
         # If behind Cloudflare (or another CDN), forward the CDN's real-client header
         # instead, AND firewall nginx to only accept connections from the CDN's IP range,
         # otherwise clients can bypass the CDN and spoof this header directly.
+
         # proxy_set_header X-Client-IP $http_cf_connecting_ip;   # Cloudflare
 
         proxy_cache_bypass $http_upgrade;
