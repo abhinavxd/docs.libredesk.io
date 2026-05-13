@@ -7516,7 +7516,228 @@
                                                                                           }
                                                                               }
                                                             }
-                                             }
+                                             },
+                  "/api/v1/business-hours":  {
+                                                 "get":  {
+                                                             "tags":  [
+                                                                          "Business Hours"
+                                                                      ],
+                                                             "summary":  "List business hour profiles",
+                                                             "operationId":  "handleGetBusinessHours",
+                                                             "security":  [
+                                                                              {
+                                                                                  "basicAuth":  [
+
+                                                                                                ]
+                                                                              },
+                                                                              {
+                                                                                  "tokenAuth":  [
+
+                                                                                                ]
+                                                                              }
+                                                                          ],
+                                                             "responses":  {
+                                                                               "200":  {
+                                                                                           "description":  "Success",
+                                                                                           "content":  {
+                                                                                                           "application/json":  {
+                                                                                                                                    "schema":  {
+                                                                                                                                                   "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                               }
+                                                                                                                                }
+                                                                                                       }
+                                                                                       },
+                                                                               "401":  {
+                                                                                           "description":  "Unauthorized"
+                                                                                       },
+                                                                               "500":  {
+                                                                                           "description":  "Internal server error"
+                                                                                       }
+                                                                           }
+                                                         },
+                                                 "post":  {
+                                                              "tags":  [
+                                                                           "Business Hours"
+                                                                       ],
+                                                              "summary":  "Create business hour profile",
+                                                              "operationId":  "handleCreateBusinessHours",
+                                                              "security":  [
+                                                                               {
+                                                                                   "basicAuth":  [
+
+                                                                                                 ]
+                                                                               },
+                                                                               {
+                                                                                   "tokenAuth":  [
+
+                                                                                                 ]
+                                                                               }
+                                                                           ],
+                                                              "requestBody":  {
+                                                                                  "required":  true,
+                                                                                  "content":  {
+                                                                                                  "application/json":  {
+                                                                                                                           "schema":  {
+                                                                                                                                          "type":  "object",
+                                                                                                                                          "additionalProperties":  true
+                                                                                                                                      }
+                                                                                                                       }
+                                                                                              }
+                                                                              },
+                                                              "responses":  {
+                                                                                "200":  {
+                                                                                            "description":  "Success",
+                                                                                            "content":  {
+                                                                                                            "application/json":  {
+                                                                                                                                     "schema":  {
+                                                                                                                                                    "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                }
+                                                                                                                                 }
+                                                                                                        }
+                                                                                        },
+                                                                                "401":  {
+                                                                                            "description":  "Unauthorized"
+                                                                                        },
+                                                                                "500":  {
+                                                                                            "description":  "Internal server error"
+                                                                                        }
+                                                                            }
+                                                          }
+                                             },
+                  "/api/v1/business-hours/{id}":  {
+                                                      "parameters":  [
+                                                                         {
+                                                                             "name":  "id",
+                                                                             "in":  "path",
+                                                                             "required":  true,
+                                                                             "schema":  {
+                                                                                            "type":  "string"
+                                                                                        }
+                                                                         }
+                                                                     ],
+                                                      "get":  {
+                                                                  "tags":  [
+                                                                               "Business Hours"
+                                                                           ],
+                                                                  "summary":  "Get business hour profile",
+                                                                  "operationId":  "handleGetBusinessHour",
+                                                                  "security":  [
+                                                                                   {
+                                                                                       "basicAuth":  [
+
+                                                                                                     ]
+                                                                                   },
+                                                                                   {
+                                                                                       "tokenAuth":  [
+
+                                                                                                     ]
+                                                                                   }
+                                                                               ],
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "Success",
+                                                                                                "content":  {
+                                                                                                                "application/json":  {
+                                                                                                                                         "schema":  {
+                                                                                                                                                        "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                    }
+                                                                                                                                     }
+                                                                                                            }
+                                                                                            },
+                                                                                    "401":  {
+                                                                                                "description":  "Unauthorized"
+                                                                                            },
+                                                                                    "500":  {
+                                                                                                "description":  "Internal server error"
+                                                                                            }
+                                                                                }
+                                                              },
+                                                      "put":  {
+                                                                  "tags":  [
+                                                                               "Business Hours"
+                                                                           ],
+                                                                  "summary":  "Update business hour profile",
+                                                                  "operationId":  "handleUpdateBusinessHour",
+                                                                  "security":  [
+                                                                                   {
+                                                                                       "basicAuth":  [
+
+                                                                                                     ]
+                                                                                   },
+                                                                                   {
+                                                                                       "tokenAuth":  [
+
+                                                                                                     ]
+                                                                                   }
+                                                                               ],
+                                                                  "requestBody":  {
+                                                                                      "required":  true,
+                                                                                      "content":  {
+                                                                                                      "application/json":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "type":  "object",
+                                                                                                                                              "additionalProperties":  true
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                  }
+                                                                                  },
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "Success",
+                                                                                                "content":  {
+                                                                                                                "application/json":  {
+                                                                                                                                         "schema":  {
+                                                                                                                                                        "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                    }
+                                                                                                                                     }
+                                                                                                            }
+                                                                                            },
+                                                                                    "401":  {
+                                                                                                "description":  "Unauthorized"
+                                                                                            },
+                                                                                    "500":  {
+                                                                                                "description":  "Internal server error"
+                                                                                            }
+                                                                                }
+                                                              },
+                                                      "delete":  {
+                                                                     "tags":  [
+                                                                                  "Business Hours"
+                                                                              ],
+                                                                     "summary":  "Delete business hour profile",
+                                                                     "operationId":  "handleDeleteBusinessHour",
+                                                                     "security":  [
+                                                                                      {
+                                                                                          "basicAuth":  [
+
+                                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                          "tokenAuth":  [
+
+                                                                                                        ]
+                                                                                      }
+                                                                                  ],
+                                                                     "responses":  {
+                                                                                       "200":  {
+                                                                                                   "description":  "Success",
+                                                                                                   "content":  {
+                                                                                                                   "application/json":  {
+                                                                                                                                            "schema":  {
+                                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                       }
+                                                                                                                                        }
+                                                                                                               }
+                                                                                               },
+                                                                                       "401":  {
+                                                                                                   "description":  "Unauthorized"
+                                                                                               },
+                                                                                       "500":  {
+                                                                                                   "description":  "Internal server error"
+                                                                                               }
+                                                                                   }
+                                                                 }
+                                                  }
               },
     "components":  {
                        "securitySchemes":  {
