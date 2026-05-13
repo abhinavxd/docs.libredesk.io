@@ -7958,7 +7958,228 @@
                                                                                     }
                                                                         }
                                                       }
-                                       }
+                                       },
+                  "/api/v1/custom-attributes":  {
+                                                    "get":  {
+                                                                "tags":  [
+                                                                             "Custom Attributes"
+                                                                         ],
+                                                                "summary":  "List custom attributes",
+                                                                "operationId":  "handleGetCustomAttributes",
+                                                                "security":  [
+                                                                                 {
+                                                                                     "basicAuth":  [
+
+                                                                                                   ]
+                                                                                 },
+                                                                                 {
+                                                                                     "tokenAuth":  [
+
+                                                                                                   ]
+                                                                                 }
+                                                                             ],
+                                                                "responses":  {
+                                                                                  "200":  {
+                                                                                              "description":  "Success",
+                                                                                              "content":  {
+                                                                                                              "application/json":  {
+                                                                                                                                       "schema":  {
+                                                                                                                                                      "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                  }
+                                                                                                                                   }
+                                                                                                          }
+                                                                                          },
+                                                                                  "401":  {
+                                                                                              "description":  "Unauthorized"
+                                                                                          },
+                                                                                  "500":  {
+                                                                                              "description":  "Internal server error"
+                                                                                          }
+                                                                              }
+                                                            },
+                                                    "post":  {
+                                                                 "tags":  [
+                                                                              "Custom Attributes"
+                                                                          ],
+                                                                 "summary":  "Create custom attribute",
+                                                                 "operationId":  "handleCreateCustomAttribute",
+                                                                 "security":  [
+                                                                                  {
+                                                                                      "basicAuth":  [
+
+                                                                                                    ]
+                                                                                  },
+                                                                                  {
+                                                                                      "tokenAuth":  [
+
+                                                                                                    ]
+                                                                                  }
+                                                                              ],
+                                                                 "requestBody":  {
+                                                                                     "required":  true,
+                                                                                     "content":  {
+                                                                                                     "application/json":  {
+                                                                                                                              "schema":  {
+                                                                                                                                             "type":  "object",
+                                                                                                                                             "additionalProperties":  true
+                                                                                                                                         }
+                                                                                                                          }
+                                                                                                 }
+                                                                                 },
+                                                                 "responses":  {
+                                                                                   "200":  {
+                                                                                               "description":  "Success",
+                                                                                               "content":  {
+                                                                                                               "application/json":  {
+                                                                                                                                        "schema":  {
+                                                                                                                                                       "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                   }
+                                                                                                                                    }
+                                                                                                           }
+                                                                                           },
+                                                                                   "401":  {
+                                                                                               "description":  "Unauthorized"
+                                                                                           },
+                                                                                   "500":  {
+                                                                                               "description":  "Internal server error"
+                                                                                           }
+                                                                               }
+                                                             }
+                                                },
+                  "/api/v1/custom-attributes/{id}":  {
+                                                         "parameters":  [
+                                                                            {
+                                                                                "name":  "id",
+                                                                                "in":  "path",
+                                                                                "required":  true,
+                                                                                "schema":  {
+                                                                                               "type":  "string"
+                                                                                           }
+                                                                            }
+                                                                        ],
+                                                         "get":  {
+                                                                     "tags":  [
+                                                                                  "Custom Attributes"
+                                                                              ],
+                                                                     "summary":  "Get custom attribute",
+                                                                     "operationId":  "handleGetCustomAttribute",
+                                                                     "security":  [
+                                                                                      {
+                                                                                          "basicAuth":  [
+
+                                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                          "tokenAuth":  [
+
+                                                                                                        ]
+                                                                                      }
+                                                                                  ],
+                                                                     "responses":  {
+                                                                                       "200":  {
+                                                                                                   "description":  "Success",
+                                                                                                   "content":  {
+                                                                                                                   "application/json":  {
+                                                                                                                                            "schema":  {
+                                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                       }
+                                                                                                                                        }
+                                                                                                               }
+                                                                                               },
+                                                                                       "401":  {
+                                                                                                   "description":  "Unauthorized"
+                                                                                               },
+                                                                                       "500":  {
+                                                                                                   "description":  "Internal server error"
+                                                                                               }
+                                                                                   }
+                                                                 },
+                                                         "put":  {
+                                                                     "tags":  [
+                                                                                  "Custom Attributes"
+                                                                              ],
+                                                                     "summary":  "Update custom attribute",
+                                                                     "operationId":  "handleUpdateCustomAttribute",
+                                                                     "security":  [
+                                                                                      {
+                                                                                          "basicAuth":  [
+
+                                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                          "tokenAuth":  [
+
+                                                                                                        ]
+                                                                                      }
+                                                                                  ],
+                                                                     "requestBody":  {
+                                                                                         "required":  true,
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "type":  "object",
+                                                                                                                                                 "additionalProperties":  true
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                     "responses":  {
+                                                                                       "200":  {
+                                                                                                   "description":  "Success",
+                                                                                                   "content":  {
+                                                                                                                   "application/json":  {
+                                                                                                                                            "schema":  {
+                                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                       }
+                                                                                                                                        }
+                                                                                                               }
+                                                                                               },
+                                                                                       "401":  {
+                                                                                                   "description":  "Unauthorized"
+                                                                                               },
+                                                                                       "500":  {
+                                                                                                   "description":  "Internal server error"
+                                                                                               }
+                                                                                   }
+                                                                 },
+                                                         "delete":  {
+                                                                        "tags":  [
+                                                                                     "Custom Attributes"
+                                                                                 ],
+                                                                        "summary":  "Delete custom attribute",
+                                                                        "operationId":  "handleDeleteCustomAttribute",
+                                                                        "security":  [
+                                                                                         {
+                                                                                             "basicAuth":  [
+
+                                                                                                           ]
+                                                                                         },
+                                                                                         {
+                                                                                             "tokenAuth":  [
+
+                                                                                                           ]
+                                                                                         }
+                                                                                     ],
+                                                                        "responses":  {
+                                                                                          "200":  {
+                                                                                                      "description":  "Success",
+                                                                                                      "content":  {
+                                                                                                                      "application/json":  {
+                                                                                                                                               "schema":  {
+                                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                          }
+                                                                                                                                           }
+                                                                                                                  }
+                                                                                                  },
+                                                                                          "401":  {
+                                                                                                      "description":  "Unauthorized"
+                                                                                                  },
+                                                                                          "500":  {
+                                                                                                      "description":  "Internal server error"
+                                                                                                  }
+                                                                                      }
+                                                                    }
+                                                     }
               },
     "components":  {
                        "securitySchemes":  {
