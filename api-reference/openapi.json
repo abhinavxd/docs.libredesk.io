@@ -5387,7 +5387,46 @@
                                                                                              }
                                                                                  }
                                                                }
-                                                  }
+                                                  },
+                  "/api/v1/teams/compact":  {
+                                                "get":  {
+                                                            "tags":  [
+                                                                         "Teams"
+                                                                     ],
+                                                            "summary":  "Get compact team list",
+                                                            "operationId":  "handleGetTeamsCompact",
+                                                            "security":  [
+                                                                             {
+                                                                                 "basicAuth":  [
+
+                                                                                               ]
+                                                                             },
+                                                                             {
+                                                                                 "tokenAuth":  [
+
+                                                                                               ]
+                                                                             }
+                                                                         ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Success",
+                                                                                          "content":  {
+                                                                                                          "application/json":  {
+                                                                                                                                   "schema":  {
+                                                                                                                                                  "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                              }
+                                                                                                                               }
+                                                                                                      }
+                                                                                      },
+                                                                              "401":  {
+                                                                                          "description":  "Unauthorized"
+                                                                                      },
+                                                                              "500":  {
+                                                                                          "description":  "Internal server error"
+                                                                                      }
+                                                                          }
+                                                        }
+                                            }
               },
     "components":  {
                        "securitySchemes":  {
