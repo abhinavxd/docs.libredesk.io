@@ -3913,7 +3913,491 @@
                                                                                                       }
                                                                                           }
                                                                         }
-                                                         }
+                                                         },
+                  "/api/v1/views/me":  {
+                                           "get":  {
+                                                       "tags":  [
+                                                                    "Views"
+                                                                ],
+                                                       "summary":  "Get personal views for current user",
+                                                       "operationId":  "handleGetMyViews",
+                                                       "security":  [
+                                                                        {
+                                                                            "basicAuth":  [
+
+                                                                                          ]
+                                                                        },
+                                                                        {
+                                                                            "tokenAuth":  [
+
+                                                                                          ]
+                                                                        }
+                                                                    ],
+                                                       "responses":  {
+                                                                         "200":  {
+                                                                                     "description":  "Success",
+                                                                                     "content":  {
+                                                                                                     "application/json":  {
+                                                                                                                              "schema":  {
+                                                                                                                                             "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                         }
+                                                                                                                          }
+                                                                                                 }
+                                                                                 },
+                                                                         "401":  {
+                                                                                     "description":  "Unauthorized"
+                                                                                 },
+                                                                         "500":  {
+                                                                                     "description":  "Internal server error"
+                                                                                 }
+                                                                     }
+                                                   },
+                                           "post":  {
+                                                        "tags":  [
+                                                                     "Views"
+                                                                 ],
+                                                        "summary":  "Create personal view",
+                                                        "operationId":  "handleCreateMyView",
+                                                        "security":  [
+                                                                         {
+                                                                             "basicAuth":  [
+
+                                                                                           ]
+                                                                         },
+                                                                         {
+                                                                             "tokenAuth":  [
+
+                                                                                           ]
+                                                                         }
+                                                                     ],
+                                                        "requestBody":  {
+                                                                            "required":  true,
+                                                                            "content":  {
+                                                                                            "application/json":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object",
+                                                                                                                                    "properties":  {
+                                                                                                                                                       "name":  {
+                                                                                                                                                                    "type":  "string"
+                                                                                                                                                                },
+                                                                                                                                                       "filters":  {
+                                                                                                                                                                       "type":  "object"
+                                                                                                                                                                   }
+                                                                                                                                                   }
+                                                                                                                                }
+                                                                                                                 }
+                                                                                        }
+                                                                        },
+                                                        "responses":  {
+                                                                          "200":  {
+                                                                                      "description":  "Success",
+                                                                                      "content":  {
+                                                                                                      "application/json":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                  }
+                                                                                  },
+                                                                          "401":  {
+                                                                                      "description":  "Unauthorized"
+                                                                                  },
+                                                                          "500":  {
+                                                                                      "description":  "Internal server error"
+                                                                                  }
+                                                                      }
+                                                    }
+                                       },
+                  "/api/v1/views/me/{id}":  {
+                                                "parameters":  [
+                                                                   {
+                                                                       "name":  "id",
+                                                                       "in":  "path",
+                                                                       "required":  true,
+                                                                       "schema":  {
+                                                                                      "type":  "string"
+                                                                                  }
+                                                                   }
+                                                               ],
+                                                "put":  {
+                                                            "tags":  [
+                                                                         "Views"
+                                                                     ],
+                                                            "summary":  "Update personal view",
+                                                            "operationId":  "handleUpdateMyView",
+                                                            "security":  [
+                                                                             {
+                                                                                 "basicAuth":  [
+
+                                                                                               ]
+                                                                             },
+                                                                             {
+                                                                                 "tokenAuth":  [
+
+                                                                                               ]
+                                                                             }
+                                                                         ],
+                                                            "requestBody":  {
+                                                                                "required":  true,
+                                                                                "content":  {
+                                                                                                "application/json":  {
+                                                                                                                         "schema":  {
+                                                                                                                                        "type":  "object",
+                                                                                                                                        "properties":  {
+                                                                                                                                                           "name":  {
+                                                                                                                                                                        "type":  "string"
+                                                                                                                                                                    },
+                                                                                                                                                           "filters":  {
+                                                                                                                                                                           "type":  "object"
+                                                                                                                                                                       }
+                                                                                                                                                       }
+                                                                                                                                    }
+                                                                                                                     }
+                                                                                            }
+                                                                            },
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Success",
+                                                                                          "content":  {
+                                                                                                          "application/json":  {
+                                                                                                                                   "schema":  {
+                                                                                                                                                  "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                              }
+                                                                                                                               }
+                                                                                                      }
+                                                                                      },
+                                                                              "401":  {
+                                                                                          "description":  "Unauthorized"
+                                                                                      },
+                                                                              "500":  {
+                                                                                          "description":  "Internal server error"
+                                                                                      }
+                                                                          }
+                                                        },
+                                                "delete":  {
+                                                               "tags":  [
+                                                                            "Views"
+                                                                        ],
+                                                               "summary":  "Delete personal view",
+                                                               "operationId":  "handleDeleteMyView",
+                                                               "security":  [
+                                                                                {
+                                                                                    "basicAuth":  [
+
+                                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                    "tokenAuth":  [
+
+                                                                                                  ]
+                                                                                }
+                                                                            ],
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "Success",
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         }
+                                                                                         },
+                                                                                 "401":  {
+                                                                                             "description":  "Unauthorized"
+                                                                                         },
+                                                                                 "500":  {
+                                                                                             "description":  "Internal server error"
+                                                                                         }
+                                                                             }
+                                                           }
+                                            },
+                  "/api/v1/views/shared":  {
+                                               "get":  {
+                                                           "tags":  [
+                                                                        "Views"
+                                                                    ],
+                                                           "summary":  "Get shared views accessible to current user",
+                                                           "operationId":  "handleGetSharedViewsAccessible",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       }
+                                           },
+                  "/api/v1/shared-views":  {
+                                               "get":  {
+                                                           "tags":  [
+                                                                        "Views"
+                                                                    ],
+                                                           "summary":  "Get all shared views (admin)",
+                                                           "operationId":  "handleGetAllSharedViews",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       },
+                                               "post":  {
+                                                            "tags":  [
+                                                                         "Views"
+                                                                     ],
+                                                            "summary":  "Create shared view",
+                                                            "operationId":  "handleCreateSharedView",
+                                                            "security":  [
+                                                                             {
+                                                                                 "basicAuth":  [
+
+                                                                                               ]
+                                                                             },
+                                                                             {
+                                                                                 "tokenAuth":  [
+
+                                                                                               ]
+                                                                             }
+                                                                         ],
+                                                            "requestBody":  {
+                                                                                "required":  true,
+                                                                                "content":  {
+                                                                                                "application/json":  {
+                                                                                                                         "schema":  {
+                                                                                                                                        "type":  "object",
+                                                                                                                                        "properties":  {
+                                                                                                                                                           "name":  {
+                                                                                                                                                                        "type":  "string"
+                                                                                                                                                                    },
+                                                                                                                                                           "filters":  {
+                                                                                                                                                                           "type":  "object"
+                                                                                                                                                                       },
+                                                                                                                                                           "visibility":  {
+                                                                                                                                                                              "type":  "string"
+                                                                                                                                                                          },
+                                                                                                                                                           "team_id":  {
+                                                                                                                                                                           "type":  "integer"
+                                                                                                                                                                       }
+                                                                                                                                                       }
+                                                                                                                                    }
+                                                                                                                     }
+                                                                                            }
+                                                                            },
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Success",
+                                                                                          "content":  {
+                                                                                                          "application/json":  {
+                                                                                                                                   "schema":  {
+                                                                                                                                                  "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                              }
+                                                                                                                               }
+                                                                                                      }
+                                                                                      },
+                                                                              "401":  {
+                                                                                          "description":  "Unauthorized"
+                                                                                      },
+                                                                              "500":  {
+                                                                                          "description":  "Internal server error"
+                                                                                      }
+                                                                          }
+                                                        }
+                                           },
+                  "/api/v1/shared-views/{id}":  {
+                                                    "parameters":  [
+                                                                       {
+                                                                           "name":  "id",
+                                                                           "in":  "path",
+                                                                           "required":  true,
+                                                                           "schema":  {
+                                                                                          "type":  "string"
+                                                                                      }
+                                                                       }
+                                                                   ],
+                                                    "get":  {
+                                                                "tags":  [
+                                                                             "Views"
+                                                                         ],
+                                                                "summary":  "Get single shared view",
+                                                                "operationId":  "handleGetSharedView",
+                                                                "security":  [
+                                                                                 {
+                                                                                     "basicAuth":  [
+
+                                                                                                   ]
+                                                                                 },
+                                                                                 {
+                                                                                     "tokenAuth":  [
+
+                                                                                                   ]
+                                                                                 }
+                                                                             ],
+                                                                "responses":  {
+                                                                                  "200":  {
+                                                                                              "description":  "Success",
+                                                                                              "content":  {
+                                                                                                              "application/json":  {
+                                                                                                                                       "schema":  {
+                                                                                                                                                      "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                  }
+                                                                                                                                   }
+                                                                                                          }
+                                                                                          },
+                                                                                  "401":  {
+                                                                                              "description":  "Unauthorized"
+                                                                                          },
+                                                                                  "500":  {
+                                                                                              "description":  "Internal server error"
+                                                                                          }
+                                                                              }
+                                                            },
+                                                    "put":  {
+                                                                "tags":  [
+                                                                             "Views"
+                                                                         ],
+                                                                "summary":  "Update shared view",
+                                                                "operationId":  "handleUpdateSharedView",
+                                                                "security":  [
+                                                                                 {
+                                                                                     "basicAuth":  [
+
+                                                                                                   ]
+                                                                                 },
+                                                                                 {
+                                                                                     "tokenAuth":  [
+
+                                                                                                   ]
+                                                                                 }
+                                                                             ],
+                                                                "requestBody":  {
+                                                                                    "required":  true,
+                                                                                    "content":  {
+                                                                                                    "application/json":  {
+                                                                                                                             "schema":  {
+                                                                                                                                            "type":  "object",
+                                                                                                                                            "properties":  {
+                                                                                                                                                               "name":  {
+                                                                                                                                                                            "type":  "string"
+                                                                                                                                                                        },
+                                                                                                                                                               "filters":  {
+                                                                                                                                                                               "type":  "object"
+                                                                                                                                                                           },
+                                                                                                                                                               "visibility":  {
+                                                                                                                                                                                  "type":  "string"
+                                                                                                                                                                              },
+                                                                                                                                                               "team_id":  {
+                                                                                                                                                                               "type":  "integer"
+                                                                                                                                                                           }
+                                                                                                                                                           }
+                                                                                                                                        }
+                                                                                                                         }
+                                                                                                }
+                                                                                },
+                                                                "responses":  {
+                                                                                  "200":  {
+                                                                                              "description":  "Success",
+                                                                                              "content":  {
+                                                                                                              "application/json":  {
+                                                                                                                                       "schema":  {
+                                                                                                                                                      "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                  }
+                                                                                                                                   }
+                                                                                                          }
+                                                                                          },
+                                                                                  "401":  {
+                                                                                              "description":  "Unauthorized"
+                                                                                          },
+                                                                                  "500":  {
+                                                                                              "description":  "Internal server error"
+                                                                                          }
+                                                                              }
+                                                            },
+                                                    "delete":  {
+                                                                   "tags":  [
+                                                                                "Views"
+                                                                            ],
+                                                                   "summary":  "Delete shared view",
+                                                                   "operationId":  "handleDeleteSharedView",
+                                                                   "security":  [
+                                                                                    {
+                                                                                        "basicAuth":  [
+
+                                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                        "tokenAuth":  [
+
+                                                                                                      ]
+                                                                                    }
+                                                                                ],
+                                                                   "responses":  {
+                                                                                     "200":  {
+                                                                                                 "description":  "Success",
+                                                                                                 "content":  {
+                                                                                                                 "application/json":  {
+                                                                                                                                          "schema":  {
+                                                                                                                                                         "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                     }
+                                                                                                                                      }
+                                                                                                             }
+                                                                                             },
+                                                                                     "401":  {
+                                                                                                 "description":  "Unauthorized"
+                                                                                             },
+                                                                                     "500":  {
+                                                                                                 "description":  "Internal server error"
+                                                                                             }
+                                                                                 }
+                                                               }
+                                                }
               },
     "components":  {
                        "securitySchemes":  {
