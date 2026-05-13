@@ -3299,7 +3299,228 @@
                                                                                                      }
                                                                                          }
                                                                        }
-                                                           }
+                                                           },
+                  "/api/v1/oidc":  {
+                                       "get":  {
+                                                   "tags":  [
+                                                                "OIDC"
+                                                            ],
+                                                   "summary":  "List all OIDC providers",
+                                                   "operationId":  "handleGetOIDCProviders",
+                                                   "security":  [
+                                                                    {
+                                                                        "basicAuth":  [
+
+                                                                                      ]
+                                                                    },
+                                                                    {
+                                                                        "tokenAuth":  [
+
+                                                                                      ]
+                                                                    }
+                                                                ],
+                                                   "responses":  {
+                                                                     "200":  {
+                                                                                 "description":  "Success",
+                                                                                 "content":  {
+                                                                                                 "application/json":  {
+                                                                                                                          "schema":  {
+                                                                                                                                         "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                     }
+                                                                                                                      }
+                                                                                             }
+                                                                             },
+                                                                     "401":  {
+                                                                                 "description":  "Unauthorized"
+                                                                             },
+                                                                     "500":  {
+                                                                                 "description":  "Internal server error"
+                                                                             }
+                                                                 }
+                                               },
+                                       "post":  {
+                                                    "tags":  [
+                                                                 "OIDC"
+                                                             ],
+                                                    "summary":  "Create OIDC provider",
+                                                    "operationId":  "handleCreateOIDCProvider",
+                                                    "security":  [
+                                                                     {
+                                                                         "basicAuth":  [
+
+                                                                                       ]
+                                                                     },
+                                                                     {
+                                                                         "tokenAuth":  [
+
+                                                                                       ]
+                                                                     }
+                                                                 ],
+                                                    "requestBody":  {
+                                                                        "required":  true,
+                                                                        "content":  {
+                                                                                        "application/json":  {
+                                                                                                                 "schema":  {
+                                                                                                                                "type":  "object",
+                                                                                                                                "additionalProperties":  true
+                                                                                                                            }
+                                                                                                             }
+                                                                                    }
+                                                                    },
+                                                    "responses":  {
+                                                                      "200":  {
+                                                                                  "description":  "Success",
+                                                                                  "content":  {
+                                                                                                  "application/json":  {
+                                                                                                                           "schema":  {
+                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                      }
+                                                                                                                       }
+                                                                                              }
+                                                                              },
+                                                                      "401":  {
+                                                                                  "description":  "Unauthorized"
+                                                                              },
+                                                                      "500":  {
+                                                                                  "description":  "Internal server error"
+                                                                              }
+                                                                  }
+                                                }
+                                   },
+                  "/api/v1/oidc/{id}":  {
+                                            "parameters":  [
+                                                               {
+                                                                   "name":  "id",
+                                                                   "in":  "path",
+                                                                   "required":  true,
+                                                                   "schema":  {
+                                                                                  "type":  "string"
+                                                                              }
+                                                               }
+                                                           ],
+                                            "get":  {
+                                                        "tags":  [
+                                                                     "OIDC"
+                                                                 ],
+                                                        "summary":  "Get OIDC provider",
+                                                        "operationId":  "handleGetOIDCProvider",
+                                                        "security":  [
+                                                                         {
+                                                                             "basicAuth":  [
+
+                                                                                           ]
+                                                                         },
+                                                                         {
+                                                                             "tokenAuth":  [
+
+                                                                                           ]
+                                                                         }
+                                                                     ],
+                                                        "responses":  {
+                                                                          "200":  {
+                                                                                      "description":  "Success",
+                                                                                      "content":  {
+                                                                                                      "application/json":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                  }
+                                                                                  },
+                                                                          "401":  {
+                                                                                      "description":  "Unauthorized"
+                                                                                  },
+                                                                          "500":  {
+                                                                                      "description":  "Internal server error"
+                                                                                  }
+                                                                      }
+                                                    },
+                                            "put":  {
+                                                        "tags":  [
+                                                                     "OIDC"
+                                                                 ],
+                                                        "summary":  "Update OIDC provider",
+                                                        "operationId":  "handleUpdateOIDCProvider",
+                                                        "security":  [
+                                                                         {
+                                                                             "basicAuth":  [
+
+                                                                                           ]
+                                                                         },
+                                                                         {
+                                                                             "tokenAuth":  [
+
+                                                                                           ]
+                                                                         }
+                                                                     ],
+                                                        "requestBody":  {
+                                                                            "required":  true,
+                                                                            "content":  {
+                                                                                            "application/json":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object",
+                                                                                                                                    "additionalProperties":  true
+                                                                                                                                }
+                                                                                                                 }
+                                                                                        }
+                                                                        },
+                                                        "responses":  {
+                                                                          "200":  {
+                                                                                      "description":  "Success",
+                                                                                      "content":  {
+                                                                                                      "application/json":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                  }
+                                                                                  },
+                                                                          "401":  {
+                                                                                      "description":  "Unauthorized"
+                                                                                  },
+                                                                          "500":  {
+                                                                                      "description":  "Internal server error"
+                                                                                  }
+                                                                      }
+                                                    },
+                                            "delete":  {
+                                                           "tags":  [
+                                                                        "OIDC"
+                                                                    ],
+                                                           "summary":  "Delete OIDC provider",
+                                                           "operationId":  "handleDeleteOIDCProvider",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       }
+                                        }
               },
     "components":  {
                        "securitySchemes":  {
