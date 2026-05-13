@@ -6703,7 +6703,365 @@
                                                                                             }
                                                                                 }
                                                               }
-                                                 }
+                                                 },
+                  "/api/v1/context-links":  {
+                                                "get":  {
+                                                            "tags":  [
+                                                                         "Context Links"
+                                                                     ],
+                                                            "summary":  "List context links",
+                                                            "operationId":  "handleGetContextLinks",
+                                                            "security":  [
+                                                                             {
+                                                                                 "basicAuth":  [
+
+                                                                                               ]
+                                                                             },
+                                                                             {
+                                                                                 "tokenAuth":  [
+
+                                                                                               ]
+                                                                             }
+                                                                         ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Success",
+                                                                                          "content":  {
+                                                                                                          "application/json":  {
+                                                                                                                                   "schema":  {
+                                                                                                                                                  "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                              }
+                                                                                                                               }
+                                                                                                      }
+                                                                                      },
+                                                                              "401":  {
+                                                                                          "description":  "Unauthorized"
+                                                                                      },
+                                                                              "500":  {
+                                                                                          "description":  "Internal server error"
+                                                                                      }
+                                                                          }
+                                                        },
+                                                "post":  {
+                                                             "tags":  [
+                                                                          "Context Links"
+                                                                      ],
+                                                             "summary":  "Create context link",
+                                                             "operationId":  "handleCreateContextLink",
+                                                             "security":  [
+                                                                              {
+                                                                                  "basicAuth":  [
+
+                                                                                                ]
+                                                                              },
+                                                                              {
+                                                                                  "tokenAuth":  [
+
+                                                                                                ]
+                                                                              }
+                                                                          ],
+                                                             "requestBody":  {
+                                                                                 "required":  true,
+                                                                                 "content":  {
+                                                                                                 "application/json":  {
+                                                                                                                          "schema":  {
+                                                                                                                                         "type":  "object",
+                                                                                                                                         "additionalProperties":  true
+                                                                                                                                     }
+                                                                                                                      }
+                                                                                             }
+                                                                             },
+                                                             "responses":  {
+                                                                               "200":  {
+                                                                                           "description":  "Success",
+                                                                                           "content":  {
+                                                                                                           "application/json":  {
+                                                                                                                                    "schema":  {
+                                                                                                                                                   "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                               }
+                                                                                                                                }
+                                                                                                       }
+                                                                                       },
+                                                                               "401":  {
+                                                                                           "description":  "Unauthorized"
+                                                                                       },
+                                                                               "500":  {
+                                                                                           "description":  "Internal server error"
+                                                                                       }
+                                                                           }
+                                                         }
+                                            },
+                  "/api/v1/context-links/active":  {
+                                                       "get":  {
+                                                                   "tags":  [
+                                                                                "Context Links"
+                                                                            ],
+                                                                   "summary":  "List active context links",
+                                                                   "operationId":  "handleGetActiveContextLinks",
+                                                                   "security":  [
+                                                                                    {
+                                                                                        "basicAuth":  [
+
+                                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                        "tokenAuth":  [
+
+                                                                                                      ]
+                                                                                    }
+                                                                                ],
+                                                                   "responses":  {
+                                                                                     "200":  {
+                                                                                                 "description":  "Success",
+                                                                                                 "content":  {
+                                                                                                                 "application/json":  {
+                                                                                                                                          "schema":  {
+                                                                                                                                                         "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                     }
+                                                                                                                                      }
+                                                                                                             }
+                                                                                             },
+                                                                                     "401":  {
+                                                                                                 "description":  "Unauthorized"
+                                                                                             },
+                                                                                     "500":  {
+                                                                                                 "description":  "Internal server error"
+                                                                                             }
+                                                                                 }
+                                                               }
+                                                   },
+                  "/api/v1/context-links/{id}":  {
+                                                     "parameters":  [
+                                                                        {
+                                                                            "name":  "id",
+                                                                            "in":  "path",
+                                                                            "required":  true,
+                                                                            "schema":  {
+                                                                                           "type":  "string"
+                                                                                       }
+                                                                        }
+                                                                    ],
+                                                     "get":  {
+                                                                 "tags":  [
+                                                                              "Context Links"
+                                                                          ],
+                                                                 "summary":  "Get context link",
+                                                                 "operationId":  "handleGetContextLink",
+                                                                 "security":  [
+                                                                                  {
+                                                                                      "basicAuth":  [
+
+                                                                                                    ]
+                                                                                  },
+                                                                                  {
+                                                                                      "tokenAuth":  [
+
+                                                                                                    ]
+                                                                                  }
+                                                                              ],
+                                                                 "responses":  {
+                                                                                   "200":  {
+                                                                                               "description":  "Success",
+                                                                                               "content":  {
+                                                                                                               "application/json":  {
+                                                                                                                                        "schema":  {
+                                                                                                                                                       "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                   }
+                                                                                                                                    }
+                                                                                                           }
+                                                                                           },
+                                                                                   "401":  {
+                                                                                               "description":  "Unauthorized"
+                                                                                           },
+                                                                                   "500":  {
+                                                                                               "description":  "Internal server error"
+                                                                                           }
+                                                                               }
+                                                             },
+                                                     "put":  {
+                                                                 "tags":  [
+                                                                              "Context Links"
+                                                                          ],
+                                                                 "summary":  "Update context link",
+                                                                 "operationId":  "handleUpdateContextLink",
+                                                                 "security":  [
+                                                                                  {
+                                                                                      "basicAuth":  [
+
+                                                                                                    ]
+                                                                                  },
+                                                                                  {
+                                                                                      "tokenAuth":  [
+
+                                                                                                    ]
+                                                                                  }
+                                                                              ],
+                                                                 "requestBody":  {
+                                                                                     "required":  true,
+                                                                                     "content":  {
+                                                                                                     "application/json":  {
+                                                                                                                              "schema":  {
+                                                                                                                                             "type":  "object",
+                                                                                                                                             "additionalProperties":  true
+                                                                                                                                         }
+                                                                                                                          }
+                                                                                                 }
+                                                                                 },
+                                                                 "responses":  {
+                                                                                   "200":  {
+                                                                                               "description":  "Success",
+                                                                                               "content":  {
+                                                                                                               "application/json":  {
+                                                                                                                                        "schema":  {
+                                                                                                                                                       "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                   }
+                                                                                                                                    }
+                                                                                                           }
+                                                                                           },
+                                                                                   "401":  {
+                                                                                               "description":  "Unauthorized"
+                                                                                           },
+                                                                                   "500":  {
+                                                                                               "description":  "Internal server error"
+                                                                                           }
+                                                                               }
+                                                             },
+                                                     "delete":  {
+                                                                    "tags":  [
+                                                                                 "Context Links"
+                                                                             ],
+                                                                    "summary":  "Delete context link",
+                                                                    "operationId":  "handleDeleteContextLink",
+                                                                    "security":  [
+                                                                                     {
+                                                                                         "basicAuth":  [
+
+                                                                                                       ]
+                                                                                     },
+                                                                                     {
+                                                                                         "tokenAuth":  [
+
+                                                                                                       ]
+                                                                                     }
+                                                                                 ],
+                                                                    "responses":  {
+                                                                                      "200":  {
+                                                                                                  "description":  "Success",
+                                                                                                  "content":  {
+                                                                                                                  "application/json":  {
+                                                                                                                                           "schema":  {
+                                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                      }
+                                                                                                                                       }
+                                                                                                              }
+                                                                                              },
+                                                                                      "401":  {
+                                                                                                  "description":  "Unauthorized"
+                                                                                              },
+                                                                                      "500":  {
+                                                                                                  "description":  "Internal server error"
+                                                                                              }
+                                                                                  }
+                                                                }
+                                                 },
+                  "/api/v1/context-links/{id}/toggle":  {
+                                                            "parameters":  [
+                                                                               {
+                                                                                   "name":  "id",
+                                                                                   "in":  "path",
+                                                                                   "required":  true,
+                                                                                   "schema":  {
+                                                                                                  "type":  "string"
+                                                                                              }
+                                                                               }
+                                                                           ],
+                                                            "put":  {
+                                                                        "tags":  [
+                                                                                     "Context Links"
+                                                                                 ],
+                                                                        "summary":  "Toggle context link",
+                                                                        "operationId":  "handleToggleContextLink",
+                                                                        "security":  [
+                                                                                         {
+                                                                                             "basicAuth":  [
+
+                                                                                                           ]
+                                                                                         },
+                                                                                         {
+                                                                                             "tokenAuth":  [
+
+                                                                                                           ]
+                                                                                         }
+                                                                                     ],
+                                                                        "responses":  {
+                                                                                          "200":  {
+                                                                                                      "description":  "Success",
+                                                                                                      "content":  {
+                                                                                                                      "application/json":  {
+                                                                                                                                               "schema":  {
+                                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                          }
+                                                                                                                                           }
+                                                                                                                  }
+                                                                                                  },
+                                                                                          "401":  {
+                                                                                                      "description":  "Unauthorized"
+                                                                                                  },
+                                                                                          "500":  {
+                                                                                                      "description":  "Internal server error"
+                                                                                                  }
+                                                                                      }
+                                                                    }
+                                                        },
+                  "/api/v1/context-links/{id}/url":  {
+                                                         "parameters":  [
+                                                                            {
+                                                                                "name":  "id",
+                                                                                "in":  "path",
+                                                                                "required":  true,
+                                                                                "schema":  {
+                                                                                               "type":  "string"
+                                                                                           }
+                                                                            }
+                                                                        ],
+                                                         "get":  {
+                                                                     "tags":  [
+                                                                                  "Context Links"
+                                                                              ],
+                                                                     "summary":  "Get context link URL",
+                                                                     "operationId":  "handleGetContextLinkURL",
+                                                                     "security":  [
+                                                                                      {
+                                                                                          "basicAuth":  [
+
+                                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                          "tokenAuth":  [
+
+                                                                                                        ]
+                                                                                      }
+                                                                                  ],
+                                                                     "responses":  {
+                                                                                       "200":  {
+                                                                                                   "description":  "Success",
+                                                                                                   "content":  {
+                                                                                                                   "application/json":  {
+                                                                                                                                            "schema":  {
+                                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                       }
+                                                                                                                                        }
+                                                                                                               }
+                                                                                               },
+                                                                                       "401":  {
+                                                                                                   "description":  "Unauthorized"
+                                                                                               },
+                                                                                       "500":  {
+                                                                                                   "description":  "Internal server error"
+                                                                                               }
+                                                                                   }
+                                                                 }
+                                                     }
               },
     "components":  {
                        "securitySchemes":  {
