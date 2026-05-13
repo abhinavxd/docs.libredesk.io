@@ -5796,7 +5796,374 @@
                                                                                                          }
                                                                                              }
                                                                            }
-                                                               }
+                                                               },
+                  "/api/v1/inboxes":  {
+                                          "get":  {
+                                                      "tags":  [
+                                                                   "Inboxes"
+                                                               ],
+                                                      "summary":  "List inboxes",
+                                                      "operationId":  "handleGetInboxes",
+                                                      "security":  [
+                                                                       {
+                                                                           "basicAuth":  [
+
+                                                                                         ]
+                                                                       },
+                                                                       {
+                                                                           "tokenAuth":  [
+
+                                                                                         ]
+                                                                       }
+                                                                   ],
+                                                      "responses":  {
+                                                                        "200":  {
+                                                                                    "description":  "Success",
+                                                                                    "content":  {
+                                                                                                    "application/json":  {
+                                                                                                                             "schema":  {
+                                                                                                                                            "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                        }
+                                                                                                                         }
+                                                                                                }
+                                                                                },
+                                                                        "401":  {
+                                                                                    "description":  "Unauthorized"
+                                                                                },
+                                                                        "500":  {
+                                                                                    "description":  "Internal server error"
+                                                                                }
+                                                                    }
+                                                  },
+                                          "post":  {
+                                                       "tags":  [
+                                                                    "Inboxes"
+                                                                ],
+                                                       "summary":  "Create inbox",
+                                                       "operationId":  "handleCreateInbox",
+                                                       "security":  [
+                                                                        {
+                                                                            "basicAuth":  [
+
+                                                                                          ]
+                                                                        },
+                                                                        {
+                                                                            "tokenAuth":  [
+
+                                                                                          ]
+                                                                        }
+                                                                    ],
+                                                       "requestBody":  {
+                                                                           "required":  true,
+                                                                           "content":  {
+                                                                                           "application/json":  {
+                                                                                                                    "schema":  {
+                                                                                                                                   "type":  "object",
+                                                                                                                                   "additionalProperties":  true
+                                                                                                                               }
+                                                                                                                }
+                                                                                       }
+                                                                       },
+                                                       "responses":  {
+                                                                         "200":  {
+                                                                                     "description":  "Success",
+                                                                                     "content":  {
+                                                                                                     "application/json":  {
+                                                                                                                              "schema":  {
+                                                                                                                                             "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                         }
+                                                                                                                          }
+                                                                                                 }
+                                                                                 },
+                                                                         "401":  {
+                                                                                     "description":  "Unauthorized"
+                                                                                 },
+                                                                         "500":  {
+                                                                                     "description":  "Internal server error"
+                                                                                 }
+                                                                     }
+                                                   }
+                                      },
+                  "/api/v1/inboxes/{id}":  {
+                                               "parameters":  [
+                                                                  {
+                                                                      "name":  "id",
+                                                                      "in":  "path",
+                                                                      "required":  true,
+                                                                      "schema":  {
+                                                                                     "type":  "string"
+                                                                                 }
+                                                                  }
+                                                              ],
+                                               "get":  {
+                                                           "tags":  [
+                                                                        "Inboxes"
+                                                                    ],
+                                                           "summary":  "Get inbox",
+                                                           "operationId":  "handleGetInbox",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       },
+                                               "put":  {
+                                                           "tags":  [
+                                                                        "Inboxes"
+                                                                    ],
+                                                           "summary":  "Update inbox",
+                                                           "operationId":  "handleUpdateInbox",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "requestBody":  {
+                                                                               "required":  true,
+                                                                               "content":  {
+                                                                                               "application/json":  {
+                                                                                                                        "schema":  {
+                                                                                                                                       "type":  "object",
+                                                                                                                                       "additionalProperties":  true
+                                                                                                                                   }
+                                                                                                                    }
+                                                                                           }
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       },
+                                               "delete":  {
+                                                              "tags":  [
+                                                                           "Inboxes"
+                                                                       ],
+                                                              "summary":  "Delete inbox",
+                                                              "operationId":  "handleDeleteInbox",
+                                                              "security":  [
+                                                                               {
+                                                                                   "basicAuth":  [
+
+                                                                                                 ]
+                                                                               },
+                                                                               {
+                                                                                   "tokenAuth":  [
+
+                                                                                                 ]
+                                                                               }
+                                                                           ],
+                                                              "responses":  {
+                                                                                "200":  {
+                                                                                            "description":  "Success",
+                                                                                            "content":  {
+                                                                                                            "application/json":  {
+                                                                                                                                     "schema":  {
+                                                                                                                                                    "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                }
+                                                                                                                                 }
+                                                                                                        }
+                                                                                        },
+                                                                                "401":  {
+                                                                                            "description":  "Unauthorized"
+                                                                                        },
+                                                                                "500":  {
+                                                                                            "description":  "Internal server error"
+                                                                                        }
+                                                                            }
+                                                          }
+                                           },
+                  "/api/v1/inboxes/{id}/toggle":  {
+                                                      "parameters":  [
+                                                                         {
+                                                                             "name":  "id",
+                                                                             "in":  "path",
+                                                                             "required":  true,
+                                                                             "schema":  {
+                                                                                            "type":  "string"
+                                                                                        }
+                                                                         }
+                                                                     ],
+                                                      "put":  {
+                                                                  "tags":  [
+                                                                               "Inboxes"
+                                                                           ],
+                                                                  "summary":  "Toggle inbox enabled/disabled",
+                                                                  "operationId":  "handleToggleInbox",
+                                                                  "security":  [
+                                                                                   {
+                                                                                       "basicAuth":  [
+
+                                                                                                     ]
+                                                                                   },
+                                                                                   {
+                                                                                       "tokenAuth":  [
+
+                                                                                                     ]
+                                                                                   }
+                                                                               ],
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "Success",
+                                                                                                "content":  {
+                                                                                                                "application/json":  {
+                                                                                                                                         "schema":  {
+                                                                                                                                                        "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                    }
+                                                                                                                                     }
+                                                                                                            }
+                                                                                            },
+                                                                                    "401":  {
+                                                                                                "description":  "Unauthorized"
+                                                                                            },
+                                                                                    "500":  {
+                                                                                                "description":  "Internal server error"
+                                                                                            }
+                                                                                }
+                                                              }
+                                                  },
+                  "/api/v1/inboxes/oauth/{provider}/authorize":  {
+                                                                     "parameters":  [
+                                                                                        {
+                                                                                            "name":  "provider",
+                                                                                            "in":  "path",
+                                                                                            "required":  true,
+                                                                                            "schema":  {
+                                                                                                           "type":  "string"
+                                                                                                       }
+                                                                                        }
+                                                                                    ],
+                                                                     "post":  {
+                                                                                  "tags":  [
+                                                                                               "Inboxes"
+                                                                                           ],
+                                                                                  "summary":  "Start OAuth flow for inbox",
+                                                                                  "operationId":  "handleInboxOAuthAuthorize",
+                                                                                  "security":  [
+                                                                                                   {
+                                                                                                       "basicAuth":  [
+
+                                                                                                                     ]
+                                                                                                   },
+                                                                                                   {
+                                                                                                       "tokenAuth":  [
+
+                                                                                                                     ]
+                                                                                                   }
+                                                                                               ],
+                                                                                  "requestBody":  {
+                                                                                                      "required":  true,
+                                                                                                      "content":  {
+                                                                                                                      "application/json":  {
+                                                                                                                                               "schema":  {
+                                                                                                                                                              "type":  "object",
+                                                                                                                                                              "additionalProperties":  true
+                                                                                                                                                          }
+                                                                                                                                           }
+                                                                                                                  }
+                                                                                                  },
+                                                                                  "responses":  {
+                                                                                                    "200":  {
+                                                                                                                "description":  "Success",
+                                                                                                                "content":  {
+                                                                                                                                "application/json":  {
+                                                                                                                                                         "schema":  {
+                                                                                                                                                                        "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                                    }
+                                                                                                                                                     }
+                                                                                                                            }
+                                                                                                            },
+                                                                                                    "401":  {
+                                                                                                                "description":  "Unauthorized"
+                                                                                                            },
+                                                                                                    "500":  {
+                                                                                                                "description":  "Internal server error"
+                                                                                                            }
+                                                                                                }
+                                                                              }
+                                                                 },
+                  "/api/v1/inboxes/oauth/{provider}/callback":  {
+                                                                    "parameters":  [
+                                                                                       {
+                                                                                           "name":  "provider",
+                                                                                           "in":  "path",
+                                                                                           "required":  true,
+                                                                                           "schema":  {
+                                                                                                          "type":  "string"
+                                                                                                      }
+                                                                                       }
+                                                                                   ],
+                                                                    "get":  {
+                                                                                "tags":  [
+                                                                                             "Inboxes"
+                                                                                         ],
+                                                                                "summary":  "OAuth callback for inbox",
+                                                                                "operationId":  "handleInboxOAuthCallback",
+                                                                                "responses":  {
+                                                                                                  "200":  {
+                                                                                                              "description":  "Success",
+                                                                                                              "content":  {
+                                                                                                                              "application/json":  {
+                                                                                                                                                       "schema":  {
+                                                                                                                                                                      "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                                  }
+                                                                                                                                                   }
+                                                                                                                          }
+                                                                                                          },
+                                                                                                  "401":  {
+                                                                                                              "description":  "Unauthorized"
+                                                                                                          },
+                                                                                                  "500":  {
+                                                                                                              "description":  "Internal server error"
+                                                                                                          }
+                                                                                              }
+                                                                            }
+                                                                }
               },
     "components":  {
                        "securitySchemes":  {
