@@ -3046,7 +3046,98 @@
                                                                                          }
                                                                              }
                                                            }
+                                               },
+                  "/api/v1/lang":  {
+                                       "get":  {
+                                                   "tags":  [
+                                                                "i18n"
+                                                            ],
+                                                   "summary":  "List available languages",
+                                                   "operationId":  "handleGetLanguages",
+                                                   "responses":  {
+                                                                     "200":  {
+                                                                                 "description":  "Success",
+                                                                                 "content":  {
+                                                                                                 "application/json":  {
+                                                                                                                          "schema":  {
+                                                                                                                                         "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                     }
+                                                                                                                      }
+                                                                                             }
+                                                                             },
+                                                                     "401":  {
+                                                                                 "description":  "Unauthorized"
+                                                                             },
+                                                                     "500":  {
+                                                                                 "description":  "Internal server error"
+                                                                             }
+                                                                 }
                                                }
+                                   },
+                  "/api/v1/lang/{lang}":  {
+                                              "parameters":  [
+                                                                 {
+                                                                     "name":  "lang",
+                                                                     "in":  "path",
+                                                                     "required":  true,
+                                                                     "schema":  {
+                                                                                    "type":  "string"
+                                                                                }
+                                                                 }
+                                                             ],
+                                              "get":  {
+                                                          "tags":  [
+                                                                       "i18n"
+                                                                   ],
+                                                          "summary":  "Get a language file",
+                                                          "operationId":  "handleGetLanguage",
+                                                          "responses":  {
+                                                                            "200":  {
+                                                                                        "description":  "Success",
+                                                                                        "content":  {
+                                                                                                        "application/json":  {
+                                                                                                                                 "schema":  {
+                                                                                                                                                "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                            }
+                                                                                                                             }
+                                                                                                    }
+                                                                                    },
+                                                                            "401":  {
+                                                                                        "description":  "Unauthorized"
+                                                                                    },
+                                                                            "500":  {
+                                                                                        "description":  "Internal server error"
+                                                                                    }
+                                                                        }
+                                                      }
+                                          },
+                  "/api/v1/config":  {
+                                         "get":  {
+                                                     "tags":  [
+                                                                  "Config"
+                                                              ],
+                                                     "summary":  "Get public config",
+                                                     "operationId":  "handleGetConfig",
+                                                     "responses":  {
+                                                                       "200":  {
+                                                                                   "description":  "Success",
+                                                                                   "content":  {
+                                                                                                   "application/json":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                               }
+                                                                               },
+                                                                       "401":  {
+                                                                                   "description":  "Unauthorized"
+                                                                               },
+                                                                       "500":  {
+                                                                                   "description":  "Internal server error"
+                                                                               }
+                                                                   }
+                                                 }
+                                     }
               },
     "components":  {
                        "securitySchemes":  {
