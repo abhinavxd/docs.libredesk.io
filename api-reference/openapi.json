@@ -3137,7 +3137,169 @@
                                                                                }
                                                                    }
                                                  }
-                                     }
+                                     },
+                  "/api/v1/settings/general":  {
+                                                   "get":  {
+                                                               "tags":  [
+                                                                            "Settings"
+                                                                        ],
+                                                               "summary":  "Get general settings",
+                                                               "operationId":  "handleGetGeneralSettings",
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "Success",
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         }
+                                                                                         },
+                                                                                 "401":  {
+                                                                                             "description":  "Unauthorized"
+                                                                                         },
+                                                                                 "500":  {
+                                                                                             "description":  "Internal server error"
+                                                                                         }
+                                                                             }
+                                                           },
+                                                   "put":  {
+                                                               "tags":  [
+                                                                            "Settings"
+                                                                        ],
+                                                               "summary":  "Update general settings",
+                                                               "operationId":  "handleUpdateGeneralSettings",
+                                                               "security":  [
+                                                                                {
+                                                                                    "basicAuth":  [
+
+                                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                    "tokenAuth":  [
+
+                                                                                                  ]
+                                                                                }
+                                                                            ],
+                                                               "requestBody":  {
+                                                                                   "required":  true,
+                                                                                   "content":  {
+                                                                                                   "application/json":  {
+                                                                                                                            "schema":  {
+                                                                                                                                           "type":  "object",
+                                                                                                                                           "additionalProperties":  true
+                                                                                                                                       }
+                                                                                                                        }
+                                                                                               }
+                                                                               },
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "Success",
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         }
+                                                                                         },
+                                                                                 "401":  {
+                                                                                             "description":  "Unauthorized"
+                                                                                         },
+                                                                                 "500":  {
+                                                                                             "description":  "Internal server error"
+                                                                                         }
+                                                                             }
+                                                           }
+                                               },
+                  "/api/v1/settings/notifications/email":  {
+                                                               "get":  {
+                                                                           "tags":  [
+                                                                                        "Settings"
+                                                                                    ],
+                                                                           "summary":  "Get email notification settings",
+                                                                           "operationId":  "handleGetEmailNotificationSettings",
+                                                                           "security":  [
+                                                                                            {
+                                                                                                "basicAuth":  [
+
+                                                                                                              ]
+                                                                                            },
+                                                                                            {
+                                                                                                "tokenAuth":  [
+
+                                                                                                              ]
+                                                                                            }
+                                                                                        ],
+                                                                           "responses":  {
+                                                                                             "200":  {
+                                                                                                         "description":  "Success",
+                                                                                                         "content":  {
+                                                                                                                         "application/json":  {
+                                                                                                                                                  "schema":  {
+                                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                             }
+                                                                                                                                              }
+                                                                                                                     }
+                                                                                                     },
+                                                                                             "401":  {
+                                                                                                         "description":  "Unauthorized"
+                                                                                                     },
+                                                                                             "500":  {
+                                                                                                         "description":  "Internal server error"
+                                                                                                     }
+                                                                                         }
+                                                                       },
+                                                               "put":  {
+                                                                           "tags":  [
+                                                                                        "Settings"
+                                                                                    ],
+                                                                           "summary":  "Update email notification settings",
+                                                                           "operationId":  "handleUpdateEmailNotificationSettings",
+                                                                           "security":  [
+                                                                                            {
+                                                                                                "basicAuth":  [
+
+                                                                                                              ]
+                                                                                            },
+                                                                                            {
+                                                                                                "tokenAuth":  [
+
+                                                                                                              ]
+                                                                                            }
+                                                                                        ],
+                                                                           "requestBody":  {
+                                                                                               "required":  true,
+                                                                                               "content":  {
+                                                                                                               "application/json":  {
+                                                                                                                                        "schema":  {
+                                                                                                                                                       "type":  "object",
+                                                                                                                                                       "additionalProperties":  true
+                                                                                                                                                   }
+                                                                                                                                    }
+                                                                                                           }
+                                                                                           },
+                                                                           "responses":  {
+                                                                                             "200":  {
+                                                                                                         "description":  "Success",
+                                                                                                         "content":  {
+                                                                                                                         "application/json":  {
+                                                                                                                                                  "schema":  {
+                                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                             }
+                                                                                                                                              }
+                                                                                                                     }
+                                                                                                     },
+                                                                                             "401":  {
+                                                                                                         "description":  "Unauthorized"
+                                                                                                     },
+                                                                                             "500":  {
+                                                                                                         "description":  "Internal server error"
+                                                                                                     }
+                                                                                         }
+                                                                       }
+                                                           }
               },
     "components":  {
                        "securitySchemes":  {
