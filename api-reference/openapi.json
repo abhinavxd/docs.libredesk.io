@@ -4397,7 +4397,302 @@
                                                                                              }
                                                                                  }
                                                                }
+                                                },
+                  "/api/v1/tags":  {
+                                       "get":  {
+                                                   "tags":  [
+                                                                "Tags"
+                                                            ],
+                                                   "summary":  "List all tags",
+                                                   "operationId":  "handleGetTags",
+                                                   "security":  [
+                                                                    {
+                                                                        "basicAuth":  [
+
+                                                                                      ]
+                                                                    },
+                                                                    {
+                                                                        "tokenAuth":  [
+
+                                                                                      ]
+                                                                    }
+                                                                ],
+                                                   "responses":  {
+                                                                     "200":  {
+                                                                                 "description":  "Success",
+                                                                                 "content":  {
+                                                                                                 "application/json":  {
+                                                                                                                          "schema":  {
+                                                                                                                                         "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                     }
+                                                                                                                      }
+                                                                                             }
+                                                                             },
+                                                                     "401":  {
+                                                                                 "description":  "Unauthorized"
+                                                                             },
+                                                                     "500":  {
+                                                                                 "description":  "Internal server error"
+                                                                             }
+                                                                 }
+                                               },
+                                       "post":  {
+                                                    "tags":  [
+                                                                 "Tags"
+                                                             ],
+                                                    "summary":  "Create tag",
+                                                    "operationId":  "handleCreateTag",
+                                                    "security":  [
+                                                                     {
+                                                                         "basicAuth":  [
+
+                                                                                       ]
+                                                                     },
+                                                                     {
+                                                                         "tokenAuth":  [
+
+                                                                                       ]
+                                                                     }
+                                                                 ],
+                                                    "requestBody":  {
+                                                                        "required":  true,
+                                                                        "content":  {
+                                                                                        "application/json":  {
+                                                                                                                 "schema":  {
+                                                                                                                                "type":  "object",
+                                                                                                                                "properties":  {
+                                                                                                                                                   "name":  {
+                                                                                                                                                                "type":  "string"
+                                                                                                                                                            }
+                                                                                                                                               },
+                                                                                                                                "required":  [
+                                                                                                                                                 "name"
+                                                                                                                                             ]
+                                                                                                                            }
+                                                                                                             }
+                                                                                    }
+                                                                    },
+                                                    "responses":  {
+                                                                      "200":  {
+                                                                                  "description":  "Success",
+                                                                                  "content":  {
+                                                                                                  "application/json":  {
+                                                                                                                           "schema":  {
+                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                      }
+                                                                                                                       }
+                                                                                              }
+                                                                              },
+                                                                      "401":  {
+                                                                                  "description":  "Unauthorized"
+                                                                              },
+                                                                      "500":  {
+                                                                                  "description":  "Internal server error"
+                                                                              }
+                                                                  }
                                                 }
+                                   },
+                  "/api/v1/tags/{id}":  {
+                                            "parameters":  [
+                                                               {
+                                                                   "name":  "id",
+                                                                   "in":  "path",
+                                                                   "required":  true,
+                                                                   "schema":  {
+                                                                                  "type":  "string"
+                                                                              }
+                                                               }
+                                                           ],
+                                            "put":  {
+                                                        "tags":  [
+                                                                     "Tags"
+                                                                 ],
+                                                        "summary":  "Update tag",
+                                                        "operationId":  "handleUpdateTag",
+                                                        "security":  [
+                                                                         {
+                                                                             "basicAuth":  [
+
+                                                                                           ]
+                                                                         },
+                                                                         {
+                                                                             "tokenAuth":  [
+
+                                                                                           ]
+                                                                         }
+                                                                     ],
+                                                        "requestBody":  {
+                                                                            "required":  true,
+                                                                            "content":  {
+                                                                                            "application/json":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object",
+                                                                                                                                    "properties":  {
+                                                                                                                                                       "name":  {
+                                                                                                                                                                    "type":  "string"
+                                                                                                                                                                }
+                                                                                                                                                   },
+                                                                                                                                    "required":  [
+                                                                                                                                                     "name"
+                                                                                                                                                 ]
+                                                                                                                                }
+                                                                                                                 }
+                                                                                        }
+                                                                        },
+                                                        "responses":  {
+                                                                          "200":  {
+                                                                                      "description":  "Success",
+                                                                                      "content":  {
+                                                                                                      "application/json":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                  }
+                                                                                  },
+                                                                          "401":  {
+                                                                                      "description":  "Unauthorized"
+                                                                                  },
+                                                                          "500":  {
+                                                                                      "description":  "Internal server error"
+                                                                                  }
+                                                                      }
+                                                    },
+                                            "delete":  {
+                                                           "tags":  [
+                                                                        "Tags"
+                                                                    ],
+                                                           "summary":  "Delete tag",
+                                                           "operationId":  "handleDeleteTag",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       }
+                                        },
+                  "/api/v1/tags/import":  {
+                                              "post":  {
+                                                           "tags":  [
+                                                                        "Tags"
+                                                                    ],
+                                                           "summary":  "Import tags from CSV",
+                                                           "operationId":  "handleImportTags",
+                                                           "security":  [
+                                                                            {
+                                                                                "basicAuth":  [
+
+                                                                                              ]
+                                                                            },
+                                                                            {
+                                                                                "tokenAuth":  [
+
+                                                                                              ]
+                                                                            }
+                                                                        ],
+                                                           "requestBody":  {
+                                                                               "required":  true,
+                                                                               "content":  {
+                                                                                               "multipart/form-data":  {
+                                                                                                                           "schema":  {
+                                                                                                                                          "type":  "object",
+                                                                                                                                          "properties":  {
+                                                                                                                                                             "file":  {
+                                                                                                                                                                          "type":  "string",
+                                                                                                                                                                          "format":  "binary"
+                                                                                                                                                                      }
+                                                                                                                                                         },
+                                                                                                                                          "required":  [
+                                                                                                                                                           "file"
+                                                                                                                                                       ]
+                                                                                                                                      }
+                                                                                                                       }
+                                                                                           }
+                                                                           },
+                                                           "responses":  {
+                                                                             "200":  {
+                                                                                         "description":  "Success",
+                                                                                         "content":  {
+                                                                                                         "application/json":  {
+                                                                                                                                  "schema":  {
+                                                                                                                                                 "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                             }
+                                                                                                                              }
+                                                                                                     }
+                                                                                     },
+                                                                             "401":  {
+                                                                                         "description":  "Unauthorized"
+                                                                                     },
+                                                                             "500":  {
+                                                                                         "description":  "Internal server error"
+                                                                                     }
+                                                                         }
+                                                       }
+                                          },
+                  "/api/v1/tags/import/status":  {
+                                                     "get":  {
+                                                                 "tags":  [
+                                                                              "Tags"
+                                                                          ],
+                                                                 "summary":  "Get tag import status",
+                                                                 "operationId":  "handleGetTagImportStatus",
+                                                                 "security":  [
+                                                                                  {
+                                                                                      "basicAuth":  [
+
+                                                                                                    ]
+                                                                                  },
+                                                                                  {
+                                                                                      "tokenAuth":  [
+
+                                                                                                    ]
+                                                                                  }
+                                                                              ],
+                                                                 "responses":  {
+                                                                                   "200":  {
+                                                                                               "description":  "Success",
+                                                                                               "content":  {
+                                                                                                               "application/json":  {
+                                                                                                                                        "schema":  {
+                                                                                                                                                       "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                   }
+                                                                                                                                    }
+                                                                                                           }
+                                                                                           },
+                                                                                   "401":  {
+                                                                                               "description":  "Unauthorized"
+                                                                                           },
+                                                                                   "500":  {
+                                                                                               "description":  "Internal server error"
+                                                                                           }
+                                                                               }
+                                                             }
+                                                 }
               },
     "components":  {
                        "securitySchemes":  {
