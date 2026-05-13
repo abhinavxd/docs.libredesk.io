@@ -687,7 +687,55 @@
                                                                                      "description":  "Internal server error"
                                                                                  }
                                                                      }
-                                                   }
+                                                   },
+                                           "post":  {
+                                                        "tags":  [
+                                                                     "Contacts"
+                                                                 ],
+                                                        "summary":  "Create contact",
+                                                        "operationId":  "handleCreateContact",
+                                                        "security":  [
+                                                                         {
+                                                                             "basicAuth":  [
+
+                                                                                           ]
+                                                                         },
+                                                                         {
+                                                                             "tokenAuth":  [
+
+                                                                                           ]
+                                                                         }
+                                                                     ],
+                                                        "requestBody":  {
+                                                                            "required":  true,
+                                                                            "content":  {
+                                                                                            "application/json":  {
+                                                                                                                     "schema":  {
+                                                                                                                                    "type":  "object",
+                                                                                                                                    "additionalProperties":  true
+                                                                                                                                }
+                                                                                                                 }
+                                                                                        }
+                                                                        },
+                                                        "responses":  {
+                                                                          "200":  {
+                                                                                      "description":  "Success",
+                                                                                      "content":  {
+                                                                                                      "application/json":  {
+                                                                                                                               "schema":  {
+                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                          }
+                                                                                                                           }
+                                                                                                  }
+                                                                                  },
+                                                                          "401":  {
+                                                                                      "description":  "Unauthorized"
+                                                                                  },
+                                                                          "500":  {
+                                                                                      "description":  "Internal server error"
+                                                                                  }
+                                                                      }
+                                                    }
                                        },
                   "/api/v1/contacts/search":  {
                                                   "get":  {
