@@ -8218,7 +8218,55 @@
                                                                                       }
                                                                           }
                                                         }
-                                            }
+                                            },
+                  "/api/v1/csat/{uuid}/response":  {
+                                                       "parameters":  [
+                                                                          {
+                                                                              "name":  "uuid",
+                                                                              "in":  "path",
+                                                                              "required":  true,
+                                                                              "schema":  {
+                                                                                             "type":  "string"
+                                                                                         }
+                                                                          }
+                                                                      ],
+                                                       "post":  {
+                                                                    "tags":  [
+                                                                                 "CSAT"
+                                                                             ],
+                                                                    "summary":  "Submit CSAT response",
+                                                                    "operationId":  "handleSubmitCSATResponse",
+                                                                    "requestBody":  {
+                                                                                        "required":  true,
+                                                                                        "content":  {
+                                                                                                        "application/json":  {
+                                                                                                                                 "schema":  {
+                                                                                                                                                "type":  "object",
+                                                                                                                                                "additionalProperties":  true
+                                                                                                                                            }
+                                                                                                                             }
+                                                                                                    }
+                                                                                    },
+                                                                    "responses":  {
+                                                                                      "200":  {
+                                                                                                  "description":  "Success",
+                                                                                                  "content":  {
+                                                                                                                  "application/json":  {
+                                                                                                                                           "schema":  {
+                                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                      }
+                                                                                                                                       }
+                                                                                                              }
+                                                                                              },
+                                                                                      "401":  {
+                                                                                                  "description":  "Unauthorized"
+                                                                                              },
+                                                                                      "500":  {
+                                                                                                  "description":  "Internal server error"
+                                                                                              }
+                                                                                  }
+                                                                }
+                                                   }
               },
     "components":  {
                        "securitySchemes":  {
