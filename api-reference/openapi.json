@@ -3520,7 +3520,264 @@
                                                                                      }
                                                                          }
                                                        }
-                                        }
+                                        },
+                  "/api/v1/conversations/mentioned":  {
+                                                          "get":  {
+                                                                      "tags":  [
+                                                                                   "Conversations"
+                                                                               ],
+                                                                      "summary":  "Get conversations mentioning current user",
+                                                                      "operationId":  "handleGetMentionedConversations",
+                                                                      "security":  [
+                                                                                       {
+                                                                                           "basicAuth":  [
+
+                                                                                                         ]
+                                                                                       },
+                                                                                       {
+                                                                                           "tokenAuth":  [
+
+                                                                                                         ]
+                                                                                       }
+                                                                                   ],
+                                                                      "responses":  {
+                                                                                        "200":  {
+                                                                                                    "description":  "Success",
+                                                                                                    "content":  {
+                                                                                                                    "application/json":  {
+                                                                                                                                             "schema":  {
+                                                                                                                                                            "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                        }
+                                                                                                                                         }
+                                                                                                                }
+                                                                                                },
+                                                                                        "401":  {
+                                                                                                    "description":  "Unauthorized"
+                                                                                                },
+                                                                                        "500":  {
+                                                                                                    "description":  "Internal server error"
+                                                                                                }
+                                                                                    }
+                                                                  }
+                                                      },
+                  "/api/v1/conversations/{uuid}/mark-unread":  {
+                                                                   "parameters":  [
+                                                                                      {
+                                                                                          "name":  "uuid",
+                                                                                          "in":  "path",
+                                                                                          "required":  true,
+                                                                                          "schema":  {
+                                                                                                         "type":  "string"
+                                                                                                     }
+                                                                                      }
+                                                                                  ],
+                                                                   "put":  {
+                                                                               "tags":  [
+                                                                                            "Conversations"
+                                                                                        ],
+                                                                               "summary":  "Mark conversation as unread",
+                                                                               "operationId":  "handleMarkConversationUnread",
+                                                                               "security":  [
+                                                                                                {
+                                                                                                    "basicAuth":  [
+
+                                                                                                                  ]
+                                                                                                },
+                                                                                                {
+                                                                                                    "tokenAuth":  [
+
+                                                                                                                  ]
+                                                                                                }
+                                                                                            ],
+                                                                               "responses":  {
+                                                                                                 "200":  {
+                                                                                                             "description":  "Success",
+                                                                                                             "content":  {
+                                                                                                                             "application/json":  {
+                                                                                                                                                      "schema":  {
+                                                                                                                                                                     "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                                 }
+                                                                                                                                                  }
+                                                                                                                         }
+                                                                                                         },
+                                                                                                 "401":  {
+                                                                                                             "description":  "Unauthorized"
+                                                                                                         },
+                                                                                                 "500":  {
+                                                                                                             "description":  "Internal server error"
+                                                                                                         }
+                                                                                             }
+                                                                           }
+                                                               },
+                  "/api/v1/conversations/{uuid}/page-visits":  {
+                                                                   "parameters":  [
+                                                                                      {
+                                                                                          "name":  "uuid",
+                                                                                          "in":  "path",
+                                                                                          "required":  true,
+                                                                                          "schema":  {
+                                                                                                         "type":  "string"
+                                                                                                     }
+                                                                                      }
+                                                                                  ],
+                                                                   "get":  {
+                                                                               "tags":  [
+                                                                                            "Conversations"
+                                                                                        ],
+                                                                               "summary":  "Get page visits for conversation",
+                                                                               "operationId":  "handleGetConversationPageVisits",
+                                                                               "security":  [
+                                                                                                {
+                                                                                                    "basicAuth":  [
+
+                                                                                                                  ]
+                                                                                                },
+                                                                                                {
+                                                                                                    "tokenAuth":  [
+
+                                                                                                                  ]
+                                                                                                }
+                                                                                            ],
+                                                                               "responses":  {
+                                                                                                 "200":  {
+                                                                                                             "description":  "Success",
+                                                                                                             "content":  {
+                                                                                                                             "application/json":  {
+                                                                                                                                                      "schema":  {
+                                                                                                                                                                     "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                                 }
+                                                                                                                                                  }
+                                                                                                                         }
+                                                                                                         },
+                                                                                                 "401":  {
+                                                                                                             "description":  "Unauthorized"
+                                                                                                         },
+                                                                                                 "500":  {
+                                                                                                             "description":  "Internal server error"
+                                                                                                         }
+                                                                                             }
+                                                                           }
+                                                               },
+                  "/api/v1/conversations/{uuid}/custom-attributes":  {
+                                                                         "parameters":  [
+                                                                                            {
+                                                                                                "name":  "uuid",
+                                                                                                "in":  "path",
+                                                                                                "required":  true,
+                                                                                                "schema":  {
+                                                                                                               "type":  "string"
+                                                                                                           }
+                                                                                            }
+                                                                                        ],
+                                                                         "put":  {
+                                                                                     "tags":  [
+                                                                                                  "Conversations"
+                                                                                              ],
+                                                                                     "summary":  "Update conversation custom attributes",
+                                                                                     "operationId":  "handleUpdateConversationCustomAttributes",
+                                                                                     "security":  [
+                                                                                                      {
+                                                                                                          "basicAuth":  [
+
+                                                                                                                        ]
+                                                                                                      },
+                                                                                                      {
+                                                                                                          "tokenAuth":  [
+
+                                                                                                                        ]
+                                                                                                      }
+                                                                                                  ],
+                                                                                     "requestBody":  {
+                                                                                                         "required":  true,
+                                                                                                         "content":  {
+                                                                                                                         "application/json":  {
+                                                                                                                                                  "schema":  {
+                                                                                                                                                                 "type":  "object",
+                                                                                                                                                                 "additionalProperties":  true
+                                                                                                                                                             }
+                                                                                                                                              }
+                                                                                                                     }
+                                                                                                     },
+                                                                                     "responses":  {
+                                                                                                       "200":  {
+                                                                                                                   "description":  "Success",
+                                                                                                                   "content":  {
+                                                                                                                                   "application/json":  {
+                                                                                                                                                            "schema":  {
+                                                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                                       }
+                                                                                                                                                        }
+                                                                                                                               }
+                                                                                                               },
+                                                                                                       "401":  {
+                                                                                                                   "description":  "Unauthorized"
+                                                                                                               },
+                                                                                                       "500":  {
+                                                                                                                   "description":  "Internal server error"
+                                                                                                               }
+                                                                                                   }
+                                                                                 }
+                                                                     },
+                  "/api/v1/conversations/{uuid}/contacts/custom-attributes":  {
+                                                                                  "parameters":  [
+                                                                                                     {
+                                                                                                         "name":  "uuid",
+                                                                                                         "in":  "path",
+                                                                                                         "required":  true,
+                                                                                                         "schema":  {
+                                                                                                                        "type":  "string"
+                                                                                                                    }
+                                                                                                     }
+                                                                                                 ],
+                                                                                  "put":  {
+                                                                                              "tags":  [
+                                                                                                           "Conversations"
+                                                                                                       ],
+                                                                                              "summary":  "Update contact custom attributes via conversation",
+                                                                                              "operationId":  "handleUpdateConversationContactCustomAttributes",
+                                                                                              "security":  [
+                                                                                                               {
+                                                                                                                   "basicAuth":  [
+
+                                                                                                                                 ]
+                                                                                                               },
+                                                                                                               {
+                                                                                                                   "tokenAuth":  [
+
+                                                                                                                                 ]
+                                                                                                               }
+                                                                                                           ],
+                                                                                              "requestBody":  {
+                                                                                                                  "required":  true,
+                                                                                                                  "content":  {
+                                                                                                                                  "application/json":  {
+                                                                                                                                                           "schema":  {
+                                                                                                                                                                          "type":  "object",
+                                                                                                                                                                          "additionalProperties":  true
+                                                                                                                                                                      }
+                                                                                                                                                       }
+                                                                                                                              }
+                                                                                                              },
+                                                                                              "responses":  {
+                                                                                                                "200":  {
+                                                                                                                            "description":  "Success",
+                                                                                                                            "content":  {
+                                                                                                                                            "application/json":  {
+                                                                                                                                                                     "schema":  {
+                                                                                                                                                                                    "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                                                }
+                                                                                                                                                                 }
+                                                                                                                                        }
+                                                                                                                        },
+                                                                                                                "401":  {
+                                                                                                                            "description":  "Unauthorized"
+                                                                                                                        },
+                                                                                                                "500":  {
+                                                                                                                            "description":  "Internal server error"
+                                                                                                                        }
+                                                                                                            }
+                                                                                          }
+                                                                              }
               },
     "components":  {
                        "securitySchemes":  {
