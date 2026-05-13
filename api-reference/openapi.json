@@ -7061,7 +7061,241 @@
                                                                                                }
                                                                                    }
                                                                  }
-                                                     }
+                                                     },
+                  "/api/v1/reports/overview/sla":  {
+                                                       "get":  {
+                                                                   "tags":  [
+                                                                                "Reports"
+                                                                            ],
+                                                                   "summary":  "SLA report overview",
+                                                                   "operationId":  "handleGetSLAReportOverview",
+                                                                   "security":  [
+                                                                                    {
+                                                                                        "basicAuth":  [
+
+                                                                                                      ]
+                                                                                    },
+                                                                                    {
+                                                                                        "tokenAuth":  [
+
+                                                                                                      ]
+                                                                                    }
+                                                                                ],
+                                                                   "responses":  {
+                                                                                     "200":  {
+                                                                                                 "description":  "Success",
+                                                                                                 "content":  {
+                                                                                                                 "application/json":  {
+                                                                                                                                          "schema":  {
+                                                                                                                                                         "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                     }
+                                                                                                                                      }
+                                                                                                             }
+                                                                                             },
+                                                                                     "401":  {
+                                                                                                 "description":  "Unauthorized"
+                                                                                             },
+                                                                                     "500":  {
+                                                                                                 "description":  "Internal server error"
+                                                                                             }
+                                                                                 }
+                                                               }
+                                                   },
+                  "/api/v1/reports/overview/counts":  {
+                                                          "get":  {
+                                                                      "tags":  [
+                                                                                   "Reports"
+                                                                               ],
+                                                                      "summary":  "Counts report overview",
+                                                                      "operationId":  "handleGetCountsReportOverview",
+                                                                      "security":  [
+                                                                                       {
+                                                                                           "basicAuth":  [
+
+                                                                                                         ]
+                                                                                       },
+                                                                                       {
+                                                                                           "tokenAuth":  [
+
+                                                                                                         ]
+                                                                                       }
+                                                                                   ],
+                                                                      "responses":  {
+                                                                                        "200":  {
+                                                                                                    "description":  "Success",
+                                                                                                    "content":  {
+                                                                                                                    "application/json":  {
+                                                                                                                                             "schema":  {
+                                                                                                                                                            "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                        }
+                                                                                                                                         }
+                                                                                                                }
+                                                                                                },
+                                                                                        "401":  {
+                                                                                                    "description":  "Unauthorized"
+                                                                                                },
+                                                                                        "500":  {
+                                                                                                    "description":  "Internal server error"
+                                                                                                }
+                                                                                    }
+                                                                  }
+                                                      },
+                  "/api/v1/reports/overview/charts":  {
+                                                          "get":  {
+                                                                      "tags":  [
+                                                                                   "Reports"
+                                                                               ],
+                                                                      "summary":  "Charts report overview",
+                                                                      "operationId":  "handleGetChartsReportOverview",
+                                                                      "security":  [
+                                                                                       {
+                                                                                           "basicAuth":  [
+
+                                                                                                         ]
+                                                                                       },
+                                                                                       {
+                                                                                           "tokenAuth":  [
+
+                                                                                                         ]
+                                                                                       }
+                                                                                   ],
+                                                                      "responses":  {
+                                                                                        "200":  {
+                                                                                                    "description":  "Success",
+                                                                                                    "content":  {
+                                                                                                                    "application/json":  {
+                                                                                                                                             "schema":  {
+                                                                                                                                                            "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                        }
+                                                                                                                                         }
+                                                                                                                }
+                                                                                                },
+                                                                                        "401":  {
+                                                                                                    "description":  "Unauthorized"
+                                                                                                },
+                                                                                        "500":  {
+                                                                                                    "description":  "Internal server error"
+                                                                                                }
+                                                                                    }
+                                                                  }
+                                                      },
+                  "/api/v1/reports/overview/csat":  {
+                                                        "get":  {
+                                                                    "tags":  [
+                                                                                 "Reports"
+                                                                             ],
+                                                                    "summary":  "CSAT report overview",
+                                                                    "operationId":  "handleGetCSATReportOverview",
+                                                                    "security":  [
+                                                                                     {
+                                                                                         "basicAuth":  [
+
+                                                                                                       ]
+                                                                                     },
+                                                                                     {
+                                                                                         "tokenAuth":  [
+
+                                                                                                       ]
+                                                                                     }
+                                                                                 ],
+                                                                    "responses":  {
+                                                                                      "200":  {
+                                                                                                  "description":  "Success",
+                                                                                                  "content":  {
+                                                                                                                  "application/json":  {
+                                                                                                                                           "schema":  {
+                                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                      }
+                                                                                                                                       }
+                                                                                                              }
+                                                                                              },
+                                                                                      "401":  {
+                                                                                                  "description":  "Unauthorized"
+                                                                                              },
+                                                                                      "500":  {
+                                                                                                  "description":  "Internal server error"
+                                                                                              }
+                                                                                  }
+                                                                }
+                                                    },
+                  "/api/v1/reports/overview/messages":  {
+                                                            "get":  {
+                                                                        "tags":  [
+                                                                                     "Reports"
+                                                                                 ],
+                                                                        "summary":  "Messages report overview",
+                                                                        "operationId":  "handleGetMessagesReportOverview",
+                                                                        "security":  [
+                                                                                         {
+                                                                                             "basicAuth":  [
+
+                                                                                                           ]
+                                                                                         },
+                                                                                         {
+                                                                                             "tokenAuth":  [
+
+                                                                                                           ]
+                                                                                         }
+                                                                                     ],
+                                                                        "responses":  {
+                                                                                          "200":  {
+                                                                                                      "description":  "Success",
+                                                                                                      "content":  {
+                                                                                                                      "application/json":  {
+                                                                                                                                               "schema":  {
+                                                                                                                                                              "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                          }
+                                                                                                                                           }
+                                                                                                                  }
+                                                                                                  },
+                                                                                          "401":  {
+                                                                                                      "description":  "Unauthorized"
+                                                                                                  },
+                                                                                          "500":  {
+                                                                                                      "description":  "Internal server error"
+                                                                                                  }
+                                                                                      }
+                                                                    }
+                                                        },
+                  "/api/v1/reports/overview/tags":  {
+                                                        "get":  {
+                                                                    "tags":  [
+                                                                                 "Reports"
+                                                                             ],
+                                                                    "summary":  "Tags report overview",
+                                                                    "operationId":  "handleGetTagsReportOverview",
+                                                                    "security":  [
+                                                                                     {
+                                                                                         "basicAuth":  [
+
+                                                                                                       ]
+                                                                                     },
+                                                                                     {
+                                                                                         "tokenAuth":  [
+
+                                                                                                       ]
+                                                                                     }
+                                                                                 ],
+                                                                    "responses":  {
+                                                                                      "200":  {
+                                                                                                  "description":  "Success",
+                                                                                                  "content":  {
+                                                                                                                  "application/json":  {
+                                                                                                                                           "schema":  {
+                                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                      }
+                                                                                                                                       }
+                                                                                                              }
+                                                                                              },
+                                                                                      "401":  {
+                                                                                                  "description":  "Unauthorized"
+                                                                                              },
+                                                                                      "500":  {
+                                                                                                  "description":  "Internal server error"
+                                                                                              }
+                                                                                  }
+                                                                }
+                                                    }
               },
     "components":  {
                        "securitySchemes":  {
