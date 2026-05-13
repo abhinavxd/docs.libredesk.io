@@ -8179,7 +8179,46 @@
                                                                                                   }
                                                                                       }
                                                                     }
-                                                     }
+                                                     },
+                  "/api/v1/activity-logs":  {
+                                                "get":  {
+                                                            "tags":  [
+                                                                         "Activity Logs"
+                                                                     ],
+                                                            "summary":  "List activity logs",
+                                                            "operationId":  "handleGetActivityLogs",
+                                                            "security":  [
+                                                                             {
+                                                                                 "basicAuth":  [
+
+                                                                                               ]
+                                                                             },
+                                                                             {
+                                                                                 "tokenAuth":  [
+
+                                                                                               ]
+                                                                             }
+                                                                         ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Success",
+                                                                                          "content":  {
+                                                                                                          "application/json":  {
+                                                                                                                                   "schema":  {
+                                                                                                                                                  "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                              }
+                                                                                                                               }
+                                                                                                      }
+                                                                                      },
+                                                                              "401":  {
+                                                                                          "description":  "Unauthorized"
+                                                                                      },
+                                                                              "500":  {
+                                                                                          "description":  "Internal server error"
+                                                                                      }
+                                                                          }
+                                                        }
+                                            }
               },
     "components":  {
                        "securitySchemes":  {
