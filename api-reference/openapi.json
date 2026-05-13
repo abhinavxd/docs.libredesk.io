@@ -8266,7 +8266,259 @@
                                                                                               }
                                                                                   }
                                                                 }
-                                                   }
+                                                   },
+                  "/api/v1/notifications":  {
+                                                "get":  {
+                                                            "tags":  [
+                                                                         "Notifications"
+                                                                     ],
+                                                            "summary":  "List notifications",
+                                                            "operationId":  "handleGetNotifications",
+                                                            "security":  [
+                                                                             {
+                                                                                 "basicAuth":  [
+
+                                                                                               ]
+                                                                             },
+                                                                             {
+                                                                                 "tokenAuth":  [
+
+                                                                                               ]
+                                                                             }
+                                                                         ],
+                                                            "responses":  {
+                                                                              "200":  {
+                                                                                          "description":  "Success",
+                                                                                          "content":  {
+                                                                                                          "application/json":  {
+                                                                                                                                   "schema":  {
+                                                                                                                                                  "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                              }
+                                                                                                                               }
+                                                                                                      }
+                                                                                      },
+                                                                              "401":  {
+                                                                                          "description":  "Unauthorized"
+                                                                                      },
+                                                                              "500":  {
+                                                                                          "description":  "Internal server error"
+                                                                                      }
+                                                                          }
+                                                        },
+                                                "delete":  {
+                                                               "tags":  [
+                                                                            "Notifications"
+                                                                        ],
+                                                               "summary":  "Delete all notifications",
+                                                               "operationId":  "handleDeleteAllNotifications",
+                                                               "security":  [
+                                                                                {
+                                                                                    "basicAuth":  [
+
+                                                                                                  ]
+                                                                                },
+                                                                                {
+                                                                                    "tokenAuth":  [
+
+                                                                                                  ]
+                                                                                }
+                                                                            ],
+                                                               "responses":  {
+                                                                                 "200":  {
+                                                                                             "description":  "Success",
+                                                                                             "content":  {
+                                                                                                             "application/json":  {
+                                                                                                                                      "schema":  {
+                                                                                                                                                     "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                 }
+                                                                                                                                  }
+                                                                                                         }
+                                                                                         },
+                                                                                 "401":  {
+                                                                                             "description":  "Unauthorized"
+                                                                                         },
+                                                                                 "500":  {
+                                                                                             "description":  "Internal server error"
+                                                                                         }
+                                                                             }
+                                                           }
+                                            },
+                  "/api/v1/notifications/stats":  {
+                                                      "get":  {
+                                                                  "tags":  [
+                                                                               "Notifications"
+                                                                           ],
+                                                                  "summary":  "Get notification stats",
+                                                                  "operationId":  "handleGetNotificationStats",
+                                                                  "security":  [
+                                                                                   {
+                                                                                       "basicAuth":  [
+
+                                                                                                     ]
+                                                                                   },
+                                                                                   {
+                                                                                       "tokenAuth":  [
+
+                                                                                                     ]
+                                                                                   }
+                                                                               ],
+                                                                  "responses":  {
+                                                                                    "200":  {
+                                                                                                "description":  "Success",
+                                                                                                "content":  {
+                                                                                                                "application/json":  {
+                                                                                                                                         "schema":  {
+                                                                                                                                                        "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                    }
+                                                                                                                                     }
+                                                                                                            }
+                                                                                            },
+                                                                                    "401":  {
+                                                                                                "description":  "Unauthorized"
+                                                                                            },
+                                                                                    "500":  {
+                                                                                                "description":  "Internal server error"
+                                                                                            }
+                                                                                }
+                                                              }
+                                                  },
+                  "/api/v1/notifications/{id}/read":  {
+                                                          "parameters":  [
+                                                                             {
+                                                                                 "name":  "id",
+                                                                                 "in":  "path",
+                                                                                 "required":  true,
+                                                                                 "schema":  {
+                                                                                                "type":  "string"
+                                                                                            }
+                                                                             }
+                                                                         ],
+                                                          "put":  {
+                                                                      "tags":  [
+                                                                                   "Notifications"
+                                                                               ],
+                                                                      "summary":  "Mark notification as read",
+                                                                      "operationId":  "handleMarkNotificationRead",
+                                                                      "security":  [
+                                                                                       {
+                                                                                           "basicAuth":  [
+
+                                                                                                         ]
+                                                                                       },
+                                                                                       {
+                                                                                           "tokenAuth":  [
+
+                                                                                                         ]
+                                                                                       }
+                                                                                   ],
+                                                                      "responses":  {
+                                                                                        "200":  {
+                                                                                                    "description":  "Success",
+                                                                                                    "content":  {
+                                                                                                                    "application/json":  {
+                                                                                                                                             "schema":  {
+                                                                                                                                                            "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                        }
+                                                                                                                                         }
+                                                                                                                }
+                                                                                                },
+                                                                                        "401":  {
+                                                                                                    "description":  "Unauthorized"
+                                                                                                },
+                                                                                        "500":  {
+                                                                                                    "description":  "Internal server error"
+                                                                                                }
+                                                                                    }
+                                                                  }
+                                                      },
+                  "/api/v1/notifications/read-all":  {
+                                                         "put":  {
+                                                                     "tags":  [
+                                                                                  "Notifications"
+                                                                              ],
+                                                                     "summary":  "Mark all notifications as read",
+                                                                     "operationId":  "handleMarkAllNotificationsRead",
+                                                                     "security":  [
+                                                                                      {
+                                                                                          "basicAuth":  [
+
+                                                                                                        ]
+                                                                                      },
+                                                                                      {
+                                                                                          "tokenAuth":  [
+
+                                                                                                        ]
+                                                                                      }
+                                                                                  ],
+                                                                     "responses":  {
+                                                                                       "200":  {
+                                                                                                   "description":  "Success",
+                                                                                                   "content":  {
+                                                                                                                   "application/json":  {
+                                                                                                                                            "schema":  {
+                                                                                                                                                           "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                       }
+                                                                                                                                        }
+                                                                                                               }
+                                                                                               },
+                                                                                       "401":  {
+                                                                                                   "description":  "Unauthorized"
+                                                                                               },
+                                                                                       "500":  {
+                                                                                                   "description":  "Internal server error"
+                                                                                               }
+                                                                                   }
+                                                                 }
+                                                     },
+                  "/api/v1/notifications/{id}":  {
+                                                     "parameters":  [
+                                                                        {
+                                                                            "name":  "id",
+                                                                            "in":  "path",
+                                                                            "required":  true,
+                                                                            "schema":  {
+                                                                                           "type":  "string"
+                                                                                       }
+                                                                        }
+                                                                    ],
+                                                     "delete":  {
+                                                                    "tags":  [
+                                                                                 "Notifications"
+                                                                             ],
+                                                                    "summary":  "Delete notification",
+                                                                    "operationId":  "handleDeleteNotification",
+                                                                    "security":  [
+                                                                                     {
+                                                                                         "basicAuth":  [
+
+                                                                                                       ]
+                                                                                     },
+                                                                                     {
+                                                                                         "tokenAuth":  [
+
+                                                                                                       ]
+                                                                                     }
+                                                                                 ],
+                                                                    "responses":  {
+                                                                                      "200":  {
+                                                                                                  "description":  "Success",
+                                                                                                  "content":  {
+                                                                                                                  "application/json":  {
+                                                                                                                                           "schema":  {
+                                                                                                                                                          "$ref":  "#/components/schemas/SuccessResponse"
+                                                                                                                                                      }
+                                                                                                                                       }
+                                                                                                              }
+                                                                                              },
+                                                                                      "401":  {
+                                                                                                  "description":  "Unauthorized"
+                                                                                              },
+                                                                                      "500":  {
+                                                                                                  "description":  "Internal server error"
+                                                                                              }
+                                                                                  }
+                                                                }
+                                                 }
               },
     "components":  {
                        "securitySchemes":  {
