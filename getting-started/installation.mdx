@@ -80,6 +80,17 @@ Libredesk is a single binary application that requires postgres and redis to run
         Edit `config.toml` with your database credentials and preferences.
       </Step>
       
+      <Step title="Create the uploads directory">
+        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory - file uploads fail if it is missing or not writable.
+        
+        ```bash
+        mkdir uploads
+        chmod 755 uploads
+        ```
+        
+        If Libredesk runs as a different user than the one that created the directory, give that user ownership with `chown`.
+      </Step>
+      
       <Step title="Install database tables">
         ```bash
         ./libredesk --install
@@ -152,6 +163,17 @@ Libredesk is a single binary application that requires postgres and redis to run
         ```
         
         Edit `config.toml` with your database credentials and preferences.
+      </Step>
+      
+      <Step title="Create the uploads directory">
+        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory - file uploads fail if it is missing or not writable.
+        
+        ```bash
+        mkdir uploads
+        chmod 755 uploads
+        ```
+        
+        If Libredesk runs as a different user than the one that created the directory, give that user ownership with `chown`.
       </Step>
       
       <Step title="Install database tables">
