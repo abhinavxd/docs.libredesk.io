@@ -751,6 +751,11 @@
                     "type": "string",
                     "description": "ISO country code"
                   },
+                  "country": {
+                    "type": "string",
+                    "description": "Contact's country as an ISO 3166-1 alpha-2 code",
+                    "example": "US"
+                  },
                   "files": {
                     "type": "string",
                     "format": "binary",
@@ -765,7 +770,11 @@
                     "type": "boolean",
                     "description": "Whether the contact is enabled"
                   }
-                }
+                },
+                "required": [
+                  "email",
+                  "first_name"
+                ]
               }
             }
           }
@@ -2073,8 +2082,23 @@
                     "type": "string",
                     "format": "binary",
                     "description": "File to upload"
+                  },
+                  "inline": {
+                    "type": "string",
+                    "description": "Set to 'true' to store the file with an inline disposition (e.g. an inline image) instead of as an attachment."
+                  },
+                  "linked_model": {
+                    "type": "string",
+                    "enum": [
+                      "messages"
+                    ],
+                    "description": "Name of the model the uploaded media is linked to.",
+                    "example": "messages"
                   }
-                }
+                },
+                "required": [
+                  "files"
+                ]
               }
             }
           }
@@ -3653,6 +3677,15 @@
               "urgent",
               "vip"
             ]
+          },
+          "action": {
+            "type": "string",
+            "enum": [
+              "set_tags",
+              "add_tags",
+              "remove_tags"
+            ],
+            "description": "How to apply the tags. Defaults to 'set_tags' (replaces all tags) when omitted."
           }
         }
       },
@@ -3865,10 +3898,21 @@
           "name": {
             "type": "string",
             "example": "Open"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "open",
+              "waiting",
+              "resolved"
+            ],
+            "description": "Category this status maps to.",
+            "example": "open"
           }
         },
         "required": [
-          "name"
+          "name",
+          "category"
         ]
       },
       "Status": {
@@ -4202,7 +4246,11 @@
             "type": "integer",
             "example": 1
           }
-        }
+        },
+        "required": [
+          "name",
+          "conversation_assignment_type"
+        ]
       },
       "Team": {
         "type": "object",
@@ -4526,6 +4574,15 @@
               "offline"
             ],
             "description": "Availability status"
+          },
+          "source": {
+            "type": "string",
+            "enum": [
+              "user",
+              "idle"
+            ],
+            "description": "Origin of the status change. 'user' is a manual change by the agent (default); 'idle' is an automatic idle-detection driven change. Idle transitions do not overwrite manual away states.",
+            "example": "idle"
           }
         }
       },
@@ -4602,12 +4659,10 @@
       "CreateConversationRequest": {
         "type": "object",
         "required": [
-          "subject",
           "content",
           "inbox_id",
           "contact_email",
           "first_name",
-          "last_name",
           "initiator"
         ],
         "properties": {
@@ -4646,6 +4701,11 @@
             "type": "string",
             "description": "Contact's last name"
           },
+          "external_user_id": {
+            "type": "string",
+            "description": "External identifier for the contact in your own system",
+            "example": "crm-9f3a21"
+          },
           "attachments": {
             "type": "array",
             "items": {
@@ -4659,14 +4719,23 @@
               "agent",
               "contact"
             ],
-            "description": "Who initiated the conversation. 'contact' means first message is incoming from contact, 'agent' means first message is outgoing from agent"
+            "description": "Who initiated the conversation. 'contact' means the first message is treated as an incoming message from the contact; 'agent' means the first message is an outgoing reply from the agent. Automation rules are only evaluated for contact-initiated conversations (incoming messages); agent-initiated conversations skip automation rule evaluation."
+          },
+          "custom_attributes": {
+            "type": "object",
+            "additionalProperties": true,
+            "description": "Arbitrary key-value custom attributes to set on the conversation",
+            "example": {
+              "order_id": "A-1024",
+              "plan": "pro"
+            }
           }
         }
       },
       "MessageRequest": {
         "type": "object",
         "required": [
-          "message"
+          "sender_type"
         ],
         "properties": {
           "message": {
@@ -4712,6 +4781,31 @@
               "contact"
             ],
             "description": "Specifies whether the message is sent by an agent or a contact."
+          },
+          "mentions": {
+            "type": "array",
+            "description": "Agents or teams mentioned in a private note.",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "agent",
+                    "team"
+                  ],
+                  "description": "Whether the mention targets an agent or a team"
+                },
+                "id": {
+                  "type": "integer",
+                  "description": "ID of the mentioned agent or team"
+                }
+              }
+            }
+          },
+          "echo_id": {
+            "type": "string",
+            "description": "Client-generated identifier echoed back to deduplicate the message on the sender's side"
           }
         }
       },
