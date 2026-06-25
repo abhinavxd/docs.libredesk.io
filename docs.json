@@ -45,6 +45,12 @@
             ]
           },
           {
+            "group": "Roles",
+            "pages": [
+              "roles/overview"
+            ]
+          },
+          {
             "group": "Contributing",
             "pages": [
               "contributing/developer-setup",

@@ -1,0 +1,103 @@
+---
+title: Roles & Permissions
+description: Control what agents can see and do in Libredesk with roles
+---
+
+A role is a named set of permissions. Every agent is assigned one or more roles, and the agent's effective access is the union of the permissions across those roles. Roles are managed under **Admin → Teams → Roles**.
+
+## Default roles
+
+Libredesk ships with two roles out of the box.
+
+| Role | Description |
+|------|-------------|
+| `Admin` | Complete access to everything, including all settings. This role cannot be edited; create a new role if you need a variation. |
+| `Agent` | Limited access to conversations, messages, and views. |
+
+<Info>
+The `Admin` role is locked and cannot be modified. To grant a subset of admin access, create a new role with only the permissions you need.
+</Info>
+
+## Permissions
+
+Permissions follow an `object:action` format (for example `roles:manage`). The sections below list every available permission and what it grants.
+
+### Conversation
+
+| Permission | What it grants |
+|------------|----------------|
+| `conversations:read` | Open and read an individual conversation, including its participants and search. Required to view any conversation. |
+| `conversations:write` | Start new conversations. |
+| `conversations:read_assigned` | List the conversations assigned to the agent. |
+| `conversations:read_all` | List every conversation in the helpdesk, regardless of who it is assigned to. |
+| `conversations:read_unassigned` | List conversations that are not yet assigned to anyone. |
+| `conversations:read_team_inbox` | List the unassigned conversations in the inboxes of the agent's teams. |
+| `conversations:read_team_all` | List all conversations assigned to the agent's teams. |
+| `conversations:update_user_assignee` | Assign a conversation to an agent, or remove that assignment. |
+| `conversations:update_team_assignee` | Assign a conversation to a team, or remove that assignment. |
+| `conversations:update_priority` | Set a conversation's priority. |
+| `conversations:update_status` | Change a conversation's status (for example open, resolved, or snoozed). |
+| `conversations:update_tags` | Add or remove tags on a conversation. |
+| `messages:read` | Read the messages in a conversation and download transcripts. |
+| `messages:write` | Reply to and send messages in a conversation. |
+| `messages:write_as_contact` | Post a message into a conversation on the contact's behalf. |
+| `view:manage` | Create and manage the agent's own saved conversation views (filters). |
+
+### Admin
+
+| Permission | What it grants |
+|------------|----------------|
+| `general_settings:manage` | Edit instance-wide settings such as business name, branding, and defaults. |
+| `notification_settings:manage` | Configure the email notifications that agents receive. |
+| `status:manage` | Create, rename, and delete conversation statuses. |
+| `oidc:manage` | Add and edit SSO (OpenID Connect) login providers. |
+| `tags:manage` | Create, edit, delete, and import tags. |
+| `macros:manage` | Create and edit macros (reusable sets of replies and actions). |
+| `users:manage` | Create, edit, and delete agents, and assign their roles. See the warning below. |
+| `teams:manage` | Create and edit teams and their membership. |
+| `automations:manage` | Create and edit automation rules that act on conversations. |
+| `inboxes:manage` | Create, configure, and delete inboxes (email, live chat, WhatsApp), including their channel connections and WhatsApp templates. |
+| `roles:manage` | Create, edit, and delete roles and the permissions they grant. |
+| `templates:manage` | Create and edit email templates. |
+| `reports:manage` | View the reporting dashboards (overview, CSAT, SLA, message volume, tag distribution). View-only, despite the name. |
+| `business_hours:manage` | Define business-hour schedules and holidays used by SLAs. |
+| `sla:manage` | Create and edit SLA policies. |
+| `ai:manage` | Configure the AI provider and prompts. |
+| `custom_attributes:manage` | Create and edit custom fields for conversations and contacts. |
+| `activity_logs:manage` | View the activity (audit) log. View-only, despite the name. |
+| `webhooks:manage` | Create and edit outgoing webhooks. |
+| `shared_views:manage` | Create and manage saved views shared with other agents. |
+| `context_links:manage` | Configure the context links shown alongside a conversation. |
+
+<Warning>
+**`users:manage` is effectively full access.** It lets an agent assign any role, including `Admin`, to any agent, themselves included. So anyone with `users:manage` can grant themselves every other permission. Treat it as equivalent to admin access and give it only to people you fully trust.
+</Warning>
+
+### Contact
+
+| Permission | What it grants |
+|------------|----------------|
+| `contacts:read_all` | List and view every contact. |
+| `contacts:read` | View an individual contact's profile and search contacts. |
+| `contacts:write` | Edit a contact's details. |
+| `contacts:block` | Block or unblock contacts. |
+| `contact_notes:read` | Read the private notes on a contact. |
+| `contact_notes:write` | Add private notes to a contact. |
+| `contact_notes:delete` | Delete private notes on a contact. |
+
+## Creating a role
+
+<Steps>
+  <Step title="Open roles">
+    Go to **Admin → Teams → Roles** and click **New role**.
+  </Step>
+  <Step title="Name the role">
+    Give it a name and an optional description.
+  </Step>
+  <Step title="Select permissions">
+    Check the permissions to grant. Anything left unchecked is denied.
+  </Step>
+  <Step title="Assign to agents">
+    Save the role, then assign it to agents from their user settings. An agent's access is the combined permissions of all roles assigned to them.
+  </Step>
+</Steps>
