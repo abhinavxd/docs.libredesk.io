@@ -59,6 +59,8 @@ The signing algorithm is **HS256** (HMAC-SHA256). The secret never leaves your s
   "email": "user@example.com",
   "first_name": "John",
   "last_name": "Doe",
+  "phone_number": "9876543210",
+  "phone_number_country_code": "IN",
   "exp": 1735689600,
   "contact_custom_attributes": {
     "plan": "premium",
@@ -73,6 +75,8 @@ The signing algorithm is **HS256** (HMAC-SHA256). The secret never leaves your s
 | `email` | Yes | User's email address. |
 | `first_name` | Yes | User's first name. |
 | `last_name` | No | User's last name. |
+| `phone_number` | No | User's phone number. |
+| `phone_number_country_code` | No | ISO 3166-1 alpha-2 country code for the phone number (e.g. `IN`, `US`). |
 | `exp` | Yes | Unix timestamp (seconds) when the token expires. |
 | `contact_custom_attributes` | No | Object of custom attributes written to the contact record on login. |
 
