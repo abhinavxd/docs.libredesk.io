@@ -167,15 +167,17 @@ window.Libredesk.onUnreadCountChange(function (count) {
 
 ## Conversation continuity
 
-If an agent is offline, visitors usually leave. Link the live chat inbox to an email inbox under **General → Conversation continuity** and Libredesk will email the visitor's message to the agent instead of dropping it.
+Contacts don't have to stay in the live chat. If they leave before the conversation is finished, Libredesk can automatically email them any unread messages.
 
-| Setting | Description |
-|---------|-------------|
-| `offline_threshold` | How long agents must be offline before email fallback kicks in (e.g. `10m`). |
-| `max_messages_per_email` | Batch size. Messages beyond this split into a new email. |
-| `min_email_interval` | Minimum gap between fallback emails for the same conversation. |
 
-Replies from the email thread appear back in the same live chat conversation.
+| Setting                  | Description                                                                        |
+| ------------------------ | ---------------------------------------------------------------------------------- |
+| `offline_threshold`      | How long agents must be offline before email fallback is triggered (e.g. `10m`).   |
+| `max_messages_per_email` | Maximum number of messages per email. Additional messages are sent in a new email. |
+| `min_email_interval`     | Minimum time between fallback emails for the same conversation.                    |
+
+Replies to the email thread are added back to the same live chat conversation.
+
 
 ## Security
 
