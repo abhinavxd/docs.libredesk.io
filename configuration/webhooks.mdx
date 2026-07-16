@@ -91,6 +91,10 @@ Each webhook request includes the following headers:
 | `User-Agent` | `Libredesk-Webhook/<version>` |
 | `X-Libredesk-Signature` | HMAC signature (if secret is configured) |
 
+### SSRF protection
+
+Webhook URLs are one of several admin-configured outbound URLs covered by Libredesk's optional SSRF guard, which is disabled by default. See [SSRF protection](/configuration/ssrf-protection) for details and how to enable it.
+
 ## Available Events
 
 ### Conversation Events

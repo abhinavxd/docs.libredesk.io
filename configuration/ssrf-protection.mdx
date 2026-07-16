@@ -1,0 +1,36 @@
+---
+title: SSRF protection
+description: Optional guard for admin-configured outbound URLs
+---
+
+Libredesk lets admins configure URLs that the server fetches on their behalf. This guard blocks those outbound requests from reaching private, loopback, link-local, and cloud-metadata IP ranges (SSRF protection).
+
+It covers every admin-configured outbound URL:
+
+- **Webhooks** - event delivery endpoints
+- **SSO** - OIDC provider discovery
+- **AI** - the AI provider base URL and custom AI tool calls
+
+## Disabled by default
+
+The guard is **off by default**. In a self-hosted, single-tenant deployment the admin already controls the infrastructure and sets these URLs, so reaching internal hosts is not a privilege boundary - it is expected. Common setups depend on it:
+
+- An internal webhook receiver
+- An OIDC provider on a private network
+- A local model endpoint, such as Ollama on `localhost` or a LAN address
+
+Enabling the guard by default would break those legitimate cases.
+
+## Opting in
+
+Turn it on when the outbound URLs come from parties you do not fully trust, such as a multi-tenant or hosted deployment. Configure it in `config.toml`:
+
+```toml
+[ssrf]
+# Block outbound requests to private/loopback/link-local/cloud-metadata IPs.
+enabled = true
+# CIDR ranges allowed to bypass the guard when enabled, for reaching known internal hosts.
+allowed_cidrs = ["10.0.0.0/8", "192.168.1.10/32"]
+```
+
+Use `allowed_cidrs` to carve out known internal hosts you still need to reach while the guard is on.

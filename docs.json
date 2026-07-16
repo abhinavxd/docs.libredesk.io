@@ -41,7 +41,8 @@
               "configuration/email-templates",
               "configuration/sso",
               "configuration/webhooks",
-              "configuration/context-links"
+              "configuration/context-links",
+              "configuration/ssrf-protection"
             ]
           },
           {
