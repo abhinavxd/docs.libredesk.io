@@ -1,0 +1,234 @@
+---
+title: AI
+description: Connect an AI provider, build a knowledge base, and let an AI assistant answer customers
+---
+
+There are two things here. One is a set of helpers for your agents: copilot, drafted replies, conversation summaries, and tag suggestions. The other is AI assistants, which reply to customers on their own, search your knowledge base, call your APIs, and hand the conversation to a human when they cannot help.
+
+Both are configured under **Admin → AI**, and neither works until you add a provider.
+
+<Note>
+  AI is currently in beta. Assistant replies go out to customers, so test on a low-volume inbox first.
+</Note>
+
+## Providers
+
+Libredesk talks to any OpenAI-compatible endpoint - OpenAI, Anthropic, OpenRouter, Groq, Together AI, Azure, LiteLLM, or a local Ollama. Pick a preset to pre-fill the base URL and model, then edit anything you want.
+
+There are two providers to configure:
+
+| Provider | Used for |
+|----------|----------|
+| **Completion** | Drafting replies, copilot, summaries, assistant responses |
+| **Embedding** | Turning snippets into vectors so the assistant can search them |
+
+<Steps>
+  <Step title="Configure completion">
+    Go to **Admin → AI → Providers**. Pick a preset, paste your API key, and save.
+  </Step>
+
+  <Step title="Configure embedding">
+    Fill in the embedding provider on the same page. **Dimensions** must match the model's output size (1536 for `text-embedding-3-small`, 3072 for `text-embedding-3-large`, 768 for `nomic-embed-text`).
+  </Step>
+
+  <Step title="Test the connection">
+    Hit **Test connection** on each. Libredesk sends a real request and reports what the provider said, including a dimensions mismatch.
+  </Step>
+</Steps>
+
+### Completion fields
+
+| Field | Notes |
+|-------|-------|
+| Model | Model ID as the provider names it, e.g. `gpt-5.4-mini`. |
+| Base URL | Leave blank for the OpenAI default. |
+| Temperature | 0 to 2. Leave blank to use the model's default - some models reject any other value. |
+| Max tokens | Cap on the reply length. |
+| Reasoning effort | `none`, `low`, `medium`, `high`. Leave blank for most models. |
+| Custom instructions | Added to every AI prompt. Good place for tone and format rules. |
+| Model supports image input | Off by default. When on, image attachments from customers are sent to the model. When off, images are never sent. |
+
+Changing the embedding model or dimensions re-embeds existing snippets automatically.
+
+<Tip>
+  Model choice matters. The cheapest models ignore your instructions and guardrails and make things up. You do not need a frontier model either. A mid-tier model like Claude Haiku or GPT-5.4 Mini is the right balance for support replies. Move up a tier if you see replies drifting from your instructions.
+</Tip>
+
+<Warning>
+  Every AI feature calls your provider and costs money on your account. Max tokens, max turns, and max steps are the settings that cap how much a single conversation can spend.
+</Warning>
+
+## Snippets
+
+Snippets are the knowledge base. The assistant and copilot search them to answer questions. One library, shared by every assistant.
+
+Write each snippet as a self-contained answer, not a fragment. A snippet titled "Refund policy" with the full policy in the body works; a single line pulled out of a longer page does not.
+
+You can add snippets three ways:
+
+- **Manually** - **New snippet**, title and content.
+- **Import from URL** - Libredesk fetches the page, keeps the readable content, and adds it as a snippet you can edit afterwards.
+- **Suggestions** - mined from resolved conversations, see below.
+
+### Learn from resolved conversations
+
+Turn on **Learn from resolved conversations** under **Admin → AI → Suggestions**. Resolved conversations where a human agent gave a reusable answer are mined into FAQ suggestions.
+
+Each suggestion shows the question, the drafted answer, and a link to the conversation it came from. Approving one adds it to snippets. Rejecting one drops it. Nothing reaches the assistant until you approve it.
+
+## Assistants
+
+An assistant is a persona with its own name, avatar, tone, instructions, and set of tools. Create as many as you need - one for billing, one for order status.
+
+Assistants show up alongside your agents as assignees. **A conversation gets an AI reply only when it is assigned to an assistant**, so route work to one with an automation rule (or assign it by hand to try it out). The assistant replies on both email and live chat, and only on open conversations - never snoozed or resolved ones.
+
+### Settings
+
+| Field | What it does |
+|-------|--------------|
+| Name, avatar | What customers see on the reply. |
+| Description | Your own note. Customers never see it. |
+| Expectation message | Shown to the customer while the assistant is handling the chat, e.g. "I'm an AI assistant here to help with your order." Disappears on handoff. |
+| Tone, response length | Friendly, professional, neutral, casual. Concise, balanced, detailed. |
+| Max turns | Replies before it hands off. 1 to 20. |
+| Languages | Languages it may reply in. It matches the customer when their language is on the list, otherwise it uses the first one. Leave empty to always match the customer. |
+| Offer handoff to a human | When off, it never offers a human and says it cannot help instead. |
+| Fallback team | Team the conversation lands in on handoff. |
+| Instructions | How it should respond. "Always confirm the order ID before looking anything up." |
+| Guardrails | Rules it must never break. "Never issue a refund without a human agent's approval." |
+| Tools | Tools this assistant may call. It can only use the ones you grant. |
+
+### Handoff
+
+The assistant hands the conversation to a human, unassigns itself, and posts an activity message when it:
+
+- decides it cannot help
+- hits its max turns
+- errors out or times out
+- sees someone other than the contact reply on the thread
+
+### Test and Performance
+
+The assistant edit page has two extra tabs:
+
+- **Test** - send a sample customer message and see the reply it would draft, plus which snippets it used. Nothing is saved or sent.
+- **Performance** - conversations, replies, resolution rate, handoff rate, reopen rate, replies per conversation, and CSAT for that assistant.
+
+## Tools
+
+Tools let an assistant call your own APIs while replying - look up an order, check a subscription, cancel something. Create them under **Admin → AI → Tools**, then grant them per assistant.
+
+| Field | Notes |
+|-------|-------|
+| Name | The function name the model calls. Letters, numbers, hyphen, underscore, up to 64 characters. |
+| Description | The model reads this to decide when to call the tool. Be precise about what it does and when to use it. |
+| URL, method | `GET` or `POST`. |
+| Headers | Sent with every request. Values are encrypted at rest. |
+| Parameters | JSON schema for the arguments the model may pass. Leave blank for a single text input. |
+| Require verified contact | On by default. See below. |
+
+```json Parameters example
+{
+  "type": "object",
+  "properties": {
+    "order_id": { "type": "string", "description": "The order ID to look up" }
+  },
+  "required": ["order_id"]
+}
+```
+
+On `GET` the arguments go on the query string. On `POST` they are the JSON body.
+
+### Identity headers
+
+Libredesk adds these headers to every tool request, server-side. The model never sees them and cannot change them.
+
+| Header | Value |
+|--------|-------|
+| `X-Libredesk-Contact-Id` | Contact ID in Libredesk. |
+| `X-Libredesk-Contact-Email` | Current email on the contact. |
+| `X-Libredesk-Contact-External-Id` | Your own user ID, if the contact came in through a verified live chat session. |
+| `X-Libredesk-Contact-Type` | `contact` or `visitor`. |
+| `X-Libredesk-Contact-Verified` | `true` or `false`, see below. Always sent. |
+| `X-Libredesk-Conversation-UUID` | Conversation the tool call belongs to. |
+| `X-Libredesk-Inbox-Id` | Inbox the conversation arrived on. |
+
+### Require verified contact
+
+An email address a customer types into a chat proves nothing. With **Require verified contact** on, the assistant emails a one-time code to the contact and asks them to paste it back before the tool can run. Codes expire in 10 minutes and both sends and attempts are capped.
+
+Turn it off only if your endpoint authenticates the customer itself. Once it is off, anyone who can reach the chat widget can trigger that tool for that contact.
+
+<Warning>
+  Tool URLs are fetched by your Libredesk server. If you accept tool definitions from people you do not fully trust, turn on [SSRF protection](/configuration/ssrf-protection).
+</Warning>
+
+### Writing a custom tool
+
+The tool config above is the easy half. The endpoint it calls is where the work is, and three rules cover most of it:
+
+1. **Check your own secret first.** Configure a header like `X-Api-Key` on the tool and reject any request that does not carry it. Your endpoint is on the internet; the tool config is the only thing that proves the call came from Libredesk.
+2. **Take the customer's identity from the headers, never from the arguments.** Libredesk injects the headers server-side and the model cannot see or change them. Anything in the request body was written by the model, from what the customer typed, so treat it as untrusted input. If the model asks for `account_id=99999`, look up the account that belongs to the contact in the header and ignore the number.
+3. **Gate sensitive data on `X-Libredesk-Contact-Verified`.** A visitor can claim any email address in chat. That header is `true` only after the contact proved the address with a one-time code, so require it before returning anything you would not show a stranger.
+
+```go
+const apiKey = "your-shared-secret"
+
+func handleBalance(w http.ResponseWriter, r *http.Request) {
+	if r.Header.Get("X-Api-Key") != apiKey {
+		http.Error(w, "unauthorized", http.StatusUnauthorized)
+		return
+	}
+	if r.Header.Get("X-Libredesk-Contact-Verified") != "true" {
+		http.Error(w, "contact not verified", http.StatusForbidden)
+		return
+	}
+
+	// Identity comes from the header. Nothing in the body decides whose data this is.
+	email := r.Header.Get("X-Libredesk-Contact-Email")
+	account, ok := lookupByEmail(email)
+	if !ok {
+		http.Error(w, "no account for this contact", http.StatusNotFound)
+		return
+	}
+
+	json.NewEncoder(w).Encode(map[string]any{
+		"balance":  account.Balance,
+		"currency": "INR",
+	})
+}
+```
+
+Return small, flat JSON. The response goes into the model's context and long payloads are truncated, so send the three fields the assistant needs to answer rather than your whole account object.
+
+A non-2xx response is handed back to the model as text, so error messages are worth writing properly. "No order found for that ID" lets the assistant ask the customer to check the number. A bare `500` usually ends in a handoff.
+
+The repo ships a runnable version of this at [`scripts/tools-server`](https://github.com/abhinavxd/libredesk/tree/main/scripts/tools-server). Run it with `go run ./scripts/tools-server`, point a tool at `http://localhost:7070/account`, and it logs every header and argument it receives.
+
+## For your agents
+
+These need only the completion provider, and work whether or not you use assistants.
+
+- **Copilot** - a panel in the conversation sidebar. Ask it anything about the conversation; it searches your snippets and the contact's history. Insert its answer into the reply box or add it as a private note. Rename it under **Admin → General**.
+- **Drafted replies** - describe what you want to say in the reply box and let AI write the reply.
+- **Rewrite prompts** - fix grammar and spelling, and the other prompts in the reply box AI menu.
+- **Summarize conversation** - drops an AI summary into the conversation as a private note.
+- **Tag suggestions** - suggests tags from your existing tag list.
+
+## Limits
+
+Assistant worker and run limits live in `config.toml`:
+
+```toml
+[ai_agent]
+# Number of workers running autonomous AI assistant responses
+worker_count = 10
+# Maximum number of AI assistant response jobs that can be queued
+queue_size = 1000
+# Maximum number of tool calls the assistant can make while working on one reply. (1-20)
+max_steps = 6
+# Conversation messages sent to the model as history. (5-100)
+max_history_messages = 30
+```
+
+One assistant run is capped at 90 seconds on live chat and 3 minutes on email, with each provider call capped at 60 seconds. A run that hits a cap hands off to a human.

@@ -37,8 +37,10 @@
             "group": "Configuration",
             "pages": [
               "configuration/connecting-inboxes",
+              "configuration/email-sender-verification",
               "configuration/livechat",
               "configuration/email-templates",
+              "configuration/ai",
               "configuration/sso",
               "configuration/webhooks",
               "configuration/context-links",
