@@ -7,10 +7,10 @@ You can access the Libredesk API to interact with your instance programmatically
 
 
 <Note>
-If you come across API calls that are yet to be documented, Please consider contributing to docs.
+Some endpoints are not documented yet. Pull requests to the docs are welcome.
 </Note>
 
-## Generating API Keys
+## Generating API keys
 
 <Steps>
   <Step title="Edit agent">
@@ -18,15 +18,15 @@ If you come across API calls that are yet to be documented, Please consider cont
   </Step>
   
   <Step title="Generate new API key">
-    An API Key and API Secret will be generated for the agent
+    Libredesk shows an API key and an API secret for that agent
   </Step>
   
   <Step title="Save the credentials">
-    Keep both the API Key and API Secret secure
+    Keep both the API key and API secret secure
   </Step>
   
   <Step title="Key management">
-    You can revoke / regenerate API keys at any time from the same page
+    You can revoke or regenerate API keys at any time from the same page
   </Step>
 </Steps>
 
@@ -34,24 +34,24 @@ If you come across API calls that are yet to be documented, Please consider cont
 
 Libredesk supports two authentication schemes:
 
-### Basic Authentication
+### Basic authentication
 
 ```bash
 curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
   -H "Authorization: Basic <base64_encoded_key:secret>"
 ```
 
-### Token Authentication
+### Token authentication
 
 ```bash
 curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
   -H "Authorization: token your_api_key:your_api_secret"
 ```
 
-## API Documentation
+## API reference
 
-The complete API documentation with all endpoints is available in the [API Reference](/api-reference/introduction) section of this documentation.
+Every documented endpoint is listed in the [API reference](/api-reference/introduction).
 
-<Card title="View API Reference" icon="code" href="/api-reference/introduction">
-  Explore the complete interactive API documentation
+<Card title="View API reference" icon="code" href="/api-reference/introduction">
+  Browse endpoints with request and response examples
 </Card>

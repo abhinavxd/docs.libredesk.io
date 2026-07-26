@@ -12,7 +12,7 @@ Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend us
 - Redis
 - PostgreSQL (≥13)
 
-## First Time Setup
+## First-time setup
 
 <Steps>
   <Step title="Clone the repository">
@@ -35,14 +35,14 @@ Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend us
     make
     ./libredesk --install
     ```
-    This will set up the database and prompt you to set the System user password.
+    Sets up the database and prompts you for the System user password.
   </Step>
 </Steps>
 
-## Running the Dev Environment
+## Running the dev environment
 
 <Tabs>
-  <Tab title="Full Stack Development">
+  <Tab title="Full stack">
     Run both backend and frontend in development mode:
     
     <Steps>
@@ -64,14 +64,14 @@ Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend us
     </Steps>
   </Tab>
   
-  <Tab title="Backend Only">
+  <Tab title="Backend only">
     ```bash
     make run-backend
     ```
     Access the backend API at `http://localhost:9000`
   </Tab>
   
-  <Tab title="Frontend Only">
+  <Tab title="Frontend only">
     ```bash
     make run-frontend
     ```
@@ -79,7 +79,7 @@ Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend us
   </Tab>
 </Tabs>
 
-## Production Build
+## Production build
 
 To build a production-ready binary:
 
@@ -87,8 +87,4 @@ To build a production-ready binary:
 make
 ```
 
-This will:
-- Build the Go binary
-- Build the Javascript frontend
-- Embed the static assets
-- Produce a single self-contained binary: `libredesk`
+This builds the Go binary and the Javascript frontend, embeds the static assets, and produces a single self-contained binary: `libredesk`.

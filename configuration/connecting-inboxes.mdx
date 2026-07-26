@@ -18,7 +18,7 @@ Connect your Gmail or Google Workspace inbox using OAuth 2.0 or an app password.
 
 #### Required OAuth scopes
 
-When configuring your Google OAuth app, the following scopes are required:
+Your Google OAuth app needs these scopes:
 
 | Scope | Purpose |
 |-------|---------|
@@ -29,7 +29,7 @@ When configuring your Google OAuth app, the following scopes are required:
 
 <Steps>
   <Step title="Get callback URL from Libredesk">
-    In Libredesk, go to Admin → Inboxes → New inbox → Google. A dialog will open with the **Callback URL**, copy this URL.
+    In Libredesk, go to Admin → Inboxes → New inbox → Google. A dialog opens with the **Callback URL**. Copy it.
   </Step>
 
   <Step title="Create a Google Cloud project">
@@ -121,7 +121,7 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
 
 <Steps>
   <Step title="Get callback URL from Libredesk">
-    In Libredesk, go to Admin → Inboxes → New inbox → Microsoft. A dialog will open with the **Callback URL** - copy this URL.
+    In Libredesk, go to Admin → Inboxes → New inbox → Microsoft. A dialog opens with the **Callback URL**. Copy it.
   </Step>
 
   <Step title="Register an app in Azure Portal">
@@ -156,14 +156,7 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
 
 ## Manual IMAP/SMTP setup
 
-For self-hosted mail servers or providers that don't support OAuth, use manual IMAP/SMTP configuration.
-
-### When to use
-
-- Self-hosted mail servers
-- Email providers without OAuth support
-
-For Gmail specifically, see the [App password](#app-password) option under Google setup.
+Use manual IMAP/SMTP for self-hosted mail servers and for providers that don't support OAuth. For Gmail, use the [app password](#app-password) option under Google setup instead.
 
 ### Configuration steps
 

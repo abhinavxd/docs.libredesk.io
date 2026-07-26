@@ -3,11 +3,7 @@ title: Webhooks
 description: Receive real-time HTTP notifications for Libredesk events
 ---
 
-Webhooks allow you to receive real-time HTTP notifications when specific events occur in your Libredesk instance. This enables you to integrate Libredesk with external systems and automate workflows based on conversation and message events.
-
-## Overview
-
-When a configured event occurs in Libredesk, an HTTP POST request is sent to the webhook URL you specify. The request contains a JSON payload with event details and relevant data.
+When something happens in your Libredesk instance, Libredesk sends an HTTP POST to a URL you choose. The body is JSON containing the event name, a timestamp, and the conversation or message it happened to. Use webhooks to push Libredesk activity into your own systems.
 
 ## Configuration
 
@@ -17,12 +13,12 @@ When a configured event occurs in Libredesk, an HTTP POST request is sent to the
   </Step>
   
   <Step title="Create webhook">
-    Click **Create Webhook** and configure:
-    - **Name**: A descriptive name for your webhook
-    - **URL**: The endpoint URL where webhook payloads will be sent
-    - **Events**: Select which events you want to subscribe to
-    - **Secret**: Optional secret key for signature verification
-    - **Status**: Enable or disable the webhook
+    Click **Create Webhook** and fill in:
+    - **Name**: a name you will recognize later
+    - **URL**: where Libredesk sends the payload
+    - **Events**: the events to subscribe to
+    - **Secret**: optional, used to sign the payload
+    - **Status**: enabled or disabled
   </Step>
   
   <Step title="Test webhook">
@@ -32,9 +28,9 @@ When a configured event occurs in Libredesk, an HTTP POST request is sent to the
 
 ## Security
 
-### Signature Verification
+### Signature verification
 
-If you provide a secret key, webhook payloads will be signed using HMAC-SHA256. The signature is included in the `X-Libredesk-Signature` header in the format `sha256=<signature>`.
+When you set a secret, Libredesk signs the payload with HMAC-SHA256 and sends the result in the `X-Libredesk-Signature` header as `sha256=<signature>`.
 
 <CodeGroup>
 
@@ -83,7 +79,7 @@ func verifySignature(payload []byte, signature, secret string) bool {
 
 ### Headers
 
-Each webhook request includes the following headers:
+Every request carries these headers:
 
 | Header | Description |
 |--------|-------------|
@@ -95,9 +91,9 @@ Each webhook request includes the following headers:
 
 Webhook URLs are one of several admin-configured outbound URLs covered by Libredesk's optional SSRF guard, which is disabled by default. See [SSRF protection](/configuration/ssrf-protection) for details and how to enable it.
 
-## Available Events
+## Events
 
-### Conversation Events
+### Conversation events
 
 <AccordionGroup>
 
@@ -437,7 +433,7 @@ Triggered when tags are added or removed from a conversation.
 
 </AccordionGroup>
 
-### Message Events
+### Message events
 
 <AccordionGroup>
 
@@ -497,19 +493,18 @@ Triggered when an existing message is updated.
 
 </AccordionGroup>
 
-## Delivery and Retries
+## Delivery and retries
 
-<Info>
-**Webhook Delivery Behavior:**
-- Webhooks requests timeout can be configured in the `config.toml` file
-- Failed deliveries are not automatically retried
-- Webhook delivery runs in a background worker pool for better performance
-- If the webhook queue is full (configurable in config.toml), new events may be dropped
-</Info>
+- Deliveries run in a background worker pool.
+- The request timeout is set in `config.toml`.
+- Failed deliveries are not retried.
+- Events can be dropped when the delivery queue is full. The queue size is set in `config.toml`.
 
-## Testing Webhooks
+Because there are no retries, verify the signature and reply within 5 seconds, then do the actual work after you have responded. An endpoint that blocks on slow processing will time out and lose the event.
 
-You can test your webhook configuration using these tools:
+## Testing
+
+Both of these give you a throwaway URL that shows the payloads Libredesk sends:
 
 <CardGroup cols={2}>
   <Card title="Webhook.site" icon="globe" href="https://webhook.site">
@@ -520,18 +515,9 @@ You can test your webhook configuration using these tools:
   </Card>
 </CardGroup>
 
-## Best Practices
+## Example integration
 
-<Check>
-**Do:**
-- Always verify webhook signatures in production
-- Respond quickly (< 5 seconds) to webhook requests
-- Process webhooks asynchronously in your application
-</Check>
-
-## Example Integration
-
-Here's a simple Express.js server that receives and processes Libredesk webhooks:
+An Express server that verifies the signature, replies immediately, and processes the event afterwards:
 
 ```javascript
 const express = require('express');

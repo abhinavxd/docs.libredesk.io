@@ -3,18 +3,18 @@ title: Installation
 description: Deploy Libredesk using Docker, binary, or from source
 ---
 
-Libredesk is a single binary application that requires postgres and redis to run. You can install it using the binary or docker.
+Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Install it with Docker, from a release binary, or from source.
 
 
-## Installation Methods
+## Installation methods
 
 <Tabs>
   <Tab title="Docker (Recommended)">
-    ## Docker Installation
+    ## Docker installation
     
     The latest image is available on DockerHub at [libredesk/libredesk:latest](https://hub.docker.com/r/libredesk/libredesk)
     
-    ### Quick Start with Docker Compose
+    ### Quick start with Docker Compose
     
     <Steps>
       <Step title="Download configuration files">
@@ -55,7 +55,7 @@ Libredesk is a single binary application that requires postgres and redis to run
   </Tab>
   
   <Tab title="Binary">
-    ## Binary Installation
+    ## Binary installation
     
     <Info>
     **Prerequisites:**
@@ -81,7 +81,7 @@ Libredesk is a single binary application that requires postgres and redis to run
       </Step>
       
       <Step title="Create the uploads directory">
-        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory - file uploads fail if it is missing or not writable.
+        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory, and uploads fail if it is missing or not writable.
         
         ```bash
         mkdir uploads
@@ -95,7 +95,7 @@ Libredesk is a single binary application that requires postgres and redis to run
         ```bash
         ./libredesk --install
         ```
-        This will create the necessary tables in PostgreSQL.
+        Creates the tables in PostgreSQL.
         
         <Tip>
         To set the System user password during installation, use the environment variable: 
@@ -125,7 +125,7 @@ Libredesk is a single binary application that requires postgres and redis to run
   </Tab>
   
   <Tab title="From Source">
-    ## Compile from Source
+    ## Compile from source
     
     Build the latest unreleased version from the `main` branch.
     
@@ -150,7 +150,7 @@ Libredesk is a single binary application that requires postgres and redis to run
         ```bash
         make
         ```
-        This will generate the `libredesk` binary in the current directory.
+        Generates the `libredesk` binary in the current directory.
       </Step>
       
       <Step title="Configure Libredesk">
@@ -166,7 +166,7 @@ Libredesk is a single binary application that requires postgres and redis to run
       </Step>
       
       <Step title="Create the uploads directory">
-        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory - file uploads fail if it is missing or not writable.
+        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory, and uploads fail if it is missing or not writable.
         
         ```bash
         mkdir uploads
@@ -180,7 +180,7 @@ Libredesk is a single binary application that requires postgres and redis to run
         ```bash
         ./libredesk --install
         ```
-        This will create the necessary tables in PostgreSQL.
+        Creates the tables in PostgreSQL.
         
         <Tip>
         To set the System user password during installation, use the environment variable: 
@@ -211,7 +211,7 @@ Libredesk is a single binary application that requires postgres and redis to run
 </Tabs>
 
 
-## Configuration via Environment Variables
+## Configuration via environment variables
 
 Instead of using a `config.toml` file, you can configure Libredesk entirely through environment variables.
 
@@ -227,7 +227,7 @@ Instead of using a `config.toml` file, you can configure Libredesk entirely thro
 | `db.host = "localhost"` | `LIBREDESK_DB__HOST=localhost` |
 
 
-## Nginx Configuration (Recommended)
+## Nginx reverse proxy (recommended)
 
 We recommend running Libredesk behind Nginx as a reverse proxy.
 
@@ -242,7 +242,7 @@ sudo dnf install nginx && sudo systemctl enable --now nginx
 ```
 
 <Warning>
-The proxy must set `X-Client-IP` to `$remote_addr` - Libredesk uses this header to identify the client for rate limiting and audit logs. Without it, the proxy's IP is treated as the client.
+The proxy must set `X-Client-IP` to `$remote_addr`. Libredesk reads this header to identify the client for rate limiting and audit logs, and without it every request looks like it came from the proxy.
 </Warning>
 
 Save the following as `/etc/nginx/sites-available/libredesk`:
