@@ -7,26 +7,26 @@ You can access the Libredesk API to interact with your instance programmatically
 
 
 <Note>
-If you come across API calls that are yet to be documented, Please consider contributing to docs.
+Some endpoints are not documented yet. Pull requests to the docs are welcome.
 </Note>
 
 ## Authentication
 
 The API supports two authentication methods:
 
-### Basic Authentication
+### Basic authentication
 ```bash
 curl -X GET "https://your-instance.com/api/v1/endpoint" \
   -H "Authorization: Basic <base64_encoded_api_key:api_secret>"
 ```
 
-### Token Authentication
+### Token authentication
 ```bash
 curl -X GET "https://your-instance.com/api/v1/endpoint" \
   -H "Authorization: token api_key:api_secret"
 ```
 
-## Getting API Keys
+## Getting API keys
 
 1. Go to **Admin → Teammate → Agent → Edit**
 2. Generate a new API key
@@ -38,6 +38,6 @@ curl -X GET "https://your-instance.com/api/v1/endpoint" \
 https://your-instance.com/api/v1
 ```
 
-## Response Format
+## Response format
 
-All API responses are returned in JSON format.
+Every response is JSON.

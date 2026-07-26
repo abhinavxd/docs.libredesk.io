@@ -172,7 +172,7 @@ Contacts don't have to stay in the live chat. If they leave before the conversat
 
 | Setting                  | Description                                                                        |
 | ------------------------ | ---------------------------------------------------------------------------------- |
-| `offline_threshold`      | How long agents must be offline before email fallback is triggered (e.g. `10m`).   |
+| `offline_threshold`      | How long agents must be offline before Libredesk sends a fallback email (e.g. `10m`). |
 | `max_messages_per_email` | Maximum number of messages per email. Additional messages are sent in a new email. |
 | `min_email_interval`     | Minimum time between fallback emails for the same conversation.                    |
 
@@ -191,7 +191,7 @@ example.com
 staging.example.com
 ```
 
-Leave this empty to allow all origins. Set it in production.
+Leave this empty to allow all origins. Always set it in production.
 
 ### Blocked IPs
 

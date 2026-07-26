@@ -5,7 +5,7 @@ description: Open external tools from the conversation sidebar with contact deta
 
 Context Links are buttons in the conversation sidebar that open external URLs with contact and conversation details filled in. Agents click them to jump to CRMs, billing systems, or internal dashboards without copy-pasting identifiers.
 
-## URL Template Variables
+## URL template variables
 
 These placeholders are replaced with the current contact's details when an agent clicks the link.
 
@@ -40,17 +40,17 @@ https://billing.example.com/customer?ext_id={{external_user_id}}&email={{email}}
 https://dashboard.internal/lookup?contact={{contact_id}}&conv={{conversation_uuid}}
 ```
 
-**Secure integration with encrypted token:**
+**Encrypted token:**
 ```
 https://api.example.com/auth/libredesk?token={{token}}
 ```
 The receiving system decrypts the token to get all contact and agent fields in one payload, without exposing them in the URL.
 
-## Encrypted Token
+## Encrypted token
 
 When you use `{{token}}`, Libredesk generates an AES-256-GCM encrypted, time-limited token containing all the above fields plus `agent_id`, `agent_email`, `iat`, and `exp`. The receiving system decrypts it with the shared secret.
 
-### Decrypting the Token
+### Decrypting the token
 
 ```python
 import base64, json, time

@@ -3,15 +3,15 @@ title: Email Templates
 description: Customize outgoing emails with dynamic template expressions
 ---
 
-Templating in outgoing emails allows you to personalize content by embedding dynamic expressions like `{{ .Recipient.FullName }}`. These expressions reference fields from the conversation, contact, recipient, and author objects and dynamically insert the appropriate information when the email is sent.
+Outgoing emails can include expressions like `{{ .Recipient.FullName }}`, which pull fields from the conversation, contact, recipient, and author. Libredesk replaces them with real values when it sends the email.
 
-## Outgoing Email Template Expressions
+## Outgoing email templates
 
-If you want to customize the look of outgoing emails, you can do so in the **Admin → Templates → Outgoing Email Templates** section. This template will be used for all outgoing emails including replies to conversations, notifications, and other system-generated emails.
+Edit the template under **Admin → Templates → Outgoing Email Templates**. It applies to every outgoing email, including replies to conversations, notifications, and other system-generated mail.
 
-### Available Variables
+### Available variables
 
-#### Conversation Variables
+#### Conversation variables
 
 | Variable | Value |
 |----------|-------|
@@ -20,7 +20,7 @@ If you want to customize the look of outgoing emails, you can do so in the **Adm
 | `{{ .Conversation.Priority }}` | The priority level of the conversation |
 | `{{ .Conversation.UUID }}` | The unique identifier of the conversation |
 
-#### Contact Variables
+#### Contact variables
 
 | Variable | Value |
 |----------|-------|
@@ -29,7 +29,7 @@ If you want to customize the look of outgoing emails, you can do so in the **Adm
 | `{{ .Contact.FullName }}` | Full name of the contact/customer |
 | `{{ .Contact.Email }}` | Email address of the contact/customer |
 
-#### Recipient Variables
+#### Recipient variables
 
 | Variable | Value |
 |----------|-------|
@@ -38,7 +38,7 @@ If you want to customize the look of outgoing emails, you can do so in the **Adm
 | `{{ .Recipient.FullName }}` | Full name of the recipient |
 | `{{ .Recipient.Email }}` | Email address of the recipient |
 
-#### Author Variables
+#### Author variables
 
 | Variable | Value |
 |----------|-------|
@@ -47,10 +47,10 @@ If you want to customize the look of outgoing emails, you can do so in the **Adm
 | `{{ .Author.FullName }}` | Full name of the message author |
 | `{{ .Author.Email }}` | Email address of the message author |
 
-## Example outgoing email template 
+## Example outgoing email template
 
 <Note>
-Templates support HTML formatting. Use HTML tags like `<p>` and `<br />` to control spacing and line breaks. Plain text without HTML tags will render without line breaks.
+Templates support HTML formatting. Use tags like `<p>` and `<br />` to control spacing and line breaks. Plain text without HTML tags renders without line breaks.
 </Note>
 
 ```html
@@ -64,19 +64,13 @@ Templates support HTML formatting. Use HTML tags like `<p>` and `<br />` to cont
 <p>Reference: {{ .Conversation.ReferenceNumber }}</p>
 ```
 
-### Understanding Template Structure
+### How the template wraps a message
 
-When an outgoing email template is configured, it automatically wraps around message content. The `{{ template "content" . }}` placeholder indicates where the message body will be inserted.
+The template wraps every message an agent sends. Whatever the agent types in the editor goes where `{{ template "content" . }}` sits.
 
-#### Template Behavior
+So if the template already opens with "Dear `{{ .Recipient.FirstName }}`" and closes with "Best regards, `{{ .Author.FullName }}`", agents should write neither a greeting nor a sign-off. They write only the body.
 
-The template structure determines what should be included in message responses:
-
-- **Greetings**: If the template includes a greeting (e.g., "Dear `{{ .Recipient.FirstName }}`"), do not add another greeting in the message body
-- **Sign-offs**: If the template includes a sign-off (e.g., "Best regards, `{{ .Author.FullName }}`"), do not add another sign-off in the message body
-- **Message Content**: Write only the main content that should appear in the `{{ template "content" . }}` section
-
-#### Example: Correct Usage
+#### Correct usage
 
 **Message written in text editor:**
 ```
@@ -95,7 +89,7 @@ Sarah Smith
 Reference: TKT-2024-001
 ```
 
-#### Example: Incorrect Usage (Duplication)
+#### Duplicated greeting and sign-off
 
 **Message written in text editor:**
 ```
@@ -124,10 +118,6 @@ Sarah Smith
 Reference: TKT-2024-001
 ```
 
-### Adapting to Different Template Configurations
+### Other template shapes
 
-The content structure should match your template configuration:
-
-- **Templates without greetings**: Include your own greeting in the message body
-- **Templates with only content placeholder**: Write complete emails including greetings and sign-offs
-- **Custom templates**: Review the active template configuration to understand what elements are automatically included
+A template with no greeting means agents write their own. A template that is only the content placeholder means agents write the whole email, greeting and sign-off included. Read the active template before deciding.

@@ -13,7 +13,7 @@ Both are configured under **Admin → AI**, and neither works until you add a pr
 
 ## Providers
 
-Libredesk talks to any OpenAI-compatible endpoint - OpenAI, Anthropic, OpenRouter, Groq, Together AI, Azure, LiteLLM, or a local Ollama. Pick a preset to pre-fill the base URL and model, then edit anything you want.
+Libredesk talks to any OpenAI-compatible endpoint: OpenAI, Anthropic, OpenRouter, Groq, Together AI, Azure, LiteLLM, or a local Ollama. Pick a preset to pre-fill the base URL and model, then edit anything you want.
 
 There are two providers to configure:
 
@@ -42,7 +42,7 @@ There are two providers to configure:
 |-------|-------|
 | Model | Model ID as the provider names it, e.g. `gpt-5.4-mini`. |
 | Base URL | Leave blank for the OpenAI default. |
-| Temperature | 0 to 2. Leave blank to use the model's default - some models reject any other value. |
+| Temperature | 0 to 2. Leave blank to use the model's default. Some models reject any other value. |
 | Max tokens | Cap on the reply length. |
 | Reasoning effort | `none`, `low`, `medium`, `high`. Leave blank for most models. |
 | Custom instructions | Added to every AI prompt. Good place for tone and format rules. |
@@ -78,7 +78,7 @@ Each suggestion shows the question, the drafted answer, and a link to the conver
 
 ## Assistants
 
-An assistant is a persona with its own name, avatar, tone, instructions, and set of tools. Create as many as you need - one for billing, one for order status.
+An assistant is a persona with its own name, avatar, tone, instructions, and set of tools. Create as many as you need: one for billing, one for order status.
 
 Assistants show up alongside your agents as assignees. **A conversation gets an AI reply only when it is assigned to an assistant**, so route work to one with an automation rule (or assign it by hand to try it out). The assistant replies on both email and live chat, and only on open conversations - never snoozed or resolved ones.
 
@@ -116,7 +116,7 @@ The assistant edit page has two extra tabs:
 
 ## Tools
 
-Tools let an assistant call your own APIs while replying - look up an order, check a subscription, cancel something. Create them under **Admin → AI → Tools**, then grant them per assistant.
+Tools let an assistant call your own APIs while replying, to look up an order, check a subscription, or cancel something. Create them under **Admin → AI → Tools**, then grant them per assistant.
 
 | Field | Notes |
 |-------|-------|
