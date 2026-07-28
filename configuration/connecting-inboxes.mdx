@@ -40,6 +40,12 @@ An app password is the quickest way to connect Gmail. It needs no Google Cloud C
     | Username | Your full Gmail address |
     | Password | The app password from step 1 |
   </Step>
+
+  <Step title="Save the inbox, then wait for the first scan">
+    Click **Save**. Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
+
+    So: send a test email to the address, wait 5 minutes, then look in Conversations.
+  </Step>
 </Steps>
 
 ### OAuth
@@ -86,6 +92,12 @@ Your Google OAuth app needs these scopes:
 
   <Step title="Complete setup in Libredesk">
     Back in the Libredesk dialog, enter the Client ID and Client Secret, then click Authorize. You'll be redirected to Google's consent screen to grant permissions.
+  </Step>
+
+  <Step title="Save the inbox, then wait for the first scan">
+    Click **Save**. Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
+
+    So: send a test email to the address, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
 
@@ -152,6 +164,12 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
   <Step title="Complete setup in Libredesk">
     Back in the Libredesk dialog, enter the Client ID, Client Secret, and Tenant ID (optional), then click Authorize. You'll be redirected to Microsoft's consent screen to grant permissions.
   </Step>
+
+  <Step title="Save the inbox, then wait for the first scan">
+    Click **Save**. Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
+
+    So: send a test email to the address, wait 5 minutes, then look in Conversations.
+  </Step>
 </Steps>
 
 ## Manual IMAP/SMTP setup
@@ -163,6 +181,12 @@ Use manual IMAP/SMTP for self-hosted mail servers and for providers that don't s
 <Steps>
   <Step title="Add inbox in Libredesk">
     Navigate to Admin → Inboxes → New inbox → Other provider, configure IMAP and SMTP settings, then click Save.
+  </Step>
+
+  <Step title="Wait for the first scan">
+    Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
+
+    So: send a test email to the address, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
 
