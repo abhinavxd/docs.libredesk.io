@@ -3,7 +3,7 @@ title: Developer Setup
 description: Set up your development environment for Libredesk
 ---
 
-Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend uses Shadcn for UI components.
+Libredesk is a monorepo with a Go backend and two Vue.js frontend apps: the main agent dashboard and the live chat widget. Both use Shadcn for UI components.
 
 ## Prerequisites
 
@@ -43,8 +43,8 @@ Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend us
 
 <Tabs>
   <Tab title="Full stack">
-    Run both backend and frontend in development mode:
-    
+    Run the backend and both frontend apps in development mode:
+
     <Steps>
       <Step title="Start backend server">
         ```bash
@@ -52,30 +52,44 @@ Libredesk is a monorepo with a Go backend and a Vue.js frontend. The frontend us
         ```
         This starts the libredesk backend dev server on `:9000`
       </Step>
-      
-      <Step title="Start frontend server">
+
+      <Step title="Start the main app">
         ```bash
-        make run-frontend
+        make run-frontend-main
         ```
-        This starts the Vue frontend in dev mode using pnpm on `:8000`
-        
+        This starts the agent dashboard in dev mode using pnpm on `:8000`
+
         Requests are proxied to the backend running on `:9000` (check `vite.config.js` for proxy config)
+      </Step>
+
+      <Step title="Start the widget app">
+        ```bash
+        make run-frontend-widget
+        ```
+        This starts the live chat widget in dev mode on `:8001`, also proxied to the backend on `:9000`
+
+        Only needed if you are working on the widget.
       </Step>
     </Steps>
   </Tab>
-  
+
   <Tab title="Backend only">
     ```bash
     make run-backend
     ```
     Access the backend API at `http://localhost:9000`
   </Tab>
-  
+
   <Tab title="Frontend only">
     ```bash
-    make run-frontend
+    make run-frontend-main
     ```
-    Access the frontend at `http://localhost:8000`
+    Access the main app at `http://localhost:8000`
+
+    ```bash
+    make run-frontend-widget
+    ```
+    Access the widget at `http://localhost:8001`
   </Tab>
 </Tabs>
 
@@ -87,4 +101,6 @@ To build a production-ready binary:
 make
 ```
 
-This builds the Go binary and the Javascript frontend, embeds the static assets, and produces a single self-contained binary: `libredesk`.
+This builds the Go binary and both frontend apps, embeds the static assets, and produces a single self-contained binary: `libredesk`.
+
+To build just one app: `make frontend-build-main` or `make frontend-build-widget`.
