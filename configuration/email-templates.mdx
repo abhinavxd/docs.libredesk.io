@@ -38,6 +38,8 @@ Edit the template under **Admin → Templates → Outgoing Email Templates**. It
 | `{{ .Recipient.FullName }}` | Full name of the recipient |
 | `{{ .Recipient.Email }}` | Email address of the recipient |
 
+The recipient is whoever receives the email. In replies to conversations, `Recipient` and `Contact` are the same person. They differ only in [email notification templates](#email-notification-templates), where the recipient is an agent.
+
 #### Author variables
 
 | Variable | Value |
@@ -46,6 +48,45 @@ Edit the template under **Admin → Templates → Outgoing Email Templates**. It
 | `{{ .Author.LastName }}` | Last name of the message author |
 | `{{ .Author.FullName }}` | Full name of the message author |
 | `{{ .Author.Email }}` | Email address of the message author |
+
+The author is the sender of the message. When Libredesk itself sends the email (automations, conversation continuity), the sender is the built-in System user, so these fields stay empty - otherwise emails would render "System" as the author's name.
+
+#### Message variables
+
+| Variable | Value |
+|----------|-------|
+| `{{ .IsAIComposed }}` | `true` when the reply was written by an [AI assistant](/configuration/ai#assistants) rather than a person |
+| `{{ .IsContinuityEmail }}` | `true` when the email is a [conversation continuity](/configuration/livechat#conversation-continuity) email, i.e. unread live chat messages emailed to a contact who left the chat |
+
+Use them to disclose AI replies, or to skip parts of the template that don't fit an automated email:
+
+```html
+{{ if .IsContinuityEmail }}
+  <p>You have new messages:</p>
+{{ else }}
+  <p>Dear {{ .Recipient.FirstName }},</p>
+{{ end }}
+
+{{ if .IsAIComposed }}
+  <p>This reply was composed by an AI assistant.</p>
+{{ end }}
+```
+
+### Template functions
+
+These work in any template, alongside the variables above.
+
+| Function | Value |
+|----------|-------|
+| `{{ RootURL }}` | Root URL of the Libredesk instance, set under **Admin → General** |
+| `{{ SiteName }}` | Site name, set under **Admin → General** |
+| `{{ LogoURL }}` | URL of the uploaded logo |
+| `{{ FaviconURL }}` | URL of the uploaded favicon |
+| `{{ Date "2006-01-02" }}` | Current date and time, formatted with a [Go layout](https://pkg.go.dev/time#pkg-constants). `{{ Date "" }}` uses the ANSIC layout |
+
+### Using variables in replies and private notes
+
+The same expressions work when an agent types them in the reply editor or a private note, and in macros. Libredesk replaces them when the message is saved, so the agent sees the final text right away.
 
 ## Example outgoing email template
 
@@ -62,6 +103,9 @@ Templates support HTML formatting. Use tags like `<p>` and `<br />` to control s
 {{ .Author.FullName }}</p>
 ---
 <p>Reference: {{ .Conversation.ReferenceNumber }}</p>
+{{ if .IsAIComposed }}
+  <p>This reply was composed by an AI assistant.</p>
+{{ end }}
 ```
 
 ### How the template wraps a message
@@ -120,4 +164,23 @@ Reference: TKT-2024-001
 
 ### Other template shapes
 
-A template with no greeting means agents write their own. A template that is only the content placeholder means agents write the whole email, greeting and sign-off included. Read the active template before deciding.
+A template with no greeting means agents write their own. A template that is only the content placeholder means agents write the whole email, greeting and sign-off included. Read the active template before deciding what to write.
+
+## Email notification templates
+
+Edit these under **Admin → Templates → Email notification templates**. The default outgoing email template wraps each one, and the subject line takes the same expressions as the body.
+
+The first three go to agents, so `{{ .Recipient.* }}` is the agent being notified and author fields are empty. The CSAT request goes to the contact, as a normal reply in the conversation.
+
+Each template has its own variables:
+
+| Template | Variables |
+|----------|-----------|
+| Conversation assigned | Conversation, Contact, Recipient |
+| Mentioned in conversation | Conversation, Recipient, `{{ .MentionedBy.FirstName }}`, `{{ .MentionedBy.LastName }}`, `{{ .MentionedBy.FullName }}`, `{{ .MentionedBy.Email }}`, `{{ .Message.Content }}` (the private note), `{{ .Message.UUID }}` |
+| SLA breach warning, SLA breached | Conversation (`{{ .Conversation.Priority }}` is empty here), Recipient, `{{ .SLA.Metric }}` (First response, Resolution, or Next response), `{{ .SLA.DueIn }}` (time left, for the warning email), `{{ .SLA.OverdueBy }}` (time past the deadline, for the breach email) |
+| CSAT request | Everything an outgoing email gets (Conversation, Contact, Recipient, Author, `{{ .IsAIComposed }}`), plus `{{ .CSATLink }}` (rating page URL, append `?rating=1` to `?rating=5` for one-click rating) and `{{ .CSATUUID }}` |
+
+<Note>
+In the CSAT request, `{{ .Author.* }}` holds the person who resolved the conversation, and is empty when an automation resolved it.
+</Note>
