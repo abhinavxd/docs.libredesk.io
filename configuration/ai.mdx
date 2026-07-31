@@ -149,7 +149,7 @@ Libredesk adds these headers to every tool request, server-side. The model never
 | `X-Libredesk-Contact-Email` | Current email on the contact. |
 | `X-Libredesk-Contact-External-Id` | Your own user ID, if the contact came in through a verified live chat session. |
 | `X-Libredesk-Contact-Type` | `contact` or `visitor`. |
-| `X-Libredesk-Contact-Verified` | `true` or `false`, see below. Always sent. |
+| `X-Libredesk-Contact-Verified` | `true` or `false`, see below. Always sent. Read this before returning any personal data. |
 | `X-Libredesk-Conversation-UUID` | Conversation the tool call belongs to. |
 | `X-Libredesk-Inbox-Id` | Inbox the conversation arrived on. |
 
@@ -158,6 +158,10 @@ Libredesk adds these headers to every tool request, server-side. The model never
 An email address a customer types into a chat proves nothing. With **Require verified contact** on, the assistant emails a one-time code to the contact and asks them to paste it back before the tool can run. Codes expire in 10 minutes and both sends and attempts are capped.
 
 Turn it off only if your endpoint authenticates the customer itself. Once it is off, anyone who can reach the chat widget can trigger that tool for that contact.
+
+<Warning>
+  **Check `X-Libredesk-Contact-Verified` in your endpoint on every call. Return personal data, or act on the customer's account, only when it is `true`.** The toggle above is a gate inside Libredesk, in front of the model. It is not a guarantee your endpoint gets: with the toggle off, or on a tool where it was never turned on, requests reach you with the header set to `false`. The header is the only thing that actually proves the customer owns the email they claimed, so treat it as the source of truth and check it yourself. Do not rely on the assistant having asked for a code first.
+</Warning>
 
 <Warning>
   Tool URLs are fetched by your Libredesk server. If you accept tool definitions from people you do not fully trust, turn on [SSRF protection](/configuration/ssrf-protection).
@@ -169,7 +173,7 @@ The tool config above is the easy half. The endpoint it calls is where the work 
 
 1. **Check your own secret first.** Configure a header like `X-Api-Key` on the tool and reject any request that does not carry it. Your endpoint is on the internet; the tool config is the only thing that proves the call came from Libredesk.
 2. **Take the customer's identity from the headers, never from the arguments.** Libredesk injects the headers server-side and the model cannot see or change them. Anything in the request body was written by the model, from what the customer typed, so treat it as untrusted input. If the model asks for `account_id=99999`, look up the account that belongs to the contact in the header and ignore the number.
-3. **Gate sensitive data on `X-Libredesk-Contact-Verified`.** A visitor can claim any email address in chat. That header is `true` only after the contact proved the address with a one-time code, so require it before returning anything you would not show a stranger.
+3. **Gate sensitive data on `X-Libredesk-Contact-Verified`.** A visitor can claim any email address in chat. That header is `true` only after the contact proved the address with a one-time code, so require it before returning anything you would not show a stranger, and before anything that changes their account: a cancellation, a refund, an address update.
 
 ```go
 const apiKey = "your-shared-secret"
