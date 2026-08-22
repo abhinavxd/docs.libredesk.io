@@ -1,0 +1,105 @@
+---
+title: Help Center
+description: Publish a searchable knowledge base with collections, articles in multiple languages, and customize it however you want
+---
+
+A help center is a public site, served by Libredesk, where customers browse and search your articles. You can run more than one. Each has its own content, languages, appearance and domain. Published articles can also be used by the AI assistant to answer conversations.
+
+## Create a help center
+
+<Steps>
+  <Step title="Add the help center">
+    Go to **Admin → Help center → New help center**. Fill in the name and the slug that goes in its URL.
+  </Step>
+
+  <Step title="Pick a layout">
+    **Docs** gives you a documentation layout: a top navigation bar, a sidebar listing collections, and quick search on Ctrl+K. **Classic** gives you a landing page with a hero banner, a large search bar and collection cards.
+  </Step>
+</Steps>
+
+## URLs
+
+By default the help center is served from your Libredesk instance:
+
+```
+https://support.example.com/hc/<slug>/<locale>
+https://support.example.com/hc/<slug>/<locale>/collections/<collection-slug>
+https://support.example.com/hc/<slug>/<locale>/articles/<article-slug>
+```
+
+## Custom domain
+
+A help center can be served from its own domain or subdomain, for example `https://help.example.com`, where it sits at the root and the paths above drop the `/hc/<slug>` prefix. Two help centers cannot share a domain.
+
+Set **Custom domain** to the domain's root URL in the help center's settings, then:
+
+<Steps>
+  <Step title="Point DNS at the server">
+    Point the domain at the same server as your Libredesk instance: an `A` record to its IP, or a `CNAME` to the hostname you already serve Libredesk on.
+  </Step>
+
+  <Step title="Add a server block">
+    Libredesk decides which help center to serve from the `Host` header of the request, so the proxy has to forward the original host. Save this as `/etc/nginx/sites-available/libredesk-help`:
+
+    ```nginx
+    server {
+        listen 80;
+        server_name help.example.com;
+
+        location / {
+            proxy_pass http://localhost:9000;
+            proxy_http_version 1.1;
+            proxy_set_header Host $host;
+            proxy_set_header X-Client-IP $remote_addr;
+        }
+    }
+    ```
+
+    Then enable it and reload nginx:
+
+    ```bash
+    sudo ln -s /etc/nginx/sites-available/libredesk-help /etc/nginx/sites-enabled/
+    sudo nginx -t && sudo systemctl reload nginx
+    ```
+  </Step>
+</Steps>
+
+<Warning>
+`proxy_set_header Host $host;` is the line that matters. Without it nginx sends the upstream's host, no help center matches, and visitors land on the agent login page instead of your help center.
+</Warning>
+
+## Collections and articles
+
+Collections group articles and can be nested up to three levels deep. To change the order readers see, drag a row by its handle in the content tree.
+
+Only published articles appear on the public site, and **Preview** shows a draft the way its public page will look. An article's author can be an agent or an AI assistant.
+
+## Languages
+
+Add every language you plan to write in under **Supported languages**, then pick the **Default language** that visitors land on. A language picker appears in the navigation bar once there is more than one.
+
+A collection or article belongs to a single language, and an article has to sit in a collection of the same language. You cannot remove a language that still holds content, because that content would have no reachable URL.
+
+## AI answers
+
+On any article the AI assistant may answer from, turn on **Allow AI assistants to use this article**. Nothing happens until the article is published. Enable it in one language only, not in every translation.
+
+Articles are indexed as you save them, so edits are picked up without a manual reindex. AI has to be configured for this to work, see [AI](/configuration/ai).
+
+## Appearance
+
+**Customize** covers the logo, favicon, accent colour, header and hero, announcement bar, navigation and footer links, and what the landing and article pages show.
+
+For anything the settings do not cover, **Custom code** takes custom CSS and JS, injected into every page.
+
+## SEO
+
+Set the page title and meta description for the home page, and the meta fields on each article. Libredesk serves `/robots.txt` and a sitemap index at `/sitemap.xml`, plus a per-language sitemap at `/hc/<slug>/<locale>/sitemap.xml`. Both are scoped to the host that asked for them, so a custom domain only advertises its own help center.
+
+## Search insights
+
+**Search insights** lists the top searches visitors ran and the ones that came back empty, which is where you find the articles you are missing.
+
+## Permissions
+
+Managing help centers, collections and articles needs the **Manage help centers** permission, which you add to a role under **Admin → Roles**.

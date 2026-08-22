@@ -38,6 +38,7 @@
             "pages": [
               "configuration/connecting-inboxes",
               "configuration/livechat",
+              "configuration/help-center",
               "configuration/email-templates",
               "configuration/ai",
               "configuration/sso",
