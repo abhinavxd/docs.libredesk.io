@@ -1,0 +1,200 @@
+---
+title: WhatsApp
+description: Connect a WhatsApp number through Meta's Cloud API
+---
+
+Libredesk connects directly to Meta's WhatsApp Cloud API. You create a Meta app, register a business phone number, then add its credentials to a WhatsApp inbox in Libredesk.
+
+## Before you start
+
+You need:
+
+- A Facebook account with access to a Meta business portfolio, or permission to create one
+- A phone number that can receive an SMS or voice call
+- A public HTTPS URL for your Libredesk instance
+- A public privacy policy URL for publishing the Meta app
+
+<Warning>
+  For this setup, use a number that is not registered with the WhatsApp or WhatsApp Business mobile app. Removing an existing account from either app deletes its chat history.
+</Warning>
+
+## Create the Meta app
+
+<Steps>
+  <Step title="Enter the app details">
+    Open [Meta for Developers](https://developers.facebook.com/apps/), select **My Apps → Create App**, then enter an app name and contact email.
+  </Step>
+
+  <Step title="Choose the WhatsApp use case">
+    Select **Connect with customers through WhatsApp**, then select **Next**.
+
+    <Frame caption="Choose the WhatsApp use case when creating the app">
+      <img
+        src="/images/whatsapp-use-case.png"
+        alt="Meta app creation option named Connect with customers through WhatsApp"
+      />
+    </Frame>
+  </Step>
+
+  <Step title="Connect the business portfolio">
+    Select the business portfolio that will own the WhatsApp Business Account. Review the requirements, confirm the app details, then select **Create app**.
+  </Step>
+
+  <Step title="Open production setup">
+    In the app dashboard, go to **Use cases → Customize** next to **Connect with customers through WhatsApp**. Under **Basic setup**, open **Step 2. Production setup**.
+
+    <Frame caption="The production setup tasks in Meta">
+      <img
+        src="/images/whatsapp-production-setup.png"
+        alt="Meta production setup with Webhooks, phone number, payment, and messaging tasks"
+      />
+    </Frame>
+  </Step>
+</Steps>
+
+## Register the phone number
+
+In **Step 2. Production setup**, expand **Register your WhatsApp phone number** and select **Add new number**.
+
+Complete the four stages shown by Meta:
+
+1. Enter the legal business name, website or social profile, and country.
+2. Create the WhatsApp Business profile, including its customer-facing display name.
+3. Enter the phone number and choose SMS or voice verification.
+4. Enter the verification code sent by Meta.
+
+<Frame caption="Meta's phone number registration wizard">
+  <img
+    src="/images/whatsapp-add-phone-number.png"
+    alt="Meta phone number wizard with Business information, WhatsApp Business Profile, Add number, and Verify number stages"
+  />
+</Frame>
+
+### Copy the account IDs
+
+Open [WhatsApp Manager](https://business.facebook.com/latest/whatsapp_manager/) and select the WhatsApp Business Account you created.
+
+- The account selector at the top shows the **WhatsApp Business Account ID**.
+- Under **Account tools → Phone numbers**, select the registered number to show its **Phone number ID**.
+
+These are numeric IDs. Do not enter the phone number, app ID, or business portfolio ID in their place.
+
+<Frame caption="The WhatsApp Business Account ID in the account selector">
+  <img
+    src="/images/whatsapp-business-account-id.png"
+    alt="Example WhatsApp Business Account with its numeric ID"
+  />
+</Frame>
+
+<Frame caption="The Phone number ID after selecting a registered number">
+  <img
+    src="/images/whatsapp-phone-number-id.png"
+    alt="Example registered WhatsApp number with its Phone number ID"
+  />
+</Frame>
+
+## Copy the Meta credentials
+
+### Permanent access token
+
+Return to **Step 2. Production setup** and expand **Send message**. Under **Step 1: Generate token**, select **Generate token** and complete Meta's authorization flow.
+
+Copy the permanent access token and store it securely.
+
+<Frame caption="Generate a permanent access token in the Send message task">
+  <img
+    src="/images/whatsapp-generate-token.png"
+    alt="Meta Generate token step for a permanent WhatsApp access token"
+  />
+</Frame>
+
+<Warning>
+  Do not use the temporary token from **Step 1. Try it out**. It belongs to Meta's test number and expires.
+</Warning>
+
+### App secret
+
+Open **App settings → Basic**, select **Show** next to **App secret**, then copy it.
+
+## Publish the Meta app
+
+Open **App settings → Basic** and add the privacy policy URL. Then open **Publish**, complete any requirements Meta lists, and publish the app.
+
+<Frame caption="Meta requires a privacy policy URL before publishing">
+  <img
+    src="/images/whatsapp-publish-app.png"
+    alt="Meta Publish page showing the privacy policy requirement and WhatsApp use case"
+  />
+</Frame>
+
+<Warning>
+  An unpublished Meta app receives only test webhooks. Incoming messages from your registered number will not reach Libredesk until you publish the app.
+</Warning>
+
+Business verification is optional for the initial connection. Meta recommends it to show the business display name, raise messaging limits, and register more phone numbers. You can start it under **Step 3. Business verification**.
+
+## Connect the number to Libredesk
+
+First, go to **Admin → Settings → General** and set **Root URL** to the public HTTPS address of your Libredesk instance.
+
+Then go to **Admin → Inboxes → New inbox → WhatsApp** and enter:
+
+| Libredesk field | Value |
+|-----------------|-------|
+| Name | A name that identifies the inbox in Libredesk |
+| Phone number ID | The ID shown after selecting the number in WhatsApp Manager |
+| WhatsApp Business Account ID | The ID shown in the WhatsApp Manager account selector |
+| Access token | The permanent token generated in Meta |
+| App secret | The secret from **App settings → Basic** |
+| API version | Leave the default unless Meta requires another version |
+| Webhook verify token | A random secret that you create |
+
+Generate a webhook verify token with:
+
+```bash
+openssl rand -hex 32
+```
+
+Save the inbox. Libredesk checks that the token can access both IDs, then attempts to register the webhook with Meta.
+
+## Verify the webhook
+
+After saving the inbox:
+
+1. Open the WhatsApp inbox in Libredesk and copy its **Callback URL** and **Webhook verify token**.
+2. In Meta, open **Use cases → Customize → Step 2. Production setup → Configure Webhooks**.
+3. Confirm that the callback URL matches the Libredesk value. If it does not, paste both values and select **Verify and save**.
+4. Under **Webhook fields**, subscribe to `messages` and `message_template_status_update`.
+
+<Frame caption="Enter the Libredesk callback URL and verify token">
+  <img
+    src="/images/whatsapp-webhook-endpoint.png"
+    alt="Meta webhook configuration fields for Callback URL and Verify token"
+  />
+</Frame>
+
+<Frame caption="The two webhook fields required by Libredesk">
+  <img
+    src="/images/whatsapp-webhook-fields.png"
+    alt="Meta webhook fields for messages and message template status updates"
+  />
+</Frame>
+
+The `messages` field delivers incoming messages and delivery statuses. The `message_template_status_update` field keeps template approval statuses current in Libredesk.
+
+## Test the connection
+
+Send a WhatsApp message from another phone to the registered business number. A new conversation should appear in Libredesk. Reply from Libredesk to confirm that outgoing messages work.
+
+If the conversation does not appear, confirm that:
+
+- The Meta app is published
+- The Libredesk Root URL is a public HTTPS address
+- The Meta webhook callback matches the URL shown by Libredesk
+- Both webhook fields above show **Subscribed**
+
+## Business-initiated messages
+
+Replies are allowed for 24 hours after the customer messages you. After that window, start the conversation with an approved WhatsApp template.
+
+To send business-initiated template messages, return to **Step 2. Production setup** and expand **Add payment to send business-initiated messages**. Add a payment method in Meta's Billing Hub.
