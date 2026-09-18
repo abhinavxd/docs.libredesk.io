@@ -205,7 +205,11 @@ func handleBalance(w http.ResponseWriter, r *http.Request) {
 
 Return small, flat JSON. The response goes into the model's context and long payloads are truncated, so send the three fields the assistant needs to answer rather than your whole account object.
 
-A non-2xx response is handed back to the model as text, so error messages are worth writing properly. "No order found for that ID" lets the assistant ask the customer to check the number. A bare `500` usually ends in a handoff.
+**Use the status code to say whether the request worked, not whether it found anything.** A 2xx response reads as data, so the assistant answers from it. A non-2xx response reads as a failure, and the assistant usually tells the customer it could not help and hands the conversation to a human.
+
+So "this customer has no orders" is a 2xx with an empty list or a short message. Keep non-2xx for requests that genuinely could not be served: a bad API key, a missing identifier, your upstream being down.
+
+The body is handed back to the model as text either way, so error messages are worth writing properly. "No order found for that ID" lets the assistant ask the customer to check the number. A bare `500` usually ends in a handoff.
 
 The repo ships a runnable version of this at [`scripts/tools-server`](https://github.com/abhinavxd/libredesk/tree/main/scripts/tools-server). Run it with `go run ./scripts/tools-server`, point a tool at `http://localhost:7070/account`, and it logs every header and argument it receives.
 
