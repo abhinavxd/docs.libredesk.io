@@ -38,7 +38,6 @@
             "pages": [
               "configuration/connecting-inboxes",
               "configuration/livechat",
-              "configuration/whatsapp",
               "configuration/help-center",
               "configuration/email-templates",
               "configuration/ai",
