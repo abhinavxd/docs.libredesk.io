@@ -9,6 +9,33 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
 ## Installation methods
 
 <Tabs>
+  <Tab title="Easypanel">
+    ## Easypanel installation
+
+    [Easypanel](https://easypanel.io) is a self-hosted Docker deployment platform, and Libredesk has a one-click deployment template there. The template provisions Libredesk alongside PostgreSQL and Redis, and auto-generates the encryption key and System user password.
+
+    <a href="https://easypanel.io/templates/libredesk">
+      <img src="https://easypanel.io/img/deploy-on-easypanel-40.svg" alt="Deploy on Easypanel" height="40"/>
+    </a>
+
+    <Steps>
+      <Step title="Install Easypanel">
+        [Install Easypanel](https://easypanel.io/docs/installation) on your own server, if you haven't already.
+      </Step>
+
+      <Step title="Deploy the template">
+        Click the button above, review the generated settings, and click **Deploy**.
+      </Step>
+
+      <Step title="Find the System user password">
+        Once deployed, open the Libredesk service's environment variables in the Easypanel panel to find the auto-generated `LIBREDESK_SYSTEM_USER_PASSWORD`.
+      </Step>
+    </Steps>
+
+    Visit the domain Easypanel assigns to the service and login with:
+    - **Email**: `System`
+    - **Password**: The auto-generated password from the previous step
+  </Tab>
   <Tab title="Docker (Recommended)">
     ## Docker installation
     
