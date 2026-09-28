@@ -80,6 +80,7 @@
               "api-reference/endpoint/conversations/get-conversation",
               "api-reference/endpoint/conversations/get-messages",
               "api-reference/endpoint/conversations/get-message",
+              "api-reference/endpoint/conversations/download-conversation-transcript",
               "api-reference/endpoint/conversations/send-message",
               "api-reference/endpoint/conversations/retry-message",
               "api-reference/endpoint/conversations/get-assigned-conversations",
@@ -116,6 +117,8 @@
               "api-reference/endpoint/contacts/get-contact",
               "api-reference/endpoint/contacts/update-contact",
               "api-reference/endpoint/contacts/block-contact",
+              "api-reference/endpoint/contacts/delete-contact",
+              "api-reference/endpoint/contacts/export-contact-data",
               "api-reference/endpoint/contact-notes/get-contact-notes",
               "api-reference/endpoint/contact-notes/create-contact-note",
               "api-reference/endpoint/contact-notes/delete-contact-note"
@@ -144,8 +147,7 @@
             "group": "AI",
             "pages": [
               "api-reference/endpoint/ai-completions/a-i-completion",
-              "api-reference/endpoint/ai-completions/get-a-i-prompts",
-              "api-reference/endpoint/ai-completions/update-a-i-provider"
+              "api-reference/endpoint/ai-completions/get-a-i-prompts"
             ]
           },
           {
@@ -165,7 +167,48 @@
           {
             "group": "Media",
             "pages": [
-              "api-reference/endpoint/media/media-upload"
+              "api-reference/endpoint/media/media-upload",
+              "api-reference/endpoint/media/serve-media"
+            ]
+          },
+          {
+            "group": "Tags",
+            "pages": [
+              "api-reference/endpoint/tags/get-tags",
+              "api-reference/endpoint/tags/create-tag",
+              "api-reference/endpoint/tags/update-tag",
+              "api-reference/endpoint/tags/delete-tag"
+            ]
+          },
+          {
+            "group": "Custom Attributes",
+            "pages": [
+              "api-reference/endpoint/custom-attributes/get-custom-attributes"
+            ]
+          },
+          {
+            "group": "Inboxes",
+            "pages": [
+              "api-reference/endpoint/inboxes/get-inboxes"
+            ]
+          },
+          {
+            "group": "Reports",
+            "pages": [
+              "api-reference/endpoint/reports/overview-counts",
+              "api-reference/endpoint/reports/overview-charts",
+              "api-reference/endpoint/reports/overview-csat",
+              "api-reference/endpoint/reports/overview-message-volume",
+              "api-reference/endpoint/reports/overview-s-l-a",
+              "api-reference/endpoint/reports/overview-tag-distribution"
+            ]
+          },
+          {
+            "group": "Help Center",
+            "pages": [
+              "api-reference/endpoint/help-center/get-public-help-center-tree",
+              "api-reference/endpoint/help-center/get-public-help-center-article",
+              "api-reference/endpoint/help-center/search-public-help-center"
             ]
           }
         ]
