@@ -1,9 +1,9 @@
 ---
 title: Deploy on Railway
-description: One-click deploy Libredesk on Railway with managed PostgreSQL and Redis
+description: One-click deploy libredesk on Railway with managed PostgreSQL and Redis
 ---
 
-[Railway](https://railway.com) provisions a Libredesk service alongside managed PostgreSQL and Redis from a single template. The database schema installs automatically on first deploy.
+[Railway](https://railway.com) provisions a libredesk service alongside managed PostgreSQL and Redis from a single template. The database schema installs automatically on first deploy.
 
 ## Deploy
 
@@ -13,11 +13,11 @@ description: One-click deploy Libredesk on Railway with managed PostgreSQL and R
 
 <Steps>
   <Step title="Click Deploy on Railway">
-    Sign in to Railway, then set `LIBREDESK_SYSTEM_USER_PASSWORD` in the deploy form. It must be at least 10 characters with uppercase, lowercase, numeric, and special characters (e.g. `MyPassword@123`).
+    Sign in to Railway, then set `LIBREDESK_SYSTEM_USER_PASSWORD` in the deploy form. It must be 10 to 72 characters long and contain an uppercase letter, a lowercase letter, a number and a special character (e.g. `MyPassword@123`).
   </Step>
 
   <Step title="Wait for the build">
-    Railway provisions PostgreSQL, Redis, and the Libredesk app, and assigns a `*.up.railway.app` domain to the Libredesk service. The schema installs automatically on first boot.
+    Railway provisions PostgreSQL, Redis, and the libredesk app, and assigns a `*.up.railway.app` domain to the libredesk service. The schema installs automatically on first boot.
   </Step>
 
   <Step title="Log in">
@@ -30,20 +30,22 @@ description: One-click deploy Libredesk on Railway with managed PostgreSQL and R
 
 ## Configuration
 
-To override any Libredesk setting, add an environment variable under the **Libredesk** service's **Variables** tab. All variables use the `LIBREDESK_` prefix with double underscores (`__`) for nested keys.
+To override any libredesk setting, add an environment variable under the **libredesk** service's **Variables** tab. All variables use the `LIBREDESK_` prefix with double underscores (`__`) for nested keys.
 
 | Setting | Environment variable |
 |---------|----------------------|
-| Max attachment / request body size (bytes) | `LIBREDESK_APP__SERVER__MAX_BODY_SIZE` |
+| Max request body size (bytes) | `LIBREDESK_APP__SERVER__MAX_BODY_SIZE` |
 | Session lifetime | `LIBREDESK_APP__SERVER__SESSION_LIFETIME` |
-| Log level (`debug`, `info`, `warn`, `error`) | `LIBREDESK_APP__LOG_LEVEL` |
+| Log level (`debug`, `info`, `warn`, `error`, `fatal`) | `LIBREDESK_APP__LOG_LEVEL` |
 
-See the [full configuration reference](/getting-started/installation#configuration-via-environment-variables) for the complete list.
+The per-file upload limit is a separate setting, **Max allowed file upload size** under **Admin → General**.
+
+See [configuration via environment variables](/getting-started/installation#configuration-via-environment-variables) for how keys map to variable names. [`config.sample.toml`](https://github.com/abhinavxd/libredesk/blob/main/config.sample.toml) lists every key.
 
 <Warning>
 Don't change the auto-injected database and Redis variables. Railway manages those references.
 </Warning>
 
-## Updating Libredesk
+## Updating libredesk
 
-Redeploy the **Libredesk** service from the Railway dashboard. It pulls the latest image and runs any pending migrations on startup.
+Redeploy the **libredesk** service from the Railway dashboard. It pulls the latest image and runs any pending migrations on startup.

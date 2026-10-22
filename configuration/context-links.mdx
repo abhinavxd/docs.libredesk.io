@@ -3,7 +3,19 @@ title: Context Links
 description: Open external tools from the conversation sidebar with contact details passed automatically
 ---
 
-Context Links are buttons in the conversation sidebar that open external URLs with contact and conversation details filled in. Agents click them to jump to CRMs, billing systems, or internal dashboards without copy-pasting identifiers.
+Context Links are links in the conversation sidebar that open external URLs with contact and conversation details filled in. Agents click them to jump to CRMs, billing systems, or internal dashboards without copy-pasting identifiers.
+
+## Configuration
+
+Go to **Admin → Integrations → Context links** and click **New context link**.
+
+| Field | Notes |
+|-------|-------|
+| Name | The link text agents see in the sidebar. |
+| URL template | The URL to open, with the variables below. |
+| Secret | 32 characters. Needed only for `{{token}}`. |
+| Token expiry (seconds) | How long `{{token}}` is valid. |
+| Active | Only active links appear in the sidebar. |
 
 ## URL template variables
 
@@ -15,7 +27,7 @@ These placeholders are replaced with the current contact's details when an agent
 | `{{phone}}` | Contact's phone number |
 | `{{phone_country_code}}` | Contact's phone country code |
 | `{{external_user_id}}` | Contact's external user ID |
-| `{{contact_id}}` | Contact's internal Libredesk ID |
+| `{{contact_id}}` | Contact's internal libredesk ID |
 | `{{first_name}}` | Contact's first name |
 | `{{last_name}}` | Contact's last name |
 | `{{conversation_uuid}}` | UUID of the current conversation |
@@ -48,7 +60,26 @@ The receiving system decrypts the token to get all contact and agent fields in o
 
 ## Encrypted token
 
-When you use `{{token}}`, Libredesk generates an AES-256-GCM encrypted, time-limited token containing all the above fields plus `agent_id`, `agent_email`, `iat`, and `exp`. The receiving system decrypts it with the shared secret.
+When you use `{{token}}`, libredesk generates an AES-256-GCM encrypted, time-limited token containing all the above fields plus `agent_id`, `agent_email`, `iat`, and `exp`. The receiving system decrypts it with the shared secret.
+
+The token is base64 of a 12-byte nonce followed by the ciphertext. The secret is the AES-256 key. Decrypted, it looks like this:
+
+```json
+{
+  "email": "user@example.com",
+  "phone": "",
+  "phone_country_code": "",
+  "external_user_id": "",
+  "contact_id": 456,
+  "first_name": "John",
+  "last_name": "Doe",
+  "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
+  "agent_id": 789,
+  "agent_email": "agent@example.com",
+  "iat": 1750000000,
+  "exp": 1750001200
+}
+```
 
 ### Decrypting the token
 

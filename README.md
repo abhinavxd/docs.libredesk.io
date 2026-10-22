@@ -1,6 +1,6 @@
-# Libredesk documentation
+# libredesk documentation
 
-Source for [docs.libredesk.io](https://docs.libredesk.io), the documentation site for [Libredesk](https://libredesk.io), an open source, self-hosted customer support desk.
+Source for [docs.libredesk.io](https://docs.libredesk.io), the documentation site for [libredesk](https://libredesk.io), an open source, self-hosted customer support desk.
 
 The site is built with [Mintlify](https://mintlify.com) and covers installation and configuration, the API reference generated from the OpenAPI spec, and setup guides for contributors.
 
@@ -26,13 +26,15 @@ The preview runs at `http://localhost:3000`.
 - `introduction.mdx` - main introduction page
 - `getting-started/` - installation and setup guides
 - `configuration/` - configuration documentation
+- `hosting-providers/` - deployment guides for hosting providers
+- `roles/` - roles and permissions
 - `contributing/` - developer and contributor guides
 - `api-reference/` - OpenAPI specification and API docs
 - `docs.json` - Mintlify navigation configuration
 
 ## Contributing
 
-Send documentation fixes as pull requests to this repository. To contribute to Libredesk itself, see the [developer setup guide](https://docs.libredesk.io/contributing/developer-setup).
+Send documentation fixes as pull requests to this repository. To contribute to libredesk itself, see the [developer setup guide](https://docs.libredesk.io/contributing/developer-setup).
 
 ## Links
 

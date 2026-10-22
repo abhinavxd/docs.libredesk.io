@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "theme": "mint",
-  "name": "Libredesk Documentation",
+  "name": "libredesk Documentation",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
@@ -38,6 +38,7 @@
             "pages": [
               "configuration/connecting-inboxes",
               "configuration/livechat",
+              "configuration/whatsapp",
               "configuration/help-center",
               "configuration/email-templates",
               "configuration/ai",
@@ -83,11 +84,14 @@
               "api-reference/endpoint/conversations/download-conversation-transcript",
               "api-reference/endpoint/conversations/send-message",
               "api-reference/endpoint/conversations/retry-message",
+              "api-reference/endpoint/conversations/delete-message",
               "api-reference/endpoint/conversations/get-assigned-conversations",
+              "api-reference/endpoint/conversations/get-mentioned-conversations",
               "api-reference/endpoint/conversations/get-unassigned-conversations",
               "api-reference/endpoint/conversations/get-team-unassigned-conversations",
               "api-reference/endpoint/conversations/get-view-conversations",
               "api-reference/endpoint/conversations/get-conversation-participants",
+              "api-reference/endpoint/conversations/get-contact-page-visits",
               "api-reference/endpoint/conversations/update-conversation-status",
               "api-reference/endpoint/conversations/update-conversation-priority",
               "api-reference/endpoint/conversations/update-user-assignee",
@@ -95,6 +99,7 @@
               "api-reference/endpoint/conversations/remove-user-assignee",
               "api-reference/endpoint/conversations/remove-team-assignee",
               "api-reference/endpoint/conversations/update-conversation-assignee-last-seen",
+              "api-reference/endpoint/conversations/mark-conversation-as-unread",
               "api-reference/endpoint/conversations/update-conversation-custom-attributes",
               "api-reference/endpoint/conversations/update-contact-custom-attributes",
               "api-reference/endpoint/conversations/update-conversationtags"
@@ -115,6 +120,7 @@
             "pages": [
               "api-reference/endpoint/contacts/get-contacts",
               "api-reference/endpoint/contacts/get-contact",
+              "api-reference/endpoint/contacts/create-contact",
               "api-reference/endpoint/contacts/update-contact",
               "api-reference/endpoint/contacts/block-contact",
               "api-reference/endpoint/contacts/delete-contact",
@@ -161,7 +167,9 @@
             "pages": [
               "api-reference/endpoint/search/search-conversations",
               "api-reference/endpoint/search/search-contacts",
-              "api-reference/endpoint/search/search-messages"
+              "api-reference/endpoint/search/search-messages",
+              "api-reference/endpoint/search/paginated-search-conversations",
+              "api-reference/endpoint/search/paginated-search-messages"
             ]
           },
           {

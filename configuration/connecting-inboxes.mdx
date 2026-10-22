@@ -3,7 +3,7 @@ title: Connecting Inboxes
 description: Connect email inboxes using Google, Microsoft OAuth, or manual IMAP/SMTP configuration
 ---
 
-Libredesk supports three methods for connecting email inboxes: Google OAuth, Microsoft OAuth, and manual IMAP/SMTP configuration with password authentication.
+libredesk supports three methods for connecting email inboxes: Google OAuth, Microsoft OAuth, and manual IMAP/SMTP configuration with password authentication.
 
 ## Google setup
 
@@ -15,13 +15,13 @@ An app password is the quickest way to connect Gmail. It needs no Google Cloud C
 
 <Steps>
   <Step title="Generate an app password">
-    Visit [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords), name the app (e.g. `Libredesk`), and copy the generated 16-character password.
+    Visit [myaccount.google.com/apppasswords](https://myaccount.google.com/apppasswords), name the app (e.g. `libredesk`), and copy the generated 16-character password.
   </Step>
 
-  <Step title="Add inbox in Libredesk">
-    Go to Admin → Inboxes → New inbox → **Other provider** and use these settings:
+  <Step title="Add inbox in libredesk">
+    Go to Admin → Inboxes → New inbox → Email → **Other provider** and use these settings:
 
-    **IMAP**
+    **IMAP Configuration**
     | Field | Value |
     |-------|-------|
     | Host | `imap.gmail.com` |
@@ -30,21 +30,21 @@ An app password is the quickest way to connect Gmail. It needs no Google Cloud C
     | Username | Your full Gmail address |
     | Password | The app password from step 1 |
 
-    **SMTP**
+    **SMTP Configuration**
     | Field | Value |
     |-------|-------|
     | Host | `smtp.gmail.com` |
     | Port | `587` |
     | TLS | STARTTLS |
-    | Authentication Protocol | PLAIN |
+    | Authentication Protocol (under **Advanced**) | Plain |
     | Username | Your full Gmail address |
     | Password | The app password from step 1 |
   </Step>
 
-  <Step title="Save the inbox, then wait for the first scan">
-    Click **Save**. Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
+  <Step title="Create the inbox, then wait for the first scan">
+    Click **Create**. libredesk does not check the mailbox immediately. It checks on the **Scan Interval** set under IMAP Configuration → Advanced, which is `5m` by default.
 
-    So: send a test email to the address, wait 5 minutes, then look in Conversations.
+    Send a test email to the address, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
 
@@ -67,8 +67,8 @@ Your Google OAuth app needs these scopes:
 #### Configuration steps
 
 <Steps>
-  <Step title="Get callback URL from Libredesk">
-    In Libredesk, go to Admin → Inboxes → New inbox → Google. A dialog opens with the **Callback URL**. Copy it.
+  <Step title="Get callback URL from libredesk">
+    In libredesk, go to Admin → Inboxes → New inbox → Email → Google. A dialog opens with the **Callback URL**. Copy it.
   </Step>
 
   <Step title="Create a Google Cloud project">
@@ -90,14 +90,12 @@ Your Google OAuth app needs these scopes:
     - Note down the Client ID and Client Secret
   </Step>
 
-  <Step title="Complete setup in Libredesk">
-    Back in the Libredesk dialog, enter the Client ID and Client Secret, then click Authorize. You'll be redirected to Google's consent screen to grant permissions.
+  <Step title="Complete setup in libredesk">
+    Back in the libredesk dialog, enter the Client ID and Client secret, then click **Continue**. You'll be redirected to Google's consent screen to grant permissions.
   </Step>
 
-  <Step title="Save the inbox, then wait for the first scan">
-    Click **Save**. Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
-
-    So: send a test email to the address, wait 5 minutes, then look in Conversations.
+  <Step title="Wait for the first scan">
+    After you grant access, libredesk creates the inbox. It checks the mailbox every 5 minutes by default, so send a test email, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
 
@@ -132,8 +130,8 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
 ### Configuration steps
 
 <Steps>
-  <Step title="Get callback URL from Libredesk">
-    In Libredesk, go to Admin → Inboxes → New inbox → Microsoft. A dialog opens with the **Callback URL**. Copy it.
+  <Step title="Get callback URL from libredesk">
+    In libredesk, go to Admin → Inboxes → New inbox → Email → Microsoft. A dialog opens with the **Callback URL**. Copy it.
   </Step>
 
   <Step title="Register an app in Azure Portal">
@@ -161,14 +159,12 @@ Add the following **Microsoft Graph** delegated permissions in Azure Portal:
     - Directory (tenant) ID (if using single-tenant)
   </Step>
 
-  <Step title="Complete setup in Libredesk">
-    Back in the Libredesk dialog, enter the Client ID, Client Secret, and Tenant ID (optional), then click Authorize. You'll be redirected to Microsoft's consent screen to grant permissions.
+  <Step title="Complete setup in libredesk">
+    Back in the libredesk dialog, enter the Client ID, Client secret, and Tenant ID (optional), then click **Continue**. You'll be redirected to Microsoft's consent screen to grant permissions.
   </Step>
 
-  <Step title="Save the inbox, then wait for the first scan">
-    Click **Save**. Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
-
-    So: send a test email to the address, wait 5 minutes, then look in Conversations.
+  <Step title="Wait for the first scan">
+    After you grant access, libredesk creates the inbox. It checks the mailbox every 5 minutes by default, so send a test email, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
 
@@ -179,17 +175,49 @@ Use manual IMAP/SMTP for self-hosted mail servers and for providers that don't s
 ### Configuration steps
 
 <Steps>
-  <Step title="Add inbox in Libredesk">
-    Navigate to Admin → Inboxes → New inbox → Other provider, configure IMAP and SMTP settings, then click Save.
+  <Step title="Add inbox in libredesk">
+    Navigate to Admin → Inboxes → New inbox → Email → Other provider, fill in **IMAP Configuration** and **SMTP Configuration**, then click **Create**.
   </Step>
 
   <Step title="Wait for the first scan">
-    Libredesk does not check the mailbox immediately. It checks on the **Scan interval** set in the same form, which is `5m` by default.
+    libredesk does not check the mailbox immediately. It checks on the **Scan Interval** set in the same form, which is `5m` by default.
 
-    So: send a test email to the address, wait 5 minutes, then look in Conversations.
+    Send a test email to the address, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
+
+## Email aliases
+
+An inbox can receive and send mail for more than one address. Add the extra addresses under **Email aliases** in the inbox form.
+
+Each alias must forward to this inbox's mailbox, and your SMTP provider must allow sending as that alias.
+
+<Steps>
+  <Step title="Add the alias">
+    Click **Add**, enter the address, then save the inbox.
+  </Step>
+
+  <Step title="Verify the alias">
+    Click **Verify** next to the alias. libredesk sends a test email from the alias and marks it **Verified** when the email reaches the inbox. If it shows **Failed**, fix forwarding or send-as permissions, then click **Try again**.
+  </Step>
+</Steps>
+
+Only verified aliases are used for sending. A reply goes out from the alias the contact wrote to. Agents can pick another address in the **From** field of the reply box.
+
+## Inbox options
+
+| Option | What it does |
+|--------|--------------|
+| From display name template | Sender name on replies, for example `{{ .Agent.FirstName }} at {{ .Inbox.Name }}` |
+| Reply-To address | Where customer replies go, when it differs from the From address |
+| Enable plus addressing | Improves conversation threading. Your provider must support it |
+| CSAT Surveys | Sends a satisfaction survey when a conversation is resolved |
+| Prompt to tag before replying | Warns agents before they reply on a conversation with no tags |
 
 ## Live chat {#live-chat}
 
 For live chat widget setup, see the [Live Chat](/configuration/livechat) guide.
+
+## WhatsApp {#whatsapp}
+
+For WhatsApp setup, see the [WhatsApp](/configuration/whatsapp) guide.

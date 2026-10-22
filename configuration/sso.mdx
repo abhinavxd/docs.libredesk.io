@@ -6,7 +6,7 @@ description: Configure Single Sign-On with OpenID Connect providers
 Agents can sign in through an external OpenID Connect provider such as Google or Keycloak.
 
 <Note>
-You still create agent accounts in Libredesk yourself. Signing in with SSO does not create an account.
+You still create agent accounts in libredesk yourself. Signing in with SSO does not create an account. libredesk matches the provider's email address to an existing agent.
 </Note>
 
 ## Configuration
@@ -20,16 +20,20 @@ Providers differ in the details, so check your provider's documentation for anyt
     - Client Secret
   </Step>
   
-  <Step title="Libredesk configuration">
-    In Libredesk, navigate to Security → SSO and click New SSO and enter the following details:
-    - Provider URL (e.g., the URL of your OpenID provider)
+  <Step title="libredesk configuration">
+    In libredesk, navigate to Admin → Security → SSO, click **New SSO**, and enter the following details:
+    - Provider: Google, Microsoft, or Custom
+    - Name: a descriptive name for the connection
+    - Provider URL: the issuer URL of your OpenID provider (e.g., `https://accounts.google.com`)
+    - Logo URL (Custom only): the logo shown on the login page
     - Client ID
-    - Client Secret
-    - A descriptive name for the connection
+    - Client secret
+
+    Click **Create**.
   </Step>
   
   <Step title="Redirect URL">
-    After saving, copy the generated Callback URL from Libredesk and add it as a valid redirect URI in your provider's client settings.
+    After saving, open the SSO entry and copy the **Callback URL**. Add it as a valid redirect URI in your provider's client settings.
   </Step>
 </Steps>
 
@@ -56,18 +60,19 @@ Providers differ in the details, so check your provider's documentation for anyt
     - Note down the generated client secret
   </Step>
   
-  <Step title="Configure Libredesk SSO">
-    In Libredesk, go to Admin → Security → SSO and click New SSO:
-    - Provider URL (e.g., `https://keycloak.example.com/realms/yourrealm`)
+  <Step title="Configure libredesk SSO">
+    In libredesk, go to Admin → Security → SSO and click New SSO:
+    - Provider: `Custom`
     - Name (e.g., `Keycloak`)
+    - Provider URL (e.g., `https://keycloak.example.com/realms/yourrealm`)
     - Client ID
     - Client secret
-    - Click save
+    - Click Create
   </Step>
   
   <Step title="Add redirect URI">
     1. After saving, click on the three dots and choose Edit to open the new SSO entry
-    2. Copy the generated Callback URL from Libredesk
+    2. Copy the generated Callback URL from libredesk
     3. Back in Keycloak, edit the client and add the Callback URL to Valid Redirect URIs:
        - e.g., `https://ticket.example.com/api/v1/oidc/1/finish`
   </Step>

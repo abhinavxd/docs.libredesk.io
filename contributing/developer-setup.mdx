@@ -1,14 +1,14 @@
 ---
 title: Developer Setup
-description: Set up your development environment for Libredesk
+description: Set up your development environment for libredesk
 ---
 
-Libredesk is a monorepo with a Go backend and two Vue.js frontend apps: the main agent dashboard and the live chat widget. Both use Shadcn for UI components.
+libredesk is a monorepo with a Go backend and two Vue.js frontend apps: the main agent dashboard and the live chat widget. Both use Shadcn for UI components.
 
 ## Prerequisites
 
-- Go
-- Node.js and pnpm (if working on frontend)
+- Go 1.25 or later
+- Node.js 20 or later and pnpm (if working on frontend)
 - Redis
 - PostgreSQL (≥13)
 
@@ -22,20 +22,22 @@ Libredesk is a monorepo with a Go backend and two Vue.js frontend apps: the main
     ```
   </Step>
   
-  <Step title="Configure Libredesk">
+  <Step title="Configure libredesk">
     Copy `config.sample.toml` as `config.toml` and add your configuration:
     ```bash
     cp config.sample.toml config.toml
     ```
+    For local Postgres and Redis, set `db.host` to `localhost` and `redis.address` to `localhost:6379`.
   </Step>
   
   <Step title="Build and install">
-    Build the libredesk binary and run the DB setup:
+    Build the libredesk binary, run the DB setup and set the System user password:
     ```bash
     make
     ./libredesk --install
+    ./libredesk --set-system-user-password
     ```
-    Sets up the database and prompts you for the System user password.
+    Log in as `System` with the password you set.
   </Step>
 </Steps>
 
@@ -104,3 +106,18 @@ make
 This builds the Go binary and both frontend apps, embeds the static assets, and produces a single self-contained binary: `libredesk`.
 
 To build just one app: `make frontend-build-main` or `make frontend-build-widget`.
+
+
+## Running tests
+
+```bash
+make test
+```
+
+Go integration tests need Postgres. Start a test database on `127.0.0.1:5433` with:
+
+```bash
+make test-db
+```
+
+Remove it with `make test-db-down`.

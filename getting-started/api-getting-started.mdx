@@ -1,9 +1,9 @@
 ---
 title: API Getting Started
-description: Access the Libredesk API to interact with your instance programmatically
+description: Access the libredesk API to interact with your instance programmatically
 ---
 
-You can access the Libredesk API to interact with your instance programmatically by generating API keys for any agent.
+Generate an API key for any agent to work with your instance through the libredesk API.
 
 
 <Note>
@@ -12,39 +12,43 @@ Some endpoints are not documented yet. Pull requests to the docs are welcome.
 
 ## Generating API keys
 
+You need the `users:manage` permission to generate API keys.
+
 <Steps>
-  <Step title="Edit agent">
-    Go to **Admin → Teammate → Agent → Edit**
+  <Step title="Open the agent">
+    Go to **Admin → Teammates → Agents** and open the agent.
   </Step>
   
-  <Step title="Generate new API key">
-    Libredesk shows an API key and an API secret for that agent
+  <Step title="Generate an API key">
+    Click **Generate API key**. libredesk shows an API key and an API secret for that agent.
   </Step>
   
   <Step title="Save the credentials">
-    Keep both the API key and API secret secure
+    Copy both values and store them securely. The secret is shown only once.
   </Step>
   
   <Step title="Key management">
-    You can revoke or regenerate API keys at any time from the same page
+    Regenerate or revoke the key at any time from the same page.
   </Step>
 </Steps>
 
+A request made with an API key has the same roles and permissions as the agent that owns the key.
+
 ## Using the API
 
-Libredesk supports two authentication schemes:
+All endpoints are under `/api/v1`. libredesk supports two authentication schemes:
 
 ### Basic authentication
 
 ```bash
-curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
+curl -X GET "https://your-libredesk-instance.com/api/v1/endpoint" \
   -H "Authorization: Basic <base64_encoded_key:secret>"
 ```
 
 ### Token authentication
 
 ```bash
-curl -X GET "https://your-libredesk-instance.com/api/endpoint" \
+curl -X GET "https://your-libredesk-instance.com/api/v1/endpoint" \
   -H "Authorization: token your_api_key:your_api_secret"
 ```
 

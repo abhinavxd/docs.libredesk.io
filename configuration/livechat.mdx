@@ -1,23 +1,23 @@
 ---
 title: Live Chat
-description: Embed the Libredesk chat widget on your website and verify user identity with JWTs
+description: Embed the libredesk chat widget on your website and verify user identity with JWTs
 ---
 
-The Libredesk live chat widget embeds on any website as a single `<script>` tag. Visitors can start conversations anonymously, or you can verify their identity with a server-signed JWT so the widget loads with their profile attached.
+The libredesk live chat widget embeds on any website as a single `<script>` tag. Visitors can start conversations anonymously, or you can verify their identity with a server-signed JWT so the widget loads with their profile attached.
 
 ## Create a live chat inbox
 
 <Steps>
   <Step title="Add the inbox">
-    Go to **Admin → Inboxes → New inbox → Live chat**. Fill in the name, brand name, and website URL.
+    Go to **Admin → Inboxes → New inbox → Live Chat**. Fill in the name, brand name, and website URL.
   </Step>
 
   <Step title="Configure appearance and messages">
-    Set the launcher colour, position, logo, greeting message, and home screen under the **Appearance** and **Messages** tabs. All changes are live as soon as you save.
+    Set the colors, launcher, greeting, and home screen under the **Appearance** and **Content** tabs. All changes are live as soon as you save.
   </Step>
 
   <Step title="Copy the install snippet">
-    Open the **Installation** tab and copy the `<script>` snippet shown there. Paste it before the closing `</body>` tag on every page where the widget should appear.
+    Open the **Setup** tab, expand **Installation** and copy the `<script>` snippet shown there. Paste it before the closing `</body>` tag on every page where the widget should appear.
   </Step>
 </Steps>
 
@@ -35,19 +35,32 @@ The anonymous snippet looks like this:
 <script async src="https://support.example.com/widget.js"></script>
 ```
 
-`baseURL` is the URL of your Libredesk instance. `inboxID` is the UUID shown on the inbox's **Installation** tab.
+`baseURL` is the URL of your libredesk instance. `inboxID` is the inbox UUID, already filled in by the snippet on the **Setup** tab.
 
-Anyone visiting the page can now open the widget and start a conversation. Every session is treated as a new anonymous visitor unless you add identity verification.
+Anyone visiting the page can now open the widget and start a conversation. A visitor is remembered in the same browser. To recognize signed-in users across devices, add identity verification.
+
+### Widget settings
+
+`window.LibredeskSettings` accepts these keys:
+
+| Key | Required | Description |
+|-----|----------|-------------|
+| `baseURL` | Yes | URL of your libredesk instance. |
+| `inboxID` | Yes | UUID of the live chat inbox. |
+| `userJWT` | No | Signed JWT for a logged-in user. See [Identity verification](#identity-verification). |
+| `language` | No | Widget UI language, e.g. `de`. Used when the inbox language is **Auto-detect (browser language)**. |
+| `hideLauncher` | No | `true` hides the launcher button. Open the widget with `Libredesk.show()`. |
+| `cookieDomain` | No | Domain for the session cookie. Defaults to the parent domain, e.g. `.example.com`. |
 
 ## Identity verification
 
-If users are already signed into your product, pass a signed JWT so the widget loads with their existing Libredesk contact. Without verification, the widget cannot tell a returning user apart from a new visitor on a new device.
+If users are already signed into your product, pass a signed JWT so the widget loads with their existing libredesk contact. Without verification, the widget cannot tell a returning user apart from a new visitor on a new device.
 
 ### How it works
 
-1. Your server signs a JWT with the inbox **Secret key** (set under the **Security** tab).
-2. Your page passes that JWT to the widget via `userJWT`.
-3. Libredesk verifies the signature, then upserts the contact by `external_user_id`.
+1. Your server signs a JWT with the inbox **Secret key** (set under **Setup → Security**).
+2. Your page passes that JWT to the widget via `userJWT`, or calls `Libredesk.setUser(jwt)`.
+3. libredesk verifies the signature, then finds or creates the contact by `external_user_id`.
 
 The signing algorithm is **HS256** (HMAC-SHA256). The secret never leaves your server.
 
@@ -151,8 +164,12 @@ Once the widget loads, `window.Libredesk` exposes these methods:
 | `Libredesk.show()` | Open the widget. |
 | `Libredesk.hide()` | Close the widget. |
 | `Libredesk.toggle()` | Toggle between open and closed. |
+| `Libredesk.isVisible()` | Return `true` when the widget is open. |
 | `Libredesk.setUser(jwt)` | Log a user in after page load with a signed JWT. |
 | `Libredesk.logout()` | Clear the current session and reset to anonymous. |
+| `Libredesk.setLanguage(code)` | Switch the widget UI language. |
+| `Libredesk.trackEvent(name)` | Record an event for [proactive message](#proactive-messages) targeting. |
+| `Libredesk.destroy()` | Remove the launcher and widget from the page. |
 | `Libredesk.onShow(fn)` | Register a callback fired when the widget opens. |
 | `Libredesk.onHide(fn)` | Register a callback fired when the widget closes. |
 | `Libredesk.onUnreadCountChange(fn)` | Register a callback fired with the unread message count. |
@@ -165,25 +182,56 @@ window.Libredesk.onUnreadCountChange(function (count) {
 });
 ```
 
+## Proactive messages
+
+A proactive message pops up next to the launcher on matching pages. A conversation starts when someone replies. Add them under **Content → Proactive messages**. The first matching message in the list is shown.
+
+| Setting | Description |
+|---------|-------------|
+| Sender | Agent shown as the sender. **Brand bot** shows the inbox brand name. |
+| Route replies to team | Team that gets the conversation when someone replies. |
+| Who sees it | All, visitors only, or logged-in users only, with optional conditions on contact custom attributes. |
+| Include pages / Exclude pages | One URL or path per line. `*` matches any characters. An empty include list matches every page. |
+| Optional event name | Show the message only after your site calls `Libredesk.trackEvent()` with this name. |
+| Active time on page (seconds) | Time on the page before the message shows. |
+| Business hours rule | Any time, during business hours, or outside business hours of a chosen schedule. |
+| Device | Desktop, mobile, or both. |
+| Show again | Once per person, once per session, or after a set number of hours. |
+
+**Minimum time between proactive messages** (default `24h`) applies across all proactive messages in the inbox.
+
+## Help articles in the widget
+
+Under **Content → Help center**, pick one of your [help centers](/configuration/help-center) to let people search and read its published articles inside the widget.
+
+- **Show Help tab** turns the Help tab on or off, separately for visitors and users.
+- **Featured articles** picks the articles shown first. Leave it empty to show popular articles.
+- To show help on the home screen, add the **help articles** card under **Content → Home screen apps**.
+
+## Pre-chat form
+
+Under **Conversations → Pre-chat form**, collect details such as name, email, and custom attributes before a chat starts. Turn on **Show only during AI handoff** to show the form only when the AI assistant hands the chat to an agent.
+
 ## Conversation continuity
 
-Contacts don't have to stay in the live chat. If they leave before the conversation is finished, Libredesk can automatically email them any unread messages.
+If a contact leaves the live chat before the conversation is finished, libredesk can email them the agent replies they have not seen. Pick an email inbox under **General → Conversation continuity email inbox** to turn this on. The contact needs an email address.
 
-
-| Setting                  | Description                                                                        |
-| ------------------------ | ---------------------------------------------------------------------------------- |
-| `offline_threshold`      | How long agents must be offline before Libredesk sends a fallback email (e.g. `10m`). |
-| `max_messages_per_email` | Maximum number of messages per email. Additional messages are sent in a new email. |
-| `min_email_interval`     | Minimum time between fallback emails for the same conversation.                    |
+| Setting | Default | Description |
+| ------- | ------- | ----------- |
+| Offline threshold | `10m` | How long the contact must be offline before libredesk sends the email. |
+| Max messages per email | `10` | Maximum number of messages in one email. |
+| Min email interval | `15m` | Minimum time between continuity emails for the same conversation. |
 
 Replies to the email thread are added back to the same live chat conversation.
 
 
 ## Security
 
+These settings are under **Setup → Security**.
+
 ### Trusted domains
 
-Under the **Security** tab, list the domains allowed to embed the widget. Requests from other origins are rejected. Supports wildcards:
+List the domains allowed to embed the widget, one per line. `*.example.com` matches subdomains only, so add the bare domain separately:
 
 ```
 example.com
@@ -191,11 +239,11 @@ example.com
 staging.example.com
 ```
 
-Leave this empty to allow all origins. Always set it in production.
+Leave this empty to allow any domain. Always set it in production.
 
 ### Blocked IPs
 
-Block specific IPs or CIDR ranges from opening the widget:
+Block specific IPs or CIDR ranges from opening the widget, one per line:
 
 ```
 192.168.1.0/24
@@ -205,4 +253,4 @@ Block specific IPs or CIDR ranges from opening the widget:
 
 ### Session duration
 
-Controls how long a widget session stays authenticated before the JWT must be re-verified. Default is `10h`. Format accepts `s`, `m`, `h` (e.g. `30m`, `24h`).
+**Authenticated user session duration** controls how long a signed-in user's session lasts without activity. Default is `10h`. Format accepts `s`, `m`, `h` (e.g. `30m`, `24h`).

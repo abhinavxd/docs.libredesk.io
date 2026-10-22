@@ -1,9 +1,9 @@
 ---
 title: API Introduction
-description: Getting started with the Libredesk API
+description: Getting started with the libredesk API
 ---
 
-You can access the Libredesk API to interact with your instance programmatically by generating API keys for any agent.
+Generate an API key for any agent to work with your instance through the libredesk API.
 
 
 <Note>
@@ -28,9 +28,9 @@ curl -X GET "https://your-instance.com/api/v1/endpoint" \
 
 ## Getting API keys
 
-1. Go to **Admin → Teammate → Agent → Edit**
-2. Generate a new API key
-3. Save both the API Key and API Secret
+1. Go to **Admin → Teammates → Agents** and open the agent.
+2. Click **Generate API key**.
+3. Copy both the API key and the API secret. The secret is shown only once.
 
 ## Base URL
 
@@ -40,4 +40,4 @@ https://your-instance.com/api/v1
 
 ## Response format
 
-Every response is JSON.
+Responses are JSON. A successful response wraps the result in `data`. An error response has a `message` and an `error_type`.

@@ -1,28 +1,28 @@
 ---
 title: Webhooks
-description: Receive real-time HTTP notifications for Libredesk events
+description: Receive real-time HTTP notifications for libredesk events
 ---
 
-When something happens in your Libredesk instance, Libredesk sends an HTTP POST to a URL you choose. The body is JSON containing the event name, a timestamp, and the conversation or message it happened to. Use webhooks to push Libredesk activity into your own systems.
+When something happens in your libredesk instance, libredesk sends an HTTP POST to a URL you choose. The body is JSON containing the event name, a timestamp, and the conversation or message it happened to. Use webhooks to push libredesk activity into your own systems.
 
 ## Configuration
 
 <Steps>
   <Step title="Navigate to webhooks">
-    Go to **Admin → Integrations → Webhooks** in your Libredesk dashboard
+    Go to **Admin → Integrations → Webhooks** in your libredesk dashboard
   </Step>
   
   <Step title="Create webhook">
-    Click **Create Webhook** and fill in:
+    Click **New webhook** and fill in:
     - **Name**: a name you will recognize later
-    - **URL**: where Libredesk sends the payload
+    - **URL**: where libredesk sends the payload
     - **Events**: the events to subscribe to
     - **Secret**: optional, used to sign the payload
-    - **Status**: enabled or disabled
+    - **Active**: enabled or disabled
   </Step>
   
   <Step title="Test webhook">
-    Use the test button to send a sample payload to verify your endpoint is working
+    Open the webhook's menu in the list and click **Send test** to send a `webhook.test` event to your endpoint.
   </Step>
 </Steps>
 
@@ -30,7 +30,7 @@ When something happens in your Libredesk instance, Libredesk sends an HTTP POST 
 
 ### Signature verification
 
-When you set a secret, Libredesk signs the payload with HMAC-SHA256 and sends the result in the `X-Libredesk-Signature` header as `sha256=<signature>`.
+When you set a secret, libredesk signs the payload with HMAC-SHA256 and sends the result in the `X-Libredesk-Signature` header as `sha256=<signature>`.
 
 <CodeGroup>
 
@@ -89,7 +89,7 @@ Every request carries these headers:
 
 ### SSRF protection
 
-Webhook URLs are one of several admin-configured outbound URLs covered by Libredesk's optional SSRF guard, which is disabled by default. See [SSRF protection](/configuration/ssrf-protection) for details and how to enable it.
+Webhook URLs are one of several admin-configured outbound URLs covered by libredesk's optional SSRF guard, which is disabled by default. See [SSRF protection](/configuration/ssrf-protection) for details and how to enable it.
 
 ## Events
 
@@ -98,7 +98,7 @@ Webhook URLs are one of several admin-configured outbound URLs covered by Libred
 <AccordionGroup>
 
 <Accordion title="conversation.created">
-Triggered when a new conversation is created.
+Triggered when a new conversation is created, by a contact or by an agent.
 
 ```json
 {
@@ -111,23 +111,71 @@ Triggered when a new conversation is created.
     "uuid": "550e8400-e29b-41d4-a716-446655440000",
     "contact_id": 456,
     "inbox_id": 1,
+    "closed_at": null,
+    "resolved_at": null,
+    "last_resolved_at": null,
+    "contact_last_seen_at": null,
     "reference_number": "100",
     "priority": "Medium",
     "priority_id": 2,
     "status": "Open",
+    "status_category": "open",
     "status_id": 1,
+    "first_reply_at": null,
+    "last_reply_at": null,
+    "assigned_user_id": null,
+    "assigned_team_id": null,
+    "assignee": null,
+    "waiting_since": "2025-06-15T10:30:00Z",
+    "snoozed_until": null,
     "subject": "Help with account setup",
+    "inbox_mail": "support@example.com",
+    "inbox_reply_to": "",
+    "inbox_aliases": [],
     "inbox_name": "Support",
     "inbox_channel": "email",
+    "tags": [],
+    "meta": {},
+    "custom_attributes": {},
+    "last_message_at": "2025-06-15T10:30:00Z",
+    "last_message": "I need help setting up my account",
+    "last_message_sender": "contact",
+    "last_interaction": "I need help setting up my account",
+    "last_interaction_at": "2025-06-15T10:30:00Z",
+    "last_interaction_sender": "contact",
     "contact": {
       "id": 456,
+      "created_at": "2025-06-01T09:00:00Z",
+      "updated_at": "2025-06-15T10:30:00Z",
       "first_name": "John",
       "last_name": "Doe",
       "email": "john.doe@example.com",
-      "type": "contact"
+      "type": "contact",
+      "availability_status": "offline",
+      "avatar_url": null,
+      "phone_number": null,
+      "phone_number_country_code": null,
+      "country": null,
+      "custom_attributes": {},
+      "enabled": true,
+      "last_active_at": null,
+      "last_login_at": null,
+      "external_user_id": null
     },
-    "custom_attributes": {},
-    "tags": []
+    "sla_policy_id": null,
+    "sla_policy_name": null,
+    "applied_sla_id": null,
+    "next_sla_deadline_at": null,
+    "first_response_deadline_at": null,
+    "resolution_deadline_at": null,
+    "next_response_deadline_at": null,
+    "next_response_met_at": null,
+    "last_inbound_at": "2025-06-15T10:30:00Z",
+    "contact_last_inbound_at": "2025-06-15T10:30:00Z",
+    "csat_rating": null,
+    "csat_feedback": null,
+    "csat_responded_at": null,
+    "previous_conversations": null
   }
 }
 ```
@@ -155,22 +203,36 @@ Triggered when a conversation's status is updated.
       "inbox_id": 1,
       "closed_at": null,
       "resolved_at": "2025-06-15T10:35:00Z",
+      "last_resolved_at": "2025-06-15T10:35:00Z",
+      "contact_last_seen_at": null,
       "reference_number": "100",
       "priority": "Medium",
       "priority_id": 2,
       "status": "Resolved",
+      "status_category": "resolved",
       "status_id": 3,
       "first_reply_at": "2025-06-15T10:31:00Z",
-      "last_reply_at": "2025-06-15T10:34:00Z",
+      "last_reply_at": "2025-06-15T10:31:00Z",
       "assigned_user_id": 789,
       "assigned_team_id": null,
+      "assignee": {
+        "id": 789,
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "avatar_url": null,
+        "type": "agent",
+        "availability_status": "online"
+      },
       "waiting_since": null,
+      "snoozed_until": null,
       "subject": "Help with account setup",
       "inbox_mail": "support@example.com",
+      "inbox_reply_to": "",
+      "inbox_aliases": [],
       "inbox_name": "Support",
       "inbox_channel": "email",
       "tags": [],
-      "meta": [],
+      "meta": {},
       "custom_attributes": {},
       "last_message_at": "2025-06-15T10:34:00Z",
       "last_message": "Thank you for your help!",
@@ -190,18 +252,26 @@ Triggered when a conversation's status is updated.
         "avatar_url": null,
         "phone_number": null,
         "phone_number_country_code": null,
+        "country": null,
         "custom_attributes": {},
         "enabled": true,
         "last_active_at": null,
-        "last_login_at": null
+        "last_login_at": null,
+        "external_user_id": null
       },
       "sla_policy_id": null,
       "sla_policy_name": null,
       "applied_sla_id": null,
+      "next_sla_deadline_at": null,
       "first_response_deadline_at": null,
       "resolution_deadline_at": null,
       "next_response_deadline_at": null,
       "next_response_met_at": null,
+      "last_inbound_at": "2025-06-15T10:34:00Z",
+      "contact_last_inbound_at": "2025-06-15T10:34:00Z",
+      "csat_rating": null,
+      "csat_feedback": null,
+      "csat_responded_at": null,
       "previous_conversations": null
     }
   }
@@ -210,7 +280,7 @@ Triggered when a conversation's status is updated.
 </Accordion>
 
 <Accordion title="conversation.assigned">
-Triggered when a conversation is assigned to a user.
+Triggered when a conversation is assigned to a user. Team assignment does not send this event.
 
 ```json
 {
@@ -229,22 +299,36 @@ Triggered when a conversation is assigned to a user.
       "inbox_id": 1,
       "closed_at": null,
       "resolved_at": null,
+      "last_resolved_at": null,
+      "contact_last_seen_at": null,
       "reference_number": "100",
       "priority": "Medium",
       "priority_id": 2,
       "status": "Open",
+      "status_category": "open",
       "status_id": 1,
       "first_reply_at": null,
       "last_reply_at": null,
       "assigned_user_id": 789,
       "assigned_team_id": null,
+      "assignee": {
+        "id": 789,
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "avatar_url": null,
+        "type": "agent",
+        "availability_status": "online"
+      },
       "waiting_since": "2025-06-15T10:30:00Z",
+      "snoozed_until": null,
       "subject": "Help with account setup",
       "inbox_mail": "support@example.com",
+      "inbox_reply_to": "",
+      "inbox_aliases": [],
       "inbox_name": "Support",
       "inbox_channel": "email",
       "tags": [],
-      "meta": [],
+      "meta": {},
       "custom_attributes": {},
       "last_message_at": "2025-06-15T10:30:00Z",
       "last_message": "I need help setting up my account",
@@ -264,18 +348,26 @@ Triggered when a conversation is assigned to a user.
         "avatar_url": null,
         "phone_number": null,
         "phone_number_country_code": null,
+        "country": null,
         "custom_attributes": {},
         "enabled": true,
         "last_active_at": null,
-        "last_login_at": null
+        "last_login_at": null,
+        "external_user_id": null
       },
       "sla_policy_id": null,
       "sla_policy_name": null,
       "applied_sla_id": null,
+      "next_sla_deadline_at": null,
       "first_response_deadline_at": null,
       "resolution_deadline_at": null,
       "next_response_deadline_at": null,
       "next_response_met_at": null,
+      "last_inbound_at": "2025-06-15T10:30:00Z",
+      "contact_last_inbound_at": "2025-06-15T10:30:00Z",
+      "csat_rating": null,
+      "csat_feedback": null,
+      "csat_responded_at": null,
       "previous_conversations": null
     }
   }
@@ -302,22 +394,29 @@ Triggered when a conversation is unassigned from a user.
       "inbox_id": 1,
       "closed_at": null,
       "resolved_at": null,
+      "last_resolved_at": null,
+      "contact_last_seen_at": null,
       "reference_number": "100",
       "priority": "Medium",
       "priority_id": 2,
       "status": "Open",
+      "status_category": "open",
       "status_id": 1,
       "first_reply_at": "2025-06-15T10:31:00Z",
-      "last_reply_at": "2025-06-15T10:35:00Z",
+      "last_reply_at": "2025-06-15T10:31:00Z",
       "assigned_user_id": null,
       "assigned_team_id": null,
+      "assignee": null,
       "waiting_since": "2025-06-15T10:35:00Z",
+      "snoozed_until": null,
       "subject": "Help with account setup",
       "inbox_mail": "support@example.com",
+      "inbox_reply_to": "",
+      "inbox_aliases": [],
       "inbox_name": "Support",
       "inbox_channel": "email",
       "tags": [],
-      "meta": [],
+      "meta": {},
       "custom_attributes": {},
       "last_message_at": "2025-06-15T10:35:00Z",
       "last_message": "I still need help",
@@ -337,18 +436,26 @@ Triggered when a conversation is unassigned from a user.
         "avatar_url": null,
         "phone_number": null,
         "phone_number_country_code": null,
+        "country": null,
         "custom_attributes": {},
         "enabled": true,
         "last_active_at": null,
-        "last_login_at": null
+        "last_login_at": null,
+        "external_user_id": null
       },
       "sla_policy_id": null,
       "sla_policy_name": null,
       "applied_sla_id": null,
+      "next_sla_deadline_at": null,
       "first_response_deadline_at": null,
       "resolution_deadline_at": null,
       "next_response_deadline_at": null,
       "next_response_met_at": null,
+      "last_inbound_at": "2025-06-15T10:35:00Z",
+      "contact_last_inbound_at": "2025-06-15T10:35:00Z",
+      "csat_rating": null,
+      "csat_feedback": null,
+      "csat_responded_at": null,
       "previous_conversations": null
     }
   }
@@ -365,8 +472,13 @@ Triggered when tags are added or removed from a conversation.
   "timestamp": "2025-06-15T10:45:00Z",
   "payload": {
     "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
-    "previous_tags": ["bug"],
-    "new_tags": ["bug", "priority"],
+    "previous_tags": [
+      "bug"
+    ],
+    "new_tags": [
+      "bug",
+      "priority"
+    ],
     "actor_id": 789,
     "conversation": {
       "id": 123,
@@ -377,28 +489,45 @@ Triggered when tags are added or removed from a conversation.
       "inbox_id": 1,
       "closed_at": null,
       "resolved_at": null,
+      "last_resolved_at": null,
+      "contact_last_seen_at": null,
       "reference_number": "100",
       "priority": "Medium",
       "priority_id": 2,
       "status": "Open",
+      "status_category": "open",
       "status_id": 1,
       "first_reply_at": "2025-06-15T10:31:00Z",
-      "last_reply_at": "2025-06-15T10:35:00Z",
+      "last_reply_at": "2025-06-15T10:31:00Z",
       "assigned_user_id": 789,
       "assigned_team_id": null,
+      "assignee": {
+        "id": 789,
+        "first_name": "Jane",
+        "last_name": "Smith",
+        "avatar_url": null,
+        "type": "agent",
+        "availability_status": "online"
+      },
       "waiting_since": null,
+      "snoozed_until": null,
       "subject": "Help with account setup",
       "inbox_mail": "support@example.com",
+      "inbox_reply_to": "",
+      "inbox_aliases": [],
       "inbox_name": "Support",
       "inbox_channel": "email",
-      "tags": ["bug", "priority"],
-      "meta": [],
+      "tags": [
+        "bug",
+        "priority"
+      ],
+      "meta": {},
       "custom_attributes": {},
-      "last_message_at": "2025-06-15T10:35:00Z",
-      "last_message": "Thank you for your help!",
+      "last_message_at": "2025-06-15T10:30:00Z",
+      "last_message": "I need help setting up my account",
       "last_message_sender": "contact",
-      "last_interaction": "Thank you for your help!",
-      "last_interaction_at": "2025-06-15T10:35:00Z",
+      "last_interaction": "I need help setting up my account",
+      "last_interaction_at": "2025-06-15T10:30:00Z",
       "last_interaction_sender": "contact",
       "contact": {
         "id": 456,
@@ -412,18 +541,26 @@ Triggered when tags are added or removed from a conversation.
         "avatar_url": null,
         "phone_number": null,
         "phone_number_country_code": null,
+        "country": null,
         "custom_attributes": {},
         "enabled": true,
         "last_active_at": null,
-        "last_login_at": null
+        "last_login_at": null,
+        "external_user_id": null
       },
       "sla_policy_id": null,
       "sla_policy_name": null,
       "applied_sla_id": null,
+      "next_sla_deadline_at": null,
       "first_response_deadline_at": null,
       "resolution_deadline_at": null,
       "next_response_deadline_at": null,
       "next_response_met_at": null,
+      "last_inbound_at": "2025-06-15T10:30:00Z",
+      "contact_last_inbound_at": "2025-06-15T10:30:00Z",
+      "csat_rating": null,
+      "csat_feedback": null,
+      "csat_responded_at": null,
       "previous_conversations": null
     }
   }
@@ -438,7 +575,7 @@ Triggered when tags are added or removed from a conversation.
 <AccordionGroup>
 
 <Accordion title="message.created">
-Triggered when a new message is created in a conversation.
+Triggered when a new message is created in a conversation. This includes incoming and outgoing messages, private notes, and activity messages.
 
 ```json
 {
@@ -450,42 +587,66 @@ Triggered when a new message is created in a conversation.
     "updated_at": "2025-06-15T10:33:00Z",
     "uuid": "123e4567-e89b-12d3-a456-426614174000",
     "type": "outgoing",
-    "status": "sent",
+    "status": "pending",
     "conversation_id": 123,
+    "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
     "content": "<p>Hello! How can I help you today?</p>",
     "text_content": "Hello! How can I help you today?",
     "content_type": "html",
     "private": false,
     "sender_id": 789,
     "sender_type": "agent",
-    "attachments": []
+    "meta": {},
+    "attachments": [],
+    "author": {
+      "id": 789,
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@example.com",
+      "avatar_url": null,
+      "availability_status": "online",
+      "type": "agent",
+      "last_active_at": "2025-06-15T10:33:00Z"
+    }
   }
 }
 ```
 </Accordion>
 
 <Accordion title="message.updated">
-Triggered when an existing message is updated.
+Triggered when an outgoing message's status changes to `sent` or `failed`.
 
 ```json
 {
   "event": "message.updated",
-  "timestamp": "2025-06-15T10:34:00Z",
+  "timestamp": "2025-06-15T10:33:02Z",
   "payload": {
     "id": 987,
     "created_at": "2025-06-15T10:33:00Z",
-    "updated_at": "2025-06-15T10:34:00Z",
+    "updated_at": "2025-06-15T10:33:02Z",
     "uuid": "123e4567-e89b-12d3-a456-426614174000",
     "type": "outgoing",
     "status": "sent",
     "conversation_id": 123,
-    "content": "<p>Hello! How can I help you today? (Updated)</p>",
-    "text_content": "Hello! How can I help you today? (Updated)",
+    "conversation_uuid": "550e8400-e29b-41d4-a716-446655440000",
+    "content": "<p>Hello! How can I help you today?</p>",
+    "text_content": "Hello! How can I help you today?",
     "content_type": "html",
     "private": false,
     "sender_id": 789,
     "sender_type": "agent",
-    "attachments": []
+    "meta": {},
+    "attachments": [],
+    "author": {
+      "id": 789,
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "email": "jane.smith@example.com",
+      "avatar_url": null,
+      "availability_status": "online",
+      "type": "agent",
+      "last_active_at": "2025-06-15T10:33:00Z"
+    }
   }
 }
 ```
@@ -493,18 +654,36 @@ Triggered when an existing message is updated.
 
 </AccordionGroup>
 
+### Automation rules
+
+The **Trigger webhook** automation action sends a custom event, for example `priority.escalated`, to one active webhook.
+
+```json
+{
+  "event": "priority.escalated",
+  "timestamp": "2025-06-15T10:50:00Z",
+  "payload": {
+    "conversation": { "id": 123, "uuid": "550e8400-e29b-41d4-a716-446655440000" },
+    "actor_id": 1
+  }
+}
+```
+
+`conversation` is shortened here.
+
 ## Delivery and retries
 
 - Deliveries run in a background worker pool.
-- The request timeout is set in `config.toml`.
 - Failed deliveries are not retried.
-- Events can be dropped when the delivery queue is full. The queue size is set in `config.toml`.
+- Events are dropped when the delivery queue is full.
 
-Because there are no retries, verify the signature and reply within 5 seconds, then do the actual work after you have responded. An endpoint that blocks on slow processing will time out and lose the event.
+Worker count, queue size, and timeout are set in the `[webhook]` section of `config.toml`.
+
+Because there are no retries, verify the signature and reply within 3 seconds, then do the actual work after you have responded. An endpoint that blocks on slow processing will time out and lose the event.
 
 ## Testing
 
-Both of these give you a throwaway URL that shows the payloads Libredesk sends:
+Both of these give you a throwaway URL that shows the payloads libredesk sends:
 
 <CardGroup cols={2}>
   <Card title="Webhook.site" icon="globe" href="https://webhook.site">
