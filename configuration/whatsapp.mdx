@@ -3,11 +3,7 @@ title: WhatsApp
 description: Connect a WhatsApp number through Meta's Cloud API
 ---
 
-<Note>
-  WhatsApp support is still in development and is not available in any released version yet. This guide is published ahead of the release. You cannot set up a WhatsApp inbox until the feature ships.
-</Note>
-
-Libredesk connects directly to Meta's WhatsApp Cloud API. You create a Meta app, register a business phone number, then add its credentials to a WhatsApp inbox in Libredesk.
+libredesk connects directly to Meta's WhatsApp Cloud API. You create a Meta app, register a business phone number, then add its credentials to a WhatsApp inbox in libredesk.
 
 ## Before you start
 
@@ -15,7 +11,7 @@ You need:
 
 - A Facebook account with access to a Meta business portfolio, or permission to create one
 - A phone number that can receive an SMS or voice call
-- A public HTTPS URL for your Libredesk instance
+- A public HTTPS URL for your libredesk instance
 - A public privacy policy URL for publishing the Meta app
 
 <Warning>
@@ -113,10 +109,10 @@ Use a [System User access token](https://developers.facebook.com/documentation/b
 4. Return to the system user and select **Generate token**. Choose your app and **Never** for expiration if available.
 5. Select both `whatsapp_business_messaging` and `whatsapp_business_management`, then generate the token and store it securely.
 
-These [permissions](https://www.postman.com/meta/whatsapp-business-platform/documentation/wlk6lh4/whatsapp-cloud-api) cover messaging, account management, templates, and webhooks. The broader `business_management` permission in Meta's general setup guide is for business portfolio operations; Libredesk does not require it.
+These [permissions](https://www.postman.com/meta/whatsapp-business-platform/documentation/wlk6lh4/whatsapp-cloud-api) cover messaging, account management, templates, and webhooks. The broader `business_management` permission in Meta's general setup guide is for business portfolio operations; libredesk does not require it.
 
 <Warning>
-  App-dashboard user tokens expire and will stop the connection from working. Use a System User token; if it has an expiry date, replace it in Libredesk before it expires.
+  App-dashboard user tokens expire and will stop the connection from working. Use a System User token; if it has an expiry date, replace it in libredesk before it expires.
 </Warning>
 
 ### App secret
@@ -125,9 +121,9 @@ Open **App settings → Basic**, select **Show** next to **App secret**, then co
 
 ## Complete Cloud API registration
 
-Adding a number and verifying its SMS or voice code does not complete [Cloud API registration](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/registration). If your number is not already registered, register it through Meta's API after generating the access token above. Libredesk does not register the phone number for you.
+Adding a number and verifying its SMS or voice code does not complete [Cloud API registration](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/registration). If your number is not already registered, register it through Meta's API after generating the access token above. libredesk does not register the phone number for you.
 
-Replace the placeholders below with the Graph API version shown in Libredesk's WhatsApp inbox form, your Phone number ID, your System User token, and a six-digit PIN:
+Replace the placeholders below with the Graph API version shown in libredesk's WhatsApp inbox form, your Phone number ID, your System User token, and a six-digit PIN:
 
 ```bash
 curl -X POST 'https://graph.facebook.com/GRAPH_API_VERSION/PHONE_NUMBER_ID/register' \
@@ -136,7 +132,7 @@ curl -X POST 'https://graph.facebook.com/GRAPH_API_VERSION/PHONE_NUMBER_ID/regis
   -d '{"messaging_product":"whatsapp","pin":"SIX_DIGIT_PIN"}'
 ```
 
-For a number with two-step verification already enabled, use its existing PIN. Otherwise, choose a new six-digit PIN and store it securely. This PIN is separate from the SMS or voice verification code and is not entered in Libredesk. If you have forgotten it, follow Meta's [PIN reset instructions](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/phone-numbers#two-step-verification) before retrying registration.
+For a number with two-step verification already enabled, use its existing PIN. Otherwise, choose a new six-digit PIN and store it securely. This PIN is separate from the SMS or voice verification code and is not entered in libredesk. If you have forgotten it, follow Meta's [PIN reset instructions](https://developers.facebook.com/documentation/business-messaging/whatsapp/business-phone-numbers/phone-numbers#two-step-verification) before retrying registration.
 
 ## Publish the Meta app
 
@@ -160,15 +156,16 @@ Business verification is optional for the initial connection. New business portf
 
 Business verification is one path to higher limits, subject to Meta's eligibility checks. Start it under **Step 3. Business verification** and check your current messaging limit in **WhatsApp Manager → Account tools → Messaging limits**.
 
-## Connect the number to Libredesk
+## Connect the number to libredesk
 
-First, go to **Admin → Settings → General** and set **Root URL** to the public HTTPS address of your Libredesk instance.
+First, go to **Admin → General** and set **Root URL** to the public HTTPS address of your libredesk instance.
 
 Then go to **Admin → Inboxes → New inbox → WhatsApp** and enter:
 
-| Libredesk field | Value |
+| libredesk field | Value |
 |-----------------|-------|
-| Name | A name that identifies the inbox in Libredesk |
+| Name | A name that identifies the inbox in libredesk |
+| Reopen window (hours) | A reply within this many hours of resolving reopens the conversation. `0` always starts a new one. Default `48` |
 | Phone number ID | The number's ID from API Setup or WhatsApp Manager |
 | WhatsApp Business Account ID | The account's ID from API Setup or WhatsApp Manager |
 | Access token | The System User token generated above |
@@ -182,54 +179,107 @@ Generate a webhook verify token with:
 openssl rand -hex 32
 ```
 
-Save the inbox. Libredesk checks that the token can access the phone number and that the number belongs to the WhatsApp Business Account, then attempts to register a callback for that account in the background.
+Click **Create**. libredesk checks that the token can access the phone number and that the number belongs to the WhatsApp Business Account. libredesk then attempts to register a callback for that account in the background.
+
+When **CSAT Surveys** is on, libredesk submits the **CSAT survey template** to Meta when you save the inbox. Surveys are sent with it once Meta approves it.
 
 ## Configure webhooks
 
-Libredesk automatically attempts to subscribe your app to the WhatsApp Business Account and set an account-level callback override for messages. This does not change the app-level callback shown in Meta's dashboard.
+libredesk automatically attempts to subscribe your app to the WhatsApp Business Account and set an account-level callback override for messages. This does not change the app-level callback shown in Meta's dashboard.
 
 Meta's [callback overrides](https://developers.facebook.com/documentation/business-messaging/whatsapp/webhooks/override#supported-webhook-fields) do not apply to template status updates. Configure the app-level callback as well to receive those updates:
 
-1. Open the WhatsApp inbox in Libredesk and copy its **Callback URL** and **Webhook verify token**.
+1. Open the WhatsApp inbox in libredesk and copy its **Callback URL** and **Webhook verify token**.
 2. In Meta, open **Use cases → Customize → Step 2. Production setup → Configure Webhooks**.
 3. Set the app-level **Callback URL** and **Verify token** to the copied values, then select **Verify and save**.
 4. Under **Webhook fields**, subscribe to `messages` and `message_template_status_update`.
-5. Save the inbox again in Libredesk to retry account-level webhook registration with Meta's configuration in place.
+5. Save the inbox again in libredesk to retry account-level webhook registration with Meta's configuration in place.
 
-<Frame caption="Enter the Libredesk callback URL and verify token">
+<Frame caption="Enter the libredesk callback URL and verify token">
   <img
     src="/images/whatsapp-webhook-endpoint.png"
     alt="Meta webhook configuration fields for Callback URL and Verify token"
   />
 </Frame>
 
-<Frame caption="The two webhook fields required by Libredesk">
+<Frame caption="The two webhook fields required by libredesk">
   <img
     src="/images/whatsapp-webhook-fields.png"
     alt="Meta webhook fields for messages and message template status updates"
   />
 </Frame>
 
-The `messages` field delivers incoming messages and delivery statuses. The `message_template_status_update` field keeps template approval statuses current in Libredesk.
+The `messages` field delivers incoming messages and delivery statuses. The `message_template_status_update` field keeps template approval statuses current in libredesk.
 
-Automatic registration failures are recorded in Libredesk's server logs; saving the inbox can still succeed. If registration fails, check that the Root URL is public HTTPS, Meta can reach the callback, and the System User token has access to the account, then save the inbox again to retry.
+Automatic registration failures are recorded in libredesk's server logs; saving the inbox can still succeed. If registration fails, check that the Root URL is public HTTPS, Meta can reach the callback, and the System User token has access to the account, then save the inbox again to retry.
 
 ## Test the connection
 
-Send a WhatsApp message from another phone to the registered business number. A new conversation should appear in Libredesk. Reply from Libredesk to confirm that outgoing messages work.
+Send a WhatsApp message from another phone to the registered business number. A new conversation should appear in libredesk. Reply from libredesk to confirm that outgoing messages work.
 
 If the conversation does not appear, confirm that:
 
 - The Meta app is published and in **Live** mode
-- The Libredesk Root URL is a public HTTPS address that Meta can reach
-- Libredesk's server logs show successful automatic webhook registration; after correcting a registration failure, save the inbox again
+- The libredesk Root URL is a public HTTPS address that Meta can reach
+- libredesk's server logs show successful automatic webhook registration; after correcting a registration failure, save the inbox again
 - Both webhook fields above show **Subscribed**
 - The **App secret** matches the same Meta app used to generate the token. A wrong secret rejects incoming webhooks even when saving the inbox succeeds; the server logs report `whatsapp webhook signature verification failed`
 
 If replies fail, check that the number has completed Cloud API registration and the token has `whatsapp_business_messaging` permission. If template statuses do not update, check the app-level callback and the `message_template_status_update` subscription.
 
+## The 24-hour reply window
+
+Agents can send free-form replies and attachments for 24 hours after the contact's latest message. After that, only approved templates can be sent, and the reply box shows a **Send template** button. Private notes work at any time. The window opens again when the contact replies.
+
 ## Business-initiated messages
 
-Replies are allowed for 24 hours after the customer messages you. After that window, start the conversation with an approved WhatsApp template.
+Send an approved template to start a new conversation or to message a contact whose reply window is closed.
 
 To send business-initiated template messages, return to **Step 2. Production setup** and expand **Add payment to send business-initiated messages**. Add a payment method in Meta's Billing Hub.
+
+## Templates
+
+Manage templates under **Admin → WhatsApp templates**. Each WhatsApp inbox has its own template list.
+
+Click **New template**, fill in the form, then click **Submit to Meta**. The template stays `PENDING` until Meta reviews it, and only `APPROVED` templates can be sent. If Meta rejects it, hover over the status to see the reason, then edit and resubmit.
+
+**Sync from Meta** imports templates you created in WhatsApp Manager. libredesk also syncs every 6 hours.
+
+libredesk can send templates with a text header or no header. Templates with image, video, or document headers can be synced but not sent.
+
+To send a template in a conversation, click **Send template** in the reply box, pick a template, fill in its values, and click **Send**.
+
+## Start a WhatsApp conversation
+
+Open **New conversation**, select the **WhatsApp** tab, choose the inbox, and enter the contact's phone number. A new WhatsApp conversation always starts with an approved template.
+
+A contact can have one open WhatsApp conversation per inbox. If one exists, the form links to it.
+
+## Message types
+
+Incoming text, images, video, audio, voice notes, documents, stickers, locations, contact cards, and button replies appear in the conversation. Reactions are ignored.
+
+Agents can send text and attachments. WhatsApp allows one file per message, so libredesk sends each attachment as its own message. WebP images are not supported.
+
+## Delivery and read status
+
+Outgoing messages show sent, delivered, read, or failed. Hover over a failed message to see the reason. When an agent opens a conversation, the contact sees a read receipt.
+
+## Contacts
+
+Replies go to the contact's WhatsApp number. Editing the contact's phone number does not change where replies go.
+
+To message an existing contact who has no WhatsApp number, such as an email contact, libredesk uses the phone number and country code saved on the contact.
+
+## Multiple phone numbers
+
+Create one WhatsApp inbox per phone number. Inboxes can share a WhatsApp Business Account.
+
+## Permissions
+
+| Action | Permission |
+|--------|------------|
+| Create, edit, delete, and sync templates | `inboxes:manage` |
+| Send replies and templates in a conversation | `messages:write` |
+| Start a WhatsApp conversation | `conversations:write` |
+| Start a WhatsApp conversation with a number that has no contact | `conversations:write` and `contacts:write` |

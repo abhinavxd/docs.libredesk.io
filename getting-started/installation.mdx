@@ -1,9 +1,9 @@
 ---
 title: Installation
-description: Deploy Libredesk using Docker, binary, or from source
+description: Deploy libredesk using Docker, binary, or from source
 ---
 
-Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Install it with Docker, from a release binary, or from source.
+libredesk ships as a single binary and needs PostgreSQL and Redis to run. Install it with Docker, from a release binary, or from source.
 
 
 ## Installation methods
@@ -25,13 +25,14 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         ```
       </Step>
       
-      <Step title="Configure Libredesk">
+      <Step title="Configure libredesk">
         ```bash
         # Copy the config.sample.toml to config.toml and edit as needed
         cp config.sample.toml config.toml
         ```
         
-        Edit `config.toml` with your database credentials and preferences.
+        Set `app.encryption_key` in `config.toml` to a random 32-character string. See [Encryption key](#encryption-key).
+
       </Step>
       
       <Step title="Start the services">
@@ -46,6 +47,7 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         # Set System user password
         docker exec -it libredesk_app ./libredesk --set-system-user-password
         ```
+
       </Step>
     </Steps>
     
@@ -68,7 +70,7 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         Download the [latest release](https://github.com/abhinavxd/libredesk/releases) for your platform and extract the libredesk binary.
       </Step>
       
-      <Step title="Configure Libredesk">
+      <Step title="Configure libredesk">
         ```bash
         # Download the sample config file
         curl -LO https://github.com/abhinavxd/libredesk/raw/main/config.sample.toml
@@ -77,18 +79,21 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         cp config.sample.toml config.toml
         ```
         
-        Edit `config.toml` with your database credentials and preferences.
+        Edit `config.toml`:
+        - Set `app.encryption_key` to a random 32-character string. See [Encryption key](#encryption-key).
+        - Set the `db` credentials and set `db.host` to `localhost`.
+        - Set `redis.address` to `localhost:6379`.
       </Step>
       
       <Step title="Create the uploads directory">
-        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory, and uploads fail if it is missing or not writable.
+        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). libredesk does not create this directory, and uploads fail if it is missing or not writable.
         
         ```bash
         mkdir uploads
         chmod 755 uploads
         ```
         
-        If Libredesk runs as a different user than the one that created the directory, give that user ownership with `chown`.
+        If libredesk runs as a different user than the one that created the directory, give that user ownership with `chown`.
       </Step>
       
       <Step title="Install database tables">
@@ -96,6 +101,10 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         ./libredesk --install
         ```
         Creates the tables in PostgreSQL.
+        
+        <Warning>
+        `--install` deletes existing libredesk data. Run it only on a new database.
+        </Warning>
         
         <Tip>
         To set the System user password during installation, use the environment variable: 
@@ -112,7 +121,7 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         ```
       </Step>
       
-      <Step title="Run Libredesk">
+      <Step title="Run libredesk">
         ```bash
         ./libredesk
         ```
@@ -133,15 +142,15 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
     **Prerequisites:**
     - PostgreSQL ≥13
     - Redis
-    - Go (latest version)
-    - Node.js (≥18)
+    - Go 1.25 or later
+    - Node.js 20 or later
     - pnpm
     </Info>
     
     <Steps>
       <Step title="Clone the repository">
         ```bash
-        git clone git@github.com:abhinavxd/libredesk.git
+        git clone https://github.com/abhinavxd/libredesk.git
         cd libredesk
         ```
       </Step>
@@ -153,27 +162,27 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         Generates the `libredesk` binary in the current directory.
       </Step>
       
-      <Step title="Configure Libredesk">
+      <Step title="Configure libredesk">
         ```bash
-        # Download the sample config file
-        curl -LO https://github.com/abhinavxd/libredesk/raw/main/config.sample.toml
-        
         # Copy the config.sample.toml to config.toml and edit as needed
         cp config.sample.toml config.toml
         ```
         
-        Edit `config.toml` with your database credentials and preferences.
+        Edit `config.toml`:
+        - Set `app.encryption_key` to a random 32-character string. See [Encryption key](#encryption-key).
+        - Set the `db` credentials and set `db.host` to `localhost`.
+        - Set `redis.address` to `localhost:6379`.
       </Step>
       
       <Step title="Create the uploads directory">
-        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). Libredesk does not create this directory, and uploads fail if it is missing or not writable.
+        With the default `fs` upload provider, files are stored in the directory set by `upload.fs.upload_path` (`uploads`, relative to the working directory). libredesk does not create this directory, and uploads fail if it is missing or not writable.
         
         ```bash
         mkdir uploads
         chmod 755 uploads
         ```
         
-        If Libredesk runs as a different user than the one that created the directory, give that user ownership with `chown`.
+        If libredesk runs as a different user than the one that created the directory, give that user ownership with `chown`.
       </Step>
       
       <Step title="Install database tables">
@@ -181,6 +190,10 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         ./libredesk --install
         ```
         Creates the tables in PostgreSQL.
+        
+        <Warning>
+        `--install` deletes existing libredesk data. Run it only on a new database.
+        </Warning>
         
         <Tip>
         To set the System user password during installation, use the environment variable: 
@@ -197,7 +210,7 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
         ```
       </Step>
       
-      <Step title="Run Libredesk">
+      <Step title="Run libredesk">
         ```bash
         ./libredesk
         ```
@@ -211,9 +224,16 @@ Libredesk ships as a single binary and needs PostgreSQL and Redis to run. Instal
 </Tabs>
 
 
+## Encryption key
+
+`app.encryption_key` encrypts stored secrets such as inbox passwords. It must be exactly 32 characters. Generate one with `openssl rand -hex 16`.
+
+Set it before the first start and do not change it, or saved secrets can no longer be read.
+
+
 ## Configuration via environment variables
 
-Instead of using a `config.toml` file, you can configure Libredesk entirely through environment variables.
+Instead of using a `config.toml` file, you can configure libredesk entirely through environment variables.
 
 - All environment variables use the `LIBREDESK_` prefix
 - Use double underscore (`__`) for nested configuration keys
@@ -223,13 +243,39 @@ Instead of using a `config.toml` file, you can configure Libredesk entirely thro
 
 | TOML Config | Environment Variable |
 |-------------|---------------------|
+| `app.encryption_key = "..."` | `LIBREDESK_APP__ENCRYPTION_KEY=...` |
 | `upload.fs.upload_path = "uploads"` | `LIBREDESK_UPLOAD__FS__UPLOAD_PATH=uploads` |
 | `db.host = "localhost"` | `LIBREDESK_DB__HOST=localhost` |
 
 
+## Command-line flags
+
+| Flag | Description |
+|------|-------------|
+| `--config` | Path to the config file. Defaults to `config.toml` |
+| `--install` | Install the database schema |
+| `--upgrade` | Run pending database upgrades |
+| `--yes` | Skip the confirmation prompt |
+| `--set-system-user-password` | Set the System user password |
+| `--static-dir` | Directory with custom static files and templates |
+| `--version` | Print the version |
+
+
+## Rate limits
+
+Public endpoints are rate limited per client IP. Change the limits in `config.toml`.
+
+| Section | Endpoints | Default (requests per minute) |
+|---------|-----------|-------------------------------|
+| `[rate_limit.widget]` | Livechat widget APIs | 100 |
+| `[rate_limit.auth]` | Login, password reset and other auth endpoints | 30 |
+| `[rate_limit.public]` | Help center, CSAT, `robots.txt` and sitemaps | 100 |
+| `[rate_limit.media]` | Public media downloads (uploaded files, avatars) | 300 |
+
+
 ## Nginx reverse proxy (recommended)
 
-We recommend running Libredesk behind Nginx as a reverse proxy.
+We recommend running libredesk behind Nginx as a reverse proxy.
 
 Install nginx if you don't have it:
 
@@ -242,7 +288,7 @@ sudo dnf install nginx && sudo systemctl enable --now nginx
 ```
 
 <Warning>
-The proxy must set `X-Client-IP` to `$remote_addr`. Libredesk reads this header to identify the client for rate limiting and audit logs, and without it every request looks like it came from the proxy.
+The proxy must set `X-Client-IP` to `$remote_addr`. libredesk reads this header to identify the client for rate limiting and audit logs, and without it every request looks like it came from the proxy.
 </Warning>
 
 Save the following as `/etc/nginx/sites-available/libredesk`:

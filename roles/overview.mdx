@@ -1,18 +1,18 @@
 ---
 title: Roles & Permissions
-description: Control what agents can see and do in Libredesk with roles
+description: Control what agents can see and do in libredesk with roles
 ---
 
-A role is a named set of permissions. Every agent is assigned one or more roles, and the agent's effective access is the union of the permissions across those roles. Roles are managed under **Admin → Teams → Roles**.
+A role is a named set of permissions. Every agent is assigned one or more roles, and the agent's effective access is the union of the permissions across those roles. Roles are managed under **Admin → Teammates → Roles**.
 
 ## Default roles
 
-Libredesk ships with two roles.
+libredesk ships with two roles. Neither can be deleted.
 
 | Role | Description |
 |------|-------------|
-| `Admin` | Complete access to everything, including all settings. This role cannot be edited; create a new role if you need a variation. |
-| `Agent` | Limited access to conversations, messages, and views. |
+| `Admin` | Every permission except `messages:write_as_contact`, including all settings. This role cannot be edited. Create a new role if you need a variation. |
+| `Agent` | Read, assign, and update conversations, send replies and private notes, and manage their own views. |
 
 <Info>
 The `Admin` role is locked and cannot be modified. To grant a subset of admin access, create a new role with only the permissions you need.
@@ -39,9 +39,16 @@ Permissions follow an `object:action` format (for example `roles:manage`). The s
 | `conversations:update_status` | Change a conversation's status (for example open, resolved, or snoozed). |
 | `conversations:update_tags` | Add or remove tags on a conversation. |
 | `messages:read` | Read the messages in a conversation and download transcripts. |
-| `messages:write` | Reply to and send messages in a conversation. |
+| `messages:write` | Send replies to the contact in a conversation. |
+| `messages:write_private` | Add private notes to a conversation, delete private notes, and post an AI summary as a private note. Agents can delete only their own notes. Members of the `Admin` role can delete any note. |
 | `messages:write_as_contact` | Post a message into a conversation on the contact's behalf. |
 | `view:manage` | Create and manage the agent's own saved conversation views (filters). |
+
+To open a conversation, an agent needs `conversations:read` plus a list permission that matches how the conversation is assigned. For example, `conversations:read_assigned` covers conversations assigned to the agent, and `conversations:read_team_inbox` covers team conversations with no agent assigned.
+
+Applying a macro needs the permission for each action in it. For example, a macro that sets tags needs `conversations:update_tags`.
+
+Before v2.9.0, `messages:write` also covered private notes. The v2.9.0 upgrade adds `messages:write_private` to every role that has `messages:write`.
 
 ### Admin
 
@@ -56,13 +63,14 @@ Permissions follow an `object:action` format (for example `roles:manage`). The s
 | `users:manage` | Create, edit, and delete agents, and assign their roles. See the warning below. |
 | `teams:manage` | Create and edit teams and their membership. |
 | `automations:manage` | Create and edit automation rules that act on conversations. |
-| `inboxes:manage` | Create, configure, and delete inboxes (email, live chat, WhatsApp), including their channel connections and WhatsApp templates. |
+| `inboxes:manage` | Create, configure, and delete inboxes (email, live chat, WhatsApp), including their channel connections, email alias verification, live chat proactive messages, and WhatsApp templates. |
 | `roles:manage` | Create, edit, and delete roles and the permissions they grant. |
 | `templates:manage` | Create and edit email templates. |
 | `reports:manage` | View the reporting dashboards (overview, CSAT, SLA, message volume, tag distribution). |
 | `business_hours:manage` | Define business-hour schedules and holidays used by SLAs. |
 | `sla:manage` | Create and edit SLA policies. |
-| `ai:manage` | Configure the AI provider and prompts. |
+| `ai:manage` | Configure AI providers, editor prompts, snippets, FAQ suggestions, tools, and assistants. |
+| `help_center:manage` | Create and edit help centers, collections, and articles, and view help center search insights. |
 | `custom_attributes:manage` | Create and edit custom fields for conversations and contacts. |
 | `activity_logs:manage` | View the activity (audit) log. |
 | `webhooks:manage` | Create and edit outgoing webhooks. |
@@ -81,6 +89,8 @@ Permissions follow an `object:action` format (for example `roles:manage`). The s
 | `contacts:read` | View an individual contact's profile and search contacts. |
 | `contacts:write` | Edit a contact's details. |
 | `contacts:block` | Block or unblock contacts. |
+| `contacts:delete` | Delete a contact. |
+| `contacts:export` | Download all data stored for a contact as a JSON file. |
 | `contact_notes:read` | Read the private notes on a contact. |
 | `contact_notes:write` | Add private notes to a contact. |
 | `contact_notes:delete` | Delete private notes on a contact. |
@@ -89,7 +99,7 @@ Permissions follow an `object:action` format (for example `roles:manage`). The s
 
 <Steps>
   <Step title="Open roles">
-    Go to **Admin → Teams → Roles** and click **New role**.
+    Go to **Admin → Teammates → Roles** and click **New role**.
   </Step>
   <Step title="Name the role">
     Give it a name and an optional description.
@@ -98,6 +108,6 @@ Permissions follow an `object:action` format (for example `roles:manage`). The s
     Check the permissions to grant. Anything left unchecked is denied.
   </Step>
   <Step title="Assign to agents">
-    Save the role, then assign it to agents from their user settings. An agent's access is the combined permissions of all roles assigned to them.
+    Save the role, then assign it to agents under **Admin → Teammates → Agents**. An agent's access is the combined permissions of all roles assigned to them.
   </Step>
 </Steps>

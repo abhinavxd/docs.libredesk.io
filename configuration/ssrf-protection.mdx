@@ -3,13 +3,13 @@ title: SSRF protection
 description: Optional guard for admin-configured outbound URLs
 ---
 
-Libredesk lets admins configure URLs that the server fetches on their behalf. This guard blocks those outbound requests from reaching private, loopback, link-local, and cloud-metadata IP ranges (SSRF protection).
+libredesk lets admins configure URLs that the server fetches on their behalf. This guard blocks those outbound requests from reaching private, loopback, link-local, and cloud-metadata IP ranges (SSRF protection).
 
 It covers every admin-configured outbound URL:
 
-- **Webhooks** - event delivery endpoints
-- **SSO** - OIDC provider discovery
-- **AI** - the AI provider base URL and custom AI tool calls
+- **Webhooks** - event and test deliveries
+- **SSO** - OIDC provider discovery and token exchange
+- **AI** - provider base URLs, custom AI tool calls, and snippet **Import from URL**
 
 ## Disabled by default
 
@@ -33,4 +33,4 @@ enabled = true
 allowed_cidrs = ["10.0.0.0/8", "192.168.1.10/32"]
 ```
 
-Use `allowed_cidrs` to carve out known internal hosts you still need to reach while the guard is on.
+Use `allowed_cidrs` to carve out known internal hosts you still need to reach while the guard is on. Restart libredesk after changing these settings.

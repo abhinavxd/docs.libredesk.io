@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "Libredesk API",
-    "description": "REST API documentation for Libredesk helpdesk system.\n\n## Authentication\n\nThe Libredesk API supports two authentication methods:\n\n### 1. Basic Authentication\nUse your API key and secret with Basic authentication:\n```\nAuthorization: Basic <base64_encoded_api_key:api_secret>\n```\n\n### 2. Token Authentication  \nUse your API key and secret with token authentication:\n```\nAuthorization: token api_key:api_secret\n```\n\nTo obtain API credentials, generate them from your agent profile in the Libredesk dashboard.",
+    "title": "libredesk API",
+    "description": "REST API documentation for libredesk helpdesk system.\n\n## Authentication\n\nThe libredesk API supports two authentication methods:\n\n### 1. Basic Authentication\nUse your API key and secret with Basic authentication:\n```\nAuthorization: Basic <base64_encoded_api_key:api_secret>\n```\n\n### 2. Token Authentication  \nUse your API key and secret with token authentication:\n```\nAuthorization: token api_key:api_secret\n```\n\nTo obtain API credentials, generate them from your agent profile in the libredesk dashboard.",
     "version": "1.0.0"
   },
   "servers": [
@@ -397,7 +397,7 @@
             }
           }
         },
-        "description": "Requires the `users:manage` permission."
+        "description": "Signs the agent out of all sessions and unassigns their open conversations. Requires the `users:manage` permission."
       },
       "get": {
         "tags": [
@@ -584,7 +584,7 @@
             }
           }
         },
-        "description": "Requires the `users:manage` permission."
+        "description": "Changing the password or disabling the agent signs them out of all sessions. Requires the `users:manage` permission."
       }
     },
     "/api/v1/agents/{id}/api-key": {
@@ -1033,6 +1033,116 @@
           }
         },
         "description": "Requires the `contacts:read_all` permission."
+      },
+      "post": {
+        "tags": [
+          "Contacts"
+        ],
+        "summary": "Create Contact",
+        "operationId": "handleCreateContact",
+        "description": "Creates a contact. Either `email` or `phone_number` is required. Requires the `contacts:write` permission.",
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "requestBody": {
+          "description": "Contact details",
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "first_name"
+                ],
+                "properties": {
+                  "first_name": {
+                    "type": "string",
+                    "description": "Contact's first name"
+                  },
+                  "last_name": {
+                    "type": "string",
+                    "description": "Contact's last name"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "description": "Contact's email address. Must not belong to another contact. Required when `phone_number` is empty."
+                  },
+                  "phone_number": {
+                    "type": "string",
+                    "description": "Contact's phone number. Required when `email` is empty."
+                  },
+                  "phone_number_country_code": {
+                    "type": "string",
+                    "description": "ISO country code of the phone number"
+                  },
+                  "country": {
+                    "type": "string",
+                    "description": "Contact's country as an ISO 3166-1 alpha-2 code",
+                    "example": "US"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Contact created successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContactResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/contacts/search": {
@@ -1052,6 +1162,18 @@
               "minLength": 3
             },
             "description": "Search query (minimum 3 characters)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 15,
+              "default": 15
+            },
+            "description": "Maximum number of results. Values outside 1 to 15 use 15."
           }
         ],
         "security": [
@@ -1114,7 +1236,7 @@
             }
           }
         },
-        "description": "Requires the `contacts:read` permission."
+        "description": "Matches contacts whose email or phone number contains the query. Requires the `contacts:read` permission."
       }
     },
     "/api/v1/contacts/{id}": {
@@ -1311,11 +1433,11 @@
                   "email": {
                     "type": "string",
                     "format": "email",
-                    "description": "Contact's email address"
+                    "description": "Contact's email address. Required when `phone_number` is empty. Send an empty value or the string `null` to clear it."
                   },
                   "phone_number": {
                     "type": "string",
-                    "description": "Contact's phone number. Send an empty value or the string `null` to clear it."
+                    "description": "Contact's phone number. Required when `email` is empty. Send an empty value or the string `null` to clear it."
                   },
                   "phone_number_country_code": {
                     "type": "string",
@@ -1338,7 +1460,6 @@
                   }
                 },
                 "required": [
-                  "email",
                   "first_name"
                 ]
               }
@@ -2178,6 +2299,18 @@
               "minLength": 3
             },
             "description": "Search query (minimum 3 characters)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 1000,
+              "default": 1000
+            },
+            "description": "Maximum number of results. Values outside 1 to 1000 use 1000."
           }
         ],
         "security": [
@@ -2240,7 +2373,7 @@
             }
           }
         },
-        "description": "Requires the `conversations:read` permission."
+        "description": "Matches conversations whose reference number equals the query or whose contact email contains it. Returns only conversations the caller can access. Use `GET /api/v1/search/conversations` for filters and pagination. Requires the `conversations:read` permission."
       }
     },
     "/api/v1/conversations/unassigned": {
@@ -2478,7 +2611,7 @@
             }
           }
         },
-        "description": "Requires the `messages:write` permission."
+        "description": "Replies require the `messages:write` permission. Private notes (`private: true`) require `messages:write_private`. Messages with `sender_type: contact` also require `messages:write_as_contact`."
       }
     },
     "/api/v1/conversations/{cuuid}/messages/{uuid}": {
@@ -2569,6 +2702,94 @@
           }
         },
         "description": "Requires the `messages:read` permission."
+      },
+      "delete": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Delete Message",
+        "operationId": "handleDeleteMessage",
+        "description": "Deletes a private note. Its content is replaced with a placeholder and its attachments are unlinked. Agents can delete only their own notes. Agents with the Admin role can delete any note. Requires the `messages:write_private` permission.",
+        "parameters": [
+          {
+            "name": "cuuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Conversation UUID"
+          },
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Message UUID"
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Message deleted successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DeleteMessageResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/conversations/{cuuid}/messages/{uuid}/retry": {
@@ -3139,11 +3360,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Conversation assignee last seen updated successfully",
+            "description": "Conversation read state updated successfully",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/ConversationReadStateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
                 }
               }
             }
@@ -3189,7 +3420,25 @@
             }
           }
         },
-        "description": "Requires the `conversations:read` permission."
+        "description": "Marks the conversation as read by the caller, up to the latest message or up to `message_uuid`. The read position never moves backwards. Requires the `conversations:read` permission.",
+        "requestBody": {
+          "description": "Optional. Send no body to mark the whole conversation as read.",
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "message_uuid": {
+                    "type": "string",
+                    "format": "uuid",
+                    "description": "Mark the conversation as read up to this message"
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/api/v1/conversations/{uuid}/messages": {
@@ -3834,6 +4083,18 @@
               "minLength": 3
             },
             "description": "Search query (minimum 3 characters)"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 30,
+              "default": 30
+            },
+            "description": "Maximum number of results. Values outside 1 to 30 use 30."
           }
         ],
         "security": [
@@ -3896,7 +4157,7 @@
             }
           }
         },
-        "description": "Requires the `messages:read` permission."
+        "description": "Matches messages whose text contains the query. Activity messages are excluded. Returns only messages in conversations the caller can access. Use `GET /api/v1/search/messages` for filters and pagination. Requires the `messages:read` permission."
       }
     },
     "/api/v1/priorities": {
@@ -6166,7 +6427,50 @@
               }
             }
           }
-        }
+        },
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Return only tags whose name contains this text (case-insensitive)."
+          },
+          {
+            "name": "ids",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Comma-separated tag IDs, at most 200. When set, returns those tags and ignores `q`, `page` and `page_size`."
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "description": "Page number, used with `page_size`."
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "maximum": 500
+            },
+            "description": "Number of tags per page, max 500. Omit or send 0 to return all matching tags."
+          }
+        ],
+        "description": "Returns tags sorted by name."
       },
       "post": {
         "tags": [
@@ -6434,7 +6738,7 @@
         ],
         "summary": "Serve Media",
         "operationId": "handleServeMedia",
-        "description": "Public media is served without authentication. Private media requires authentication with access to the linked record, or a valid signed URL.",
+        "description": "Public media is served without authentication. Private media requires authentication with access to the linked record, or a valid signed URL. Private media not yet attached to a record is served only to the user who uploaded it.",
         "parameters": [
           {
             "name": "uuid",
@@ -6539,6 +6843,569 @@
           },
           "429": {
             "description": "Rate limit exceeded",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations/{uuid}/mark-unread": {
+      "put": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Mark Conversation As Unread",
+        "operationId": "handleMarkConversationAsUnread",
+        "description": "Marks the conversation as unread for the caller by moving their read position to just before the latest message. Returns 400 when the conversation has no messages. Requires the `conversations:read` permission.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Conversation UUID"
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Conversation marked as unread",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationUnreadStateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations/mentioned": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Get Mentioned Conversations",
+        "operationId": "handleGetMentionedConversations",
+        "description": "Get conversations where the current user, or a team they belong to, was mentioned in a private note. `mentioned_message_uuid` on each item points to the mention. Requires the `conversations:read` permission.",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 1
+            },
+            "description": "Page number (defaults to 1)"
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 500,
+              "default": 30
+            },
+            "description": "Number of items per page (defaults to 30, max 500)"
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "asc",
+                "desc"
+              ]
+            },
+            "description": "Sort direction (case-insensitive). Defaults to `desc`."
+          },
+          {
+            "name": "order_by",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "conversations.status_id",
+                "conversations.priority_id",
+                "conversations.assigned_team_id",
+                "conversations.assigned_user_id",
+                "conversations.inbox_id",
+                "conversations.last_message_at",
+                "conversations.last_interaction_at",
+                "conversations.last_interaction_sender",
+                "conversations.created_at",
+                "conversations.waiting_since",
+                "conversations.next_sla_deadline_at",
+                "conversations.snoozed_until",
+                "conversations.sla_policy_id",
+                "conversation_statuses.id",
+                "conversation_statuses.name",
+                "users.email",
+                "users.external_user_id",
+                "inboxes.channel"
+              ],
+              "default": "conversations.last_message_at"
+            },
+            "description": "Field to sort by, as `model.field`. Defaults to `conversations.last_message_at`."
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "JSON-encoded filter. Either an array of conditions that are AND-ed, e.g. `[{\"model\":\"conversations\",\"field\":\"status_id\",\"operator\":\"equals\",\"value\":\"1\"}]`, or a group `{\"logic\":\"AND\",\"rules\":[...]}` with at most one level of nested groups. Operators: `equals`, `not equals`, `greater than`, `less than`, `set`, `not set`, `in`, `between`, `contains`, `ilike`, `not contains`. Filterable fields: `conversations` (status_id, priority_id, assigned_team_id, assigned_user_id, inbox_id, last_message_at, last_interaction_at, last_interaction_sender, created_at, waiting_since, next_sla_deadline_at, snoozed_until, sla_policy_id, tags), `conversation_statuses` (id, name), `users` (email, external_user_id), `inboxes` (channel)."
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mentioned conversations retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/conversations/{uuid}/page-visits": {
+      "get": {
+        "tags": [
+          "Conversations"
+        ],
+        "summary": "Get Contact Page Visits",
+        "operationId": "handleGetContactPageVisits",
+        "description": "Returns the last 20 website pages the conversation's contact visited while the livechat widget was loaded, newest first. Requires the `conversations:read` permission.",
+        "parameters": [
+          {
+            "name": "uuid",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Conversation UUID"
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Page visits retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PageVisitListResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/search/conversations": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Paginated Search Conversations",
+        "operationId": "handlePaginatedSearchConversations",
+        "description": "Matches conversations whose reference number equals the query or whose contact email contains it, with filters and cursor pagination. An exact reference number match is listed first. Returns only conversations the caller can access. Requires the `conversations:read` permission.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3
+            },
+            "description": "Search query (minimum 3 characters)"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "JSON-encoded filter. Either an array of conditions that are AND-ed, e.g. `[{\"model\":\"conversations\",\"field\":\"status_id\",\"operator\":\"equals\",\"value\":\"1\"}]`, or a group `{\"logic\":\"AND\",\"rules\":[...]}` with at most one level of nested groups. Operators: `equals`, `not equals`, `greater than`, `less than`, `set`, `not set`, `in`, `between`, `contains`, `ilike`, `not contains`. Filterable fields: `conversations` (status_id, priority_id, assigned_team_id, assigned_user_id, inbox_id, last_message_at, last_interaction_at, last_interaction_sender, created_at, waiting_since, next_sla_deadline_at, snoozed_until, sla_policy_id, tags), `conversation_statuses` (id, name), `users` (email, external_user_id), `inboxes` (channel)."
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "newest",
+                "oldest",
+                "started_first",
+                "started_last"
+              ],
+              "default": "newest"
+            },
+            "description": "`newest` and `oldest` sort by last message time. `started_last` and `started_first` sort by creation time. Defaults to `newest`."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "`next_cursor` from the previous page. A cursor works only with the `sort` it was created with."
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 30
+            },
+            "description": "Number of results per page (defaults to 30). Values above 100 use 100."
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConversationSearchPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/search/messages": {
+      "get": {
+        "tags": [
+          "Search"
+        ],
+        "summary": "Paginated Search Messages",
+        "operationId": "handlePaginatedSearchMessages",
+        "description": "Matches messages whose text contains the query, with filters and cursor pagination. Activity messages are excluded. Returns only messages in conversations the caller can access. Requires the `messages:read` permission.",
+        "parameters": [
+          {
+            "name": "query",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "minLength": 3
+            },
+            "description": "Search query (minimum 3 characters)"
+          },
+          {
+            "name": "filters",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "JSON-encoded filter. Either an array of conditions that are AND-ed, e.g. `[{\"model\":\"conversations\",\"field\":\"status_id\",\"operator\":\"equals\",\"value\":\"1\"}]`, or a group `{\"logic\":\"AND\",\"rules\":[...]}` with at most one level of nested groups. Operators: `equals`, `not equals`, `greater than`, `less than`, `set`, `not set`, `in`, `between`, `contains`, `ilike`, `not contains`. Filterable fields: `conversations` (status_id, priority_id, assigned_team_id, assigned_user_id, inbox_id, last_message_at, last_interaction_at, last_interaction_sender, created_at, waiting_since, next_sla_deadline_at, snoozed_until, sla_policy_id, tags), `conversation_statuses` (id, name), `users` (email, external_user_id), `inboxes` (channel). Messages can also be filtered on `conversation_messages` (created_at)."
+          },
+          {
+            "name": "sort",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "newest",
+                "oldest"
+              ],
+              "default": "newest"
+            },
+            "description": "Sort by message creation time. Defaults to `newest`."
+          },
+          {
+            "name": "cursor",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "`next_cursor` from the previous page. A cursor works only with the `sort` it was created with."
+          },
+          {
+            "name": "page_size",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 100,
+              "default": 30
+            },
+            "description": "Number of results per page (defaults to 30). Values above 100 use 100."
+          }
+        ],
+        "security": [
+          {
+            "basicAuth": []
+          },
+          {
+            "tokenAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MessageSearchPageResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
             "content": {
               "application/json": {
                 "schema": {
@@ -7071,6 +7938,18 @@
             "format": "date-time",
             "nullable": true
           },
+          "last_resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When the conversation last moved to a resolved status"
+          },
+          "contact_last_seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When the contact last viewed the conversation"
+          },
           "reference_number": {
             "type": "string",
             "example": "150",
@@ -7121,6 +8000,9 @@
             "type": "integer",
             "nullable": true
           },
+          "assignee": {
+            "$ref": "#/components/schemas/ConversationAssignee"
+          },
           "waiting_since": {
             "type": "string",
             "format": "date-time",
@@ -7146,6 +8028,13 @@
           "inbox_reply_to": {
             "type": "string",
             "description": "Reply-to address of the inbox"
+          },
+          "inbox_aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InboxEmailAlias"
+            },
+            "description": "Alias addresses of the inbox. Verified aliases can be used as `send_from` when replying."
           },
           "inbox_name": {
             "type": "string",
@@ -7316,7 +8205,8 @@
                 }
               }
             },
-            "nullable": true
+            "nullable": true,
+            "description": "Up to 10 other conversations of the same contact, newest first. Only conversations the caller can access are included."
           }
         }
       },
@@ -7411,6 +8301,12 @@
             "format": "date-time",
             "nullable": true
           },
+          "last_resolved_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true,
+            "description": "When the conversation last moved to a resolved status"
+          },
           "subject": {
             "type": "string",
             "nullable": true
@@ -7465,6 +8361,9 @@
           "assigned_team_id": {
             "type": "integer",
             "nullable": true
+          },
+          "assignee": {
+            "$ref": "#/components/schemas/ConversationAssignee"
           },
           "unread_message_count": {
             "type": "integer"
@@ -7803,29 +8702,146 @@
           },
           "reference_number": {
             "type": "string",
-            "example": "REF-001"
+            "example": "150"
           },
           "subject": {
             "type": "string",
+            "nullable": true,
             "example": "Order inquiry"
+          },
+          "last_message": {
+            "type": "string",
+            "nullable": true
+          },
+          "last_message_at": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assigned_user_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "assigned_team_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "assignee": {
+            "type": "object",
+            "description": "Assigned agent. Fields are null when no agent is assigned.",
+            "properties": {
+              "first_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "last_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatar_url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "team_name": {
+            "type": "string",
+            "nullable": true
           },
           "status": {
             "type": "string",
+            "nullable": true,
             "example": "Open"
+          },
+          "priority": {
+            "type": "string",
+            "nullable": true
+          },
+          "inbox_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "inbox_channel": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "email",
+              "livechat"
+            ]
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "first_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "last_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "email": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatar_url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
       "MessageSearchResult": {
         "type": "object",
         "properties": {
+          "uuid": {
+            "type": "string"
+          },
           "created_at": {
             "type": "string",
             "format": "date-time",
             "example": "2025-08-28T10:00:00Z"
           },
+          "type": {
+            "type": "string",
+            "enum": [
+              "incoming",
+              "outgoing"
+            ]
+          },
+          "private": {
+            "type": "boolean",
+            "description": "Whether the message is a private note"
+          },
           "text_content": {
             "type": "string",
+            "description": "First 200 characters of the message text",
             "example": "Hello, I need help with my order."
+          },
+          "snippet": {
+            "type": "string",
+            "nullable": true,
+            "description": "Up to 300 characters of the message text around the first match"
+          },
+          "sender": {
+            "type": "object",
+            "properties": {
+              "first_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "last_name": {
+                "type": "string",
+                "nullable": true
+              }
+            }
           },
           "conversation_created_at": {
             "type": "string",
@@ -7838,11 +8854,83 @@
           },
           "conversation_reference_number": {
             "type": "string",
-            "example": "REF-001"
+            "example": "150"
+          },
+          "conversation_subject": {
+            "type": "string",
+            "nullable": true
           },
           "conversation_status": {
             "type": "string",
+            "nullable": true,
             "example": "Open"
+          },
+          "assigned_user_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "assigned_team_id": {
+            "type": "integer",
+            "nullable": true
+          },
+          "assignee": {
+            "type": "object",
+            "description": "Assigned agent. Fields are null when no agent is assigned.",
+            "properties": {
+              "first_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "last_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatar_url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
+          },
+          "team_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "priority": {
+            "type": "string",
+            "nullable": true
+          },
+          "inbox_name": {
+            "type": "string",
+            "nullable": true
+          },
+          "inbox_channel": {
+            "type": "string",
+            "nullable": true,
+            "enum": [
+              "email",
+              "livechat"
+            ]
+          },
+          "contact": {
+            "type": "object",
+            "properties": {
+              "first_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "last_name": {
+                "type": "string",
+                "nullable": true
+              },
+              "email": {
+                "type": "string",
+                "nullable": true
+              },
+              "avatar_url": {
+                "type": "string",
+                "nullable": true
+              }
+            }
           }
         }
       },
@@ -7914,7 +9002,16 @@
           "email": {
             "type": "string",
             "format": "email",
-            "example": "john.doe@example.com"
+            "example": "john.doe@example.com",
+            "nullable": true
+          },
+          "phone_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "phone_number_country_code": {
+            "type": "string",
+            "nullable": true
           },
           "external_user_id": {
             "type": "string",
@@ -8740,6 +9837,11 @@
             "type": "string",
             "description": "Initial message content (Accepts HTML as well)"
           },
+          "send_from": {
+            "type": "string",
+            "format": "email",
+            "description": "Agent-initiated only. Address to send the first message from: the inbox address or one of its verified aliases. Defaults to the inbox address."
+          },
           "inbox_id": {
             "type": "integer",
             "description": "ID of an enabled email inbox for the conversation"
@@ -8759,6 +9861,22 @@
             "format": "email",
             "description": "Contact's email address"
           },
+          "cc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "CC recipients of the first message"
+          },
+          "bcc": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "email"
+            },
+            "description": "BCC recipients of the first message"
+          },
           "first_name": {
             "type": "string",
             "description": "Contact's first name"
@@ -8777,7 +9895,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "Array of attachment IDs"
+            "description": "IDs of media uploaded by the caller with `POST /api/v1/media`. Media uploaded by another user is rejected with 403."
           },
           "initiator": {
             "type": "string",
@@ -8786,6 +9904,10 @@
               "contact"
             ],
             "description": "Who initiated the conversation. 'contact' means the first message is treated as an incoming message from the contact; 'agent' means the first message is an outgoing reply from the agent. Automation rules are only evaluated for contact-initiated conversations (incoming messages); agent-initiated conversations skip automation rule evaluation."
+          },
+          "source_id": {
+            "type": "string",
+            "description": "Contact-initiated only. RFC 5322 Message-ID of the original inbound email. It is stored on the first message so replies thread on it."
           },
           "custom_attributes": {
             "type": "object",
@@ -8818,7 +9940,7 @@
             "items": {
               "type": "integer"
             },
-            "description": "Attachment IDs"
+            "description": "IDs of media uploaded by the caller with `POST /api/v1/media`. Media uploaded by another user is rejected with 403."
           },
           "private": {
             "type": "boolean",
@@ -8844,6 +9966,11 @@
               "type": "string"
             },
             "description": "BCC recipients"
+          },
+          "send_from": {
+            "type": "string",
+            "format": "email",
+            "description": "Email inbox only. Address to send the reply from: the inbox address or one of its verified aliases (`inbox_aliases` on the conversation). Defaults to the address last used in the conversation."
           },
           "sender_type": {
             "type": "string",
@@ -8877,6 +10004,10 @@
           "echo_id": {
             "type": "string",
             "description": "Client-generated identifier echoed back to deduplicate the message on the sender's side"
+          },
+          "source_id": {
+            "type": "string",
+            "description": "Contact messages only. RFC 5322 Message-ID of the original inbound email. It is stored on the created message so replies thread on it."
           }
         }
       },
@@ -9297,6 +10428,13 @@
             "type": "string",
             "example": "support@example.com"
           },
+          "aliases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InboxEmailAlias"
+            },
+            "description": "Alias addresses of an email inbox"
+          },
           "from_name_template": {
             "type": "string",
             "example": ""
@@ -9513,19 +10651,23 @@
           },
           "agents_online": {
             "type": "integer",
-            "example": 0
+            "example": 0,
+            "description": "Agents with availability status `online` or `away`"
           },
           "agents_away": {
             "type": "integer",
-            "example": 0
+            "example": 0,
+            "description": "Agents with availability status `away_manual`"
           },
           "agents_reassigning": {
             "type": "integer",
-            "example": 0
+            "example": 0,
+            "description": "Agents with availability status `away_and_reassigning`"
           },
           "agents_offline": {
             "type": "integer",
-            "example": 0
+            "example": 0,
+            "description": "Agents with availability status `offline`"
           }
         }
       },
@@ -9839,6 +10981,11 @@
           "template": {
             "type": "string",
             "example": "classic"
+          },
+          "livechat_inbox_id": {
+            "type": "integer",
+            "nullable": true,
+            "description": "Livechat inbox whose widget is shown on the help center pages"
           }
         }
       },
@@ -10084,6 +11231,244 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/HelpCenterArticle"
+            }
+          }
+        }
+      },
+      "ConversationAssignee": {
+        "type": "object",
+        "nullable": true,
+        "description": "Assigned agent, or null when no agent is assigned.",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "first_name": {
+            "type": "string"
+          },
+          "last_name": {
+            "type": "string"
+          },
+          "avatar_url": {
+            "type": "string",
+            "nullable": true
+          },
+          "type": {
+            "type": "string",
+            "enum": [
+              "agent",
+              "ai_assistant"
+            ]
+          },
+          "availability_status": {
+            "type": "string",
+            "enum": [
+              "online",
+              "away",
+              "away_manual",
+              "offline",
+              "away_and_reassigning"
+            ]
+          }
+        }
+      },
+      "InboxEmailAlias": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "format": "email"
+          },
+          "verification_status": {
+            "type": "string",
+            "enum": [
+              "not_verified",
+              "pending",
+              "verified",
+              "failed"
+            ]
+          },
+          "verified_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Present only when the alias has been verified"
+          }
+        }
+      },
+      "ConversationReadState": {
+        "type": "object",
+        "properties": {
+          "conversation_uuid": {
+            "type": "string"
+          },
+          "last_seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Read position of the caller in the conversation"
+          },
+          "read_version": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Increases on every read state change. Use it to discard out-of-order updates."
+          }
+        }
+      },
+      "ConversationUnreadState": {
+        "type": "object",
+        "properties": {
+          "conversation_uuid": {
+            "type": "string"
+          },
+          "last_seen_at": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Read position of the caller, moved to just before the latest message"
+          },
+          "read_version": {
+            "type": "integer",
+            "format": "int64",
+            "description": "Increases on every read state change. Use it to discard out-of-order updates."
+          },
+          "is_unread": {
+            "type": "boolean",
+            "example": true
+          }
+        }
+      },
+      "ConversationReadStateResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ConversationReadState"
+          }
+        }
+      },
+      "ConversationUnreadStateResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "$ref": "#/components/schemas/ConversationUnreadState"
+          }
+        }
+      },
+      "PageVisit": {
+        "type": "object",
+        "properties": {
+          "url": {
+            "type": "string",
+            "example": "https://example.com/pricing"
+          },
+          "title": {
+            "type": "string",
+            "example": "Pricing"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "When the page was visited"
+          }
+        }
+      },
+      "PageVisitListResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "array",
+            "nullable": true,
+            "items": {
+              "$ref": "#/components/schemas/PageVisit"
+            }
+          }
+        }
+      },
+      "DeleteMessageResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "content": {
+                "type": "string",
+                "description": "Placeholder text that replaces the deleted note"
+              }
+            }
+          }
+        }
+      },
+      "ConversationSearchPageResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "results": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/ConversationSearchResult"
+                }
+              },
+              "per_page": {
+                "type": "integer"
+              },
+              "has_more": {
+                "type": "boolean",
+                "description": "Whether another page exists"
+              },
+              "next_cursor": {
+                "type": "string",
+                "description": "Pass as `cursor` to fetch the next page. Empty when `has_more` is false."
+              }
+            }
+          }
+        }
+      },
+      "MessageSearchPageResponse": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "example": "success"
+          },
+          "data": {
+            "type": "object",
+            "properties": {
+              "results": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/MessageSearchResult"
+                }
+              },
+              "per_page": {
+                "type": "integer"
+              },
+              "has_more": {
+                "type": "boolean",
+                "description": "Whether another page exists"
+              },
+              "next_cursor": {
+                "type": "string",
+                "description": "Pass as `cursor` to fetch the next page. Empty when `has_more` is false."
+              }
             }
           }
         }

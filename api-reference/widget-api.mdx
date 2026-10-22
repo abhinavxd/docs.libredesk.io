@@ -1,11 +1,11 @@
 ---
 title: Widget API
-description: Build custom live chat widget frontends with Libredesk's public widget endpoints and WebSocket protocol
+description: Build custom live chat widget frontends with libredesk's public widget endpoints and WebSocket protocol
 ---
 
 This document summarizes the public endpoints and WebSocket messages used by
-the Libredesk live chat widget. These APIs are intended for custom widget
-frontends that talk to an existing Libredesk instance.
+the libredesk live chat widget. These APIs are intended for custom widget
+frontends that talk to an existing libredesk instance.
 
 ## Authentication and inbox selection
 
@@ -23,11 +23,11 @@ also send:
 
 - `X-Libredesk-Visitor-Token: <visitor_session_token>`
 
-If Libredesk merges the visitor into the verified contact, the response includes
+If libredesk merges the visitor into the verified contact, the response includes
 `X-Libredesk-Clear-Visitor: true` so the custom frontend can discard the visitor
 token.
 
-API responses use Libredesk's standard envelope format. Successful responses put
+API responses use libredesk's standard envelope format. Successful responses put
 the endpoint payload in `data`.
 
 ## Public settings endpoints
@@ -56,7 +56,8 @@ Request body:
 }
 ```
 
-The JWT must include `external_user_id`, `email`, and `first_name`. It can also
+The JWT must be signed with the inbox secret (HS256) and must include `exp`,
+`external_user_id`, `email`, and `first_name`. It can also
 include `last_name`, `phone_number`, `phone_number_country_code` (ISO 3166-1
 alpha-2, e.g. `IN`), and `contact_custom_attributes`.
 
@@ -82,7 +83,7 @@ Returns the current widget user's metadata for the bearer session token.
 
 ### `POST /api/v1/widget/chat/conversations/init`
 
-Starts a new live chat conversation. If no bearer token is present, Libredesk
+Starts a new live chat conversation. If no bearer token is present, libredesk
 creates a visitor and returns a new session token.
 
 Request body:
@@ -95,6 +96,9 @@ Request body:
   }
 }
 ```
+
+To reply to a proactive message, also send the `delivery_id` returned by
+`campaigns/next` and the same `browser_key`.
 
 Response `data` includes the created `conversation`, `messages`, optional
 business hours fields, and, for a new visitor, `session_token` plus `user`.
@@ -124,17 +128,96 @@ Request body:
 
 Marks the conversation as seen by the widget user.
 
+### `GET /api/v1/widget/chat/conversations/{uuid}/transcript`
+
+Downloads the conversation as a plain text file. Requires **Download
+transcript** to be on for the inbox.
+
+### `POST /api/v1/widget/chat/conversations/{uuid}/handoff-form`
+
+Submits the pre-chat form when the AI assistant hands the conversation to an
+agent. Requires the pre-chat form with **Show only during AI handoff**.
+
+Request body:
+
+```json
+{
+  "form_data": {
+    "email": "user@example.com"
+  }
+}
+```
+
+## Proactive message endpoints
+
+The bearer token is optional. `browser_key` and `session_key` are UUIDs the
+client generates, one per browser and one per browsing session.
+
+### `POST /api/v1/widget/chat/campaigns/next`
+
+Returns the proactive message to show on the current page, or `null`.
+
+Request body:
+
+```json
+{
+  "url": "https://example.com/pricing",
+  "browser_key": "<uuid>",
+  "session_key": "<uuid>",
+  "event": "viewed_pricing",
+  "active_seconds": 12,
+  "mobile": false
+}
+```
+
+Response `data` includes the delivery `id` and a `snapshot` with the message
+and sender.
+
+### `POST /api/v1/widget/chat/campaigns/event`
+
+Records what happened to a delivered proactive message.
+
+Request body:
+
+```json
+{
+  "delivery_id": "<delivery_id>",
+  "browser_key": "<uuid>",
+  "event": "displayed"
+}
+```
+
+`event` is one of `displayed`, `opened`, or `dismissed`.
+
+## Help endpoints
+
+These endpoints serve the help center set in the inbox's widget settings. The
+bearer token is optional. Pass `?locale=` to pick a language.
+
+### `GET /api/v1/widget/chat/help`
+
+Returns the help center details, its collection `tree`, and `popular` articles.
+Returns `null` when the widget has no help center.
+
+### `GET /api/v1/widget/chat/help/search?q=<query>`
+
+Returns published articles matching `q`.
+
+### `GET /api/v1/widget/chat/help/articles/{article_slug}`
+
+Returns one published article with its `translations`.
+
 ## Upload endpoint
 
 ### `POST /api/v1/widget/media/upload`
 
-Uploads one or more files to an existing conversation. This endpoint requires
+Uploads a file to an existing conversation. This endpoint requires
 `multipart/form-data`.
 
 Form fields:
 
 - `conversation_uuid`: target conversation UUID
-- `files`: one or more file parts
+- `files`: one file part
 
 File uploads are rejected when the inbox has file upload disabled, the file is
 empty, the file is larger than the configured limit, or the extension is not
