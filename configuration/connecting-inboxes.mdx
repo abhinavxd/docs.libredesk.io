@@ -1,9 +1,9 @@
 ---
 title: Connecting Inboxes
-description: Connect email inboxes using Google, Microsoft OAuth, or manual IMAP/SMTP configuration
+description: Connect email inboxes using Google OAuth, Microsoft delegated or app-only OAuth, or manual IMAP/SMTP configuration
 ---
 
-libredesk supports three methods for connecting email inboxes: Google OAuth, Microsoft OAuth, and manual IMAP/SMTP configuration with password authentication.
+libredesk supports Google OAuth, Microsoft delegated OAuth, Microsoft app-only authentication, and manual IMAP/SMTP configuration with password authentication.
 
 ## Google setup
 
@@ -101,72 +101,197 @@ Your Google OAuth app needs these scopes:
 
 ## Microsoft setup
 
-Connect your Outlook or Microsoft 365 inbox using OAuth 2.0.
+Both Microsoft options use OAuth 2.0 and a Microsoft Entra ID app registration. Choose the flow that matches how libredesk should access the mailbox.
 
-### Prerequisites
+| libredesk option | OAuth 2.0 grant | Access model | Use for |
+|------------------|----------------|--------------|---------|
+| **Microsoft** | Authorization code | Delegated permissions, on behalf of a signed-in user | Outlook.com or Microsoft 365 user mailboxes |
+| **Microsoft (app-only)** | Client credentials | Application permissions, without a signed-in user | Exchange Online shared mailboxes |
 
-- An Azure Active Directory (Azure AD) app registration
-- OAuth 2.0 credentials (Client ID & Client Secret)
+Follow the setup for your chosen flow below. Delegated access needs a redirect URI; app-only access does not.
 
-### Required API permissions
+For Microsoft 365 mailboxes, both flows need Exchange Online with IMAP, such as Microsoft 365 Business Basic or Exchange Online (Plan 1). Check the [Exchange Online service description](https://learn.microsoft.com/office365/servicedescriptions/exchange-online-service-description/exchange-online-service-description#feature-availability-including-standalone-plans) to see whether your plan supports this.
 
-Add the following **Microsoft Graph** delegated permissions in Azure Portal:
+### Delegated access (authorization code grant)
 
-<img
-  src="/images/microsoft-api-permissions.png"
-  alt="Microsoft API Permissions"
-  className="rounded-lg border"
-/>
+Use **Microsoft** to connect the mailbox of the user who signs in. libredesk uses the OAuth 2.0 authorization code grant to obtain delegated access, then uses a refresh token to renew access tokens.
 
-| Permission | Type | Description |
-|------------|------|-------------|
-| email | Delegated | View users' email address |
-| IMAP.AccessAsUser.All | Delegated | Read and write access to mailboxes via IMAP |
-| offline_access | Delegated | Maintain access to data you have given it access to |
-| openid | Delegated | Sign users in |
-| SMTP.Send | Delegated | Send emails from mailboxes using SMTP AUTH |
-| User.Read | Delegated | Sign in and read user profile |
+#### Prerequisites
 
-### Configuration steps
+- An Outlook.com account or a Microsoft 365 user with an Exchange Online mailbox
+- Permission to register an application in Microsoft Entra ID
+
+For a shared mailbox without a licensed user's sign-in, use [app-only access](#shared-mailbox-app-only) instead.
+
+#### Required permissions and scopes
+
+In the app registration, select API permissions → Add a permission → **Microsoft Graph** → **Delegated permissions**.
+
+<Note>
+`IMAP.AccessAsUser.All` and `SMTP.Send` appear under Microsoft Graph in the Azure portal, but they grant access to Exchange Online. libredesk uses them to sign in to the mailbox over IMAP and SMTP.
+</Note>
+
+| Permission or scope | Purpose |
+|---------------------|---------|
+| `IMAP.AccessAsUser.All` | Read and write mail through IMAP on behalf of the user |
+| `SMTP.Send` | Send mail through SMTP AUTH on behalf of the user |
+| `offline_access` | Obtain a refresh token for continued access |
+| `openid` | Sign the user in with OpenID Connect |
+| `email` | Identify the signed-in user's email address |
+
+<Frame caption="Delegated permissions for the authorization code grant">
+  <img
+    src="/images/microsoft-api-permissions.png"
+    alt="LibreDesk app registration with five Microsoft Graph permissions, all of type Delegated"
+    className="rounded-lg border"
+  />
+</Frame>
+
+#### Configuration steps
 
 <Steps>
   <Step title="Get callback URL from libredesk">
     In libredesk, go to Admin → Inboxes → New inbox → Email → Microsoft. A dialog opens with the **Callback URL**. Copy it.
   </Step>
 
-  <Step title="Register an app in Azure Portal">
-    Go to the [Azure Portal](https://portal.azure.com/) → Azure Active Directory → App registrations → New registration:
-    - Enter a name for your application
-    - Select the appropriate account type (single tenant or multi-tenant)
-    - Add the callback URL from step 1 as the Redirect URI
+  <Step title="Register an application in Microsoft Entra ID">
+    In the [Azure portal](https://portal.azure.com/), go to Microsoft Entra ID → App registrations → New registration. Enter a name such as `LibreDesk`.
+
+    For your organization's Microsoft 365 mailboxes, choose **Single tenant only**. To support Outlook.com accounts, choose an account type that includes **Personal Microsoft accounts**.
+
+    Under **Redirect URI**, select **Web** and enter the callback URL from libredesk, then click **Register**. This redirect URI is required for delegated access.
   </Step>
 
-  <Step title="Configure API permissions">
-    In your app registration, go to API permissions → Add a permission → Microsoft Graph:
-    - Add all the delegated permissions shown in the table above
-    - Click Grant admin consent for Default Directory
+  <Step title="Add delegated permissions">
+    Go to API permissions → Add a permission → **Microsoft Graph** → **Delegated permissions** and add the entries above.
+
+    If your organization's consent policy requires administrator approval, have an administrator select **Grant admin consent** for your tenant.
   </Step>
 
-  <Step title="Create client secret">
-    Go to Certificates & secrets → New client secret:
-    - Add a description and expiration period
-    - Copy the secret value immediately (it won't be shown again)
+  <Step title="Create a client secret">
+    Go to Certificates & secrets → Client secrets → New client secret. Enter a description and choose an expiration period, then copy the secret **Value**, not the Secret ID. The value is only shown once.
   </Step>
 
-  <Step title="Note your credentials">
-    From the Overview page, copy:
-    - Application (client) ID
-    - Directory (tenant) ID (if using single-tenant)
+  <Step title="Copy the application identifiers">
+    From Overview, copy the **Application (client) ID**. For a single-tenant registration, also copy the **Directory (tenant) ID**.
   </Step>
 
-  <Step title="Complete setup in libredesk">
-    Back in the libredesk dialog, enter the Client ID, Client secret, and Tenant ID (optional), then click **Continue**. You'll be redirected to Microsoft's consent screen to grant permissions.
+  <Step title="Sign in through libredesk">
+    Back in the libredesk dialog, enter the Client ID and Client secret. For a single-tenant registration, enter the Tenant ID too; leave it blank for Outlook.com accounts.
+
+    Click **Continue**, sign in as the user whose mailbox you want to connect, and accept the requested permissions. This user sign-in is required even if an administrator has already granted consent.
   </Step>
 
   <Step title="Wait for the first scan">
     After you grant access, libredesk creates the inbox. It checks the mailbox every 5 minutes by default, so send a test email, wait 5 minutes, then look in Conversations.
   </Step>
 </Steps>
+
+### App-only access (client credentials grant) {#shared-mailbox-app-only}
+
+Use **Microsoft (app-only)** to connect an Exchange Online shared mailbox without a user signing in. libredesk uses the OAuth 2.0 client credentials grant to authenticate as the application, so access does not depend on any user's account or refresh token.
+
+The shared mailbox does not need its own license within Microsoft's [shared mailbox licensing limits](https://learn.microsoft.com/en-us/microsoft-365/admin/email/about-shared-mailboxes#licensing-and-mailbox-storage-limits), and no licensed user is needed for libredesk to authenticate. This flow does not support personal Outlook.com mailboxes.
+
+#### Prerequisites
+
+- An Exchange Online shared mailbox with IMAP enabled
+- A Microsoft Entra administrator who can grant tenant-wide admin consent
+- An Exchange Online administrator who can register the application's service principal and grant mailbox permissions
+
+#### Required API permissions
+
+Select **Office 365 Exchange Online** → **Application permissions**, not Microsoft Graph or Delegated permissions.
+
+<Warning>
+  We recommend only adding the permissions listed below. Anyone with the client secret gets every application permission granted to the app, with no user sign-in or MFA. Some application permissions, such as Microsoft Graph `Mail.Read` or `Mail.ReadWrite`, cover every mailbox in your tenant.
+</Warning>
+
+| Permission | API | Type |
+|------------|-----|------|
+| `IMAP.AccessAsApp` | Office 365 Exchange Online | Application |
+| `SMTP.SendAsApp` | Office 365 Exchange Online | Application |
+
+Admin consent is required for both permissions. libredesk requests access tokens with the scope `https://outlook.office365.com/.default`.
+
+<Frame caption="Exchange Online application permissions for the client credentials grant">
+  <img
+    src="/images/microsoft-app-only-api-permissions.png"
+    alt="LibreDesk app registration with IMAP.AccessAsApp and SMTP.SendAsApp under Office 365 Exchange Online, both of type Application and requiring admin consent"
+    className="rounded-lg border"
+  />
+</Frame>
+
+#### Configuration steps
+
+<Steps>
+  <Step title="Register a single-tenant application">
+    In the [Azure portal](https://portal.azure.com/), go to Microsoft Entra ID → App registrations → New registration. Enter a name such as `LibreDesk`, choose **Single tenant only**, leave **Redirect URI** blank, and click **Register**.
+
+    From Overview, copy the **Application (client) ID** and **Directory (tenant) ID**. Both are required for app-only access.
+  </Step>
+
+  <Step title="Add application permissions">
+    Go to API permissions → Add a permission → **APIs my organization uses**, search for **Office 365 Exchange Online**, choose **Application permissions**, and add `IMAP.AccessAsApp` and `SMTP.SendAsApp`.
+
+    Have an administrator click **Grant admin consent** for your tenant and confirm that both permissions show **Granted**. Delegated permissions from the other flow are not a substitute.
+  </Step>
+
+  <Step title="Create a client secret">
+    Go to Certificates & secrets → Client secrets → New client secret. Choose an expiration period and copy the secret **Value**, not the Secret ID. Store it securely and rotate it before it expires.
+  </Step>
+
+  <Step title="Register the service principal in Exchange Online">
+    The app registration defines the application; its **Enterprise application** is the service principal in your tenant. Open Microsoft Entra ID → Enterprise applications → your app → Overview and copy its **Object ID**. Do not use the Object ID from App registrations.
+
+    In [Exchange Online PowerShell](https://learn.microsoft.com/powershell/exchange/connect-to-exchange-online-powershell), register this service principal:
+
+    ```powershell
+    Connect-ExchangeOnline
+    New-ServicePrincipal -AppId <application-id> -ObjectId <enterprise-app-object-id> -DisplayName "LibreDesk"
+    ```
+  </Step>
+
+  <Step title="Grant the app access to the shared mailbox">
+    <Warning>
+      The `FullAccess` grant below lets the app read everything in the mailbox. Run these commands only for the mailboxes libredesk should handle.
+    </Warning>
+
+    ```powershell
+    $EXOServicePrincipal = Get-ServicePrincipal -Identity "LibreDesk"
+    Add-MailboxPermission -Identity support@example.com -User $EXOServicePrincipal.Identity -AccessRights FullAccess
+    Add-RecipientPermission -Identity support@example.com -Trustee $EXOServicePrincipal.Identity -AccessRights SendAs
+    Set-CASMailbox -Identity support@example.com -SmtpClientAuthenticationDisabled $false
+    ```
+
+    Use the Exchange service principal's `Identity` for the grants, not the Enterprise applications Object ID. The mailbox SMTP AUTH setting overrides the organization-wide setting, so SMTP AUTH can remain disabled for other mailboxes. Check [Microsoft's SMTP AUTH restrictions](https://learn.microsoft.com/en-us/exchange/clients-and-mobile-in-exchange-online/authenticated-client-smtp-submission), including security defaults, if authentication is still blocked.
+  </Step>
+
+  <Step title="Add the inbox in libredesk">
+    Go to Admin → Inboxes → New inbox → Email → **Microsoft (app-only)**. Enter the shared mailbox as the From address, then the tenant ID, client ID, and client secret, and click **Create**. There is no redirect or user sign-in.
+
+    IMAP and SMTP are pre-filled for Exchange Online. IMAP uses `outlook.office365.com:993` with SSL/TLS; SMTP uses `smtp.office365.com:587` with STARTTLS. Both usernames follow the From address; keep them set to the shared mailbox address, not a user's account.
+  </Step>
+
+  <Step title="Check receiving and sending">
+    libredesk checks changed client credentials with Microsoft Entra when you save, but this does not verify Exchange mailbox permissions.
+
+    Send a test email to the shared mailbox and wait for the first scan, which runs every 5 minutes by default. Then reply from libredesk to verify SMTP sending.
+  </Step>
+</Steps>
+
+#### Troubleshooting
+
+| Error | Likely cause |
+|-------|--------------|
+| `AADSTS7000215` on save | Wrong client secret, or the secret ID was copied instead of its value |
+| `AADSTS90002` on save | Wrong tenant ID |
+| IMAP `AUTHENTICATE failed` | Service principal not registered, wrong object ID, or `FullAccess` missing. New permissions can take up to an hour to apply |
+| SMTP `535 5.7.3` | SMTP AUTH disabled for the mailbox or blocked by tenant policy, or `SendAs` missing |
+
+To rotate the secret, edit the inbox and enter the new value. Leaving the field unchanged keeps the saved secret.
+
+For Microsoft's full setup reference, see [client credentials for IMAP and SMTP](https://learn.microsoft.com/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth#use-client-credentials-grant-flow-to-authenticate-smtp-imap-and-pop-connections).
 
 ## Manual IMAP/SMTP setup
 
